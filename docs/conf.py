@@ -30,7 +30,9 @@ import os
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.todo',
+    'sphinx.ext.doctest',
+    'sphinx.ext.pngmath',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -88,7 +90,7 @@ exclude_patterns = ['_build']
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-#show_authors = False
+show_authors = True
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -196,7 +198,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MateriayeCGITdoc'
+htmlhelp_basename = 'Materiały CG IT'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -278,3 +280,10 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+try:
+    import sphinx_rtd_theme
+    html_theme = "sphinx_rtd_theme"
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+except:
+    pass
