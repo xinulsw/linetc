@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QTextCodec>
+#include <QMessageBox>
 
 namespace Ui {
 class adresy;
@@ -24,6 +25,10 @@ public:
 public slots:
     void dodajKontakt();
     void koniec();
+    void zapiszKontakt();
+    void anuluj();
+    void nast();
+    void poprz();
 
 private:
     Ui::adresy *ui;
@@ -38,10 +43,10 @@ private:
     QLineEdit *nazwaLine;
     QTextEdit *adresText;
 
-    Tryb aktTryb;
-    void aktGui(Tryb tryb);
     QString staraNazwa;
     QString staryAdres;
+    Tryb aktTryb;
+    void aktGui(Tryb tryb);
     QMap<QString,QString> kontakty;
 
 };

@@ -198,7 +198,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Materiały CG IT'
+htmlhelp_basename = u'Materiały CG IT'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -250,7 +250,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'materiayecgit', u'Materiały eCG IT Documentation',
+    ('index', 'materialyecgit', u'Materiały eCG IT Documentation',
      [u'Robert Bednarz'], 1)
 ]
 
@@ -264,8 +264,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'MateriayeCGIT', u'Materiały eCG IT Documentation',
-   u'Robert Bednarz', 'MateriayeCGIT', 'One line description of project.',
+  ('index', 'MaterialyeCGIT', u'Materiały eCG IT Documentation',
+   u'Robert Bednarz', 'MaterialyeCGIT', 'One line description of project.',
    'Miscellaneous'),
 ]
 

@@ -48,10 +48,12 @@ adresy::adresy(QWidget *parent) :
     koniecBtn = ui->koniecBtn;
     koniecBtn->setEnabled(true);
 
-    setWindowTitle(trUtf8("Prosta książka adresowa"));
-
     connect(dodajBtn, SIGNAL(clicked()), this, SLOT(dodajKontakt()));
     connect(koniecBtn,SIGNAL(clicked()),this, SLOT(koniec()));
+    connect(zapiszBtn, SIGNAL(clicked()), this, SLOT(zapiszKontakt()));
+    connect(anulujBtn, SIGNAL(clicked()), this, SLOT(anuluj()));
+
+    setWindowTitle(trUtf8("Prosta książka adresowa"));
 }
 
 adresy::~adresy()
@@ -111,4 +113,33 @@ void adresy::aktGui(Tryb tryb) {
 
 void adresy::koniec() {
     adresy::close();
+}
+
+void adresy::zapiszKontakt() {
+    QString nazwa = nazwaLine->text();
+    QString adres = adresText->toPlainText();
+
+    if (nazwa == "" || adres == "") {
+        QMessageBox::information(this, trUtf8("Puste pole"),trUtf8("Proszę wpisać nazwę i adres."));
+        return;
+    }
+
+    if (aktTryb == dodajT) {
+        if (!kontakty.contains(nazwa)) {
+            kontakty.insert(nazwa, adres);
+            QMessageBox::information(this, trUtf8("Dodano wpis"),
+                                     trUtf8("Kontakt \"%1\" dodano do książki adresowej.").arg(nazwa));
+        } else {
+            QMessageBox::information(this, trUtf8("Nie dodano wpisu"),
+                                     trUtf8("Przykro, ale kontakt \"%1\" jest już w książce adresowej.").arg(nazwa));
+        }
+    }
+
+    aktGui(nawigujT);
+}
+
+void adresy::anuluj() {
+    nazwaLine->setText(staraNazwa);
+    adresText->setText(staryAdres);
+    aktGui(nawigujT);
 }
