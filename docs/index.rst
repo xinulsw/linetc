@@ -10,17 +10,16 @@ Materiały zawarte w tym repozytorium zawierają ćwiczenia, poradniki
 oraz dokumentację związaną z zagadnieniami technologii informayjnej
 i informatyki.
 
-Contents:
+Spis treści:
 
 .. toctree::
     :maxdepth: 2
     :numbered:
 
+    qt/index
     qt/adresy/index
 
-Indices and tables
+Indeks
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

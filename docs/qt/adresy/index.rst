@@ -1,8 +1,11 @@
 Adresy (Qt5)
 ###################
 
-Niniejszy scenariusz pokazuje, jak zacząć pracę w środowisku IDE Qt Creator
-przy wykorzystaniu biblioteki Qt w wersji 5.
+Niniejszy scenariusz pokazuje, jak zacząć programowanie z wykorzystaniem biblioteki
+Qt w wersji 5 przy użyciu dedykowanego środowiska IDE Qt Creator.
+Celem jest stworzenie prostej 1-okienkowej książki adresowej, w której
+można dodawać dane adresowe powiązane z określoną nazwą, np. imieniem
+i nazwiskiem.
 
 Nowy projekt
 *****************
@@ -190,7 +193,7 @@ Sygnały i sloty
 
 Działanie aplikacji z interfejsem graficznym polega w uproszczeniu na reagowaniu
 na działania użytkownika, takie jak np. kliknięcie, naciśnięcie klawisza, przeciągnięcie itp.
-Wszystkie **zdarzenia** generowane z poziomu interfejsu użytkownika w terminologii :term:`biblioteki qt`
+Wszystkie **zdarzenia** generowane z poziomu interfejsu użytkownika w terminologii biblioteki :term:`Qt`
 emitują tzw. :term:`sygnały`. Programista decyduje o tym, które z nich i jak są obsługiwane,
 definiując tzw. :term:`sloty`, czyli **funkcje** powiązane z określonymi zdarzeniami.
 Mechanizm sygnałów i slotów umożliwia komunikację między obiektami aplikacji.
@@ -407,6 +410,20 @@ Pojęcia
 
 .. glossary::
 
+    Qt
+        zestaw bibliotek programistycznych ułatwiających tworzenie aplikacji
+        z interfejsem graficznym w językach C++, QML i Java.
+
+    plik nagłówkowy
+        w języku C/C++ plik z rozszerzeniem ``.h`` zawierający deklaracje używanych
+        struktur danych, np. klas, zmiennych i funkcji. Implementacja klas i funkcji
+        umieszczana jest w plikach źródłowych. `Więcej o pliku żródłowym: <http://pl.wikipedia.org/wiki/Plik_nag%C5%82%C3%B3wkowy>`_
+
+    plik źródłowy
+        w języku C/C++ plik z rozszerzeniem ``.c/.cpp`` zawierający implementację
+        zadeklarowanych typów złożonych (np. klas) i używanych funkcji, w tym
+        funkcji głównej (``main()``).
+
     Klasa
         program komputerowy.
 
@@ -423,7 +440,7 @@ Pojęcia
         deklarowne po nim są dostępne tylko w jej obrębie.
 
     Qt Creator
-        wieloplatformowe środowisko :term:`IDE` (zintegrowane środowisko programistyczne)
+        wieloplatformowe środowisko IDE (zintegrowane środowisko programistyczne)
         dla aplikacji pisanych w językach C++, JavaScript i QML. Zawiera m.in. `debugger <http://pl.wikipedia.org/wiki/Debugger>`_
         i edytor GUI (graficznego interfejsu użytkownika).
 
@@ -441,8 +458,8 @@ Pojęcia
 Poćwicz sam
 ^^^^^^^^^^^^^
 
-    Spróbuj napisać wersję omówionej w innym scenariuszu aplikacji :ref:`ToDo <todo>`
-    przy wykorzystaniu wybranego systemu ORM, tj. Peewee lub SQLAlchemy.
+    Spróbuj rozszerzyć napisaną aplikację o możliwość przechowywania danych
+    w pliku na dysku.
 
 Metryka
 ^^^^^^^
