@@ -18,6 +18,7 @@ Spis treści:
 
     qt/index
     qt/adresy/index
+    qt/zadania/index
 
 Indeks
 ==================
