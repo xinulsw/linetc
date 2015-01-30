@@ -1,6 +1,8 @@
 Biblioteka Qt
 ###################
 
+.. _biblioteka-qt:
+
 :term:`Qt` to zestaw bibliotek przeznaczonych dla języka C++, QML i Java,
 który znakomicie ułatwia tworzenie graficznego interfejsu użytkownika.
 Zawiera również klasy udostępniające obsługę m.in. multimediów , sieci
@@ -11,7 +13,7 @@ System i środowisko IDE
 
 Bilioteka :term:`Qt` jest przenośna z założenia, więc programować z jej wykorzystaniem
 można w wielu systemach i środowiskach. My proponujemy system Linux,
-np. dystrybucję :term:`Debian Jessie` lub :term:`Xubuntu 14.04`.
+np. dystrybucję :term:`Debian` (v. Jessie) lub :term:`Xubuntu 14.04`.
 Instalacja wymaganych narzędzi sprowadza się do wydania prostych poleceń
 w terminalu:
 
@@ -70,7 +72,7 @@ Pojęcia
         Zawiera m.in. `debugger <http://pl.wikipedia.org/wiki/Debugger>`_
         i edytor GUI (graficznego interfejsu użytkownika).
 
-    Debian Jessie
+    Debian
         jedna z najstarszych i wiądących dystrybucji Linuksa, umożliwia
         elastyczną konfigurację systemu i dostosowanie go do własnych potrzeb.
         Jak większość dystrybucji, umożliwia wybór wielu środowisk graficznych,

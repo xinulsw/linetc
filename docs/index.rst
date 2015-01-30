@@ -16,6 +16,7 @@ Spis treści:
     :maxdepth: 2
     :numbered:
 
+    tools/index
     qt/index
     qt/adresy/index
     qt/zadania/index
