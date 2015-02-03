@@ -178,6 +178,68 @@ w konsoli:
 
     set PATH=%PATH%;c:\Python27\;c:\Python27\Scripts\
 
+Serwer deweloperski WWW
+************************
+
+Jeżeli chcemy tworzyć i testować aplikacje sieciowe wykorzystujące bazy danych
+za pomocą języków skryptowych, np. PHP czy Python, potrzebujemy środowiska testowego,
+na które składa się :term:`serwer HTTP`, :term:`interpreter języka skryptowego` i :term:`system bazodanowy`.
+Zestawy takiego oprogramowania określa się skrótami `WAMP <http://pl.wikipedia.org/wiki/WAMP>` lub `LAMP <http://pl.wikipedia.org/wiki/LAMP>` w zależności
+od wykorzystywanego systemu operacyjnego: W – Windows, L – Linux.
+Pozostałe litery rozwija się najczęściej jako:
+
+* A – `Apache <http://pl.wikipedia.org/wiki/Apache_%28serwer%29>`;
+* M – `MySQL <http://pl.wikipedia.org/wiki/MySQL>`, w linuksach raczej `MariaDB <http://pl.wikipedia.org/wiki/MariaDB>`;
+* P – `PHP <http://pl.wikipedia.org/wiki/PHP>`, `Perl <http://pl.wikipedia.org/wiki/Perl>` lub `Python <http://pl.wikipedia.org/wiki/Python>`.
+
+Wymienionego oprogramowania nie należy jednak traktować jako jedynych możliwych,
+dostępnych jest wiele innych, atrakcyjnych rozwiązań. Warto również mieć świadomość,
+że instalacja i konfiguracja kompletu wymienioych programów nie jest zazwyczaj
+konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowana
+biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
+serwer HTTP i obsługę wbudowanej bazy SQLite.
+
+Linux
+===================
+
+W systemach opartych na Debianie (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
+można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
+menedżerów pakietów, czyli odpowiednio:
+
+.. code-block:: bash
+
+    ~$ sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl libapache2-mod-php5
+    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php5
+
+Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
+
+.. code-block:: bash
+
+    ~$ sudo a2enmod userdir rewrite
+    ~$ sudo service apache2 restart
+
+    ~# a2enmod userdir rewrite
+    ~# systemctl restart httpd
+
+– i odblokowania możliwości wykopnywania skryptów w katalogach domowych
+użytkowników poprzez zakomentowanie następujących linii z pliku
+``/etc/apache2/mods-available/php5.conf`` (Debian) lub ``/etc/httpd/mods-available/php5.conf``
+(Arch):
+
+.. code-block:: bash
+
+    # To re-enable PHP in user directories comment the following lines
+    # (from <IfModule ...> to </IfModule>.) Do NOT set it to On as it
+    # prevents .htaccess files from disabling it.
+    #<IfModule mod_userdir.c>
+    #    <Directory /home/*/public_html>
+    #        php_admin_flag engine Off
+    #    </Directory>
+    #</IfModule>
+
+
+.. code-block:: bash
+
 Inne
 ******************
 
