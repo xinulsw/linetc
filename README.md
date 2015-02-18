@@ -15,7 +15,7 @@ Repozytorium można skolonować lokanie:
 Wszystkie kody źródłowe można też pobrać jako archiwum ZIP bezpośrednio z tego repozytorium
 bez wykorzystania narzędzia GIT.
 
-https://github.com/linetc//archive/master.zip
+    https://github.com/xinulsw/linetc/archive/master.zip
 
 Autor
 -------
