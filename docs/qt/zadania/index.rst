@@ -5,6 +5,10 @@ Po zrealizowaniu scenariusza "Adresy" powinieneś być w stanie tworzyć przy
 użyciu biblioteki Qt proste prohgramy z interfejsem graficznym. Poniżej
 zamieszczamy kilka propozycji do samodzielnego opracowania.
 
+.. contents::
+    :depth: 1
+    :local:
+
 Kalkulator
 *****************
 

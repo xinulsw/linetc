@@ -7,6 +7,10 @@ Celem jest stworzenie prostej 1-okienkowej książki adresowej, w której
 można dodawać dane adresowe powiązane z określoną nazwą, np. imieniem
 i nazwiskiem.
 
+.. contents::
+    :depth: 1
+    :local:
+
 Nowy projekt
 *****************
 

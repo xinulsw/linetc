@@ -7,7 +7,7 @@ Materiały eCG IT
 ============================================
 
 Materiały zawarte w tym repozytorium zawierają ćwiczenia, poradniki
-oraz dokumentację związaną z zagadnieniami technologii informayjnej
+oraz dokumentację związaną z zagadnieniami technologii informacyjnej
 i informatyki.
 
 Spis treści:
@@ -16,10 +16,9 @@ Spis treści:
     :maxdepth: 2
     :numbered:
 
+    Serwis eCG <http://ecg.vot.pl/>
     tools/index
     qt/index
-    qt/adresy/index
-    qt/zadania/index
 
 Indeks
 ==================
