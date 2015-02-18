@@ -324,7 +324,7 @@ sprowadza się do użycia odpowiedniego menedżera pakietów:
     ~# pacman -S git
 
 W systemach **Windows** tego samego klienta tekstowego pobieramy ze strony `<http://git-scm.com/download/win>`_
-i instalujemy wybierając domyślne opcje. 
+i instalujemy wybierając domyślne opcje.
 
 Po opanowaniu podstaw obsługi Gita można oczywiście zainstalować programy
 z graficznym interfejsem użytkownika, jednak w większości przypadków
@@ -355,7 +355,7 @@ konfiguracyjny ``.git``, którego nie należy usuwać.
     Służy do tego opcja ``init``. Możliwe jest również sklonowanie istniejącego
     projektu do katalogu o narzuconej nazwie, trzeba ją dodać na końcu polecenia
     ``git clone``.
-    
+
 
 Podstawy Gita
 =====================
@@ -465,7 +465,7 @@ Następnie wydajemy polecenia:
 
     ~$ sudo apt-get install mercurial
     ~$ sudo pip install sphinx_rtd_theme hg+https://bitbucket.org/birkenfeld/sphinx#sphinx
-    
+
     W Archu:
     ~# pacman -S mercurial
     ~# sudo pip install sphinx_rtd_theme hg+https://bitbucket.org/birkenfeld/sphinx#sphinx
@@ -473,7 +473,7 @@ Następnie wydajemy polecenia:
 .. note::
 
     Instalacja klienta systemu kontroli wersji `Mercurial <http://pl.wikipedia.org/wiki/Mercurial>`_
-    wynika z tego, że korzysta z niego projekt Spinx. Instalacja tematu ``sphinx_rtd_theme``
+    wynika z tego, że korzysta z niego projekt Sphinx. Instalacja tematu ``sphinx_rtd_theme``
     jest opcjonalna, domyślny temat wygląda tak, jak w `dokumentacji Pythona <https://docs.python.org/2.7/whatsnew/2.7.html>`_.
 
 Teraz możemy przejść do konfiguracji Sphiksa, która sprowadza się do wygenerowania
@@ -494,12 +494,12 @@ domyślne. Zwrócić uwagę należy na:
 * ``Project langiage [en]:`` – określamy język jako ``pl``;
 * ``Please indicate... Sphinx extensions:`` – odpowiadając ``y`` dołączamy rozszerzenia, można włączyć:
   ``autodoc``, ``doctest``, ``pngmath`` i ``viewcode`` – przydają się w dokumentacji Pythona.
-  Zobacz: `lista rozszerzeń Spinksa <http://sphinx-doc.org/latest/extensions.html>`_;
+  Zobacz: `lista rozszerzeń Sphinksa <http://sphinx-doc.org/latest/extensions.html>`_;
 * ``Create Makefile?`` – odpowiadamy ``y``, dzięki czemu budowanie dokumentacji sprowadzi się do wydania
   polecenia ``make html``.
 
-Po skonfigurowaniu Sphinksa w katalogu ``docs`` powinny znaleźć się pliki: ``conf.py, Makefile i make.bat``,
-a także katalogi ``_build, _static, _templates``.
+Po skonfigurowaniu Sphinksa w katalogu ``docs`` powinny znaleźć się pliki: ``conf.py, Makefile, make.bat``
+i ``index.rst``, a także katalogi ``_build, _static, _templates``.
 
 Jeżeli chcemy używać tematu *sphinx_rtd_theme* na końcu pliku ``conf.py`` dopisujemy::
 
@@ -513,7 +513,188 @@ Jeżeli chcemy używać tematu *sphinx_rtd_theme* na końcu pliku ``conf.py`` do
 Tworzenie dokumentacji
 ========================
 
-:todo:
+Na początku warto dostosować plik główny, czyli ``index.rst``.
+Jest on naszą "stroną główną", zawiera m. in. dyrektywę tworzącą
+spis treści:
+
+.. code-block:: rst
+
+    Welcome to Projekt ILO's documentation!
+    =======================================
+
+    Contents:
+
+    .. toctree::
+       :maxdepth: 2
+
+       Serwis eCG <http://ecg.vot.pl/>
+       cwiczenia/index
+       programowanie/index
+
+
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`
+
+Jak widać domyślne komunikaty są w języku angielskim, należy więc je spolszczyć
+zmieniąjąc treść według uznania. Dyrektywa ``.. toctree::`` generuje spis
+treści na podstawie wskazanych plików. W powyższym listingu dodano dwa
+przykładowe wpisy wskazujące pliki ``index.rst`` umieszczone we wskazanych
+podkatalogach. Sphinx odczytuje nagłówki z tych plików i umieszcza w spisie.
+Domyślnie sczytywane są dwa poziomy zagnieżdżenia (``:maxdepth: 2``).
+Gdybyśmy chcieli mieć numerację, dodalibyśmy opcję: ``:numbered:``.
+Pokazano również, jak dodawać stałe linki w spisie (``Serwis eCG ...``).
+
+Z sekcji indeksów (``Indices ...``) można usunąć wszystkie spisy lub
+zostawić wybrane, np. ``genindex`` udostępnia indeks zdefiniowanych terminów
+i pojęć.
+
+Dokumenty w katalogu ``docs`` warto kategoryzować i umieszczać w osobnych
+katalogach. Nazwy plików mogą być dowolne, chociaż dobrze jest przyjąć jakąś
+przejrzystą konwencję. Poszczególne pliki należy traktować jako kolejne
+strony w wersji HTML.
+
+Podstawy reST
+==================
+
+Żeby zrozumieć proste w gruncie rzeczy zasady formatowania reST najlepiej
+podglądać kod gotowych stron! Wystarczy w nagłówku kliknąć link *View page source*,
+skopiować, wkleić i wypełnić własną treścią. Zacznij od strony, którą czytasz...
+
+Jeżeli chcesz rozumieć, czytaj dalej. Podstawowe zasady są następujące:
+
+- Wcięcia są ważne!
+- Akapity itp. oddzielamy pustym wierszem.
+- \*pochylenie\*, \*\*pogrubienie\*\*
+- \`\`przykład kodu\`\`
+
+Nagłówki
+---------------
+
+Kolejne poziomy nagłówków tworzymy poprzez podkreślanie ich sekwencjami znaków:
+
+.. code-block:: rst
+
+    Część 1
+    ##############
+
+    Rozdział 2
+    **************
+
+    Sekcja 3
+    ==============
+
+    Podsekcja 4
+    --------------
+
+    Podpodsekcja 5
+    ^^^^^^^^^^^^^^
+
+    Akapit 6
+    """"""""""""""
+
+Wybór znaków nie jest narzucony, ale najlepiej trzymać się jednej konwencji,
+np. powyższej.
+
+Dyrektywy
+---------------
+
+Ogólna postać dyrektyw to:
+
+.. code-block:: rst
+
+    .. <nazwa>:: <argumenty>
+        :<opcja>: <wartość>
+
+        treść
+
+Użyteczne dyrektywy:
+
+- ``.. image:: ścieżka/plik.jpg`` – pozwala wstawić obrazek
+- ``.. figure:: ścieżka/plik.jpg`` – pozwala wstawić obrazek z etykietą
+- ``.. note::`` – warte zauważenia
+- ``.. tip::`` – wskazówka
+- ``.. warning::`` – ostrzeżenie
+- ``.. highlight:: cpp`` – formatuj kod jako *cpp* (lub ``python``, ``bash``, ``html`` itd.)
+- ``.. literalinclude:: ścieżka/test.cpp`` – wstaw kod z podanego pliku
+- ``.. code block:: cpp`` – treść poniżej to kod w *cpp* (lub ``python``, ``bash``, ``html`` itd.)
+- ``.. raw:: html`` – interpretuj treść poniżej jako HTML
+- ``.. include:: ścieżka/plik.rst`` – wstaw treść z innego pliku
+
+Listy
+---------------
+
+Aby uzyskać listę wypunktowaną lub numerowaną stosujemy:
+
+.. code-block:: rst
+
+    * punkt
+    * punkt drugi zawiera
+      dwie linie
+
+    1. punkt 1
+    2. punkt 2
+
+    #. automatyczne numerowanie
+    #. automatyczne numerowanie
+
+
+Linki
+----------------
+
+- ```Nagłówek`_`` – link do nagłówka w bieżącym dokumencie
+- ``.. _Strona Pythona: http:\\www.python.org`` – definicja linku,
+  ```Strona Pythona`_`` – wstawienie linku
+- ```Strona Pythona <http:\\www.python.org>`_`` – tak też można
+- ``.. _nazwa-linku:`` – definicja linku w dokumentacji,
+  ``:ref:`zobacz tutaj <nazwa-linku>``` – wstawienie linku
+
+.. tip::
+
+    Powtórzmy, najlepszą metodą poznania składni reST jest przeglądanie
+    źródeł gotowych plików.
+
+Budowanie dokumentacji
+=======================
+
+W katalogu głównym dokumentacji, czyli ``docs`` wydajemy polecenie:
+
+.. code-block:: bash
+
+    ~/projekt/docs$ make html
+
+W terminalu zobaczymy komunikaty, niektóre z nich będą informacją o błędach
+w formatowaniu, które musimy usunąć. Gotowa wersja zostanie umieszczona
+w katalogu ``_build/html``. Możemy go wgrać do sieci, możemy spakować i udostępnić
+– po otwarciu pliku ``index.html`` w przeglądarce zobaczymy efekt naszej pracy.
+
+Od czasu do czasu, zwłaszcza po wielu zmianach położenia plików i katalogów,
+budowanie dokumentacji warto poprzedzić usunięciem poprzedniej wersji HTML:
+
+.. code-block:: bash
+
+    ~/projekt/docs$ make clean
+
+Dokumentacja online
+======================
+
+Projekty hostowane w serwisie `GitHub <https://github.com/>`_ łatwo podpiąć
+do serwisu `Read the Docs <https://readthedocs.org/>`_, który umożliwia
+automatyczne generowanie wersji HTML, PDF, a nawet Epub (chociaż przy wykorzystaniu stabilnej,
+a nie testowej wersji Sphinksa) i udostępnianie jej online.
+
+W tym celu trzeba założyć konto na stronie
+`Read the Docs – Sign Up <https://readthedocs.org/accounts/signup/>`_.
+Po zalogowaniu importujemy projekt z GitHuba (ang. Import a Project –
+Import from GitHub) i po potwierdzeniu domyślnych opcji możemy
+cieszyć wersją online dostępną pod adresem typu: http://nazwa_projektu.readthedocs.org.
+Wersję PDF ściągniemy po zalogowaniu, wejściu na stronę projektu, wybraniu
+zakładki *Downloads* i linku *latest PDF*.
+
+.. figure:: img/rtfd.jpg
 
 Materiały
 **************
@@ -525,8 +706,9 @@ Materiały
 5. `Qt Creator`_
 6. `Strona projektu Git`_
 7. `First Steps with Sphinx`_
-8. `Docutils`_
-9. `Składnia reST & Sphinx`_
+8. `Wprowadzenie do składni Sphinx reST`_
+9. `Docutils`_
+10. `Składnia reST & Sphinx`_
 
 .. _Geany: http://www.geany.org/
 .. _MinGw: http://www.mingw.org/
@@ -535,6 +717,7 @@ Materiały
 .. _Qt Creator: http://pl.wikipedia.org/wiki/Qt_Creator
 .. _Strona projektu Git: http://git-scm.com/
 .. _First Steps with Sphinx: http://sphinx-doc.org/tutorial.html
+.. _Wprowadzenie do składni Sphinx reST: http://sphinx-doc.org/rest.html
 .. _Docutils: http://docutils.sourceforge.net/
 .. _Składnia reST & Sphinx: http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html
 
@@ -592,7 +775,7 @@ Pojęcia
         interfejs użytkownika, często zawiera domyślny wybór aplikacji przeznaczonych
         do wykonywania typowych zadań. Najpopularnijesze środowiska to `XFCE`_,
         `Gnome`_, `KDE`_, `LXDE`_, `Cinnamon`_, `Mate`_.
-    
+
     serwer WWW
         (ang. web server) – oprogramowanie obsługujące protokół http, podstawowy protokół sieci WWW,
         służący przesyłaniu dokumentów hipertekstowych.
