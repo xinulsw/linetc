@@ -235,9 +235,9 @@ Pozostałe litery rozwija się najczęściej jako:
 * M – `MySQL <http://pl.wikipedia.org/wiki/MySQL>`_, w linuksach raczej `MariaDB <http://pl.wikipedia.org/wiki/MariaDB>`_;
 * P – `PHP <http://pl.wikipedia.org/wiki/PHP>`_, `Perl <http://pl.wikipedia.org/wiki/Perl>`_ lub `Python <http://pl.wikipedia.org/wiki/Python>`_.
 
-Wymienionego oprogramowania nie należy jednak traktować jako jedynych możliwych,
-dostępnych jest wiele innych, atrakcyjnych rozwiązań. Warto również mieć świadomość,
-że instalacja i konfiguracja kompletu wymienioych programów nie jest zazwyczaj
+Wymienionego oprogramowanie to najpopularniejsze, ale nie jedyne rozwiązania.
+Dostępnych jest wiele innych, równie dobrych serwerów czy baz danych.
+Warto też wiedzieć, że instalacja i konfiguracja kompletu wymienionych programów nie jest zazwyczaj
 konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowana
 biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
 serwer HTTP i obsługę wbudowanej bazy SQLite.
@@ -280,8 +280,38 @@ użytkowników poprzez zakomentowanie następujących linii z pliku
     #    </Directory>
     #</IfModule>
 
+Tworzone strony umieszczamy w podkatalogu ``public_html`` katalogu domowego.
+Wywołujemy je wpisując w przeglądarce adres: ``127.0.0.1/~użytkownik`` –
+powinny zostać zwrócone pliki ``index.php`` lub ``index.html``, o ile istnieją.
+Jeżeli mamy kilka projektów, umieszczamy je w podkatalogach, np.
+``public_html/projekt1`` i wywołujemy: ``127.0.0.1/~użytkownik/projekt1``.
+
+Windows
+==============
+
+W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
+Proponujemy `Serwer2Go <http://www.server2go-web.de/download/download.html>`, ściągamy
+wersję **exe** *Apache 1.3.35* + *PHP 5.3.2, SQLite*, czyli pierwszą dostępną.
+Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
+wybranego dysku, *C:*, *D:* itp.:
+
+.. figure:: img/serwer2go01.jpg
+
+.. figure:: img/serwer2go02.jpg
+
+Po rozpakowaniu plików, wchodzimy do katalogu instalacyjnego, aby otworzyć
+w edytorze plik konfiguracyjny ``pms_config.ini``. M. in. dlatego, że Internet Explorer
+nie najlepiej współpracuje z serwerem, we wspomnianym pliku zmieniamy ustawienia:
 
 .. code-block:: bash
+
+    ShowTrayIcon=1
+    StartLocal=1
+    BrowserType=FIREFOX
+
+Oprogramowanie uruchamiamy za pomocą pliku ``Server2Go``, który uruchomi serwer
+WWW pod adresem ``127.0.0.1:4001`` w Firefoksie. Swoje strony umieszczamy
+w podkatalogu ``htdocs`` katalogu instalacyjnego.
 
 Git
 **********************
