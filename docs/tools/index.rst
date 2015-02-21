@@ -295,7 +295,7 @@ wersję **exe** *Apache 1.3.35* + *PHP 5.3.2, SQLite*, czyli pierwszą dostępn�
 Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
 wybranego dysku, *C:*, *D:* itp.:
 
-.. figure:: img/serwer2go01.jpg
+.. figure:: img/server2go01.jpg
 
 .. figure:: img/serwer2go02.jpg
 
