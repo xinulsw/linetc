@@ -285,8 +285,10 @@ try:
     import sphinx_rtd_theme
     html_theme = "sphinx_rtd_theme"
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    html_style = 'css/custom.css'
 except:
     pass
 
-def setup(app): 
+def setup(app):
     app.add_javascript('custom.js')
+    app.add_javascript('jquery.prettyPhoto.js')

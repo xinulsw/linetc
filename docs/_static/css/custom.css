@@ -1,0 +1,6 @@
+@import url("theme.css");
+@import url("prettyPhoto.css");
+
+ul.gallery li { display: inline; }
+ul.gallery li img { padding-bottom: 0.5em; }
+.clearfix { }

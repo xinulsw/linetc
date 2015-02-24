@@ -1,6 +1,8 @@
 Narzędzia
 ###################
 
+.. _tools:
+
 Poniżej przedstawiamy zestaw przykładowych narzędzi do programowania, tworzenia
 skryptów i dokumentacji, stron WWW itp. zadań.
 
@@ -185,7 +187,7 @@ Polecić natomiast można doinstalowanie rozszerzonej konsoli:
 .. code-block:: bash
 
     ~$ sudo apt-get install ipython2 ipython3
-    ~# pacman -S python ipython2
+    ~# pacman -S ipython ipython2
 
 W **MS Windows** najprościej zainstalować Pythona przy użyciu skryptu konsoli PowerShell
 dostępnej w wersjach *Professional* (oznaczoną niebieską ikoną i niebieskiem tłem):
@@ -220,98 +222,6 @@ w konsoli:
 .. code-block:: bat
 
     set PATH=%PATH%;c:\Python27\;c:\Python27\Scripts\
-
-Serwer deweloperski WWW
-************************
-
-Jeżeli chcemy tworzyć i testować aplikacje sieciowe wykorzystujące bazy danych
-za pomocą języków skryptowych, np. PHP czy Python, potrzebujemy środowiska testowego,
-na które składa się :term:`serwer WWW`, :term:`interpreter` języka skryptowego i :term:`system bazodanowy`.
-Zestawy takiego oprogramowania określa się skrótami `WAMP <http://pl.wikipedia.org/wiki/WAMP>`_ lub `LAMP <http://pl.wikipedia.org/wiki/LAMP>`_ w zależności
-od wykorzystywanego systemu operacyjnego: W – Windows, L – Linux.
-Pozostałe litery rozwija się najczęściej jako:
-
-* A – `Apache <http://pl.wikipedia.org/wiki/Apache_%28serwer%29>`_;
-* M – `MySQL <http://pl.wikipedia.org/wiki/MySQL>`_, w linuksach raczej `MariaDB <http://pl.wikipedia.org/wiki/MariaDB>`_;
-* P – `PHP <http://pl.wikipedia.org/wiki/PHP>`_, `Perl <http://pl.wikipedia.org/wiki/Perl>`_ lub `Python <http://pl.wikipedia.org/wiki/Python>`_.
-
-Wymienionego oprogramowanie to najpopularniejsze, ale nie jedyne rozwiązania.
-Dostępnych jest wiele innych, równie dobrych serwerów czy baz danych.
-Warto też wiedzieć, że instalacja i konfiguracja kompletu wymienionych programów nie jest zazwyczaj
-konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowana
-biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
-serwer HTTP i obsługę wbudowanej bazy SQLite.
-
-Linux
-===================
-
-W systemach opartych na Debianie (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
-można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
-menedżerów pakietów, czyli odpowiednio:
-
-.. code-block:: bash
-
-    ~$ sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl libapache2-mod-php5
-    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php5
-
-Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
-
-.. code-block:: bash
-
-    ~$ sudo a2enmod userdir rewrite
-    ~$ sudo service apache2 restart
-
-    ~# a2enmod userdir rewrite
-    ~# systemctl restart httpd
-
-– i odblokowania możliwości wykopnywania skryptów w katalogach domowych
-użytkowników poprzez zakomentowanie następujących linii z pliku
-``/etc/apache2/mods-available/php5.conf`` (Debian) lub ``/etc/httpd/mods-available/php5.conf``
-(Arch):
-
-.. code-block:: bash
-
-    # To re-enable PHP in user directories comment the following lines
-    # (from <IfModule ...> to </IfModule>.) Do NOT set it to On as it
-    # prevents .htaccess files from disabling it.
-    #<IfModule mod_userdir.c>
-    #    <Directory /home/*/public_html>
-    #        php_admin_flag engine Off
-    #    </Directory>
-    #</IfModule>
-
-Tworzone strony umieszczamy w podkatalogu ``public_html`` katalogu domowego.
-Wywołujemy je wpisując w przeglądarce adres: ``127.0.0.1/~użytkownik`` –
-powinny zostać zwrócone pliki ``index.php`` lub ``index.html``, o ile istnieją.
-Jeżeli mamy kilka projektów, umieszczamy je w podkatalogach, np.
-``public_html/projekt1`` i wywołujemy: ``127.0.0.1/~użytkownik/projekt1``.
-
-Windows
-==============
-
-W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
-Proponujemy `Serwer2Go <http://www.server2go-web.de/download/download.html>`, ściągamy
-wersję **exe** *Apache 1.3.35* + *PHP 5.3.2, SQLite*, czyli pierwszą dostępną.
-Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
-wybranego dysku, *C:*, *D:* itp.:
-
-.. figure:: img/server2go01.jpg
-
-.. figure:: img/serwer2go02.jpg
-
-Po rozpakowaniu plików, wchodzimy do katalogu instalacyjnego, aby otworzyć
-w edytorze plik konfiguracyjny ``pms_config.ini``. M. in. dlatego, że Internet Explorer
-nie najlepiej współpracuje z serwerem, we wspomnianym pliku zmieniamy ustawienia:
-
-.. code-block:: bash
-
-    ShowTrayIcon=1
-    StartLocal=1
-    BrowserType=FIREFOX
-
-Oprogramowanie uruchamiamy za pomocą pliku ``Server2Go``, który uruchomi serwer
-WWW pod adresem ``127.0.0.1:4001`` w Firefoksie. Swoje strony umieszczamy
-w podkatalogu ``htdocs`` katalogu instalacyjnego.
 
 Git
 **********************
@@ -726,6 +636,100 @@ zakładki *Downloads* i linku *latest PDF*.
 
 .. figure:: img/rtfd.jpg
 
+Serwer deweloperski WWW
+************************
+
+Jeżeli chcemy tworzyć i testować aplikacje sieciowe wykorzystujące bazy danych
+za pomocą języków skryptowych, np. PHP czy Python, potrzebujemy środowiska testowego,
+na które składa się :term:`serwer WWW`, :term:`interpreter` języka skryptowego i :term:`system bazodanowy`.
+Zestawy takiego oprogramowania określa się skrótami `WAMP <http://pl.wikipedia.org/wiki/WAMP>`_ lub `LAMP <http://pl.wikipedia.org/wiki/LAMP>`_ w zależności
+od wykorzystywanego systemu operacyjnego: W – Windows, L – Linux.
+Pozostałe litery rozwija się najczęściej jako:
+
+* A – `Apache <http://pl.wikipedia.org/wiki/Apache_%28serwer%29>`_;
+* M – `MySQL <http://pl.wikipedia.org/wiki/MySQL>`_, w linuksach raczej `MariaDB <http://pl.wikipedia.org/wiki/MariaDB>`_;
+* P – `PHP <http://pl.wikipedia.org/wiki/PHP>`_, `Perl <http://pl.wikipedia.org/wiki/Perl>`_ lub `Python <http://pl.wikipedia.org/wiki/Python>`_.
+
+Wymienionego oprogramowanie to najpopularniejsze, ale nie jedyne rozwiązania.
+Dostępnych jest wiele innych, równie dobrych serwerów czy baz danych.
+Warto też wiedzieć, że instalacja i konfiguracja kompletu wymienionych programów nie jest zazwyczaj
+konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowana
+biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
+serwer HTTP i obsługę wbudowanej bazy SQLite.
+
+Linux
+===================
+
+W systemach opartych na Debianie (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
+można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
+menedżerów pakietów, czyli odpowiednio:
+
+.. code-block:: bash
+
+    ~$ sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl libapache2-mod-php5
+    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php5
+
+Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
+
+.. code-block:: bash
+
+    ~$ sudo a2enmod userdir rewrite
+    ~$ sudo service apache2 restart
+
+    ~# a2enmod userdir rewrite
+    ~# systemctl restart httpd
+
+– i odblokowania możliwości wykopnywania skryptów w katalogach domowych
+użytkowników poprzez zakomentowanie następujących linii z pliku
+``/etc/apache2/mods-available/php5.conf`` (Debian) lub ``/etc/httpd/mods-available/php5.conf``
+(Arch):
+
+.. code-block:: bash
+
+    # To re-enable PHP in user directories comment the following lines
+    # (from <IfModule ...> to </IfModule>.) Do NOT set it to On as it
+    # prevents .htaccess files from disabling it.
+    #<IfModule mod_userdir.c>
+    #    <Directory /home/*/public_html>
+    #        php_admin_flag engine Off
+    #    </Directory>
+    #</IfModule>
+
+Tworzone strony umieszczamy w podkatalogu ``public_html`` katalogu domowego.
+Wywołujemy je wpisując w przeglądarce adres: ``127.0.0.1/~użytkownik`` –
+powinny zostać zwrócone pliki ``index.php`` lub ``index.html``, o ile istnieją.
+Jeżeli mamy kilka projektów, umieszczamy je w podkatalogach, np.
+``public_html/projekt1`` i wywołujemy: ``127.0.0.1/~użytkownik/projekt1``.
+
+.. _serwer2go-ins:
+
+Serwer2Go w Windows
+===================
+
+W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
+Proponujemy `Serwer2Go <http://www.server2go-web.de/download/download.html>`_, ściągamy
+wersję **exe** *Apache 1.3.35* + *PHP 5.3.2, SQLite*, czyli pierwszą dostępną.
+Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
+wybranego dysku, *C:*, *D:* itp.:
+
+.. figure:: img/server2go01.jpg
+
+.. figure:: img/server2go02.jpg
+
+Po rozpakowaniu plików, wchodzimy do katalogu instalacyjnego, aby otworzyć
+w edytorze plik konfiguracyjny ``pms_config.ini``. M. in. dlatego, że Internet Explorer
+nie najlepiej współpracuje z serwerem, we wspomnianym pliku zmieniamy ustawienia:
+
+.. code-block:: bash
+
+    ShowTrayIcon=1
+    StartLocal=1
+    BrowserType=FIREFOX
+
+Oprogramowanie uruchamiamy za pomocą pliku ``Server2Go``, który uruchomi serwer
+WWW pod adresem ``127.0.0.1:4001`` w Firefoksie. Swoje strony umieszczamy
+w podkatalogu ``htdocs`` katalogu instalacyjnego.
+
 Materiały
 **************
 
@@ -751,7 +755,7 @@ Materiały
 .. _Docutils: http://docutils.sourceforge.net/
 .. _Składnia reST & Sphinx: http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html
 
-Pojęcia
+Słownik
 ===========
 
 .. glossary::
