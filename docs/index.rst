@@ -18,7 +18,7 @@ Spis treści:
 
     Serwis eCG <http://ecg.vot.pl/>
     tools/index
-    qt/index
+    cppqt/index
     web/index
     galerie/index
 

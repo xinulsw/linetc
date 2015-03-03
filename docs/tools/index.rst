@@ -6,6 +6,20 @@ Narzędzia
 Poniżej przedstawiamy zestaw przykładowych narzędzi do programowania, tworzenia
 skryptów i dokumentacji, stron WWW itp. zadań.
 
+.. note::
+
+    Przykłady poleceń wydawanych w terminalu będziemy podawali dla systemu Debian
+    i pochodnych (np. (X)Ubuntu, Mint) oraz menedżera pakietów ``apt-get``,
+    poprzedzamy je symbolami ``~$``; a także dla system Arch Linux i pochodnych
+    (np. Bridge, Manjaro) korzystających z menedżera ``pacman``, poprzedzamy je
+    symbolami ``~#``.
+
+    Instalacja pakietów **wymaga uprawnień roota**. W wielu systemach używa się
+    polecenia ``sudo``, które pozwala zwykłemu użytkownikowi uruchamiać programy
+    z podwyższonymi uprawnieniami. Jeżeli Twój system nie ma skonfigurowanego
+    domyślnie polecenia *sudo* (np. Debian lub Arch Linux), musisz zalogować się
+    na konto *roota*, np. wpisując w terminalu ``su root``.
+
 Geany
 *************
 
@@ -28,12 +42,6 @@ W systemie **Linux** korzystamy z dedykowanego menedżera pakietów, np. w Xubun
 
     ~$ sudo apt-get install geany geany-plugins
     ~# pacman -S geany geany-plugins
-
-.. note::
-    Przykłady poleceń będziemy podawali dla systemów opartych na Debianie (Ubuntu
-    i pochodne, Mint), które wykorzystyują menedżer oprogramowania ``apt``; oraz
-    dla systemów opartych na Arch Linuksie (Arch, Bridge, Manjaro) i korzystających
-    z menedżera ``pacman``.
 
 W **MS Windows** ściągamy i instalujemy `pełną wersję binarną Geany <http://www.geany.org/Download/Releases>`_
 przeznaczoną dla tych systemów. *Pełna* oznacza tutaj, ze zawiera biblioteki
@@ -182,12 +190,12 @@ jak i 3.x. Dla formalności polecenia instalacyjne to:
     wskazuje wersję 3.x (!), podobnie nazwy pakietów dodatkowych. Wersja i paczki
     z liniii 2.x mają w nazwie ``python2``.
 
-Polecić natomiast można doinstalowanie rozszerzonej konsoli:
+Polecić natomiast można doinstalowanie dodatkowych narzędzi, w tym rozszerzonej konsoli:
 
 .. code-block:: bash
 
     ~$ sudo apt-get install ipython2 ipython3
-    ~# pacman -S ipython ipython2
+    ~# pacman -S python-pip ipython python2-pip ipython2
 
 W **MS Windows** najprościej zainstalować Pythona przy użyciu skryptu konsoli PowerShell
 dostępnej w wersjach *Professional* (oznaczoną niebieską ikoną i niebieskiem tłem):
@@ -408,7 +416,7 @@ Następnie wydajemy polecenia:
 
     W Archu:
     ~# pacman -S mercurial
-    ~# sudo pip install sphinx_rtd_theme hg+https://bitbucket.org/birkenfeld/sphinx#sphinx
+    ~# pip install sphinx_rtd_theme hg+https://bitbucket.org/birkenfeld/sphinx#sphinx
 
 .. note::
 
@@ -416,8 +424,8 @@ Następnie wydajemy polecenia:
     wynika z tego, że korzysta z niego projekt Sphinx. Instalacja tematu ``sphinx_rtd_theme``
     jest opcjonalna, domyślny temat wygląda tak, jak w `dokumentacji Pythona <https://docs.python.org/2.7/whatsnew/2.7.html>`_.
 
-Teraz możemy przejść do konfiguracji Sphiksa, która sprowadza się do wygenerowania
-pliku z ustawieniami o nazwie ``conf.py``. W głownym katalogu tworzonej dokumentacji,
+Teraz możemy przejść do konfiguracji Sphinksa, która sprowadza się do wygenerowania
+pliku z ustawieniami o nazwie ``conf.py``. W głównym katalogu tworzonej dokumentacji,
 czyli ``docs``, wydajemy polecenie:
 
 .. code-block:: bash
