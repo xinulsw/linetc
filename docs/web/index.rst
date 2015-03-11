@@ -25,29 +25,37 @@ Pobranie archwium
 
     GetSimple wymaga działającego serwera WWW, przy czym serwery bazodanowe
     typu MySQL itp. nie są koniecznie, ponieważ GS przechowuje pliki w formacie
-    ``XML``. Poniżej pokazujemy instalację w środowisku ``WAMP`` o nazwie :ref:`Serwer2Go <serwer2go-ins>`,
-    którego instalację omówiliśmy w rozdziale :ref:`Narzędzia <tools>`.
+    ``XML``. W rozdziale :ref:`narzędzia <tools>` omówiono instalację instalację
+    środowiska :ref:`LAMP <lamp-ins>` (dla Linuksa) i :ref:`WAMP <serwer2go-ins>`
+    (Serwer2Go dla Windowsa).
 
 Najnowszą wersję GS pobieramy ze strony `Download GetSimple CMS <http://get-simple.info/download>`_.
-Ściągnięte archiwum ``zip`` umieszczamy w podkatalogu ``htdocs`` folderu
-instalacyjnego ``Serwer2Go``. Rozpakowujemy je, następnie nazwę utworzonego katalogu
-zmieniamy na ``gs``.
+Ściągnięte archiwum ``zip`` umieszczamy w podkatalogu ``public_html`` katalogu domowego
+użytkownika Linuksa lub w podkatalogu ``htdocs`` folderu instalacyjnego ``Serwer2Go``.
+Rozpakowujemy je, a następnie nazwę utworzonego katalogu zmieniamy na ``gs``.
 
 .. figure:: img/getsimple02.jpg
 
 .. note::
 
-    W środowisku Linux archiwum należy rozpakować w podfolderze ``public_html``
-    katalogu domowego użytkownika.
+    W środowisku Linux folderowi ``gs`` musimy nadać uprawnienia do zapisu
+    i odczytu nie tylko dla właściciela, ale i dla grupy oraz innych.
+    Można to zrobić z poziomu menedżera plików po kliknięciu prawym klawiszem
+    myszy nazwy katalogu i wybraniu "Właściwości/Uprawnienia" (zob. zrzut poniżej).
+    Uwaga: na pytanie typu "Zastosować rekursywnie" odpowiadamy twierdząco.
+    Można też w katalogu ``public_html`` wydać polecenie w terminalu ``chmod -R 777 gs``.
 
-Następnie przechodzimy do przeglądarki (``Serwer2Go`` musi być uruchomiony!) i rozpoczynamy
-instalację wpisując w polu adresu: ``http://127.0.0.1:4001/gs/admin``.
+.. figure:: img/gs_chmod.png
+
+Następnie przechodzimy do przeglądarki (w Windows ``Serwer2Go`` musi być uruchomiony!)
+i rozpoczynamy instalację wpisując w polu adresu: ``http://127.0.0.1/~nazwa_użytkownika/gs/admin``
+(Linux) lub ``http://127.0.0.1:4001/gs/admin`` (Windows).
+
+.. figure:: img/getsimple03.jpg
 
 .. note::
 
-    W Linuksie adres będzie miał postać: ``http://127.0.0.1/~nazwa_użytkownika/gs/admin``.
-
-.. figure:: img/getsimple03.jpg
+    W środowisku Linux ewentualne błędy ``chmod`` ignorujemy.
 
 Spolszczenie
 ----------------
@@ -66,20 +74,22 @@ na dysk. Przenosimy je do folderu ``gs/admin/lang`` i tam rozpakowujemy.
 Instalacja
 ==================
 
-Wracamy do przęglądarki, odświeżamy stronę instalacyjną: ``http://127.0.0.1:4001/gs/admin``,
+Wracamy do przęglądarki, odświeżamy stronę instalacyjną, np. klawiszem :kbd:`F5`,
 i wybieramy polską wersję językową. Po kliknięciu przycisku "Kontynuuj instalację"
 na następnej stronie wpisujemy nazwę strony, login i hasło administratora.
 
 .. figure:: img/getsimple09.jpg
 
-Po naciśnięciu "Instaluj!" wyświetlona zostanie strona z błędem ze względu
-na brak możliwości wysłania wiadomości e-mail z danymi logowania. Jest to
+Po naciśnięciu "Instaluj!" może zostać wyświetlona strona z błędem (pod Windowsem)
+ze względu na brak możliwości wysłania wiadomości e-mail z danymi logowania. Jest to
 normalne. Wyświetlone hasło możemy ewentualnie zapisać, po czym kilkamy link "Logowanie".
-Wyświetlony zostanie panel administracyjny, w którym będziemy mogli
-zmienić hasło klikając po prawej stronie "Ustawienia", a następnie "Profil użytkownika".
-Domyślnie dodana jest demonstracyjna strona główna widoczna w panelu "Strony",
-która zostanie otwarta, jeżeli klikniemy nazwę serwisu w panelu administracyjnym
-lub wpiszemy adres w przeglądarce: ``http://127.0.0.1:4001/gs/``.
+Zobaczymy panel administracyjny, w którym będziemy mogli zmienić hasło
+klikając po prawej stronie "Ustawienia", a następnie "Profil użytkownika".
+
+Domyślnie dodana zostanie demonstracyjna strona główna widoczna w panelu "Strony",
+którą wyświetlimy w przeglądarce, jeżeli klikniemy nazwę serwisu w panelu administracyjnym
+lub wpiszemy ``http://127.0.0.1/~nazwa_użytkownika/gs/`` (Linux) lub ``http://127.0.0.1:4001/gs/`` (Windows)
+w polu adresu.
 
 .. figure:: img/getsimple14.jpg
 
@@ -91,11 +101,11 @@ Wtyczki
 Jak większość CMS-ów, GetSimple oferuje mechanizm wtyczek, pozwalający rozszerzać
 w miarę potrzeb funkcjonalność zarówno od strony użytkownika, jak i administratora
 serwisu. Instalacja wtyczek polega na pobraniu ich ze strony `Extend Repository <http://get-simple.info/extend/>`,
-a następnie rozpakowaniu archiwum ``zip`` w podfolderze ``gs/data/plugins``.
+a następnie rozpakowaniu archiwum ``zip`` w podfolderze ``gs/plugins``.
 Wtyczkami zarządzamy w sekcji "Wtyczki" panelu administracyjnego. Tam można
 je m. in. włączać lub wyłączać.
 
-Polecane wtyczki
+Przykładowe wtyczki
 -------------------
 
 - `I18N <http://get-simple.info/extend/plugin/i18n/69/>`_ – dodaje wsparcie
@@ -103,10 +113,26 @@ Polecane wtyczki
 - `I18N Gallery <http://get-simple.info/extend/plugin/i18n-gallery/160/>`_
   – dodaje możliwość wygodnego tworzenia galerii zdjęć i umieszczania ich
   na stronach;
-- `I18N Search <http://get-simple.info/extend/plugin/i18n-search/82/>` –
+- `I18N Search <http://get-simple.info/extend/plugin/i18n-search/82/>`_ –
   umożliwia m. in. wyszukiwanie tekstu na stronach serwisu, ale również
-  tworzenie list zasobów oznaczonych tymi samymi tagami;
-  .
+  tworzenie list zasobów oznaczonych tymi samymi tagami.
+- `I18N Special Pages <http://get-simple.info/extend/plugin/i18n-special-pages/319/>`_
+  – pozwala tworzyć strony specjalne typu newsy, artykuły, karty produktów
+  itp.
+
+.. note::
+
+    W Linuksie po umieszczeniu archiwów zip w podkatalogu ``gs/plugins``
+    wygodnie je rozpakujesz wydając w terminalu polecenie typu:
+    ``unzip nazwa_archiwum.zip``.
+
+    Uwaga: użycie polecenia "Rozpakuj tutaj" w menedżerze
+    plików umieści pliki w dodatkowym i niepotrzebnym podfolderze (o nazwie wtyczki),
+    z którego trzeba je będzie przenieść do folderu nadrzędnego (``plugins``).
+
+Zawartość przykładowego folderu ``plugins`` powinna wyglądać następująco:
+
+.. figure:: img/gs_plugins.png
 
 Materiały
 **************

@@ -665,6 +665,8 @@ konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowa
 biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
 serwer HTTP i obsługę wbudowanej bazy SQLite.
 
+.. _lamp-ins:
+
 Linux
 ===================
 
