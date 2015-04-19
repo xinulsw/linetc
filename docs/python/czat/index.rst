@@ -1,0 +1,743 @@
+Czat (wersja rozszerzona)
+#########################
+
+.. highlight:: python
+
+Zastosowanie Pythona i frameworka Django do stworzenia aplikacji internetowej Czat;
+prostego czata, w którym zarejestrowani użytkownicy będą mogli wymieniać się krótkimi wiadomościami.
+
+.. contents::
+    :depth: 1
+    :local:
+
+Projekt i aplikacja
+**********************
+
+Tworzymy nowy projekt Django, a następnie uruchamiamy lokalny serwer,
+który pozwoli śledzić postęp pracy. W katalogu domowym wydajemy polecenia w terminalu:
+
+.. raw:: html
+
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+
+.. code-block:: bash
+
+    ~ $ django-admin.py startproject czat
+    ~ $ cd czat
+    ~/czat $ python manage.py runserver
+
+Powstanie katalog projektu :file:`czat` i podkatalog aplikacji o takiej samej nazwie :file:`chatter`.
+Po wpisaniu w przeglądarce adresu *127.0.0.1:8000* zobaczymy stronę powitalną.
+
+.. figure:: img/czat01.png
+
+.. note::
+
+    Domyślnie serwer nasłuchuje na porcie ``8000``, można go jednak uruchomić
+    na innyn, jeżeli domyślny byłby zajęty. Wystarczy, że do polecenia dodamy
+    np.: ``127.0.0.1:8080``.
+    
+    W systemach Linux możemy kliknąć w terminalu prawym klawiszem adres ``http://127.0.0.1:8000/``
+    i wybrać polecenie "Otwórz link", aby szybko otworzyć domyślną przeglądarkę.
+    Lokalny serwer deweloperski zatrzymujemy za pomocą skrótu :kbd:`Ctrl+C`.
+    
+    Jeden projekt może zawierać wiele aplikacji zapisywanych w osobnych podkatalogach katalogu projektu.
+
+Rozpoczynamy od modyfikacji ustawień projektu, tak aby korzystał z polskiej wersji językowej
+oraz lokalnych ustawień daty i czasu. Musimy również zarejestrować naszą aplikację w projekcie.
+W pliku :file:`setting.py` zmieniamy następujące linie:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # czat/czat/settings.py
+
+    # rejestrujemy aplikacje
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+
+        'czat', # rejestrujemy aplikację
+    )
+
+    LANGUAGE_CODE = 'pl' # ustawienie języka
+
+    TIME_ZONE = 'Europe/Warsaw' # ustawienie strefy czasowej
+
+.. warning::
+
+    Uwaga: jeżeli w plikach Pythona chcemy stosować polskie znaki, m.in.
+    w komentarzach, na początku każdego pliku powinna znaleźć się linia
+    definiująca kodowanie: ``# -*- coding: utf-8 -*-``.
+
+Model – Widok – Kontroler
+**************************
+
+W projektowaniu aplikacji internetowych za pomocą Django odwołujemy się do wzorca M(odel)V(iew)C(ontroller),
+czyli Model–Widok–Kontroler [#]_, co pozwala na oddzielenie danych od ich prezentacji oraz logiki aplikacji.
+Funkcje kolejnych elementów są następujące:
+
+* Modele – :term:`model` w Django reprezentuje źródło informacji;
+  są to klasy Pythona odwzorowujące pojedyncze tabele w bazie danych [#]_;
+  każda klasa zawiera właściwości odpowiadające polom tabeli,
+  może też zawierać funkcje wykonujące operacje na danych.
+  Instancja takiej klasy odpowiada rekordowi danych.
+  Modele definiujemy w pliku :file:`models.py`.
+* Widoki – :term:`widok` w Django to funkcja Pythona, która na podstawie żądań www
+  (dla danych adresów URL) zwraca odpowiedź, najczęściej w postaci kodu HTML
+  generowanego w szablonach (templates); odpowiedzią może być również
+  przekierowanie na inny adres, jakiś dokument lub obrazek.
+  Widoki definiowane są w pliku :file:`views.py`.
+* Kontroler – :term:`kontroler` to mechanizm kierujący kolejne żądania
+  do odpowiednich widoków na podstawie wzorców adresów URL zawartych w pliku :file:`urls.py`.
+
+.. [#] Twórcy Django traktują jednak ten wzorzec elastycznie, mówiąc że ich framework wykorzystuje wzorzec MTV, czyli model (model), szablon (template), widok (view).
+.. [#] Takie odwzorowanie nosi nazwę mapowania obiektowo-relacyjnego (ORM). ORM odwzorowuje strukturę bazy na obiekty Pythona.
+
+Model danych i baza
+**********************
+
+Pisanie aplikacji zaczynamy od zdefiniwania :term:`modelu`, czyli klasy opisującej
+tabelę zawierającą wiadomości. Instancje tej klasy będą konkretnymi wiadomościami
+utworzonymi przez użytkowników systemu.
+Każda wiadomość będzie zwierała treść, datę dodania oraz autora wiadomości (użytkownika).
+
+W pliku :file:`~/czat/czat/models.py`, który musimy utworzyć, wpisujemy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: models_z1.py
+    :linenos:
+
+Jak widać, podczas opisywania klasy ``Wiadomosc`` podajemy nazwy poszczególnych
+właściwości (pól) oraz typy przechowywanych w nich danych.
+Po zdefiniowaniu przynajmniej jednego modelu możemy utworzyć bazę danych
+dla naszej aplikacji, czyli wszystkie potrzebne tabele.
+Podczas tworzenia bazy Django pyta o nazwę, email i hasło administratora.
+Podajemy te dane po wydaniu w katalogu projektu w terminalu polecenia:
+
+.. raw:: html
+
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+
+.. code-block:: bash
+
+    ~/czat $ python manage.py syncdb
+
+.. figure:: img/czat02ter.png
+
+.. note::
+
+    Domyślnie Django korzysta z bazy SQLite, która przechowywana jest w jednym pliku :file:`db.sqlite3` w katalogu aplikacji.
+    Warto zobaczyć, jak wygląda. Potrzebny będzie jednak interpreter, który w razie
+    potrzeby doinstalujemy poleceniem ``apt-get install sqlite3``. Następnie
+    W terminalu wydajemy polecenie ``python manage.py dbshell``,
+    które uruchamia interpreter bazy. Następnie możemy wylistować utworzone tabele
+    poleceniem ``.tables``. Możemy również zobaczyć jakie instrukcje SQL-a
+    zostały użyte do utworzenia naszej tabeli: ``.schema czat_wiadomosc``.
+    Z interpretera wychodzimy poleceniem ``.quit``.
+    
+.. figure:: img/czat03ter.png
+
+Panel administracyjny
+**********************
+
+Django pozwala szybko utworzyć panel administratora dla projektu, dzięki czemu będziemy mogli zacząć
+dodawać użytkowików i wprowadzać dane. Tworzymy więc plik :file:`~/czat/czat/admin.py`
+i rejestrujemy w nim nasz model jako element panelu administracyjnego:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: admin_z1.py
+    :linenos:
+
+Po ewentualnym ponownym uruchomieniu serwera wchodzimy na adres *127.0.0.1:8080/admin/*.
+Logujemy się podając dane wprowadzone podczas tworzenia bazy.
+Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości [#]_.
+
+.. [#] Bezpieczna aplikacja powinna dysponować osobnym mechanizmem rejestracji
+   użytkowników i dodawania wiadomości, tak by nie trzeba było udostępniać
+   panelu administracyjnego osobom postronnym.
+
+.. figure:: img/czat04adm.png
+
+.. figure:: img/czat05adm.png
+
+W panelu administratora widać, że etykiety oznaczające pojedynczą wiadomość
+jak i wiele wiadomości nie są spolszczone, podobnie pole daty oznaczone
+jest etykietą "Data pub". Aby w pełni spolszczyć nasz model, w pliku :file:`models.py`
+dopisujemy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: models_z2.py
+    :linenos:
+
+Jak widać, w definicjach każdego pola jako pierwszy argument możemy dopisać
+spolszczoną etykietę, np. ``u'data publikacji'``. W podklasie ``Meta`` podajemy natomiast
+nazwy modelu w liczbie pojedynczej i mnogiej. Po odświeżeniu panelu
+adminitracyjnego (np. klawiszem :kbd:`F5`) nazwy zostaną spolszczone.
+
+.. note::
+
+    Prefix ``u`` przed łańcuchami znaków oznacza kodowanie unikod (ang. *unicode*)
+    umożliwiające wyświetlanie m.in. znaków narodowych.
+
+Ćwiczenie 1
+============
+
+Po zalogowaniu na konto administratora dodajemy użytkownika "adam".
+Na stronie szczegółów, która wyświetli się po jego utworzeniu, zaznaczamy
+opcję "W zespole", następnie w panelu "Dostępne uprawnienia" zaznaczmy opcje
+dodawania (add), zmieniania (change) oraz usuwania (del) wiadomości
+(wpisy typu: "czat | wiadomosc | Can add wiadomosc") i przypisujemy je
+użytkownikowi naciskając strzałkę w prawo.
+
+.. figure:: img/czat06adm.png
+
+Przelogowujemy się na konto "adam" i dodajemy kilka przykładowych wiadomości.
+
+.. figure:: img/czat08adm.png
+
+Jak można zauważyć, dodane wiadomości wyświetlają się na liście jako "Wiadomosc object".
+Aby to poprawić, uzupełniamy definicję naszego modelu o funkcję,
+której zadaniem jest "autoprezentacja", czyli wyświetlenie treści wiadomości.
+W pliku :file:`models.py` dopisujemy zachowując wcięcia (!):
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: models_z3.py
+    :linenos:
+    :lineno-start: 18
+    :lines: 18-19
+
+.. figure:: img/czat09adm.png
+
+Widoki i szablony
+**********************
+
+Panel administracyjny już mamy, ale po wejściu na stronę główną zwykły użytkownik
+niczego ciekawego poza standardowym powitaniem Django nie widzi. Zajmiemy się teraz
+stronami po stronie (:-)) użytkownika.
+
+Dodawanie stron w Django polega na tworzeniu widoków, czyli funkcji Pythona
+powiązanych z określonymi adresami url. Widoki najczęściej zwracały będą kod HTML
+wyrenderowany na podstawie szablonów, do których możemy przekazywać dodatkowe dane [#]_,
+np. z bazy. Dla przejrzystości przyjęto, że w katalogu aplikacji (:file:`czat/czat`):
+
+1. plik :file:`views.py` zawiera definicję widoków, w tym wywołania szablonów,
+2. plik :file:`url.py` zawiera reguły łączące adresy url z widokami,
+3. w katalogu :file:`czat/czat/templates/czat` zapisujemy szablony pod nazwami
+   określonymi w wywołujących je widokach, np. :file:`index.html`.
+
+.. [#] Dane z bazy przekazywane są do szablonów za pomocą Pythonowego słownika.
+       Renderowanie polega na odszukaniu pliku szablonu, zastąpieniu przekazanych
+       zmiennych danymi i odesłaniu całości (HTML + dane) do użytkownika.
+
+Aby utworzyć stronę główną, stworzymy pierwszy widok, czyli funkcję ``index()`` [#]_,
+którą powiążemy z adresem URL głównej strony (/). Najprostszy widok zwraca
+podany tekst. W pliku :file:`views.py` umieszczamy:
+
+.. [#] Nazwa ``index()`` jest przykładowa, funkcja mogłaby się nazywać inaczej.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z1.py
+    :linenos:
+
+.. note::
+
+    Warto zapamiętać, że każdą funkcję, formularz czy widok udostępniane
+    przez Django, których chcemy użyć, musimy najpierw zaimportować za pomocą
+    klauzuli typu ``from <skąd> import <co>``.
+    
+Widok :file:`index()` łączymy z adresem URL strony głównej (/) w pliku :file:`urls.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z2.py
+    :linenos:
+    :emphasize-lines: 11
+
+Podstawową funkcją jest tu ``url()``, która jako pierwszy parametr przyjmuje wyrażenie
+regularne oznaczane skrótem ``r`` przed łańcuchem. Symbol ``^`` oznacza początek
+łańcucha, ``$`` – koniec. Zapis ``u'^$'`` to adres główny serwera.
+Drugi parametr wskazuje widok (funkcję), która ma obsłużyć dany adres.
+Trzeci parametr ``name`` pozwala zapamiętać skojarzenie url-a i widoku pod nazwą,
+której będzie można użyć np. do wygenerowania adresu linku.
+
+Skoro mamy widok i przypisaliśmy go do jakiegoś adresu URL, możemy przetestować
+działanie aplikacji. Po wywołaniu strony głównej powinniśmy zobaczyć tekst
+podany jako argument funkcji ``HttpResponse()`` w pliku :file:`views.py`:
+
+.. figure:: img/czat10.png
+
+Zazwyczaj odpowiedzią na wywołanie jakiegoś adresu URL będzie jednak jakaś
+strona zapisana w języku HTML. Szablony takich stron umieszczamy w podkatalogu
+``templates/nazwa aplikacji``. Tworzymy więc katalog:
+
+.. raw:: html
+
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+
+.. code-block:: bash
+
+    ~/czat/czat $ mkdir -p templates/czat
+
+Następnie tworzymy szablon, czyli plik :file:`~/czat/czat/templates/czat/index.html`, który zawiera:
+
+.. raw:: html
+
+    <div class="code_no">Plik index.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: index_z2.html
+    :linenos:
+
+Po wpisaniu adresu *127.0.0.1:8000/* zobaczymy tekst, który umieściliśmy w szablonie:
+
+.. figure:: img/czat11.png
+
+Rejestrowanie użytkowników
+***************************
+
+Zamiast zakładać konta użytkownikom w panelu administracyjnym udostępnimy
+im możliwość samodzielnego rejestrowania. Zadanie to można zrealizować na
+dwa sposoby. Pierwszy polega na "ręcznym" utworzeniu formularza i obsłużeniu
+przesłanych danych w skojarzonym widoku (funkcji).
+Przygotujemy więc widok ``rejestruj()``, który:
+
+1. zwróci formularz przygotowany w szablonie :file:`rejestruj.html` w odpowiedzi
+   na żądanie typu :term:`GET`, wysłane przez przeglądarkę po wejściu
+   użytkownika na stronę rejestracji pod adres URL */rejestruj*;
+2. obsłuży żądanie typu :term:`POST`, czyli wysłanie danych z formularza na serwer,
+   sprawdzi poprawność przesłanych danych (nazwę użytkownika i hasło) i
+   utworzy konto;
+3. zaloguje nowego użytkownika i przekieruje go na stronę główną.
+
+Zaczynamy od uzupełnienia pliku :file:`views.py`. Dodajemy widok ``rejestruj()``
+i zmieniamy widok ``index()``.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z3.py
+    :linenos:
+    :lineno-start: 7
+    :lines: 7-
+
+Powyższy kod pokazuje m .in., w jaki sposób przekazać dowolne dane do szablonu.
+Używamy słownika, w naszym przypadku nazwanego ``kontekst``, który zostaje
+użyty jako trzeci argument funkcji ``render()``. W ten sposób przekazujemy
+obiekt użytkownika w widoku strony głównej i formularz w widoku rejestracji.
+
+Warto także zauważyć, jak tworzymy komunikaty zwrotne dla użytkownika.
+Wykorzystujemy wbudowany w Django system komunikatów: ``messages.success(request, "Zostałeś zarejestrowany.")``.
+Tak utworzone komunikaty możemy odczytać w każdym szablonie ze zmiennej
+``messages`` (zob. niżej szablon :file:`index.html`).
+
+Tworzymy nowy szablon :file:`~/czat/czat/templates/czat/rejestruj.html`:
+
+.. raw:: html
+
+    <div class="code_no">Plik rejestruj.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: rejestruj_z3.html
+    :linenos:
+
+Wiążemy adres URL *rejestruj/* z utworzonym widokiem. Do pliku :file:`urls.py`
+dopisujemy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z3.py
+    :linenos:
+    :emphasize-lines: 3
+    :lineno-start: 10
+    :lines: 10-
+
+Gdybyśmy już teraz odwiedzili adres ``127.0.0.1:8000/rejestruj``, powinniśmy
+zobaczyć poniższy formularz:
+
+.. figure:: img/czat12rej.png
+
+Modyfikujemy również szablon strony głównej:
+
+.. raw:: html
+
+    <div class="code_no">Plik index.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: index_z3.html
+    :linenos:
+
+W szablonach dostępne są podstawowe instrukcje sterujące, takie jak np.
+``{% for %}`` czy ``{% if %}``. Tę pierwszą wykorzystamy do wyświetlenia
+komunikatów użytkownikowi, drugą m. in. do sprawdzenia, czy stronę odwiedza
+użytkownik uwierzytelniony. Dane przekazane do szablonu możemy wyświetlać
+stosując odpowiednią notację, np.: ``{{ user.username }}``.
+Dodatkowo wyświetlane dane można obrabiać za pomocą filtrów,
+np. ``{{ komunikat|capfirst }}`` – w tym wypadku wszystkie komunikaty
+zostaną wyświetlone z wielkiej litery.
+W pliku :file:`index.html` umieszczamy również link do strony rejestracji,
+który wyświetlany będzie tylko użytkownikom niezalogowanym. Aby wygenerować adres
+strony w atrybucie ``href`` używamy funkcji ``url``, za którą podajemy
+w cudzysłowach nazwę nadaną adresowi w pliku ``urls.py``, np.:
+``{% url 'rejestruj' %}``.
+
+Ćwiczenie 2
+===============
+
+Po ewentualnym ponownym uruchomieniu serwera, zarejestruj nowego użytkownika
+o nazwie "ewa". Powinieneś zobaczyć poniższą stronę:
+
+.. figure:: img/czat13rej.png
+
+W przeglądarce wpisz adres *127.0.0.1:8000/rejestruj*, aby przejść do strony
+rejestracji. Na stronie wyświetla się formularz, mimo że jesteś już zarejestrowany
+i zalogowany.
+
+Spróbuj zmienić szablon ``rejestruj.html``, tak aby zalogowanym
+użytkownikom wyświetlał się tekst "Jesteś już zarejestrowany" oraz
+link do strony głównej, a niezalogowanym formularz rejestracji.
+Wskazówka: przekaż do szablonu obiekt reprezuntujący użytkownika.
+Zobacz jak zrobiliśmy to w widoku ``index()`` i dopisz odpowiedni
+kod do słownika ``kontekst`` widoku ``rejestruj()``.
+
+Przykładowy efekt poprawnego wykonania ćwiczenia:
+
+.. figure:: img/czat14rej.png
+
+Logowanie i wylogowywanie
+**************************
+
+Skoro użytkownicy mogą się rejestrować, trzeba umożliwić im również logowanie
+i wylogowywanie z serwisu. Również to zadanie można zrobić dwojako.
+Pierwszy sposób to tak jak w przypadku rejestracji stworzenie widoków
+w pliku :file:`views.py` i powiązanie ich z adresami w pliku :file:`urls.py`.
+
+Na początku jak zawsze importujemy wymagane funkcje, później dopisujemy
+widok ``loguj()`` i ``wyloguj()`` w pliku :file:`views.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z4.py
+    :linenos:
+    :lineno-start: 36
+    :lines: 36-
+
+Podobnie jak w przypadku rejestrowania użytkowników, korzystamy z wbudowanego w Django
+formularza logowania ``AuthenticationForm``. Dzięki temu nie musimy
+"ręcznie" sprawdzać poprawności podanych danych, robi to metoda ``is_valid()``
+formularza. Jeżeli nie zwróci ona błędu, możemy zalogować użytkownika za
+pomocą funkcji ``login()``, której przekazujemy obiekty ``HttpRequest``
+(przesłane żadanie) i ``User`` – obiekt użytkownika zwrócony przez metodę
+``get_user()`` formularza.
+
+Wylogowanie polega na użyciu funkcji ``logout(request)`` – wyloguje ona
+użytkownika, którego dane zapisane są w przesłanym żądaniu.
+
+Jak widać, do logowania potrzebujemy szablonu. Najprościej utworzyć go
+na podstawie szablonu :file:`rejestruj.html`. Otwórzmy go i zapiszmy do
+pliku :file:`~/czat/czat/templates/czat/loguj.html`. Później wystarczy
+dostosować wywietlany tekst. Szablon z uwzględnieniem zmian wprowadzonych
+w ćwiczeniu 2. może wyglądać tak:
+
+.. raw:: html
+
+    <div class="code_no">Plik loguj.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: loguj_z4.html
+    :linenos:
+
+Pozostaje skojarzenie odpowiednich adresów URL z utworzonymi widokami.
+W pliku :file:`urls.py` dopisujemy reguły:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z4.py
+    :linenos:
+    :emphasize-lines: 4-5
+    :lineno-start: 10
+    :lines: 10-
+
+Możesz przetestować działanie dodanych funkcji wywołując w przeglądarce adresy:
+``127.0.0.1:8000/loguj`` i ``127.0.0.1:8000/wyloguj``. Przykładowy formularz
+wygląda tak:
+
+.. figure:: img/czat15log.png
+
+.. note::
+
+    **Podsumujmy**: działanie wszystkich omówionych do tej pory widoków jest podobne.
+    Po przejściu pod adres określony w pliku :file:`urls.py`, np. *127.0.0.1:8000/loguj/*,
+    wywoływany jest powiązany z nim widok zdefiniowany w pliku :file:`views.py`,
+    np. ``loguj()``. Tego typu operacja generuje żądanie typu :term:`GET`,
+    w odpowiedzi na które zwracany jest szablon (np. :file:`loguj.html`)
+    wyświetlający przekazny do niego formularz (np. ``AuthenticationForm``).
+    
+    Po wypełnieniu formularza użytkownik wciska odpowiedni przycisk, który
+    inicjuje żądanietypu :term:`POST`, a więc przesyłanie danych na serwer.
+    Widoki ``rejestruj()`` i ``loguj()`` wychwytują i przetwarzają takie żądania,
+    tj. rejestrują lub logują użytkownika. W odpowiedzi użytkownik
+    zostaje przekierowany z odopiwednim komunikatem na stonę główną.
+
+Ćwiczenie 3
+=================
+
+Adresów logowania i wylogowywania nikt w serwisach nie wpisuje ręcznie.
+Wstaw zatem odpowiednie linki do szablonu strony głównej. Użytkownik
+niezalogowany powinien zobaczyć odnośnik *Zaloguj*, użytkownik
+zalogowany – *Wyloguj*. Przykładowe strony mogą wyglądać tak:
+
+.. figure:: img/czat16log.png
+
+.. figure:: img/czat17log.png
+
+Widoki wbudowane
+**************************
+
+Zajmiemy sie teraz drugim sposobem stworzenia formularza rejestracji, logowania
+i wylogowania. Formularze te bowiem działają, ale nie do końca tak jak powinny.
+Spróbuj zarejestrować dodanego już użytkownika, albo przesłać niepełny
+formularz. Zauważysz, że nie dostajemy żadnej informacji o błędach.
+Można oczywiście dopisać ich obsługę do odpowiednich widoków lub wygenerować
+je w szablonach, ale... wcale nie trzeba tego robić. W przypadku prostych
+aplikacji wystarczą wbudowane w Django widoki i formularze.
+
+Wszystko da się zrobić w pliku ``urls.py``, który zmieniamy następująco:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z5.py
+    :linenos:
+    :emphasize-lines: 10-19
+    :lineno-start: 10
+    :lines: 10-
+
+Na początku importujemy potrzebny widok przeznaczony do dodawania danych
+(``CreateView``), następnie formularz tworzenia użytkownika (``UserCreationForm``)
+i logowania (``AuthenticationForm``). Do generowania adresów url
+potrzebna będzie również funkcja ``reverse_lazy()``.
+
+Następnie zakomentowujemy dotychczasowe powiązania adresów i widoków.
+Dodajemy natomiast nowe. Do adresu */rejestruj* przypisujemy widok specjalny
+generowany przez jego metodę ``as_view()``. Jako argumenty
+przekazujemy nazwę szbalonu, formularz do wygenerowania oraz
+adres strony głównej, na który nastąpi przekierowanie po udanej rejestracji.
+
+Do obsłużenia adresów */loguj* i */wyloguj* używamy dedykowanych
+widoków, którym w słownikach przekazujemy wymagane argumenty. I tak
+``template_name`` to szablon logowania, ``next_page`` natomiast to
+adres strony, na którą ma zostać przekierowany użytkownik po wylogowaniu.
+
+Pozostaje nam jeszcze określić stronę, na którą powinien zostać przekierowany
+użytkownik po udanym zalogowaniu. Musimy więc ustawić wartość zmiennej
+``LOGIN_REDIRECT_URL``. W tym celu na końcu pliku :file:`settings.py`
+dopisujemy:
+
+.. code-block:: python
+
+    from django.core.urlresolvers import reverse_lazy
+    LOGIN_REDIRECT_URL = reverse_lazy('index')
+
+To wszystko. Przetestuj teraz działanie formularza rejestracji! Spróbuj dodać
+zarejestrowanego już użytkownika i wysłać pusty lub niekompletny formularz.
+
+
+Dodawanie i wyświetlanie wiadomości
+***********************************
+
+Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od innych użytkowników i dodawać własne. Utworzymy widok ``messages()``, który wyświetli wszystkie wiadomości (żądanie GET) i ewentualnie zapisze nową wiadomość nadesłaną przez użytkownika (żądanie POST). Widok skorzysta z nowego szablonu :file:`messages.html` i powiązany zostanie z adresem */messages*. Zaczynamy od zmian w :file:`views.py`.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # -*- coding: utf 8 -*-
+
+    # chatter/chatter/views.py
+
+    # dodajemy nowe importy
+    from chatter.models import Message
+    from django.utils import timezone
+    from django.contrib.auth.decorators import login_required
+
+
+    # pozostale widoki
+
+    # dekorator, ktory "chroni" nasz widok przed dostepem przez osoby niezalogowane, jezeli uzytkownik niezalogowany
+    # bedzie probowal odwiedzic ten widok, to zostanie przekierowany na strone logowania
+    @login_required(login_url='/login')
+    def messages(request):
+        """Widok wiadomosci."""
+        error = None
+
+        # zadanie POST oznacza, ze ktos probuje dodac nowa wiadomosc w systemie
+        if request.method == 'POST':
+            text = request.POST.get('text', '') # pobieramy tresc przeslanej wiadomosci
+            # sprawdzamy, czy nie jest ona dluzsza od 250 znakow:
+            # – jezeli jest dluzsza, to zwracamy blad, jezeli jest krotsza lub rowna, to zapisujemy ja w systemie
+            if not 0 < len(text) <= 250:
+                error = u'Wiadomość nie może być pusta i musi mieć co najwyżej 250 znaków'
+            else:
+                # ustawiamy dane dla modelu Message
+                msg = Message(text=text, pub_date=timezone.now(), user=request.user)
+                msg.save() # zapisujemy nowa widomosc
+                return redirect(reverse('messages')) # przekierowujemy na strone wiadomosci
+
+        user = request.user # informacje o aktualnie zalogowanym uzytkowniku
+        messages = Message.objects.all() # pobieramy wszystkie wiadomosci
+        # ustawiamy zmienne przekazywane do szablonu
+        context = {'user': user, 'messages': messages, 'error': error}
+        # renderujemy templatke wiadomosci
+        return render(request, 'chatter/messages.html', context)
+
+Teraz tworzymy nowy szablon :file:`messages.html` w katalogu :file:`templates/chatter/`.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: messages_z1.html
+    :linenos:
+
+Uzupełniamy szablon widoku głównego, aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami. W pliku :file:`index.html` po klauzuli ``{% else %}``, poniżej znacznika ``<h1>`` wstawiamy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: html
+
+    <p><a href="{% url 'messages' %}">Zobacz wiadomości</a></p>
+
+Na koniec dodajemy nową regułę do :file:`urls.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: html
+
+    url(r'^messages/$', views.messages, name='messages'),
+
+Jeżeli uruchomimy serwer deweloperski, zalogujemy się do aplikacji i odwiedzimy adres *127.0.0.1:8080/messages/*, zobaczymy listę wiadomości dodanych przez użytkowników [#]_.
+
+.. [#] Jeżeli w panelu administracyjnym nie dodałeś żadnej wiadomości, lista będzie pusta.
+
+.. figure:: img/messages.png
+
+JAK TO DZIAŁA: W widoku ``messages()``, podobnie jak w widoku ``login()``, mamy dwie ścieżki postępowania, w zależności od użytej metody HTTP. GET pobiera wszystkie wiadomości (``messages = Message.objects.all()``), przekazuje je do szablonu i renderuje. Django konstruuje odpowiednie zapytanie i mapuje dane z bazy na obiekty klasy ``Message`` (mapowanie obiektowo-relacyjne (ORM)).
+
+POST zawiera z kolei treść nowej wiadomości, której długość sprawdzamy i jeżeli wszystko jest w porządku, tworzymy nową wiadomość (instancję klasy *Message*, czyli obiekt ``msg``) i zapisujemy ją w bazie danych (wywołujemy metodę obiektu: ``msg.save()``).
+
+
+
+Wylogowywanie użytkowników
+****************************
+
+Django ma wbudowaną również funkcję wylogowującą. Utworzymy zatem nowy widok ``my_logut()`` i powiążemy go z adresem :file:`/logout`. Do pliku :file:`views.py` dodajemy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    def my_logout(request):
+        """Wylogowywanie uzytkownika z systemu"""
+        logout(request)
+        # przekierowujemy na strone glowna
+        return redirect(reverse('index'))
+
+Zadania dodatkowe
+==================
+
+    Powiąż widok ``my_logut`` z adresem *logout/* dopisując regułę w odpowiednim pliku. Powiązanie nazwij "logout".
+    Wylogowywanie nie wymaga osobnego szablonu, dodaj jednak link wylogowujący do 1) szablonu :file:`index.html` po linku "Zobacz wiadomości" oraz do 2) szablonu :file:`messages.html` po nagłówku ``<h1>``.
+
+.. figure:: img/chatter3.png
+
+Materiały
+***************
+
+Słownik
+================
+
+.. include:: ../glossary.rst
+
+1. O Django http://pl.wikipedia.org/wiki/Django_(informatyka)
+2. Strona projektu Django https://www.djangoproject.com/
+3. Co to jest framework? http://pl.wikipedia.org/wiki/Framework
+4. Co nieco o HTTP i żądaniach GET i POST http://pl.wikipedia.org/wiki/Http
+
+Źródła
+===========
+
+* :download:`chatter_all.zip <chatter_all.zip>`
+* :download:`chatter_django.pdf <../../pdf/chatter_django.pdf>`
+
+Metryka
+===============
+
+:Autorzy: Tomasz Nowacki,
+          Robert Bednarz
+
+:Utworzony: |date| o |time|
+
+.. |date| date::
+.. |time| date:: %H:%M
+
+.. raw:: html
+
+    <style>
+        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
+        div.highlight, div.highlight-python { margin-top: 0px; }
+    </style>
+
+
+.. include:: ../../copyright.rst

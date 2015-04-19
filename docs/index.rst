@@ -20,6 +20,7 @@ Spis treści:
     tools/index
     cppqt/index
     web/index
+    python/index
     galerie/index
 
 Indeks
