@@ -596,7 +596,9 @@ dopisujemy:
     from django.core.urlresolvers import reverse_lazy
     LOGIN_REDIRECT_URL = reverse_lazy('index')
 
-To wszystko. Przetestuj teraz działanie formularza rejestracji! Spróbuj dodać
+To wszystko. Zauważ, że funkcje ``rejestruj()``, ``loguj()`` i ``wyloguj()``,
+które umieściliśmy wczesnie w pliku :file:`views.py` nie są już potrzebne!
+Przetestuj teraz działanie formularza rejestracji! Spróbuj dodać
 zarejestrowanego już użytkownika i wysłać pusty lub niekompletny formularz.
 
 
@@ -624,47 +626,46 @@ Widać powyżej, że treść przesłanej wiadomości odczytujemy ze słownika
 ``request.POST`` za pomocą metody ``get('tekst', '')``. Jej pierwszy argument
 odpowiada nazwie pola formularza użytej w szablonie, które chcemy odczytać.
 Drugi argument oznacza wartość domyślną, która zostanie użyta, jeśli
-pole będzie niedostępne.
+pole będzie niedostępne. Po sprawdzeniu długości wiadomości, możemy
+ją utworzyć wykorzystując konstruktor naszego modelu ``Wiadomosc()``,
+któremu w formie nazwanych argumentów podajemy wartości kolejnych pól.
+Na koniec zapisujemy nową wiadomość w bazie i przekierowujemy użytkownika
+ponownie do widoku ``wiadomsci()``, ale tym razem jest to żądanie typu :term:`GET`.
+W odpowiedzi na nie pobieramy wszystkie wiadomości z bazy (``Wiadomosc.objects.all()``),
+i przekazujemy do szablonu, który zwracamy użytkownikowi.
 
-Teraz tworzymy nowy szablon :file:`messages.html` w katalogu :file:`templates/chatter/`.
+Zadaniem szablonu zapisanego w pliku :file:`~/czat/czat/templates/wiadomosci.html`
+jest wyświetlenie komunikatów zwrotnych, formularza dodawania wiadomości
+i listy wiadomości dodanych.
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik wiadomosci.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
 
-.. literalinclude:: messages_z1.html
+.. highlight:: html
+.. literalinclude:: wiadomosci_z6.html
     :linenos:
 
-Uzupełniamy szablon widoku głównego, aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami. W pliku :file:`index.html` po klauzuli ``{% else %}``, poniżej znacznika ``<h1>`` wstawiamy:
+Ćwiczenie 4
+=====================
 
-.. raw:: html
+Powiąż widok ``wiadomosci()`` z adresem */wiadomosci* w pliku :file:`urls.py`,
+nadając mu nazwę *wiadomosci*, a nstępnie uzupełnij szablon widoku głównego,
+aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami.
+W szablonie ``wiadomosci.html`` dodaj link do strony głównej.
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+Zaloguj się i przetestuj wyświetlanie[#]_ i dodawanie wiadomości pod adresem
+*127.0.0.1:8080/wiadomosci/*. Sprawdź, co się stanie po wysłaniu pustej
+wiadomości.
 
-.. code-block:: html
+.. [#] Jeżeli w panelu administracyjnym nie dodałeś żadnej wiadomości,
+       lista na początku będzie pusta.
 
-    <p><a href="{% url 'messages' %}">Zobacz wiadomości</a></p>
+Poniższe zrzuty prezentują efekty naszej pracy:
 
-Na koniec dodajemy nową regułę do :file:`urls.py`:
+.. figure:: img/czat18index.png
 
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. code-block:: html
-
-    url(r'^messages/$', views.messages, name='messages'),
-
-Jeżeli uruchomimy serwer deweloperski, zalogujemy się do aplikacji i odwiedzimy adres *127.0.0.1:8080/messages/*, zobaczymy listę wiadomości dodanych przez użytkowników [#]_.
-
-.. [#] Jeżeli w panelu administracyjnym nie dodałeś żadnej wiadomości, lista będzie pusta.
-
-.. figure:: img/messages.png
-
-JAK TO DZIAŁA: W widoku ``messages()``, podobnie jak w widoku ``login()``, mamy dwie ścieżki postępowania, w zależności od użytej metody HTTP. GET pobiera wszystkie wiadomości (``messages = Message.objects.all()``), przekazuje je do szablonu i renderuje. Django konstruuje odpowiednie zapytanie i mapuje dane z bazy na obiekty klasy ``Message`` (mapowanie obiektowo-relacyjne (ORM)).
-
-POST zawiera z kolei treść nowej wiadomości, której długość sprawdzamy i jeżeli wszystko jest w porządku, tworzymy nową wiadomość (instancję klasy *Message*, czyli obiekt ``msg``) i zapisujemy ją w bazie danych (wywołujemy metodę obiektu: ``msg.save()``).
-
+.. figure:: img/czat19wiadomosci.png
 
 Materiały
 ***************
