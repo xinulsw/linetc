@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # czat/czat/views.py
 
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):

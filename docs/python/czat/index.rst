@@ -36,11 +36,11 @@ Po wpisaniu w przeglądarce adresu *127.0.0.1:8000* zobaczymy stronę powitalną
     Domyślnie serwer nasłuchuje na porcie ``8000``, można go jednak uruchomić
     na innyn, jeżeli domyślny byłby zajęty. Wystarczy, że do polecenia dodamy
     np.: ``127.0.0.1:8080``.
-    
+
     W systemach Linux możemy kliknąć w terminalu prawym klawiszem adres ``http://127.0.0.1:8000/``
     i wybrać polecenie "Otwórz link", aby szybko otworzyć domyślną przeglądarkę.
     Lokalny serwer deweloperski zatrzymujemy za pomocą skrótu :kbd:`Ctrl+C`.
-    
+
     Jeden projekt może zawierać wiele aplikacji zapisywanych w osobnych podkatalogach katalogu projektu.
 
 Rozpoczynamy od modyfikacji ustawień projektu, tak aby korzystał z polskiej wersji językowej
@@ -146,7 +146,7 @@ Podajemy te dane po wydaniu w katalogu projektu w terminalu polecenia:
     poleceniem ``.tables``. Możemy również zobaczyć jakie instrukcje SQL-a
     zostały użyte do utworzenia naszej tabeli: ``.schema czat_wiadomosc``.
     Z interpretera wychodzimy poleceniem ``.quit``.
-    
+
 .. figure:: img/czat03ter.png
 
 Panel administracyjny
@@ -272,7 +272,7 @@ podany tekst. W pliku :file:`views.py` umieszczamy:
     Warto zapamiętać, że każdą funkcję, formularz czy widok udostępniane
     przez Django, których chcemy użyć, musimy najpierw zaimportować za pomocą
     klauzuli typu ``from <skąd> import <co>``.
-    
+
 Widok :file:`index()` łączymy z adresem URL strony głównej (/) w pliku :file:`urls.py`:
 
 .. raw:: html
@@ -318,6 +318,20 @@ Następnie tworzymy szablon, czyli plik :file:`~/czat/czat/templates/czat/index.
 .. highlight:: html
 .. literalinclude:: index_z2.html
     :linenos:
+
+W pliku :file:`views.py` zmieniamy instrukcje odpowiedzi:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z2.py
+    :linenos:
+
+Do zwrócenia szablonu, używamy funkcji ``render()``, której jako pierwszy argument
+podajemy parametr ``request``, a jako drugi nazwę szablonu uwzględniającą
+katalog nadrzędny.
 
 Po wpisaniu adresu *127.0.0.1:8000/* zobaczymy tekst, który umieściliśmy w szablonie:
 
@@ -457,8 +471,8 @@ widok ``loguj()`` i ``wyloguj()`` w pliku :file:`views.py`:
 .. highlight:: python
 .. literalinclude:: views_z4.py
     :linenos:
-    :lineno-start: 36
-    :lines: 36-
+    :lineno-start: 37
+    :lines: 37-
 
 Podobnie jak w przypadku rejestrowania użytkowników, korzystamy z wbudowanego w Django
 formularza logowania ``AuthenticationForm``. Dzięki temu nie musimy
@@ -513,7 +527,7 @@ wygląda tak:
     np. ``loguj()``. Tego typu operacja generuje żądanie typu :term:`GET`,
     w odpowiedzi na które zwracany jest szablon (np. :file:`loguj.html`)
     wyświetlający przekazny do niego formularz (np. ``AuthenticationForm``).
-    
+
     Po wypełnieniu formularza użytkownik wciska odpowiedni przycisk, który
     inicjuje żądanietypu :term:`POST`, a więc przesyłanie danych na serwer.
     Widoki ``rejestruj()`` i ``loguj()`` wychwytują i przetwarzają takie żądania,
@@ -589,52 +603,28 @@ zarejestrowanego już użytkownika i wysłać pusty lub niekompletny formularz.
 Dodawanie i wyświetlanie wiadomości
 ***********************************
 
-Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od innych użytkowników i dodawać własne. Utworzymy widok ``messages()``, który wyświetli wszystkie wiadomości (żądanie GET) i ewentualnie zapisze nową wiadomość nadesłaną przez użytkownika (żądanie POST). Widok skorzysta z nowego szablonu :file:`messages.html` i powiązany zostanie z adresem */messages*. Zaczynamy od zmian w :file:`views.py`.
+Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od innych użytkowników
+i dodawać własne. Pierwszy sposób to utworzenie widoku ``wiadomosci()`` do
+wyświetlania (żądania GET) i dodawania wiadomości (żądania POST), który
+zwracał będzie szablon :file:`wiadomosci.html`. Widok ten powiążemy
+z adresem */wiadomosci*. Do pliku :file:`views.py` dodajemy importy
+i kod funkcji:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. code-block:: python
+.. highlight:: python
+.. literalinclude:: views_z6.py
+    :linenos:
+    :lineno-start: 57
+    :lines: 57-
 
-    # -*- coding: utf 8 -*-
-
-    # chatter/chatter/views.py
-
-    # dodajemy nowe importy
-    from chatter.models import Message
-    from django.utils import timezone
-    from django.contrib.auth.decorators import login_required
-
-
-    # pozostale widoki
-
-    # dekorator, ktory "chroni" nasz widok przed dostepem przez osoby niezalogowane, jezeli uzytkownik niezalogowany
-    # bedzie probowal odwiedzic ten widok, to zostanie przekierowany na strone logowania
-    @login_required(login_url='/login')
-    def messages(request):
-        """Widok wiadomosci."""
-        error = None
-
-        # zadanie POST oznacza, ze ktos probuje dodac nowa wiadomosc w systemie
-        if request.method == 'POST':
-            text = request.POST.get('text', '') # pobieramy tresc przeslanej wiadomosci
-            # sprawdzamy, czy nie jest ona dluzsza od 250 znakow:
-            # – jezeli jest dluzsza, to zwracamy blad, jezeli jest krotsza lub rowna, to zapisujemy ja w systemie
-            if not 0 < len(text) <= 250:
-                error = u'Wiadomość nie może być pusta i musi mieć co najwyżej 250 znaków'
-            else:
-                # ustawiamy dane dla modelu Message
-                msg = Message(text=text, pub_date=timezone.now(), user=request.user)
-                msg.save() # zapisujemy nowa widomosc
-                return redirect(reverse('messages')) # przekierowujemy na strone wiadomosci
-
-        user = request.user # informacje o aktualnie zalogowanym uzytkowniku
-        messages = Message.objects.all() # pobieramy wszystkie wiadomosci
-        # ustawiamy zmienne przekazywane do szablonu
-        context = {'user': user, 'messages': messages, 'error': error}
-        # renderujemy templatke wiadomosci
-        return render(request, 'chatter/messages.html', context)
+Widać powyżej, że treść przesłanej wiadomości odczytujemy ze słownika
+``request.POST`` za pomocą metody ``get('tekst', '')``. Jej pierwszy argument
+odpowiada nazwie pola formularza użytej w szablonie, które chcemy odczytać.
+Drugi argument oznacza wartość domyślną, która zostanie użyta, jeśli
+pole będzie niedostępne.
 
 Teraz tworzymy nowy szablon :file:`messages.html` w katalogu :file:`templates/chatter/`.
 
@@ -675,32 +665,6 @@ JAK TO DZIAŁA: W widoku ``messages()``, podobnie jak w widoku ``login()``, mamy
 
 POST zawiera z kolei treść nowej wiadomości, której długość sprawdzamy i jeżeli wszystko jest w porządku, tworzymy nową wiadomość (instancję klasy *Message*, czyli obiekt ``msg``) i zapisujemy ją w bazie danych (wywołujemy metodę obiektu: ``msg.save()``).
 
-
-
-Wylogowywanie użytkowników
-****************************
-
-Django ma wbudowaną również funkcję wylogowującą. Utworzymy zatem nowy widok ``my_logut()`` i powiążemy go z adresem :file:`/logout`. Do pliku :file:`views.py` dodajemy:
-
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. code-block:: python
-
-    def my_logout(request):
-        """Wylogowywanie uzytkownika z systemu"""
-        logout(request)
-        # przekierowujemy na strone glowna
-        return redirect(reverse('index'))
-
-Zadania dodatkowe
-==================
-
-    Powiąż widok ``my_logut`` z adresem *logout/* dopisując regułę w odpowiednim pliku. Powiązanie nazwij "logout".
-    Wylogowywanie nie wymaga osobnego szablonu, dodaj jednak link wylogowujący do 1) szablonu :file:`index.html` po linku "Zobacz wiadomości" oraz do 2) szablonu :file:`messages.html` po nagłówku ``<h1>``.
-
-.. figure:: img/chatter3.png
 
 Materiały
 ***************

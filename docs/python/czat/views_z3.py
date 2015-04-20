@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # czat/czat/views.py
 
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
@@ -13,6 +13,7 @@ def index(request):
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 def rejestruj(request):
     """Rejestracja nowego użytkownika."""

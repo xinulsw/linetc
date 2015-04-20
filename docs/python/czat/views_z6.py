@@ -53,3 +53,27 @@ def wyloguj(request):
     logout(request)
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('index'))
+
+from czat.models import Wiadomosc
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/loguj')
+def wiadomosci(request):
+    """Dodawanie i wyświetlanie wiadomości"""
+
+    if request.method == 'POST':
+        tekst = request.POST.get('tekst', '')
+        if not 0 < len(tekst) <= 250:
+            messages.error(request,
+            "Wiadomość nie może być pusta, może mieć maks. 250 znaków!")
+        else:
+            wiadomosc = Wiadomosc(tekst=tekst,
+                        data_pub=timezone.now(),
+                        autor=request.user)
+            wiadomosc.save()
+            return redirect(reverse('wiadomosci'))
+
+    wiadomosci = Wiadomosc.objects.all()
+    kontekst = {'user': request.user, 'wiadomosci': wiadomosci}
+    return render(request, 'czat/wiadomosci.html', kontekst)
