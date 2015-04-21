@@ -39,6 +39,15 @@ urlpatterns = patterns('',
     url(r'^wiadomosc/$', login_required(
                     views.UtworzWiadomosc.as_view(),
                     login_url='/loguj'), name='wiadomosc'),
+    url(r'^aktualizuj/(?P<pk>\d+)/', login_required(
+                    views.AktualizujWiadomosc.as_view(),
+                    login_url='/loguj'), name='aktualizuj'),
+    url(r'^usun/(?P<pk>\d+)/', login_required(
+                    DeleteView.as_view(
+                    model=Wiadomosc,
+                    template_name='wiadomosc_usun.html',
+                    success_url='/lista'),
+                    login_url='/login'), name='usun'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

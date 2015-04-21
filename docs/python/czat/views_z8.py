@@ -55,16 +55,23 @@ def wyloguj(request):
     return redirect(reverse('index'))
 
 
-from czat.models import Wiadomosc
 from django.views.generic.edit import CreateView
+from czat.models import Wiadomosc
+from django.utils import timezone
 
 class UtworzWiadomosc(CreateView):
     model = Wiadomosc
     fields = ['tekst', 'data_pub']
+    context_object_name = 'wiadomosci'
     success_url = '/wiadomosc'
 
+    def get_initial(self):
+        initial = super(UtworzWiadomosc, self).get_initial()
+        initial['data_pub'] = timezone.now()
+        return initial
+
     def get_context_data(self, **kwargs):
-        kwargs['object_list'] = Wiadomosc.objects.filter(
+        kwargs['wiadomosci'] = Wiadomosc.objects.filter(
                                 autor=self.request.user)
         return super(UtworzWiadomosc, self).get_context_data(**kwargs)
 
@@ -74,25 +81,22 @@ class UtworzWiadomosc(CreateView):
         wiadomosc.save()
         return super(UtworzWiadomosc, self).form_valid(form)
 
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/loguj')
-def wiadomosci(request):
-    """Dodawanie i wyświetlanie wiadomości"""
+from django.views.generic.edit import UpdateView
 
-    if request.method == 'POST':
-        tekst = request.POST.get('tekst', '')
-        if not 0 < len(tekst) <= 250:
-            messages.error(request,
-            "Wiadomość nie może być pusta, może mieć maks. 250 znaków!")
-        else:
-            wiadomosc = Wiadomosc(tekst=tekst,
-                        data_pub=timezone.now(),
-                        autor=request.user)
-            wiadomosc.save()
-            return redirect(reverse('wiadomosci'))
+class AktualizujWiadomosc(UpdateView):
+    model = Wiadomosc
+    from czat.forms import AktualizujWiadomoscForm
+    form_class = AktualizujWiadomoscForm
+    context_object_name = 'wiadomosci'
+    template_name = 'czat/wiadomosc_form.html'
+    success_url = '/wiadomosci'
 
-    wiadomosci = Wiadomosc.objects.all()
-    kontekst = {'user': request.user, 'wiadomosci': wiadomosci}
-    return render(request, 'czat/wiadomosci.html', kontekst)
+    def get_context_data(self, **kwargs):
+        kwargs['wiadomosci'] = Wiadomosc.objects.filter(
+                                autor=self.request.user)
+        return super(AktualizujWiadomosc, self).get_context_data(**kwargs)
+
+    def get_object(self, queryset=None):
+        wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])
+        return wiadomosc

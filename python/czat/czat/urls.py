@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DeleteView
 from czat.models import Wiadomosc
 
 urlpatterns = patterns('',
@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     #url(r'^rejestruj/', views.rejestruj, name='rejestruj'),
     #url(r'^loguj/', views.loguj, name='loguj'),
     #url(r'^wyloguj/', views.wyloguj, name='wyloguj'),
-    #url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
+    url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
     url(r'^rejestruj/', CreateView.as_view(
                     template_name='czat/rejestruj.html',
                     form_class=UserCreationForm,
@@ -44,7 +44,16 @@ urlpatterns = patterns('',
                     name='wiadomosci'),
     url(r'^wiadomosc/$', login_required(
                     views.UtworzWiadomosc.as_view(),
-                    login_url='/login'), name='wiadomosc'),
+                    login_url='/loguj'), name='wiadomosc'),
+    url(r'^aktualizuj/(?P<pk>\d+)/$', login_required(
+                    views.AktualizujWiadomosc.as_view(),
+                    login_url='/loguj'), name='aktualizuj'),
+    url(r'^usun/(?P<pk>\d+)/$', login_required(
+                    DeleteView.as_view(
+                    model=Wiadomosc,
+                    template_name='wiadomosc_usun.html',
+                    success_url='/lista'),
+                    login_url='/login'), name='usun'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

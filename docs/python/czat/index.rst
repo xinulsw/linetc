@@ -71,7 +71,7 @@ W pliku :file:`setting.py` zmieniamy następujące linie:
 
     TIME_ZONE = 'Europe/Warsaw' # ustawienie strefy czasowej
 
-.. warning::
+.. caution::
 
     Uwaga: jeżeli w plikach Pythona chcemy stosować polskie znaki, m.in.
     w komentarzach, na początku każdego pliku powinna znaleźć się linia
@@ -549,7 +549,7 @@ zalogowany – *Wyloguj*. Przykładowe strony mogą wyglądać tak:
 
 .. figure:: img/czat17log.png
 
-Widoki oŋólne
+Widoki ogólne
 **************************
 
 Zajmiemy sie teraz drugim sposobem stworzenia formularza rejestracji, logowania
@@ -574,26 +574,29 @@ Wszystko da się zrobić w pliku ``urls.py``, który zmieniamy następująco:
     :lineno-start: 10
     :lines: 10-
 
-Na początku importujemy potrzebny widok przeznaczony do dodawania danych
+Na początku importujemy widok przeznaczony do dodawania danych
 (``CreateView``), następnie formularz tworzenia użytkownika (``UserCreationForm``)
 i logowania (``AuthenticationForm``). Do generowania adresów url
 potrzebna będzie również funkcja ``reverse_lazy()``.
 
 Następnie zakomentowujemy dotychczasowe powiązania adresów i widoków.
-Dodajemy natomiast nowe. Do adresu */rejestruj* przypisujemy widok specjalny
-generowany przez jego metodę ``as_view()``. Działanie ogólne wymagają podaniJako argumenty
-przekazujemy nazwę szbalonu, formularz do wygenerowania oraz
-adres strony głównej, na który nastąpi przekierowanie po udanej rejestracji.
+Dodajemy natomiast nowe. Do adresu */rejestruj* przypisujemy wywołanie
+metody ``as_view()`` widoku ogólnego ``CreateView``. Do obsłużenia adresów */loguj*
+i */wyloguj* używamy dedykowanych widoków ``login`` i ``logout``.
 
-Do obsłużenia adresów */loguj* i */wyloguj* używamy dedykowanych
-widoków, którym w słownikach przekazujemy wymagane argumenty. I tak
-``template_name`` to szablon logowania, ``next_page`` natomiast to
-adres strony, na którą ma zostać przekierowany użytkownik po wylogowaniu.
+Na działanie widoków wpływają przekazywane im w różny sposób ustawienia właściwości,
+takie jak:
+
+* ``template_name`` – szablon, który zostanie użyty do zwrócenia odpowiedzi;
+* ``form_class`` – formularz, który zostanie przekazany do szablonu;
+* ``success_url`` – adres, na który nastąpi przekierowanie w przypadku braku błędów
+  (np. po udanej rejestracji);
+* ``next_page`` – adres strony, na który nastąpi przekierowanie użytkownika
+  po wykonaniu żądanych akcji (np. udanym wylogowaniu).
 
 Pozostaje nam jeszcze określić stronę, na którą powinien zostać przekierowany
-użytkownik po udanym zalogowaniu. Musimy więc ustawić wartość zmiennej
-``LOGIN_REDIRECT_URL``. W tym celu na końcu pliku :file:`settings.py`
-dopisujemy:
+użytkownik po udanym zalogowaniu. W tym wypadku na końcu pliku :file:`settings.py`
+definujemy wartość zmiennej ``LOGIN_REDIRECT_URL``:
 
 .. raw:: html
 
@@ -601,22 +604,36 @@ dopisujemy:
 
 .. code-block:: python
 
+    # czat/czat/settings.py
+
     from django.core.urlresolvers import reverse_lazy
     LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 To wszystko. Zauważ, że funkcje ``rejestruj()``, ``loguj()`` i ``wyloguj()``,
-które umieściliśmy wczesnie w pliku :file:`views.py` nie są już potrzebne!
+które umieściliśmy wczesniej w pliku :file:`views.py` nie są już potrzebne!
 Przetestuj teraz działanie formularza rejestracji! Spróbuj dodać
-zarejestrowanego już użytkownika i wysłać pusty lub niekompletny formularz.
+zarejestrowanego już użytkownika, wysłać pusty lub niekompletny formularz.
 
 
 Obsługa wiadomości
 ***********************************
 
-Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od użytkowników,
+Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości wszystkich użytkowników,
 zmieniać, usuwać i dodawać własne. Najprostszy sposób to skorzystanie z omówionych wyżej
-widoków wbudowanych. Do wyświetlania listy obiektów Django oferuje specjalną klasę
-``ListView``. Do pliku :file:`urls.py` dopisujemy importy:
+ogólnych widoków wbudowanych.
+
+.. note::
+
+    Django oferuje wbudowane widoki ogólne przeznaczone do typowych operacji:
+
+    * DetailView i ListView – (ang. *generic display view*) widoki przeznaczone
+      do prezentowania szczegółów i listy danych;
+    * FormView, CreateView, UpdateView i DeleteView – (ang. *generic editing views*)
+      widoki przeznaczone do wyświetlania formularzy ogólnych, w szczególności
+      służących dodawaniu, uaktualnianiu, usuwaniu obiektów (danych).
+
+Do wyświetlania listy wiadomości użyjemy klasy ``ListView``.
+Do pliku :file:`urls.py` dopisujemy importy:
 
 .. raw:: html
 
@@ -625,10 +642,10 @@ widoków wbudowanych. Do wyświetlania listy obiektów Django oferuje specjalną
 .. code-block:: python
 
     from django.contrib.auth.decorators import login_required
-    from django.views.generic.list import ListView
+    from django.views.generic.list import ListView, DeleteView
     from czat.models import Wiadomosc
 
-– i wiążemy adres */wiadomosci* z wywołaniem zaimportowanej klasy:
+– i wiążemy adres */wiadomosci* z wywołaniem widoku:
 
 .. raw:: html
 
@@ -637,85 +654,200 @@ widoków wbudowanych. Do wyświetlania listy obiektów Django oferuje specjalną
 .. highlight:: python
 .. literalinclude:: urls_z6.py
     :linenos:
-    :lineno-start: 29
-    :lines: 29-33
+    :lineno-start: 32
+    :lines: 32-38
 
 Zakładamy, że wiadomości mogą oglądać tylko użytkownicy zalogowani. Dlatego
-całe wywołanie widoku umieszczamy w funkcji ``login_required``, która
-użytkownika niezalogowanego przekieruje na adres podany w paramatrze ``login_url``.
+całe wywołanie widoku umieszczamy w funkcji ``login_required()``.
+Parametr ``login_url`` określa adres, na który przekierowany zostanie
+niezalogowany użytkownik.
 
-Widoki ogólne
-Metodzie ``as_view()`` klasy ``ListView`` wskazujemy model, w oparciu
-o który dane zostaną pobrane z bazy. Domyślnie lista danych przekazana
-byłaby do szablonu pod nazwą ``object_list``, nazwę domyślną zmieniamy
-na przyjazną ustawiając właściwość ``context_object_name``, opcja
-``paginate_by``pozwala wyświetlać określoną ilość wiadomości na stronie.
+W wywołaniu ``ListView.as_view()`` wykorzystujemy kolejne właściwości
+modyfikujące działanie widoków:
+
+* ``model`` – podajemy model, którego dane zostaną pobrane z bazy;
+* ``context_object_name`` – pozwala zmienić domyślną nazwę (object_list)
+  listy obiektów przekazanych do szablonu;
+* ``paginate_by``– pozwala ustawić ilość ilość obiektów wyświetlanych na stronie.
 
 Potrzebujemy jeszcze szablonu, którego Django szuka pod domyślną nazwą
-*model_list.html*, czyli w naszym przypadku tworzymy plik
+*<nazwa modelu>_list.html*, czyli w naszym przypadku tworzymy plik
 :file:`~/czat/czat/templates/czat/wiadomosc_list.html`:
 
 .. raw:: html
 
     <div class="code_no">Plik wiadomosc_list.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: wiadomosc_list_z6.py
+.. highlight:: html
+.. literalinclude:: wiadomosc_list_z6.html
     :linenos:
 
 W tym momencie widok wiadomości powinien już działać. Przetestuj!
 
-Dodawanie wiadomości również zrealizujemy w oparciu o dedykowany widok ogólny
-– ``CreateView``. Ponieważ nasz model wiadomości zawiera klucz obcy,
-mianowicie pole autor, tym razem dostosujemy klasę widoku w pliku
-:file:`views.py`. Pozwoli nam to również rozszerzyć standardową funkcjonalność
-widoku.
+Ćwiczenie 4
+===================
+
+W szablonie listy wiadomości przed znacznikiem zamykającym ``</body>``
+dodaj link do strony głównej.
+
+Dodawanie wiadomości zrealizujemy wykorzystując widok ``CreateView``.
+Ponieważ nasz model wiadomości zawiera klucz obcy, mianowicie pole autor,
+tym razem dostosujemy klasę widoku w pliku :file:`views.py`. Dzięki temu
+będziemy mogli rozszerzyć standardową funkcjonalność widoku.
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: urls_z7.py
+.. literalinclude:: views_z7.py
     :linenos:
     :lineno-start: 58
-    :lines: 58
+    :lines: 58-
 
 Dostosowując widok ogólny tworzymy opartą na nim klasę ``UtworzWiadomosc``.
-Następnie definiujemy źródło danych: ``model = Wiadomosc``.
-Właściwość ``fields`` pozwala określić w postaci listy pola, które mają
-znaleźć się na formularzu. Jak widać, pomijamy pole ``autor``. Właściwość
-``success_url`` pozwala ustawić adres, pod który trafi użytkownik po
-dodaniu wiadomości.
+Z nieomówionych dotąd ustawień widoku widzimy właściwość ``fields`` –
+pozwala ona określić w postaci listy pola, które mają znaleźć się na formularzu.
+Jak widać, pomijamy pole ``autor``.
+
+Właśnie dlatego musimy nadpisać metodę ``form_valid()``, która sprawdza
+poprawność przesłanych danych i zapisuje je w bazie. Żadanie POST otrzymane od
+użytkownika nie będzie zawierało danych autora. Musimy je uzupełnić.
+Polecenie ``wiadomosc = form.save(commit=False)`` tworzy obiekt wiadomości,
+ale go nie zapisuje. Dzięki temu w następnych instrukcjach możemy
+uzupełnić dane autora, po czym jeszcze raz zapisujemy wiadomość, tym razem w bazie.
 
 Metoda ``get_initail()`` pozwala ustawić domyślne wartości dla wybranych
 pól. Wykorzystujemy ją do zainicjowania pola ``data_pub`` aktualna datą.
-Metoda ``get_context_data()`` pozwala inicjowa
 
-Pierwszy sposób to utworzenie widoku ``wiadomosci()`` do
-wyświetlania (żądania GET) i dodawania wiadomości (żądania POST), który
-zwracał będzie szablon :file:`wiadomosci.html`. Widok ten powiążemy
-z adresem */wiadomosci*. Do pliku :file:`views.py` dodajemy importy
-i kod funkcji:
+Metoda ``get_context_data()`` z punktu widzenia dodawania wiadomości
+nie jest potrzebna, ale używamy jej po to, aby na jednej stronie
+obok formularza dodawania wiadomości wyświetlić ich listę. Inicjujemy
+ją poleceniem ``Wiadomosc.objects.filter(autor=self.request.user)``
+wybierającym wiadomości utworzone przez zalogowanego użytkownika.
+
+
+Ćwiczenie 5
+==============
+
+Podobnie jak wyżej potrzebujemy szablonu, który dla widoków dodawania domyślnie
+nazywają się *<nazwa modelu>_form*. Na podstawie szablonu ``wiadomosc_list.html``
+utwórz szablon  ``wiadomosc_form.html``>. Przed listą wiadomości umieść
+kod wyświetlający formularz:
+
+.. raw:: html
+
+    <div class="code_no">Plik wiadomosc_form.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: wiadomosc_form_z7.html
+    :linenos:
+    :lineno-start: 14
+    :lines: 14-19
+
+
+Dodamy teraz dwa widoki przeznaczone do aktualizaowania i usuwania wpisów.
+Zakładamy, że adresy do tych operacji będą miały postać: */aktualizuj/id_wiadomości*
+oraz */usun/id_wiadomości*, gdzie *id_wiadomosci* jest identyfikatorem
+obiektu do usunięcia. Tym razem zaczniemy od zmian w pliku :file:`urls.py`:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: views_z6.py
+.. literalinclude:: urls_z8.py
     :linenos:
-    :lineno-start: 57
-    :lines: 57-
+    :lineno-start: 42
+    :lines: 42-50
 
-Widać powyżej, że treść przesłanej wiadomości odczytujemy ze słownika
+Nowością w powyższym kodzie są wyrażenia regularne definiujące adresy z dodatkowym
+parametrem, np. ``r'^aktualizuj/(?P<pk>\d+)/'``. Część ``/(?P<pk>\d+)`` oznacza,
+że oczekujemy liczby dziesiętnej, która zostanie zapisana do zmiennej o nazwie
+``pk`` – nazwa jest tu skrótem od ang. wyrażenia *primary key*, co znaczy
+"klucz główny". Zmienna ta oznaczać będzie identyfikator wiadomości i dostępna
+będzie w widokach.
+
+Widok przeznaczony do usuwania danych powinien być zaimportowany razem z widokiem
+``ListView``. Wszystkie ustawienia określamy w pliku :file:`urls.py` za pomocą
+omówionych wcześniej właściwości. Nieco więcej pracy wymaga dostosowanie widoku
+aktualizacji.
+
+W pliku :file:`views.py` utworzymy klasę ``AktualizujWiadomosc`` opartą na
+widoku ogólnym ``UpdateView``:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z8.py
+    :linenos:
+    :lineno-start: 85
+    :lines: 85-102
+
+Formularz generowany przez Django dla danego widoku można dostosować.
+Odpowiada za to właściwość ``form_class``, której przypisujemy utworzoną
+w nowym pliku :file:`forms.py` klasę modyfikującą domyślne ustawienia:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: forms_z8.py
+    :linenos:
+
+Klasa ``AktualizujWiadomoscForm`` oparta jest na wbudowanej klasie ``ModelForm``.
+Właściwości podklasy ``Meta`` pozwalają określić cechy formularza
+wyświetlanego przez widok, który go wykorzystuje:
+
+* ``model`` – oznacza to samo co w widokach, czyli model, dla którego tworzony jest formularz;
+* ``fields`` – to samo co w widokach, lista pól do wyświetlenia;
+* ``exclude`` – opcjonalnie lista pól do pominięcia;
+* ``widgets`` – słownik, którego klucze oznaczają pola danych, a ich wartości
+  odpowiadające im w formularza HTML typy pól i ich właściwości, np. rozmiar.
+
+Na wyjaśnienie zasługuje jeszcze metoda ``get_object()`` widoku aktualizacji.
+Jej zadanie to wybranie z bazy danych i zwrócenie do formularza wiadomości,
+której identyfikator został przekazany w adresie pod nazwą *pk*:
+``wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])``.
+
+Żeby przetestować aktualizowanie i usuwanie wiadomości, w szablonie listy
+wiadomości wygenerujemy odpowiednie linki, ale tylko dla wiadomości
+utworzonych przez zalogowanego użytkownika.
+
+Ćwiczenie 6
+==============
+
+
+Wiadomości jeszcze raz
+************************
+
+Dodawanie wiadomości można zrealizować bez wbudowanych widoków ogólnych.
+Potrzebować będziemy widoku o nazwie np. ``wiadomosci()`` do wyświetlania
+(żądania GET) i dodawania wiadomości (żądania POST), który zwracał będzie
+szablon np. :file:`wiadomosci.html`. Widok ten powiążemy z adresem */wiadomosci*.
+Do pliku :file:`views.py` dodajemy importy i kod funkcji:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views_z9.py
+    :linenos:
+    :lineno-start: 105
+    :lines: 105-
+
+Widać powyżej, że treść przesłanej wiadomości wydobywamy ze słownika
 ``request.POST`` za pomocą metody ``get('tekst', '')``. Jej pierwszy argument
 odpowiada nazwie pola formularza użytej w szablonie, które chcemy odczytać.
-Drugi argument oznacza wartość domyślną, która zostanie użyta, jeśli
+Drugi argument oznacza wartość domyślną, przydatną, jeśli
 pole będzie niedostępne. Po sprawdzeniu długości wiadomości, możemy
 ją utworzyć wykorzystując konstruktor naszego modelu
-``Wiadomosc(tekst=tekst, data_pub=timezone.now(), autor=request.user)``,
-któremu w formie nazwanych argumentów podajemy wartości kolejnych pól.
+``Wiadomosc(tekst=tekst, data_pub=timezone.now(), autor=request.user)``.
+W formie nazwanych argumentów podajemy mu wartości kolejnych pól.
 Zapisanie nowej wiadomości w bazie sprowadza się do polecenia ``wiadomosc.save()``.
 
 Na koniec przekierowujemy użytkownika do tego samego widoku,
@@ -732,29 +864,43 @@ i listy wiadomości dodanych.
     <div class="code_no">Plik wiadomosci.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
 
 .. highlight:: html
-.. literalinclude:: wiadomosci_z6.html
+.. literalinclude:: wiadomosci_z9.html
     :linenos:
 
-Ćwiczenie 4
+Ćwiczenie 7
 =====================
 
 Powiąż widok ``wiadomosci()`` z adresem */wiadomosci* w pliku :file:`urls.py`,
-nadając mu nazwę *wiadomosci*, a nstępnie uzupełnij szablon widoku głównego,
+nadając mu nazwę *wiadomosci*, a następnie uzupełnij szablon widoku głównego,
 aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami.
 W szablonie ``wiadomosci.html`` dodaj link do strony głównej.
+
+.. tip::
+
+    Definicje w pliku :file:`urls.py` sprawdzane są po kolei, zwracany jest
+    widok przypisany pierwszemu napotaknemu dopasowaniu adresu. Jeżeli chcemy
+    przetestować działanie widoku ``wiadomosci()`` dla wykorzystanego już
+    adresu */wiadomosci* przypisanego wbudowanemu widokowi ListView, powiązanie
+    należy umieścić przed nim, np. na początku.
 
 Zaloguj się i przetestuj wyświetlanie [#]_ i dodawanie wiadomości pod adresem
 *127.0.0.1:8080/wiadomosci/*. Sprawdź, co się stanie po wysłaniu pustej
 wiadomości.
 
-.. [#] Jeżeli w panelu administracyjnym nie dodałeś żadnej wiadomości,
-       lista na początku będzie pusta.
+.. [#] Jeżeli nie dodałeś do tej pory żadnej wiadomości, lista na początku
+   będzie pusta.
 
 Poniższe zrzuty prezentują efekty naszej pracy:
 
 .. figure:: img/czat18index.png
 
 .. figure:: img/czat19wiadomosci.png
+
+Szablony
+*****************
+
+[todo]
+
 
 Materiały
 ***************
@@ -772,14 +918,12 @@ Słownik
 Źródła
 ===========
 
-* :download:`chatter_all.zip <chatter_all.zip>`
-* :download:`chatter_django.pdf <../../pdf/chatter_django.pdf>`
+* :download:`czat_pr.zip <czat_pr.zip>`
 
 Metryka
 ===============
 
-:Autorzy: Tomasz Nowacki,
-          Robert Bednarz
+:Autor: Robert Bednarz
 
 :Utworzony: |date| o |time|
 

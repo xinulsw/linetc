@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DeleteView
 from czat.models import Wiadomosc
 
 urlpatterns = patterns('',
