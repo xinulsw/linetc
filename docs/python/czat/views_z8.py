@@ -54,7 +54,26 @@ def wyloguj(request):
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('index'))
 
+
 from czat.models import Wiadomosc
+from django.views.generic.edit import CreateView
+
+class UtworzWiadomosc(CreateView):
+    model = Wiadomosc
+    fields = ['tekst', 'data_pub']
+    success_url = '/wiadomosc'
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = Wiadomosc.objects.filter(
+                                autor=self.request.user)
+        return super(UtworzWiadomosc, self).get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        wiadomosc = form.save(commit=False)
+        wiadomosc.autor = self.request.user
+        wiadomosc.save()
+        return super(UtworzWiadomosc, self).form_valid(form)
+
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 

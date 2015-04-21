@@ -29,7 +29,7 @@ def rejestruj(request):
     if request.method == 'POST':
         # tworzymy formularz wypełniony przesłanymi danymi użytkownika
         form = UserCreationForm(request.POST)
-        
+
         # sprawdzamy poprawność nadesłanych danych
         if form.is_valid():
             # dane są poprawne, zapisujemy dane nowego użytkownika
@@ -77,8 +77,53 @@ def wyloguj(request):
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('index'))
 
+
+from django.views.generic.edit import CreateView
 from czat.models import Wiadomosc
 from django.utils import timezone
+
+class UtworzWiadomosc(CreateView):
+    model = Wiadomosc
+    fields = ['tekst', 'data_pub']
+    context_object_name = 'wiadomosci'
+    success_url = '/wiadomosc'
+
+    def get_initial(self):
+        initial = super(UtworzWiadomosc, self).get_initial()
+        initial['data_pub'] = timezone.now()
+        return initial
+
+    def get_context_data(self, **kwargs):
+        kwargs['wiadomosci'] = Wiadomosc.objects.filter(
+                                autor=self.request.user)
+        return super(UtworzWiadomosc, self).get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        wiadomosc = form.save(commit=False)
+        wiadomosc.autor = self.request.user
+        wiadomosc.save()
+        return super(UtworzWiadomosc, self).form_valid(form)
+
+from django.views.generic.edit import UpdateView
+
+
+class AktualizujWiadomosc(UpdateView):
+    model = Wiadomosc
+    #from czat.forms import AktualizujWiadomoscForm
+    #form_class = AktualizujWiadomoscForm
+    template_name = 'czat/wiadomosc_form.html'
+    #template_name_suffix = '_update_form'
+    success_url = '/wiadomosci'
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = Wiadomosc.objects.filter(
+                                autor=self.request.user)
+        return super(AktualizujWiadomosc, self).get_context_data(**kwargs)
+
+    def get_object(self, queryset=None):
+        obj = Wiadomosc.objects.get(id=self.kwargs['id'])
+        return obj
+
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/loguj')
@@ -100,3 +145,4 @@ def wiadomosci(request):
     wiadomosci = Wiadomosc.objects.all()
     kontekst = {'user': request.user, 'wiadomosci': wiadomosci}
     return render(request, 'czat/wiadomosci.html', kontekst)
+

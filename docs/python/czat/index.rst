@@ -90,11 +90,12 @@ Funkcje kolejnych elementów są następujące:
   może też zawierać funkcje wykonujące operacje na danych.
   Instancja takiej klasy odpowiada rekordowi danych.
   Modele definiujemy w pliku :file:`models.py`.
-* Widoki – :term:`widok` w Django to funkcja Pythona, która na podstawie żądań www
+* Widoki – :term:`widok` w Django to funkcja czy klasa Pythona, która na podstawie żądań www
   (dla danych adresów URL) zwraca odpowiedź, najczęściej w postaci kodu HTML
   generowanego w szablonach (templates); odpowiedzią może być również
   przekierowanie na inny adres, jakiś dokument lub obrazek.
-  Widoki definiowane są w pliku :file:`views.py`.
+  Django zawiera wiele widoków wbudowanych. Widoki modyfikujemy
+  lub definiujemy w pliku :file:`views.py`.
 * Kontroler – :term:`kontroler` to mechanizm kierujący kolejne żądania
   do odpowiednich widoków na podstawie wzorców adresów URL zawartych w pliku :file:`urls.py`.
 
@@ -239,8 +240,10 @@ Panel administracyjny już mamy, ale po wejściu na stronę główną zwykły u�
 niczego ciekawego poza standardowym powitaniem Django nie widzi. Zajmiemy się teraz
 stronami po stronie (:-)) użytkownika.
 
-Dodawanie stron w Django polega na tworzeniu widoków, czyli funkcji Pythona
-powiązanych z określonymi adresami url. Widoki najczęściej zwracały będą kod HTML
+Dodawanie stron w Django polega na wykorzystywaniu widoków wbudowanych lub
+tworzeniu nowych. Są to klasy lub funkcje Pythona wykonujące jakieś operacje
+po stronie serwera w odpowiedzi na żądania klienta. Widoki powiązane są
+z określonymi adresami url. Widoki najczęściej zwracają kod HTML
 wyrenderowany na podstawie szablonów, do których możemy przekazywać dodatkowe dane [#]_,
 np. z bazy. Dla przejrzystości przyjęto, że w katalogu aplikacji (:file:`czat/czat`):
 
@@ -546,7 +549,7 @@ zalogowany – *Wyloguj*. Przykładowe strony mogą wyglądać tak:
 
 .. figure:: img/czat17log.png
 
-Widoki wbudowane
+Widoki oŋólne
 **************************
 
 Zajmiemy sie teraz drugim sposobem stworzenia formularza rejestracji, logowania
@@ -555,7 +558,8 @@ Spróbuj zarejestrować dodanego już użytkownika, albo przesłać niepełny
 formularz. Zauważysz, że nie dostajemy żadnej informacji o błędach.
 Można oczywiście dopisać ich obsługę do odpowiednich widoków lub wygenerować
 je w szablonach, ale... wcale nie trzeba tego robić. W przypadku prostych
-aplikacji wystarczą wbudowane w Django widoki i formularze.
+aplikacji wystarczą wbudowane w Django widoki ogólne (ang. *generic views*)
+i formularze.
 
 Wszystko da się zrobić w pliku ``urls.py``, który zmieniamy następująco:
 
@@ -577,7 +581,7 @@ potrzebna będzie również funkcja ``reverse_lazy()``.
 
 Następnie zakomentowujemy dotychczasowe powiązania adresów i widoków.
 Dodajemy natomiast nowe. Do adresu */rejestruj* przypisujemy widok specjalny
-generowany przez jego metodę ``as_view()``. Jako argumenty
+generowany przez jego metodę ``as_view()``. Działanie ogólne wymagają podaniJako argumenty
 przekazujemy nazwę szbalonu, formularz do wygenerowania oraz
 adres strony głównej, na który nastąpi przekierowanie po udanej rejestracji.
 
@@ -591,6 +595,10 @@ użytkownik po udanym zalogowaniu. Musimy więc ustawić wartość zmiennej
 ``LOGIN_REDIRECT_URL``. W tym celu na końcu pliku :file:`settings.py`
 dopisujemy:
 
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
 .. code-block:: python
 
     from django.core.urlresolvers import reverse_lazy
@@ -602,11 +610,89 @@ Przetestuj teraz działanie formularza rejestracji! Spróbuj dodać
 zarejestrowanego już użytkownika i wysłać pusty lub niekompletny formularz.
 
 
-Dodawanie i wyświetlanie wiadomości
+Obsługa wiadomości
 ***********************************
 
-Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od innych użytkowników
-i dodawać własne. Pierwszy sposób to utworzenie widoku ``wiadomosci()`` do
+Chcemy, by zalogowani użytkownicy mogli przeglądać wiadomości od użytkowników,
+zmieniać, usuwać i dodawać własne. Najprostszy sposób to skorzystanie z omówionych wyżej
+widoków wbudowanych. Do wyświetlania listy obiektów Django oferuje specjalną klasę
+``ListView``. Do pliku :file:`urls.py` dopisujemy importy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    from django.contrib.auth.decorators import login_required
+    from django.views.generic.list import ListView
+    from czat.models import Wiadomosc
+
+– i wiążemy adres */wiadomosci* z wywołaniem zaimportowanej klasy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z6.py
+    :linenos:
+    :lineno-start: 29
+    :lines: 29-33
+
+Zakładamy, że wiadomości mogą oglądać tylko użytkownicy zalogowani. Dlatego
+całe wywołanie widoku umieszczamy w funkcji ``login_required``, która
+użytkownika niezalogowanego przekieruje na adres podany w paramatrze ``login_url``.
+
+Widoki ogólne
+Metodzie ``as_view()`` klasy ``ListView`` wskazujemy model, w oparciu
+o który dane zostaną pobrane z bazy. Domyślnie lista danych przekazana
+byłaby do szablonu pod nazwą ``object_list``, nazwę domyślną zmieniamy
+na przyjazną ustawiając właściwość ``context_object_name``, opcja
+``paginate_by``pozwala wyświetlać określoną ilość wiadomości na stronie.
+
+Potrzebujemy jeszcze szablonu, którego Django szuka pod domyślną nazwą
+*model_list.html*, czyli w naszym przypadku tworzymy plik
+:file:`~/czat/czat/templates/czat/wiadomosc_list.html`:
+
+.. raw:: html
+
+    <div class="code_no">Plik wiadomosc_list.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: wiadomosc_list_z6.py
+    :linenos:
+
+W tym momencie widok wiadomości powinien już działać. Przetestuj!
+
+Dodawanie wiadomości również zrealizujemy w oparciu o dedykowany widok ogólny
+– ``CreateView``. Ponieważ nasz model wiadomości zawiera klucz obcy,
+mianowicie pole autor, tym razem dostosujemy klasę widoku w pliku
+:file:`views.py`. Pozwoli nam to również rozszerzyć standardową funkcjonalność
+widoku.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z7.py
+    :linenos:
+    :lineno-start: 58
+    :lines: 58
+
+Dostosowując widok ogólny tworzymy opartą na nim klasę ``UtworzWiadomosc``.
+Następnie definiujemy źródło danych: ``model = Wiadomosc``.
+Właściwość ``fields`` pozwala określić w postaci listy pola, które mają
+znaleźć się na formularzu. Jak widać, pomijamy pole ``autor``. Właściwość
+``success_url`` pozwala ustawić adres, pod który trafi użytkownik po
+dodaniu wiadomości.
+
+Metoda ``get_initail()`` pozwala ustawić domyślne wartości dla wybranych
+pól. Wykorzystujemy ją do zainicjowania pola ``data_pub`` aktualna datą.
+Metoda ``get_context_data()`` pozwala inicjowa
+
+Pierwszy sposób to utworzenie widoku ``wiadomosci()`` do
 wyświetlania (żądania GET) i dodawania wiadomości (żądania POST), który
 zwracał będzie szablon :file:`wiadomosci.html`. Widok ten powiążemy
 z adresem */wiadomosci*. Do pliku :file:`views.py` dodajemy importy
@@ -627,10 +713,13 @@ Widać powyżej, że treść przesłanej wiadomości odczytujemy ze słownika
 odpowiada nazwie pola formularza użytej w szablonie, które chcemy odczytać.
 Drugi argument oznacza wartość domyślną, która zostanie użyta, jeśli
 pole będzie niedostępne. Po sprawdzeniu długości wiadomości, możemy
-ją utworzyć wykorzystując konstruktor naszego modelu ``Wiadomosc()``,
+ją utworzyć wykorzystując konstruktor naszego modelu
+``Wiadomosc(tekst=tekst, data_pub=timezone.now(), autor=request.user)``,
 któremu w formie nazwanych argumentów podajemy wartości kolejnych pól.
-Na koniec zapisujemy nową wiadomość w bazie i przekierowujemy użytkownika
-ponownie do widoku ``wiadomsci()``, ale tym razem jest to żądanie typu :term:`GET`.
+Zapisanie nowej wiadomości w bazie sprowadza się do polecenia ``wiadomosc.save()``.
+
+Na koniec przekierowujemy użytkownika do tego samego widoku,
+ale tym razem jest to żądanie typu :term:`GET`.
 W odpowiedzi na nie pobieramy wszystkie wiadomości z bazy (``Wiadomosc.objects.all()``),
 i przekazujemy do szablonu, który zwracamy użytkownikowi.
 
@@ -654,7 +743,7 @@ nadając mu nazwę *wiadomosci*, a nstępnie uzupełnij szablon widoku główneg
 aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami.
 W szablonie ``wiadomosci.html`` dodaj link do strony głównej.
 
-Zaloguj się i przetestuj wyświetlanie[#]_ i dodawanie wiadomości pod adresem
+Zaloguj się i przetestuj wyświetlanie [#]_ i dodawanie wiadomości pod adresem
 *127.0.0.1:8080/wiadomosci/*. Sprawdź, co się stanie po wysłaniu pustej
 wiadomości.
 

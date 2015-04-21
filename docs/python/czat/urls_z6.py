@@ -10,6 +10,9 @@ admin.autodiscover() # potrzebne tylko w Django 1.6
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
+from czat.models import Wiadomosc
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
@@ -26,7 +29,13 @@ urlpatterns = patterns('',
     url(r'^wyloguj/', 'django.contrib.auth.views.logout',
                     {'next_page': reverse_lazy('index')},
                     name='wyloguj'),
-    url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
+    url(r'^wiadomosci/', login_required(
+                    ListView.as_view(
+                        model=Wiadomosc,
+                        context_object_name='wiadomosci',
+                        paginate_by=10),
+                    login_url='/loguj'),
+                    name='wiadomosci'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

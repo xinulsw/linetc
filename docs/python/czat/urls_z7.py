@@ -15,16 +15,10 @@ from django.views.generic.list import ListView
 from czat.models import Wiadomosc
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'czat.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    # główny adres (/) o nazwie index łączymy z widokiem index
     url(r'^$', views.index, name='index'),
     #url(r'^rejestruj/', views.rejestruj, name='rejestruj'),
     #url(r'^loguj/', views.loguj, name='loguj'),
     #url(r'^wyloguj/', views.wyloguj, name='wyloguj'),
-    #url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
     url(r'^rejestruj/', CreateView.as_view(
                     template_name='czat/rejestruj.html',
                     form_class=UserCreationForm,

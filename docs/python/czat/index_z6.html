@@ -11,10 +11,10 @@
             {% endfor %}
             </ul>
         {% endif %}
-      
+
         {% if user.is_authenticated %}
             <p>Jesteś zalogowany jako {{ user.username }}.</p>
-            <p><a href="{% url 'wiadomosci' %}">Wiadomosci</a></p>
+            <p><a href="{% url 'wiadomosci' %}">Wiadomości</a></p>
             <p><a href="{% url 'wyloguj' %}">Wyloguj się</a></p>
         {% else %}
             <p><a href="{% url 'loguj' %}">Zaloguj się</a></p>
