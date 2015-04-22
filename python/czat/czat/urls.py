@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     #url(r'^rejestruj/', views.rejestruj, name='rejestruj'),
     #url(r'^loguj/', views.loguj, name='loguj'),
     #url(r'^wyloguj/', views.wyloguj, name='wyloguj'),
-    url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
+    #url(r'^wiadomosci/', views.wiadomosci, name='wiadomosci'),
     url(r'^rejestruj/', CreateView.as_view(
                     template_name='czat/rejestruj.html',
                     form_class=UserCreationForm,
@@ -51,9 +51,9 @@ urlpatterns = patterns('',
     url(r'^usun/(?P<pk>\d+)/$', login_required(
                     DeleteView.as_view(
                     model=Wiadomosc,
-                    template_name='wiadomosc_usun.html',
-                    success_url='/lista'),
-                    login_url='/login'), name='usun'),
+                    template_name='czat/wiadomosc_usun.html',
+                    success_url='/wiadomosci'),
+                    login_url='/loguj'), name='usun'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

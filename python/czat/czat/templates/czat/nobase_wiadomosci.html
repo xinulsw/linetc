@@ -1,9 +1,16 @@
 <!-- czat/czat/templates/czat/wiadomosci.html -->
-{% extends "czat/base.html" %}
+<html>
+    <body>
+        <h1>Wiadomości</h1>
 
-    {% block naglowek %}Wiadomosci{% endblock naglowek %}
+        {% if messages %}
+            <ul>
+            {% for komunikat in messages %}
+                <li>{{ komunikat|capfirst }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
 
-    {% block tresc %}
         <h2>Dodaj wiadomość</h2>
         <form method="POST">
             {% csrf_token %}
@@ -20,8 +27,7 @@
             </li>
             {% endfor %}
         </ol>
-    {% endblock tresc %}
 
-    {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
-    {% endblock linki %}
+    </body>
+</html>

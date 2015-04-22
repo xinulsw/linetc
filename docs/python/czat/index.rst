@@ -690,7 +690,7 @@ W tym momencie widok wiadomości powinien już działać. Przetestuj!
 W szablonie listy wiadomości przed znacznikiem zamykającym ``</body>``
 dodaj link do strony głównej.
 
-Dodawanie wiadomości zrealizujemy wykorzystując widok ``CreateView``.
+**Dodawanie wiadomości** zrealizujemy wykorzystując widok ``CreateView``.
 Ponieważ nasz model wiadomości zawiera klucz obcy, mianowicie pole autor,
 tym razem dostosujemy klasę widoku w pliku :file:`views.py`. Dzięki temu
 będziemy mogli rozszerzyć standardową funkcjonalność widoku.
@@ -768,12 +768,29 @@ parametrem, np. ``r'^aktualizuj/(?P<pk>\d+)/'``. Część ``/(?P<pk>\d+)`` oznac
 "klucz główny". Zmienna ta oznaczać będzie identyfikator wiadomości i dostępna
 będzie w widokach.
 
-Widok przeznaczony do usuwania danych powinien być zaimportowany razem z widokiem
-``ListView``. Wszystkie ustawienia określamy w pliku :file:`urls.py` za pomocą
-omówionych wcześniej właściwości. Nieco więcej pracy wymaga dostosowanie widoku
-aktualizacji.
+**Usuwanie danych** realizujemy za pomocą widoku ``DeleteView``, który powinien
+być już zaimportowany razem z widokiem ``ListView``. Domyślny szablon
+dla tego widoku przyjmuje nnazwę *<nazwa-modelu>_confir_delete.html*,
+dlatego uproścliśmy jego nazwę we właściwości ``template_name``.
 
-W pliku :file:`views.py` utworzymy klasę ``AktualizujWiadomosc`` opartą na
+Ćwiczenie 6
+==============
+
+Utwórz szablon :file:`wiadomosc_usun.html` wzorując sie na wcześniejszych
+szablonach. Zamiast instrukcji wyświetlającej formularz umieść kod:
+
+.. raw:: html
+
+    <div class="code_no">Plik wiadomosc_usun.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: wiadomosc_usun_z8.html
+    :linenos:
+    :lineno-start: 17
+    :lines: 17
+
+Nieco więcej pracy wymaga **dostosowanie widoku aktualizacji**. W pliku
+:file:`views.py` utworzymy klasę ``AktualizujWiadomosc`` opartą na
 widoku ogólnym ``UpdateView``:
 
 .. raw:: html
@@ -813,13 +830,26 @@ Jej zadanie to wybranie z bazy danych i zwrócenie do formularza wiadomości,
 której identyfikator został przekazany w adresie pod nazwą *pk*:
 ``wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])``.
 
-Żeby przetestować aktualizowanie i usuwanie wiadomości, w szablonie listy
-wiadomości wygenerujemy odpowiednie linki, ale tylko dla wiadomości
-utworzonych przez zalogowanego użytkownika.
-
-Ćwiczenie 6
+Ćwiczenie 7
 ==============
 
+Żeby przetestować aktualizowanie i usuwanie wiadomości, w szablonie
+:file:`wiadomosc_list.html` wygeneruj linki *Edytuj* i *Usuń* tylko
+dla wiadomości utworzonych przez zalogowanego użytkownika.
+
+Wstaw w odpowiednie miejsce szablonu poniższy kod:
+
+.. raw:: html
+
+    <div class="code_no">Plik wiadomosc_lista.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: wiadomosc_list_z8.html
+    :linenos:
+    :lineno-start: 20
+    :lines: 20-23
+
+Dodaj również te same linki do listy wiadomości na stronach dodawania i aktualizowania.
 
 Wiadomości jeszcze raz
 ************************
@@ -867,7 +897,7 @@ i listy wiadomości dodanych.
 .. literalinclude:: wiadomosci_z9.html
     :linenos:
 
-Ćwiczenie 7
+Ćwiczenie 8
 =====================
 
 Powiąż widok ``wiadomosci()`` z adresem */wiadomosci* w pliku :file:`urls.py`,

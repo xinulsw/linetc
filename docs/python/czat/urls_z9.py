@@ -46,9 +46,9 @@ urlpatterns = patterns('',
     url(r'^usun/(?P<pk>\d+)/', login_required(
                     DeleteView.as_view(
                     model=Wiadomosc,
-                    template_name='wiadomosc_usun.html',
-                    success_url='/lista'),
-                    login_url='/login'), name='usun'),
+                    template_name='czat/wiadomosc_usun.html',
+                    success_url='/wiadomosci'),
+                    login_url='/loguj'), name='usun'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
