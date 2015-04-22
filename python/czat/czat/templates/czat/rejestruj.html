@@ -1,7 +1,7 @@
 <!-- czat/czat/templates/czat/rejestruj.html -->
-{% extends "czat/base.html" %}
+{% extends "czat/baza.html" %}
 
-    {% block naglowek %}Rejestracja użytkownika{% endblock naglowek %}
+    {% block naglowek %}Rejestracja użytkownika{% endblock %}
 
     {% block tresc %}
         {% if not user.is_authenticated %}
@@ -11,12 +11,12 @@
             <button type="submit">Zarejestruj</button>
         </form>
         {% endif %}
-    {% endblock tresc %}
+    {% endblock %}
 
     {% block linkilog %}
         <p>Jesteś już zarejestrowany jako {{ user.username }}.</p>
-    {% endblock linkilog %}
+    {% endblock %}
 
     {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
-    {% endblock linki %}
+    {% endblock %}

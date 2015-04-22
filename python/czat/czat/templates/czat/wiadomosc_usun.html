@@ -1,7 +1,7 @@
 <!-- czat/czat/templates/czat/wiadomosc_usun.html -->
-{% extends "czat/base.html" %}
+{% extends "czat/baza.html" %}
 
-    {% block naglowek %}Wiadomosci{% endblock naglowek %}
+    {% block naglowek %}Wiadomosci{% endblock %}
 
     {% block tresc %}
 
@@ -11,8 +11,8 @@
             <p>Czy na pewno chcesz usunąć wiadomość:<br />"{{ object }}"?</p>
             <button type="submit">Usuń</button>
         </form>
-    {% endblock tresc %}
+    {% endblock %}
 
     {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
-    {% endblock linki %}
+    {% endblock %}

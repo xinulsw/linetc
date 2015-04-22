@@ -1,16 +1,15 @@
 <!-- czat/czat/templates/czat/index.html -->
-{% extends "czat/base.html" %}
+{% extends "czat/baza.html" %}
 
-    {% block naglowek %}Witaj w aplikacji Czat!{% endblock naglowek %}
+    {% block naglowek %}Witaj w aplikacji Czat!{% endblock %}
 
     {% block linkilog %}
         <p>Jesteś zalogowany jako {{ user.username }}.</p>
         <p><a href="{% url 'wiadomosc' %}">Dodaj wiadomość</a></p>
         <p><a href="{% url 'wiadomosci' %}">Lista wiadomości</a></p>
-    {% endblock linkilog %}
+    {% endblock %}
 
     {% block linkizalog %}
         <p><a href="{% url 'loguj' %}">Zaloguj się</a></p>
         <p><a href="{% url 'rejestruj' %}">Zarejestruj się</a></p>
-    {% endblock linkizalog %}
-
+    {% endblock %}

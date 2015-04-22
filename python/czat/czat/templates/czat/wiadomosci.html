@@ -1,7 +1,7 @@
 <!-- czat/czat/templates/czat/wiadomosci.html -->
-{% extends "czat/base.html" %}
+{% extends "czat/baza.html" %}
 
-    {% block naglowek %}Wiadomosci{% endblock naglowek %}
+    {% block naglowek %}Wiadomosci{% endblock %}
 
     {% block tresc %}
         <h2>Dodaj wiadomość</h2>
@@ -20,8 +20,8 @@
             </li>
             {% endfor %}
         </ol>
-    {% endblock tresc %}
+    {% endblock %}
 
     {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
-    {% endblock linki %}
+    {% endblock %}

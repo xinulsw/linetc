@@ -1,7 +1,7 @@
 <!-- czat/czat/templates/czat/loguj.html -->
-{% extends "czat/base.html" %}
+{% extends "czat/baza.html" %}
 
-    {% block naglowek %}Logowanie użytkownika{% endblock naglowek %}
+    {% block naglowek %}Logowanie użytkownika{% endblock %}
 
     {% block tresc %}
         {% if user.is_authenticated %}
@@ -14,8 +14,8 @@
             <button type="submit">Zaloguj</button>
         </form>
         {% endif %}
-    {% endblock tresc %}
+    {% endblock %}
 
     {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
-    {% endblock linki %}
+    {% endblock %}
