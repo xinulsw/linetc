@@ -167,6 +167,13 @@ i rejestrujemy w nim nasz model jako element panelu administracyjnego:
 .. literalinclude:: admin_z1.py
     :linenos:
 
+.. caution::
+
+    Jeżeli korzystamy z Django w wersji 1.6 przed skorzystaniem z panelu administratora
+    jako superużytkownik, musimy dodać linię: ``admin.autodiscover()`` w pliku
+    :file:`urls.py` przed deklaracją zmiennej ``urlpatterns``. (Zobacz kod nr 7
+    poniżej.)
+
 Po ewentualnym ponownym uruchomieniu serwera wchodzimy na adres *127.0.0.1:8080/admin/*.
 Logujemy się podając dane wprowadzone podczas tworzenia bazy.
 Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości [#]_.
@@ -278,7 +285,9 @@ podany tekst. W pliku :file:`views.py` umieszczamy:
     przez Django, których chcemy użyć, musimy najpierw zaimportować za pomocą
     klauzuli typu ``from <skąd> import <co>``.
 
-Widok :file:`index()` łączymy z adresem URL strony głównej (/) w pliku :file:`urls.py`:
+W pliku :file:`urls.py` przede wszystkim importujemy widoki naszej aplikacji:
+``from czat import views``. Następnie widok `index()` łączymy z adresem
+URL strony głównej (/):
 
 .. raw:: html
 
@@ -287,7 +296,7 @@ Widok :file:`index()` łączymy z adresem URL strony głównej (/) w pliku :file
 .. highlight:: python
 .. literalinclude:: urls_z2.py
     :linenos:
-    :emphasize-lines: 11
+    :emphasize-lines: 6, 11
 
 Podstawową funkcją jest tu ``url()``, która jako pierwszy parametr przyjmuje wyrażenie
 regularne oznaczane skrótem ``r`` przed łańcuchem. Symbol ``^`` oznacza początek
@@ -312,7 +321,7 @@ strona zapisana w języku HTML. Szablony takich stron umieszczamy w podkatalogu
 
 .. code-block:: bash
 
-    ~/czat/czat $ mkdir -p templates/czat
+    ~/czat/czat$ mkdir -p templates/czat
 
 Następnie tworzymy szablon, czyli plik :file:`~/czat/czat/templates/czat/index.html`, który zawiera:
 
@@ -333,10 +342,11 @@ W pliku :file:`views.py` zmieniamy instrukcje odpowiedzi:
 .. highlight:: python
 .. literalinclude:: views_z2.py
     :linenos:
+    :emphasize-lines: 5, 9-10
 
-Do zwrócenia szablonu, używamy funkcji ``render()``, której jako pierwszy argument
-podajemy parametr ``request``, a jako drugi nazwę szablonu uwzględniającą
-katalog nadrzędny.
+Po zaimportowaniu funkcji ``render()`` używamy jej do zwrócenia szablonu.
+Jako pierwszy argument podajemy parametr ``request``, a jako drugi nazwę
+szablonu uwzględniającą katalog nadrzędny.
 
 Po wpisaniu adresu *127.0.0.1:8000/* zobaczymy tekst, który umieściliśmy w szablonie:
 
@@ -359,8 +369,7 @@ Przygotujemy więc widok ``rejestruj()``, który:
    utworzy konto;
 3. zaloguje nowego użytkownika i przekieruje go na stronę główną.
 
-Zaczynamy od uzupełnienia pliku :file:`views.py`. Dodajemy widok ``rejestruj()``
-i zmieniamy widok ``index()``.
+Zaczynamy od uzupełnienia pliku :file:`views.py`. Dodajemy widok ``rejestruj()``:
 
 .. raw:: html
 
@@ -451,9 +460,11 @@ i zalogowany.
 Spróbuj zmienić szablon ``rejestruj.html``, tak aby zalogowanym
 użytkownikom wyświetlał się tekst "Jesteś już zarejestrowany" oraz
 link do strony głównej, a niezalogowanym formularz rejestracji.
-Wskazówka: przekaż do szablonu obiekt reprezuntujący użytkownika.
-Zobacz jak zrobiliśmy to w widoku ``index()`` i dopisz odpowiedni
-kod do słownika ``kontekst`` widoku ``rejestruj()``.
+
+.. tip::
+
+    Wykorzystaj tag ``{% if warunek %}`` i obiekt ``user``, tak jak zrobiliśmy to
+    w widoku ``index()`` i dopisz odpowiedni kod w widoku ``rejestruj()``.
 
 Przykładowy efekt poprawnego wykonania ćwiczenia:
 
@@ -914,7 +925,7 @@ i listy wiadomości dodanych.
 Powiąż widok ``wiadomosci()`` z adresem */wiadomosci* w pliku :file:`urls.py`,
 nadając mu nazwę *wiadomosci*, a następnie uzupełnij szablon widoku głównego,
 aby zalogowanym użytkownikom wyświetlał się link prowadzący do strony z wiadomościami.
-W szablonie ``wiadomosci.html`` dodaj link do strony głównej.
+W szablonie ``wiadomosci.html`` dodaj link do strony głównej i link wylogowania.
 
 .. tip::
 
