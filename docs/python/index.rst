@@ -6,7 +6,6 @@ stworzonej przy użyciu frameworka Django.
 
 .. toctree::
     :maxdepth: 2
-    :numbered:
 
     czat/index
 
