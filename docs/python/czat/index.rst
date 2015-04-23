@@ -22,9 +22,9 @@ który pozwoli śledzić postęp pracy. W katalogu domowym wydajemy polecenia w 
 
 .. code-block:: bash
 
-    ~ $ django-admin.py startproject czat
-    ~ $ cd czat
-    ~/czat $ python manage.py runserver
+    ~$ django-admin.py startproject czat
+    ~$ cd czat
+    ~/czat$ python manage.py runserver
 
 Powstanie katalog projektu :file:`czat` i podkatalog aplikacji o takiej samej nazwie :file:`chatter`.
 Po wpisaniu w przeglądarce adresu *127.0.0.1:8000* zobaczymy stronę powitalną.
@@ -107,7 +107,7 @@ Funkcje kolejnych elementów są następujące:
 Model danych i baza
 **********************
 
-Pisanie aplikacji zaczynamy od zdefiniwania modelu, czyli klasy opisującej
+Pisanie aplikacji zaczynamy od zdefiniowania modelu, czyli klasy opisującej
 tabelę zawierającą wiadomości. Instancje tej klasy będą konkretnymi wiadomościami
 utworzonymi przez użytkowników systemu.
 Każda wiadomość będzie zwierała treść, datę dodania oraz autora wiadomości (użytkownika).
@@ -429,6 +429,7 @@ stosując odpowiednią notację, np.: ``{{ user.username }}``.
 Dodatkowo wyświetlane dane można obrabiać za pomocą filtrów,
 np. ``{{ komunikat|capfirst }}`` – w tym wypadku wszystkie komunikaty
 zostaną wyświetlone z wielkiej litery.
+
 W pliku :file:`index.html` umieszczamy również link do strony rejestracji,
 który wyświetlany będzie tylko użytkownikom niezalogowanym. Aby wygenerować adres
 strony w atrybucie ``href`` używamy funkcji ``url``, za którą podajemy
@@ -924,7 +925,7 @@ W szablonie ``wiadomosci.html`` dodaj link do strony głównej.
     należy umieścić przed nim, np. na początku.
 
 Zaloguj się i przetestuj wyświetlanie [#]_ i dodawanie wiadomości pod adresem
-*127.0.0.1:8080/wiadomosci/*. Sprawdź, co się stanie po wysłaniu pustej
+*127.0.0.1:8000/wiadomosci/*. Sprawdź, co się stanie po wysłaniu pustej
 wiadomości.
 
 .. [#] Jeżeli nie dodałeś do tej pory żadnej wiadomości, lista na początku
@@ -932,7 +933,7 @@ wiadomości.
 
 Poniższe zrzuty prezentują efekty naszej pracy:
 
-.. figure:: img/czat21index.png
+.. figure:: img/czat21wiadomosci.png
 
 
 Szablony
