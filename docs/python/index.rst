@@ -11,7 +11,7 @@ stworzonej przy użyciu frameworka Django.
     czat/index
 
 Metryka
-========
+**********
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 
