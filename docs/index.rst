@@ -13,7 +13,7 @@ i informatyki.
 Spis treści:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
     :numbered:
 
     Serwis eCG <http://ecg.vot.pl/>
