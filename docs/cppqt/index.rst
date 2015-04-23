@@ -5,13 +5,12 @@ Poniżej przedstawiamy realizację przykładowej aplikacji w Qt 5.
 
 .. toctree::
     :maxdepth: 2
-    :numbered:
 
     adresy/index
     zadania/index
 
 Metryka
-========
+*********
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 
