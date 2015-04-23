@@ -99,13 +99,15 @@ Funkcje kolejnych elementów są następujące:
 * Kontroler – :term:`kontroler` to mechanizm kierujący kolejne żądania
   do odpowiednich widoków na podstawie wzorców adresów URL zawartych w pliku :file:`urls.py`.
 
-.. [#] Twórcy Django traktują jednak ten wzorzec elastycznie, mówiąc że ich framework wykorzystuje wzorzec MTV, czyli model (model), szablon (template), widok (view).
-.. [#] Takie odwzorowanie nosi nazwę mapowania obiektowo-relacyjnego (ORM). ORM odwzorowuje strukturę bazy na obiekty Pythona.
+.. [#] Twórcy Django traktują jednak ten wzorzec elastycznie, mówiąc że ich
+   framework wykorzystuje wzorzec MTV, czyli model (model), szablon (template), widok (view).
+.. [#] Takie odwzorowanie nosi nazwę mapowania obiektowo-relacyjnego (ORM).
+   ORM odwzorowuje strukturę bazy na obiekty Pythona.
 
 Model danych i baza
 **********************
 
-Pisanie aplikacji zaczynamy od zdefiniwania :term:`modelu`, czyli klasy opisującej
+Pisanie aplikacji zaczynamy od zdefiniwania modelu, czyli klasy opisującej
 tabelę zawierającą wiadomości. Instancje tej klasy będą konkretnymi wiadomościami
 utworzonymi przez użytkowników systemu.
 Każda wiadomość będzie zwierała treść, datę dodania oraz autora wiadomości (użytkownika).
@@ -688,7 +690,10 @@ W tym momencie widok wiadomości powinien już działać. Przetestuj!
 ===================
 
 W szablonie listy wiadomości przed znacznikiem zamykającym ``</body>``
-dodaj link do strony głównej.
+dodaj link do strony głównej. Przykładowy efekt prezentujemy poniżej
+(zrzut zawiera również elementy, które dodamy później):
+
+.. figure:: img/czat18wiadomosci.png
 
 **Dodawanie wiadomości** zrealizujemy wykorzystując widok ``CreateView``.
 Ponieważ nasz model wiadomości zawiera klucz obcy, mianowicie pole autor,
@@ -745,6 +750,7 @@ kod wyświetlający formularz:
     :lineno-start: 14
     :lines: 14-19
 
+.. figure:: img/czat19wiadomosci.png
 
 Dodamy teraz dwa widoki przeznaczone do aktualizaowania i usuwania wpisów.
 Zakładamy, że adresy do tych operacji będą miały postać: */aktualizuj/id_wiadomości*
@@ -788,6 +794,8 @@ szablonach. Zamiast instrukcji wyświetlającej formularz umieść kod:
     :linenos:
     :lineno-start: 17
     :lines: 17
+
+.. figure:: img/czat20wiadomosci.png
 
 Nieco więcej pracy wymaga **dostosowanie widoku aktualizacji**. W pliku
 :file:`views.py` utworzymy klasę ``AktualizujWiadomosc`` opartą na
@@ -850,6 +858,8 @@ Wstaw w odpowiednie miejsce szablonu poniższy kod:
     :lines: 20-23
 
 Dodaj również te same linki do listy wiadomości na stronach dodawania i aktualizowania.
+
+.. figure:: img/czat18wiadomosci.png
 
 Wiadomości jeszcze raz
 ************************
@@ -922,9 +932,8 @@ wiadomości.
 
 Poniższe zrzuty prezentują efekty naszej pracy:
 
-.. figure:: img/czat18index.png
+.. figure:: img/czat21index.png
 
-.. figure:: img/czat19wiadomosci.png
 
 Szablony
 *****************
@@ -988,7 +997,7 @@ Postępując na tej samej zasadzie modyfikujemy szablon rejestracji:
 ==============
 
 Wzorując się na podanych przykładach zmień pozostałe szablony tak, aby
-opierały się na szablonnie bazowym.
+opierały się na szablonnie bazowym. Wygląd stron nie powinien ulec zmianie!
 
 Style, skrpyty, pliki
 ************************
@@ -1038,14 +1047,49 @@ za znacznikiem ``<title>`` w sekcji ``<head>``. Ilustruje on, jak dołączamy
 style czy skrypty, mianowicie używamy tagu ``{% static plik %}``. Wreszcie
 kod z linii 5-8 zawierający znacznik ``<div>`` z obrazkami wstawiamy
 na końcu pliku przed znacznikiem zamykającym ``</body>``. Widzimy tu,
-jak wstawiać obrazki.
+jak wstawiać obrazki. Wygląd strony głównej po zmianach:
+
+.. figure:: img/czat22szabl.png
 
 Ćwiczenie 10
 ==============
 
 W szablonie bazowym stwórz osobny block umożliwiający zastępowanie wstawionych
 obrazków. Zmień dowolny szablon inny niż strona główna tak, aby wyświetlał
-inne obrazki. Uwaga: musisz je wcześniej umieścić w odpowiednim katalogu!
+inne obrazki. Pamiętaj o zapisaniu dodatkowych obrazków do odpowiedniego katalogu!
+
+.. tip::
+
+    Tag ``{% load staticfiles %}`` musisz wstawić do każdego szablonu
+    (w dowolnym miejscu), w którym chcesz odwoływać się do plików
+    z katalogu :file:`static`.
+
+.. figure:: img/czat23szabl.png
+
+Na powyższym zrzucie widać wykonane ćwiczenie, czyli użycie dodatkowych
+obrazków. Jednak strona nie wygląda dobrze, ponieważ treść podpowiedzi
+nachodzi na logo Django (oczywiście przy małym rozmiarze okna przeglądarki).
+Spróbujemy temu zaradzić.
+
+Wykorzystamy prosty skrypt JQuery. Na początku ściągnij bibliotekę i skrypt
+z podanego :download:`archiwum <js.zip>`. Rozpakuj pliki do katalogu
+:file:`static/js`. Następnie do szablonu podstawowego :file:`baza.html`
+dodaj przed tagiem zamykającym ``</body>`` kod:
+
+.. raw:: html
+
+    <div class="code_no">Plik baza.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: baza_z12.html
+    :linenos:
+    :lines: 39-40
+
+Po odświeżeniu strony powinnieneś zobaczyć poprawioną stronę:
+
+.. figure:: img/czat24szabl.png
+
+cdn.
 
 Materiały
 ***************

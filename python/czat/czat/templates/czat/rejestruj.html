@@ -20,3 +20,11 @@
     {% block linki %}
         <p><a href="{% url 'index' %}">Strona główna</a></p>
     {% endblock %}
+
+    {% block obrazki %}
+    {% load staticfiles %}
+        <div class="fr">
+            <img src="{% static 'czat/img/django2.png' %}" width="280" />
+            <img src="{% static 'czat/img/python2.png' %}" width="280" />
+        </div>
+    {% endblock %}

@@ -31,12 +31,10 @@
 
         {% block linki %} {% endblock %}
 
-        {% block obrazki %}
-        <div class="fr">
-            <img src="{% static 'czat/img/python.png' %}" width="280" />
-            <img src="{% static 'czat/img/sqlite.png' %}" width="280" />
+        <div id="obrazki">
+            <img src="{% static 'czat/img/python.png' %}" width="300" />
+            <img src="{% static 'czat/img/sqlite.png' %}" width="300" />
         </div>
-        {% endblock %}
 
         <script src="{% static 'czat/js/jquery.js' %}"></script>
         <script src="{% static 'czat/js/czat.js' %}"></script>
