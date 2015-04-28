@@ -13,6 +13,8 @@ Poznaj zasady:
     game_rules.rst
     getting_started.rst
     library_documentation.rst
+    rgkit.rst
+    basic_strategy.rst
 
 .. note::
 

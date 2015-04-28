@@ -1,7 +1,7 @@
 Zasady gry
 ################
 
-W "Grze robotów" piszesz programy kierujące walczącymi dla Ciebie robotami.
+W *Grze robotów* piszesz programy kierujące walczącymi dla Ciebie robotami.
 Planszą gry jest siatka o wymiarach 19x19 pól. Celem gry jest
 umieszczenie na niej jak największej ilości robotów w ciągu 100 rund
 rozgrywki.
@@ -24,17 +24,17 @@ kwdratach w pionie (góra, dół) i w poziomie (lewo, prawo).
 
 W każdej rundzie możliwe są następujące działania robota:
 
-* Przemieszczenie się na przyległy kwadrat. Jeżeli znajduje się tam już robot
-  lub inny robot robot próbuje zająć to samo miejsce, obydwa tracą 5 punktów HP
+* **Ruch** na przyległy kwadrat. Jeżeli znajduje się tam już robot
+  lub inny robot próbuje zająć to samo miejsce, obydwa tracą 5 punktów HP
   z powodu kolizji, a ruch(y) nie dochodzi(ą) do skutku. Jeżeli jednak robot
-  chce przejść na pole zajęte przez innego, ale temu drugiemu udaje się
-  opuścić zajmowane pole, ruch jest udany.
+  chce przejść na pole zajęte przez innego, a ten drugi opuszcza zajmowane pole,
+  ruch jest udany.
 
   Minimum cztery roboty w kwadracie, przemieszczające się zgodnie ze wskazówkami
   zegara, będą mogły się poruszać, podobnie dowolna ilość robotów w kole.
   (Roboty nie mogą bezpośrednio zamieniać się miejscami!)
 
-* Atak na przyległy kwadrat. Jeżeli w atakowanym kwadracie znajdzie się robot
+* **Atak** na przyległy kwadrat. Jeżeli w atakowanym kwadracie znajdzie się robot
   pod koniec rundy, np. robot pozostał w miejscu lub przeszedł na nie,
   robot ten traci od 8 do 10 punktów HP w następstwie uszkodzeń.
 
@@ -45,12 +45,12 @@ W każdej rundzie możliwe są następujące działania robota:
   lub samobójstwa, ale nie odnosząc uszkodzeń z powodu kolizji.
 
 W grze nie można uszkodzić własnych robotów. Kolizje, ataki i samobójstwa
-oddziałują tylko na przeciwnika.
+wyrządzają szkody tylko przeciwnikom.
 
 Wygrawa gracz, który po 100 rundach ma największą liczbę robotów na planszy.
 
 Zadaniem gracza jest zakodować sztuczną inteligencję (ang. AI – *artificial itelligance*),
-której będą używały wszystkie roboty. Aby wygrać, roboty gracza muszą ze sobą współpracować,
+której będą używały wszystkie jego roboty. Aby wygrać, roboty gracza muszą ze sobą współpracować,
 np. żeby otoczyć przeciwnika.
 
 .. note::
