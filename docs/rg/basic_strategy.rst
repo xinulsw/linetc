@@ -66,7 +66,7 @@ nie otaczał nas bez uszkodzeń.
     W grach technika ta nazywana jest ``kiting``, a jej działanie ilustruje
     poniższa animacja:
 
-[Tu powinien być animowany gif, którego rtd nie łyka...]
+.. figure:: img/kiting.gif
 
     Zwróć uwagę na słabego robota ze zdrowiem 8 HP, który podchodzi do mocnego robota
     z 50 HP, a następnie ucieka. Zbliżając się atakuje pole, na które wchodzi przeciwnik,

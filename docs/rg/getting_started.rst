@@ -32,7 +32,7 @@ Metoda ``act`` musi zwrócić jedną z następujących odpowiedzi:
 
 Jeżeli metoda ``act`` zwróci wyjątek lub błędne polecenie, robot pozostaje
 w obronie, ale jeżeli powtórzy się to zbyt wiele razy, zostaniesz zmuszony
-do kapitulacji. Szczegóły omówiono w dziale `Zabezbieczenia`_.
+do kapitulacji. Szczegóły omówiono w dziale *Zabezbieczenia*.
 
 Odczytywanie właściwości robota
 ********************************
