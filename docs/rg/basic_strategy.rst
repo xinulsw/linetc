@@ -38,43 +38,44 @@ Startegie indywidualne
 
 Rozbudujmy przykład podstawowy. Oto lista przykładowych usprawnień:
 
-* Ulepszenie 1: opuść punkt wejścia.
+* **Ulepszenie 1: opuść punkt wejścia.**
 
 Pozostawanie w punkcie wejścia nie jest dobre. Sprawdźmy, czy jesteśmy
 w punkcie wejścia i czy powinniśmy z niego wyjść. Nawet wtedy, gdy jest
 ktoś do zaatakowania, ponieważ nie chcemy zostać zamknięci w pułapce wejścia.
 
-* Ulepszenie 2: uciekamy, jeśli grozi nam śmierć.
+* **Ulepszenie 2: uciekamy, jeśli grozi nam śmierć.**
 
 Przykładowy robot atakuje aż do śmierci. Ponieważ jednak wygrana zależy od
 liczby pozostałych robotów, a nie ich zdrowia, bardziej opłaca się zachować
 robota niż poświęcić go na zadanie dodakowych obrażeń przeciwnikowi. Jeżeli
 więc jesteśmy zagrożeni śmiercią, uciekamy, a nie giniemy na próżno.
 
-* Ulepszenie 3: Atakujemy przeciwnika o dwa kroki od nas.
+* **Ulepszenie 3: Atakujemy przeciwnika o dwa kroki od nas.**
 
-Jeśli znajdziesz uczciwego robota, zauważysz, że kiedy wejdziesza na pole
-atakowane przez przeciwnika, odnosisz obrażenia. Dlatego, jeśli to prawdopodobne,
-że ktoś może wejść na pole obok nas, powinnismy go zaatakować, aby nikt
-nie otaczał nas bez uszkodzeń.
+Zaobserwiuj jakiegokowliek uczciwego robota, zauważysz, że kiedy wchodzi na pole
+atakowane przez przeciwnika, odnosi obrażenia. Dlatego, jeśli prawdopodobne jest,
+że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go atakować. To zapobiega
+zbliżaniu się do nas bez ponoszenia konsekwencji.
+
 
 .. note::
 
     Połączenie ucieczki i ataku w kierunku przeciwnika rzeczywiście jest skuteczne.
     Każdy agresywny wróg zanim nas zaatakuje, sam spotyka się z atakiem.
     Jeżeli w porę odskoczysz, zanim się zbliży, działanie takie możesz powtórzyć.
-    W grach technika ta nazywana jest ``kiting``, a jej działanie ilustruje
-    poniższa animacja:
+    W grach technika ta nazywana jest `kiting <http://gaming.stackexchange.com/questions/18903/what-is-kiting>`_,
+    a jej działanie ilustruje poniższa animacja:
 
 .. figure:: img/kiting.gif
 
     Zwróć uwagę na słabego robota ze zdrowiem 8 HP, który podchodzi do mocnego robota
     z 50 HP, a następnie ucieka. Zbliżając się atakuje pole, na które wchodzi przeciwnik,
-    ucieka i ponawia działanie. trwa to do momentu, kiedy silniejszy robot popełnia samobójstwo
+    ucieka i ponawia działanie. trwa to do momentu, kiedy silniejszy robot popełni samobójstwo
     (co w tym wypadku jest mało przydatne). Wszystko bez uszczerbku na zdrowiu słabszego
     robota.
 
-* Ulepszenie 4: przesuwamy się tylko na wolne pola.
+* **Ulepszenie 4: przesuwamy się tylko na wolne pola.**
 
 Przykładowy robot idzie do środka planszy, ale w wielu wypadkach lepiej zrobić
 coś innego. Lepiej iść tam, gdzie jest bezpiecznie, niż narażać się na
