@@ -20,6 +20,8 @@ skryptów i dokumentacji, stron WWW itp. zadań.
     domyślnie polecenia *sudo* (np. Debian lub Arch Linux), musisz zalogować się
     na konto *roota*, np. wpisując w terminalu ``su root``.
 
+.. _geany-opis:
+
 Geany
 *************
 
@@ -743,7 +745,7 @@ w podkatalogu ``htdocs`` katalogu instalacyjnego.
 Materiały
 **************
 
-1. `Geany`_
+1. `Edytor Geany`_
 2. `MinGw`_
 3. `Język Python`_
 4. `Biblioteka Qt`_
@@ -754,7 +756,7 @@ Materiały
 9. `Docutils`_
 10. `Składnia reST & Sphinx`_
 
-.. _Geany: http://www.geany.org/
+.. _Edytor Geany: http://www.geany.org/
 .. _MinGw: http://www.mingw.org/
 .. _Język Python: https://www.python.org/
 .. _Biblioteka Qt: https://qt-project.org/

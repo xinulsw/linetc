@@ -7,6 +7,7 @@ stworzonej przy użyciu frameworka Django.
 .. toctree::
     :maxdepth: 2
 
+    toto/index
     czat/index
 
 Metryka
