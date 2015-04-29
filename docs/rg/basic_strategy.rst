@@ -53,7 +53,7 @@ więc jesteśmy zagrożeni śmiercią, uciekamy, a nie giniemy na próżno.
 
 * **Ulepszenie 3: Atakujemy przeciwnika o dwa kroki od nas.**
 
-Zaobserwiuj jakiegokowliek uczciwego robota, zauważysz, że kiedy wchodzi na pole
+Przyjrzyj się jakiemuś przestrzegającemu reguł robotowi, zauważysz, że kiedy wchodzi na pole
 atakowane przez przeciwnika, odnosi obrażenia. Dlatego, jeśli prawdopodobne jest,
 że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go atakować. To zapobiega
 zbliżaniu się do nas bez ponoszenia konsekwencji.

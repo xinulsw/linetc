@@ -38,11 +38,11 @@ W każdej rundzie możliwe są następujące działania robota:
   pod koniec rundy, np. robot pozostał w miejscu lub przeszedł na nie,
   robot ten traci od 8 do 10 punktów HP w następstwie uszkodzeń.
 
-* Samobójstwo – robot ginie pod koniec rundy, oddając 15 punktów HP dowolnemu
-  robotowi obok.
+* **Samobójstwo** – robot ginie pod koniec rundy, zabierając 15 punktów HP wszystkim
+  robotom w sąsiedztwie.
 
-* Obrona – robot pozostaje w miejscu, tracąc połowę punktów HP wskutek ataku
-  lub samobójstwa, ale nie odnosząc uszkodzeń z powodu kolizji.
+* **Obrona** – robot pozostaje w miejscu, tracąc połowę punktów HP wskutek ataku
+  lub samobójstwa, nie odnosi uszkodzeń z powodu kolizji.
 
 W grze nie można uszkodzić własnych robotów. Kolizje, ataki i samobójstwa
 wyrządzają szkody tylko przeciwnikom.
