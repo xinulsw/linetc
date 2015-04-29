@@ -63,6 +63,28 @@ Dla przykładu: ``rg.locs_around(self.location, filter_out=('invalid', 'obstacle
 
     <hr />
 
+Metoda **rg.toward(current_loc, dest_loc)**
+********************************************
+
+Zwraca następne położenie na drodze z bieżącego miejsca do podanego.
+Np. poniższy kod:
+
+.. code-block:: python
+
+    import rg
+    
+    class Robot:
+        def act(self, game):
+            if self.location == rg.CENTER_POINT:
+                return ['suicide']
+            return ['move', rg.toward(self.location, rg.CENTER_POINT)]
+
+– skieruje robota do środka planszy, gdzie popełni on samobójstwo.
+
+.. raw:: html
+
+    <hr />
+
 constant **rg.CENTER_POINT**
 *****************************
 
