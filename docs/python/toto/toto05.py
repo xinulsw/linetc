@@ -10,7 +10,7 @@ for i in range(3):
     odp = raw_input("Jaką liczbę od 1 do 10 mam na myśli? ")
     #print "Podałeś liczbę: ",odp
 
-    if liczba == odp:
+    if liczba == int(odp):
         print "Zgadłeś! Dostajesz długopis!"
         break
     else:

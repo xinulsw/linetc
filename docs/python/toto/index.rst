@@ -118,9 +118,10 @@ Uzupełniamy nasz program:
     :lines: 1-
 
 Używamy instrukcji warunkowej ``if``, która sprawdza prawdziwość warunku
-``liczba == odp``. Jeżeli wywlosowana i podana liczba są sobie równe (``==``),
+``liczba == int(odp)``. Jeżeli wywlosowana i podana liczba są sobie równe (``==``),
 wyświetlamy informację o wygranej, w przeciwnym razie ``else:`` zachętę
-do ponownej próby.
+do ponownej próby. Dodatkowa funkcja ``int()`` zamienia podaną przez
+gracza wartość na liczbę całkowitą.
 
 Przetestuj kilkukrotnie działanie programu.
 
