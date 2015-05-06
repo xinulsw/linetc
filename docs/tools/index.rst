@@ -6,6 +6,9 @@ Narzędzia
 Poniżej przedstawiamy zestaw przykładowych narzędzi do programowania, tworzenia
 skryptów i dokumentacji, stron WWW itp. zadań.
 
+.. contents:: Spis treści
+    :backlinks: none
+
 .. note::
 
     Przykłady poleceń wydawanych w terminalu będziemy podawali dla systemu Debian

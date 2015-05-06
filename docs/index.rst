@@ -18,6 +18,7 @@ Spis treści:
 
     Serwis eCG <http://ecg.vot.pl/>
     tools/index
+    tools/linux
     cppqt/index
     web/index
     python/index
