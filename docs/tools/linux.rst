@@ -30,8 +30,19 @@ wykonaj następujące czynności:
    Są to warianty systemu *TahrPup*, będącego jedną z wersji *Puppy Linux*.
 
 .. figure:: linimg/lxpup.png
+   :alt: Pulpit LxPup
+
+   Pulpit LxPup ze środowiskiem LXDE
+
+.. figure:: linimg/puptahr_jvm.png
+   :alt: Pulpit JVM
+
+   Pulpit PupThar ze środowiskiem JVM/ROX
 
 .. figure:: linimg/puptahr_xfce.png
+   :alt: Pulpit XFCE
+
+   Pulpit PupTahr ze środowiskiem XFCE
 
 3) Przygotuj pendrajwa o pojemności min. 2GB zawierającego jedną, pustą,
    aktywną partycję FAT32. Taka partycja jest domyślna na większości kluczy.
@@ -57,7 +68,7 @@ Pliki persystencji
 
 Ponieważ obydwa warianty są po angielsku i wymagają wstępnej konfiguracji,
 sugerujemy pobranie plików persystencji do odpowiedniej wersji:
-*LXDE* – :file:`lxtahrsave-lxde.2fs`, *XFCE* – :file:`tahrsave-xfce.2fs`.
+*LXDE* – :file:`lxtahrsave-lxde.2fs`, *JVM/XFCE* – :file:`tahrsave-xfce.2fs`.
 Pliki udostępniamy w serwisie `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
 Zawierają on wstępną konfigurację oraz następujące dostosowania:
 
@@ -69,8 +80,10 @@ Zawierają on wstępną konfigurację oraz następujące dostosowania:
 * skonfigurowane mini środowisko programistyczne IDE – Geany.
 * skonfigurowane elementy interfejsu LXDE lub XFCE
 
-Uwaga: wersja dla LXDE jest bardziej "dopieszczona", wersja dla XFCE wymaga
-jeszcze dopracowania (np. brak ikony kosza na Pulpicie), ale oczywiście działa.
+Uwaga: wersja dla LXDE jest bardziej "dopieszczona", wersja dla JVM/XFCE wymaga
+jeszcze dopracowania środowiska XFCE (np. brak ikony kosza na Pulpicie),
+które uruchamia się domyślnie. JVM działa bezbłędnie i można łatwo się do niego
+przełączyć przy użyciu narzędzia *WM Switcher* – przełączanie menedżerów okien.
 
 Po pobraniu należy wgrać je do głównego katalogu pendrajwa i uruchomić
 z niego komputer.
@@ -113,7 +126,7 @@ Do naszych zastosowań wybraliśmy wersję `Puppy Linux 6.0.2 tahrpup CE <http:/
 opartą na systemie Ubuntu Tahr 14.04 LTS, czyli na ostatniej wersji Ubuntu
 o przedłużonym wsparciu. Dalej będziemy nazywać ją po prostu *TahrPup*.
 Domyślny pulpit JVM/ROX Desktop/ROX-Filer tworzy ekstremalnie szybki
-i funkcjonalny zestaw. Warto go wypróbować.
+i funkcjonalny zestaw. Naprawdę warto go wypróbować.
 
 Użytkownikom dotychczasowych wersji MS Windows (<8) proponujemy wersję
 `LxPup <http://lx-pup.weebly.com/downloads.html>`_ zawierającą domyślne
@@ -225,14 +238,14 @@ Drugim formatem stosowanym dla dużych pakietów, które używamy od czasu
 do czasu, jest format `SFS <http://puppylinux.org/wikka/SquashFS>`_.
 Spakowane w ten sposób oprogramowanie możemy dodawać "w locie" w trakcie
 działania systemu. Korzystamy z narzędzia SFS-Load w locie (Start/Setup).
-   
+
 .. tip::
 
     Duże pliki SFS itp. zasoby warto przechowywać nie w katalogu domowym
     :file:`/root`, ale w katalogu głównym startowego pendrajwa. Jest on
     łatwo dostępny podczas pracy z systemem w ścieżce :file:`/initrd/mnt/dev_save/`,
     łatwo go również otworzyć z lewego panelu w menedżerze plików.
-    
+
 .. figure:: linimg/pcmanfm01.png
 
 .. note::
@@ -337,65 +350,163 @@ Przechowywanie ustawień i dokumentów w pliku ma swoje zalety:
     W katalogach na pendrajwie warto np. przechowywać opcjonalne pakiey
     oprogramowania w formacie *pet* i *sfs*.
 
+Pulpit – dostrajanie
+*********************
+
 Instalacja fontów
 ==================
 
 Czcionki *ttf* wystarczy wgrać do katalogu :file:`/usr/share/fonts/default/TTF`.
 Można użyć narzędzia *Manager fontów* (Start/Desktop/Desktop).
 
+Katalogi
+==========
+
+Niezależnie od środowiska graficznego, warto wykonać następujące czynności:
+
+* po uruchomieniu terminala w katalogu domowym :file:`/root` tworzymy dowiązania symboliczne,
+  katalog na pobierane pliki:
+
+.. code-block:: bash
+
+    ~# ln -s my-documents Dokumenty
+    ~# ln -s my-applications Aplikacje
+    ~# mkdir Pobrane
+
+* :file:`/root/my-documents/clipart` lub :file`/usr/share/backgrounds` – dodatkowe tapety
+* :file:`/root/.icons` – dodatkowe zestawy ikon
+* :file:`/root/.themes` – dodatkowe tematy Gtk
+* :file:`/usr/share/fonts/default/TTF/` – dodatkowe czcionki TrueType, np. z MS Windows
+
+LXDE
+=============
+
+* Wygląd: Start/Desktop/Change appearance, Start/System/System/Ustawienia wyświetlania
+* Czcionki: Start/Desktop/Desktop/Manager Fontu
+
+JVM
+=============
+
+* Wygląd: Menu/Pulpit/Chtheme wybór motywu GTK; Menu/Pulpit/JVM konfiguracja/Wybierz motyw JVM.
+* Tapeta: umieść plik graficzny w :file:/root/my-documents/clipart, kliknij prawym klawiszem
+  myszy i wybierz "set background".
+* Ikony pulpitu i menu: Menu/Pulpit/Desktop zmiana ikony
+* Czcionki: Menu/Pulpit/Manager fontu -> Wygląd, zaznaczamy wszystkie opcje,
+  styl hintingu ustawiamy na 1.
+* Menedżer plików ROX-Filer: prawy klawisz myszy w pustym oknie, wybierz "Ustawienia";
+  otwieranie elmentów dwukrotnym kliknięciem – sekcja Biurko,
+  ikony menedżera – sekcja Typy/Style.
+
 XFCE
 ============
 
-Jeżeli utworzyliśmy pendrajwa na podstawie pliku :file:`tahr-6.0.2_PAE.iso`,
-domyślnym środowiskiem jest JVM/ROX Desktop/ROX-Filer. Jeżeli nie przypadnie
-nam do gustu, wystarczy zaktualizować pakiety w narzędziu *quickpet-tahr*
-(omówione wyżej), zrestartować je, a następnie zainstalować pakiet PET
-z kategorii "desktops".
+Jeżeli nie przypadnie nam do gustu domyślne środowisko systemu TahrPup,
+czyli JVM/ROX Desktop/ROX-Filer, wystarczy zaktualizować pakiety w narzędziu
+*quickpet-tahr* (omówione wyżej), zrestartować je, a następnie zainstalować
+pulpit XFCE z kategorii "desktops". Po zakończeniu instalacji wybieramy narzędzie
+przełączania menedżerów okien WM Switcher (Menu/Pulpit/), zaznaczamy XFCE i klikamy
+przycisk "Restart X".
 
-[todo]
+* Menu "Start": domyślnie są na pasku zadań dwa, tradycyjny aplet "Programy"
+  i nowsze "Menu Whisker" – na niepotrzebnym kliknij prawym klawiszem i wybierz "Usuń".
+* Menu Whisker: prawy klawisz na ikonie i "Właściwości"; wpisywanie pierwszych liter
+  programu wyszukuje go w menu.
+* Wygląd: Start/Ustawienia/Wygląd
+* Tapeta i ikony pulpitu: prawy klawisz na pulpicie i "Ustawienia";
+  zakładka "Tło", opcja "Katalog" pozwala wskazać inny niż domyślny katalog z tapetami,
+  zkładka "Ikony", "Domyślne" – jakie ikony pokazywać.
+* Czionki: Start/Ustawienia/Wygląd -> Czcionki, zaznacz "Antyaliasing", przyciąganie "Lekkie",
+  podpiksele "RGB".
+* Menedżer plików Thunar: Start/Ustawienia/Menedżer plików lub Edycja/Preferencje w programie;
+  zaznaczanie elementów dwukrotnym kliknięciem -> zakładka "Zachowanie"
+* Montowanie: Start/Ustawienia/Napędy i nośniki wymienne; zaznacz "Montowanie napędów...",
+  "Montowanie nośników...", "Przeglądanie nośników..."
+* Panele (pasek zadań itp.): Start/Ustawienia/Panel;
+  zakładka "Aplety" pozwala dodawać, usuwać aplety, warto dodać "Wyświetlanie pulpitu";
+  warto dodać również aktywatory do uruchamiania aplikacji; po zaznaczeniu aktywatora
+  wybierz okno preferencji (druga od dołu ikona z prawej), a następnie wybierz aplikację,
+  np. *Menedżer plików*, *Emulator terminala*, *Przeglądarkę internetu*. Koniecznie
+  dodaj aktywator dla *PopShutdown Manager*. Kolejność elementów ustal przeciągając je myszą.
+* Obszary robocze: Start/Ustawienia/; ilość – 2.
+* Powiązania plików z domyślnymi aplikacjami: prawy klawisz na pliku, "Właściwości" -> "Otwieranie
+  za pomocą", wybieramy z listy lub "Inny program".
 
-Tworzenie skrótów na pasku zadań.
-Dodanie skrótu do PopShutdown Manager.
-Ustawienie powiązań plików z aplikacjami.
+Ustawienia i programy
+======================
 
-Użyteczne programy
-*******************
+* **Ustawienia Puppy**:
+    [LXDE] ...
+    [JVM] Menu/Ustawienia/Wizard Kreator
+    [XFCE] Programy/Puppy Setup/Puppy Setup
 
-[todo]
+* **Internet kreator połączenia**:
+    [JVM] Menu/Ustawienia
+    [XFCE] Programy/Puppy Setup/Internet Connection Wizard
 
-Session Control/RestartWm
+* **Zmiana rozmiaru pliku osobistego przechowywania**:
+    [LXDE] Start/Utility
+    [JVM] ...
+    [XFCE] Programy/Akcesoria/Resize personal storage file
 
-Konfiguracja Geany:
-Geany
-Narzędzia/Menedżer wtyczek
-HTML Characters
-Przeglądarka plików/Preferencje/
-Pokaż ukryte pliki i Podążanie za ścieżką do bieżącego pliku
-Edycja/Preferencje/
-Edytor/Wcięcia/Spacje
-Interfejs/Edytor/Ubuntu Mono
+* **Puppy Manager Pakietów**:
+    [LXDE] ...
+    [JVM] Menu/Ustawienia
+    [XFCE] Programy/Puppy Setup/Puppy Package Manager
 
-Start/Desktop/Change appearance/Windows
-Wygląd/
+* **Quickpet tahr**:
+    [LXDE] ...
+    [JVM] ...
+    [XFCE] Programy/Puppy Setup
 
-LXTerminal
-Edycja/Preferencje
-Zaawansowane/Wyłączenie skrótu klawiszowego menu (domyślnie F10)
+* **SFS-załadowanie w locie**
+    [LXDM] Start/Setup/SFS-Załadowanie w locie
+    [JVM] ...
+    [XFCE] Programy/SFS...
 
-Start/Setup/Internet kreator połączenia
-Start/Setup/Puppy Manager pakietów
-Start/Setup/quickpet tahr
-Start/Setup/Quick Setup ustawienia pierwszego uruchamiania
-Start/Setup/SFS-Załadowanie w locie
-Start/Setup/Startup Control - kontrola aplikacji startowych
-Start/System/System/Ustawienia wyświetlania
+* **QuickSetup ustawienia pierwszego uruchamiania**:
+    [LXDE] ...
+    [JVM] Menu/Ustawienia
+    [XFCE] Programy/Puppy Setup/QuickSetup...
 
-Start/Desktop/Change appearance
-Start/Desktop/Desktop/Manager Fontu
-Start/Desktop/Ustawienie daty i czasu
-Start/Desktop/Ustawienia sesji
+* **Restart menedżera okien** (RestartWM):
+    [LXDE] Session Control
+    [JVM] Menu/Wyjście
 
-Start/Utility/Zmiana rozmiaru pliku osobistego przechowywania
+* **WM Switcher** – switch windowmanagers:
+    [JVM] Menu/Pulpit
+    [XFCE] Programy/Ustawienia
+
+* **Startup Control – kontrola aplikacji startowych**:
+    [LXDE] Start/Setup
+    [JVM] Menu/Ustawienia
+    [XFCE] Programy/Ustawienia/Sesja i uruchamianie
+
+* **Domyślne aplikacje**:
+    [LXDE] ...
+    [JVM] Menu/Ustawienia/Wybór domyślnych aplikacji
+    [XFCE] Programy/Ustawienia/Preferowane programy
+
+* **Terminale**
+    [LXDE] ...
+    [JVM] Menu/Narzędzia
+    [XFCE] Programy/Akcesoria
+
+* **Ustawienie daty i czasu**
+    [LXDE] Start/Desktop
+    [XFCE] Programy/Ustawienia/Set date and time
+
+* Konfiguracja Geany:
+    Narzędzia/Menedżer wtyczek
+    HTML Characters
+    Przeglądarka plików/Preferencje/
+    Pokaż ukryte pliki i Podążanie za ścieżką do bieżącego pliku
+    Edycja/Preferencje/
+    Edytor/Wcięcia/Spacje
+    Interfejs/Edytor/Ubuntu Mono
+
+* Konfiguracja LXTerminal:
+    Edycja/Preferencje
+    Zaawansowane/Wyłączenie skrótu klawiszowego menu (domyślnie F10)
 
 Problemy?
 **************
