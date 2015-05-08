@@ -1,4 +1,4 @@
-# jeżeli wokół są przeciwnicy, atakuj
+# jeżeli wokół są przeciwnicy, atakuj, ale tylko wtedy kiedy nie grozi ci śmierć
 # wersja wykorzystująca zbiory pól i operacje na zbiorach
 
 # wszystkie pola
@@ -19,5 +19,7 @@ wrogowie = set(game.robots) - druzyna
 # pola sąsiednie zajęte przez wrogów
 sasiednie_wrogowie = sasiednie & wrogowie
 
+# 9 to średni poziom uszkodzeń
 if sasiednie_wrogowie:
-    return ['attack', sasiednie_wrogowie.pop()]
+    if 9*len(sasiednie_wrogowie) < self.hp:
+        return ['attack', sasiednie_wrogowie.pop()]
