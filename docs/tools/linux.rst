@@ -381,14 +381,16 @@ Niezależnie od środowiska graficznego, warto wykonać następujące czynności
 LXDE
 =============
 
-* Wygląd: Start/Desktop/Change appearance, Start/System/System/Ustawienia wyświetlania
-* Czcionki: Start/Desktop/Desktop/Manager Fontu
+* Wygląd, Ikony, Tapeta, Panel: Start/Desktop/Change appearance.
+* Ekran(y): Start/System/System/Ustawienia wyświetlania.
+* Czcionki: Start/Desktop/Desktop/Manager Fontu.
+* Menedżer plików: Edycja/Preferencje w programie.
 
 JVM
 =============
 
 * Wygląd: Menu/Pulpit/Chtheme wybór motywu GTK; Menu/Pulpit/JVM konfiguracja/Wybierz motyw JVM.
-* Tapeta: umieść plik graficzny w :file:/root/my-documents/clipart, kliknij prawym klawiszem
+* Tapeta: umieść plik graficzny w :file:`/root/my-documents/clipart`, kliknij prawym klawiszem
   myszy i wybierz "set background".
 * Ikony pulpitu i menu: Menu/Pulpit/Desktop zmiana ikony
 * Czcionki: Menu/Pulpit/Manager fontu -> Wygląd, zaznaczamy wszystkie opcje,
@@ -411,17 +413,18 @@ przycisk "Restart X".
   i nowsze "Menu Whisker" – na niepotrzebnym kliknij prawym klawiszem i wybierz "Usuń".
 * Menu Whisker: prawy klawisz na ikonie i "Właściwości"; wpisywanie pierwszych liter
   programu wyszukuje go w menu.
-* Wygląd: Start/Ustawienia/Wygląd
+* Wygląd: Programy/Ustawienia/Wygląd
+* Ekran: Programy/Ustawienia/Ekran
 * Tapeta i ikony pulpitu: prawy klawisz na pulpicie i "Ustawienia";
   zakładka "Tło", opcja "Katalog" pozwala wskazać inny niż domyślny katalog z tapetami,
   zkładka "Ikony", "Domyślne" – jakie ikony pokazywać.
 * Czionki: Start/Ustawienia/Wygląd -> Czcionki, zaznacz "Antyaliasing", przyciąganie "Lekkie",
   podpiksele "RGB".
-* Menedżer plików Thunar: Start/Ustawienia/Menedżer plików lub Edycja/Preferencje w programie;
+* Menedżer plików Thunar: Programy/Ustawienia/Menedżer plików lub Edycja/Preferencje w programie;
   zaznaczanie elementów dwukrotnym kliknięciem -> zakładka "Zachowanie"
-* Montowanie: Start/Ustawienia/Napędy i nośniki wymienne; zaznacz "Montowanie napędów...",
+* Montowanie: Programy/Ustawienia/Napędy i nośniki wymienne; zaznacz "Montowanie napędów...",
   "Montowanie nośników...", "Przeglądanie nośników..."
-* Panele (pasek zadań itp.): Start/Ustawienia/Panel;
+* Panele (pasek zadań itp.): Programy/Ustawienia/Panel;
   zakładka "Aplety" pozwala dodawać, usuwać aplety, warto dodać "Wyświetlanie pulpitu";
   warto dodać również aktywatory do uruchamiania aplikacji; po zaznaczeniu aktywatora
   wybierz okno preferencji (druga od dołu ikona z prawej), a następnie wybierz aplikację,
@@ -435,11 +438,12 @@ Ustawienia i programy
 ======================
 
 * **Ustawienia Puppy**:
-    [LXDE] ...
+    [LXDE] Start/Setup/Wizard Kreator
     [JVM] Menu/Ustawienia/Wizard Kreator
     [XFCE] Programy/Puppy Setup/Puppy Setup
 
 * **Internet kreator połączenia**:
+    [LXDE] Start/Setup
     [JVM] Menu/Ustawienia
     [XFCE] Programy/Puppy Setup/Internet Connection Wizard
 
@@ -449,12 +453,12 @@ Ustawienia i programy
     [XFCE] Programy/Akcesoria/Resize personal storage file
 
 * **Puppy Manager Pakietów**:
-    [LXDE] ...
+    [LXDE] Start/Setup
     [JVM] Menu/Ustawienia
     [XFCE] Programy/Puppy Setup/Puppy Package Manager
 
 * **Quickpet tahr**:
-    [LXDE] ...
+    [LXDE] Start/Setup
     [JVM] ...
     [XFCE] Programy/Puppy Setup
 
@@ -464,7 +468,7 @@ Ustawienia i programy
     [XFCE] Programy/SFS...
 
 * **QuickSetup ustawienia pierwszego uruchamiania**:
-    [LXDE] ...
+    [LXDE] Start/Setup
     [JVM] Menu/Ustawienia
     [XFCE] Programy/Puppy Setup/QuickSetup...
 
@@ -482,17 +486,18 @@ Ustawienia i programy
     [XFCE] Programy/Ustawienia/Sesja i uruchamianie
 
 * **Domyślne aplikacje**:
-    [LXDE] ...
+    [LXDE] Start/Desktop/Preferowane programy
     [JVM] Menu/Ustawienia/Wybór domyślnych aplikacji
     [XFCE] Programy/Ustawienia/Preferowane programy
 
 * **Terminale**
-    [LXDE] ...
+    [LXDE] Start/Utility
     [JVM] Menu/Narzędzia
     [XFCE] Programy/Akcesoria
 
 * **Ustawienie daty i czasu**
     [LXDE] Start/Desktop
+    [JVM] ...
     [XFCE] Programy/Ustawienia/Set date and time
 
 * Konfiguracja Geany:
