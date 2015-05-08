@@ -4,29 +4,18 @@
 Przykład robota
 *****************
 
-.. code-block:: python
+.. raw:: html
 
-    import rg
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-    class Robot:
-        def act(self, game):
-            # if we're in the center, stay put
-            if self.location == rg.CENTER_POINT:
-                return ['guard']
-
-            # if there are enemies around, attack them
-            for loc, bot in game.robots.iteritems():
-                if bot.player_id != self.player_id:
-                    if rg.dist(loc, self.location) <= 1:
-                        return ['attack', loc]
-
-            # move toward the center
-            return ['move', rg.toward(self.location, rg.CENTER_POINT)]
+.. highlight:: python
+.. literalinclude:: robot01.py
+    :linenos:
 
 W powyższym kodzie warto zauważyć trzy cechy:
 
 * stój w miejscu, jeżeli jesteś w środku planszy;
-* atakuj przeciwnika, jeeżeli jest w sąsiedztwie;
+* atakuj przeciwnika, jeżeli jest w sąsiedztwie;
 * przemieszczaj się w kierunku środka.
 
 To pozwala nam rozpocząć grę, ale wiele możemy też dodać. Większość usprawnień (ang. *feature*),
@@ -53,10 +42,10 @@ więc jesteśmy zagrożeni śmiercią, uciekamy, a nie giniemy na próżno.
 
 * **Ulepszenie 3: Atakujemy przeciwnika o dwa kroki od nas.**
 
-Przyjrzyj się jakiemuś przestrzegającemu reguł robotowi, zauważysz, że kiedy wchodzi na pole
+Przyjrzyj się grającemu wg reguł robotowi, zauważysz, że kiedy wchodzi na pole
 atakowane przez przeciwnika, odnosi obrażenia. Dlatego, jeśli prawdopodobne jest,
-że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go atakować. To zapobiega
-zbliżaniu się do nas bez ponoszenia konsekwencji.
+że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go atakować.
+Dzięki temu nit się do nas bezkarnie nie zbliży.
 
 
 .. note::
@@ -84,10 +73,10 @@ ruch na pole przeciwnika lub wchodzenie w jego sąsiedztwo. Wiemy też, że
 nie możemy wejść na zajęte pola. Możemy też zmniejszyć ilość kolizji,
 nie wchodząc na pola zajęte przez naszą drużynę.
 
-* Ulepszenie 5: Idź na wroga, jeżeli go nie ma w zasięgu dwóch kroków.
+* **Ulepszenie 5: Idź na wroga, jeżeli go nie ma w zasięgu dwóch kroków.**
 
-Skoro mamy kilka bezpiecznych możliwości, po co iść do środka? Wiemy, że
-pozostawianie w punkcie wejścia jest złe, ale to nie czyni środka dobrym.
+Po co iść do środka, skoro mamy inne bezpieczne możliwości? Wprawdzie stanie
+w punkcie wejścia jest złe, ale to nie znaczy, że środek planszy jest dobry.
 Lepszym wyborem jest ruch w kierunku, ale nie na pole, przeciwnika.
 W połączeniu z atakiem daje nam to lepszą kontrolę nad planszą.
 Później przekonamy się jeszcze, że są sytuacje, kiedy wejście na
@@ -140,7 +129,7 @@ Podstawowe operacje na zbiorach, których użyjemy to:
 
 * ``|`` lub suma – zwraca zbiór wszystkich elementów zbiorów;
 * ``-`` lub różnica – zbiór elementów obecnych tylko w pierwszym zbiorze;
-* ``&`` lub część wspólna – zwraca zbiór elementów występujących w obydwu zbiorach.
+* ``&`` lub iloczyn – zwraca zbiór elementów występujących w obydwu zbiorach.
 
 Załóżmy, że zaczniemy od wygenerowania następujących list:
 ``drużyna`` – członkowie drużyny, ``wrogowie`` – przeciwnicy,
@@ -151,34 +140,34 @@ Podstawowe struktury danych
 
 .. code-block:: python
 
-    all_locs = {(x, y) for x in xrange(19) for y in xrange(19)}
-    spawn = {loc for loc in all_locs if 'spawn' in rg.loc_types(loc)}
-    obstacle = {loc for loc in all_locs if 'obstacle' in rg.loc_types(loc)}
-    team = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
-    enemy = set(game.robots)-team
+    wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
+    wejscia = {loc for loc in wszystkie if 'wejscia' in rg.loc_types(loc)}
+    zablokowane = {loc for loc in wszystkie if 'zablokowane' in rg.loc_types(loc)}
+    druzyna = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
+    wrogowie = set(game.robots)-druzyna
 
 Warto zauważyć, jak utworzyliśmy zbiór wrogich robotów, jest to różnica
-zbioru wszystkich robotów i naszej drużyny.
+zbioru wszystkich robotów i tych z naszej drużyny.
 
 Użyteczne zbiory i funkcje
 ****************************
 
 Przy poruszaniu się i atakowaniu mamy tylko cztery możliwe kierunki, które
 zwróci nam funkcja ``rg.locs_around``. Możemy wykluczyć położenia zablokowane
-(*obstacle*), ponieważ nigdy ich nie zajmujemy i nie atakujemy. Wyrażenie
-``adjacent & enemy`` zwróci nam sąsiednie położenia zajęte przez przeciwników:
+(ang. *obstacle*), ponieważ nigdy ich nie zajmujemy i nie atakujemy. Wyrażenie
+``adjacent & wrogowie`` zwróci nam sąsiednie położenia zajęte przez przeciwników:
 
 .. code-block:: python
 
-    adjacent = set(rg.locs_around(self.location)) - obstacle
-    adjacent_enemy = adjacent & enemy
+    adjacent = set(rg.locs_around(self.location)) - zablokowane
+    adjacent_wrogowie = adjacent & wrogowie
 
 Aby odnaleźć wrogów oddalonych o dwa kroki, szukamy przyległych kwadratów
 z przeciwnikami obok. Wyłączamy sąsiednie pola zajęte przez członków drużyny.
 
 .. code-block:: python
 
-    adjacent_enemy2 = {loc for loc in adjacent if (set(rg.locs_around(loc)) & enemy)} - team team
+    adjacent_wrogowie2 = {loc for loc in adjacent if (set(rg.locs_around(loc)) & wrogowie)} - druzyna druzyna
 
 Teraz musimy sprawdzić, które z położeń są bezpieczne. Usuwamy pola zajmowane
 przez przeciwników w odległości 1 i 2 kroków. Pozbyway się także punktów
@@ -189,7 +178,7 @@ najlepsze, co możemy zrobić.
 
 .. code-block:: python
 
-    safe = adjacent - adjacent_enemy - adjacent_enemy2 - spawn - team
+    safe = adjacent - adjacent_wrogowie - adjacent_wrogowie2 - wejscia - druzyna
 
 Potrzebujemy funkcji, która wybierze nam ze zbioru położeń najbliższe
 podanego. Możemy użyć tej funkcji do znalezienia najbliższego wroga,
@@ -221,41 +210,41 @@ implemetację robota wyposażonego we wszystkie założone wyżej właściwości
 
     class Robot:
         def act(self, game):
-            all_locs = {(x, y) for x in xrange(19) for y in xrange(19)}
-            spawn = {loc for loc in all_locs if 'spawn' in rg.loc_types(loc)}
-            obstacle = {loc for loc in all_locs if 'obstacle' in rg.loc_types(loc)}
-            team = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
-            enemy = set(game.robots)-team
+            wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
+            wejscia = {loc for loc in wszystkie if 'wejscia' in rg.loc_types(loc)}
+            zablokowane = {loc for loc in wszystkie if 'zablokowane' in rg.loc_types(loc)}
+            druzyna = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
+            wrogowie = set(game.robots)-druzyna
 
-            adjacent = set(rg.locs_around(self.location)) - obstacle
-            adjacent_enemy = adjacent & enemy
-            adjacent_enemy2 = {loc for loc in adjacent if (set(rg.locs_around(loc)) & enemy)} - team
-            safe = adjacent - adjacent_enemy - adjacent_enemy2 - spawn - team
+            adjacent = set(rg.locs_around(self.location)) - zablokowane
+            adjacent_wrogowie = adjacent & wrogowie
+            adjacent_wrogowie2 = {loc for loc in adjacent if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
+            safe = adjacent - adjacent_wrogowie - adjacent_wrogowie2 - wejscia - druzyna
 
             def mindist(bots, loc):
                 return min(bots, key=lambda x: rg.dist(x, loc))
 
-            if enemy:
-                closest_enemy = mindist(enemy,self.location)
+            if wrogowie:
+                closest_wrogowie = mindist(wrogowie,self.location)
             else
-                closest_enemy = rg.CENTER_POINT
+                closest_wrogowie = rg.CENTER_POINT
 
             # akcja domyślna, którą nadpiszemy, jak znajdziemy coś lepszego
             move = ['guard']
 
-            if self.location in spawn:
+            if self.location in wejscia:
                 if safe:
                     move = ['move', mindist(safe, rg.CENTER_POINT)]
-            elif adjacent_enemy:
-                if 9*len(adjacent_enemy) >= self.hp:
+            elif adjacent_wrogowie:
+                if 9*len(adjacent_wrogowie) >= self.hp:
                     if safe:
                         move = ['move', mindist(safe, rg.CENTER_POINT)]
                 else:
-                    move = ['attack', adjacent_enemy.pop()]
-            elif adjacent_enemy2:
-                move = ['attack', adjacent_enemy2.pop()]
+                    move = ['attack', adjacent_wrogowie.pop()]
+            elif adjacent_wrogowie2:
+                move = ['attack', adjacent_wrogowie2.pop()]
             elif safe:
-                move = ['move', mindist(safe, closest_enemy)]
+                move = ['move', mindist(safe, closest_wrogowie)]
 
             return move
 
