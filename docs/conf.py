@@ -281,6 +281,18 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
+rst_prolog = u"""
+.. raw:: html
+
+    <!-- Domyślnie ładowane fonty nie zawierają Latin Ext -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <style>
+        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
+        div.highlight, div.highlight-python { margin-top: 0px; }
+    </style>
+
+"""
+
 try:
     import sphinx_rtd_theme
     html_theme = "sphinx_rtd_theme"
