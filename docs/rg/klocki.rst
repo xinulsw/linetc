@@ -25,8 +25,8 @@ Składając te "klocki", gracz tworzy logikę działania robota.
     (env)~/robot$ rgrun robot01.py robot01.py
     (env)~/robot$ rgrun bots/stupid26.py robot01.py
 
-Idź do środka planszy
-**********************
+Idź do środka
+**************
 
 .. raw:: html
 
@@ -40,8 +40,8 @@ Idź do środka planszy
 
     <hr />
 
-Broń się, gdy jesteś w środku
-******************************
+Broń się w środku
+********************
 
 .. raw:: html
 
@@ -55,8 +55,8 @@ Broń się, gdy jesteś w środku
 
     <hr />
 
-Atakuj przeciwników, jeśli są obok
-***********************************
+Atakuj obok
+**************************
 
 Wersja wykorzystująca pętlę.
 
@@ -76,7 +76,7 @@ Zbiory pól
 ****************
 
 Poniższy kod definiuje zbiory zawierające pola różnej kategorii, które
-ułatwiają definiowanie zachowań robotów. Zobacz dalsze przykłady.
+ułatwiają wyznaczanie zachowań robotów. Zobacz dalsze przykłady.
 
 .. raw:: html
 
@@ -90,8 +90,8 @@ ułatwiają definiowanie zachowań robotów. Zobacz dalsze przykłady.
 
     <hr />
 
-Atakuj przeciwników, jeśli są obok
-***********************************
+Opuść wejście
+**********************
 
 Wersja wykorzystująca zbiory pól.
 
@@ -107,8 +107,8 @@ Wersja wykorzystująca zbiory pól.
 
     <hr />
 
-Atakuj, jeśli nie grozi ci śmierć
-***********************************
+Atakuj obok
+**************************
 
 Wersja wykorzystująca zbiory pól.
 
@@ -118,6 +118,113 @@ Wersja wykorzystująca zbiory pól.
 
 .. highlight:: python
 .. literalinclude:: rgkod05.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Atakuj, jeśli nie umrzesz
+***********************************
+
+Wersja wykorzystująca zbiory pól.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod06.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Atakuj na 2 kroki
+**************************
+
+Wersja wykorzystująca zbiory pól.
+Jeżeli w odległości 2 kroków jest przeciwnik, atakuj.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod07.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Bezpieczne pola
+****************
+
+Wersja wykorzystująca zbiory pól.
+Zbiór sąsiednich pól, na które można wejść bez ryzyka.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod08.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Najbliżej do celu
+*******************
+
+Wersja wykorzystująca zbiory pól.
+Funkcja, która z podanego zbioru pól (bots) zwraca pole, na które należy wejść,
+aby najszybciej dostać się do celu (loc), np. środka planszy lub wroga.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod09.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Bezpiecznie do środka
+**************************
+
+Wersja wykorzystująca zbiory pól.
+Idź z punktu wejścia bezpiecznie do środka.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod10.py
+    :linenos:
+
+.. raw:: html
+
+    <hr />
+
+Najbliższy wróg
+*****************
+
+Wersja wykorzystująca zbiory. Idź bezpiecznie w kierunku najbliższego wroga.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod11.py
     :linenos:
 
 .. raw:: html

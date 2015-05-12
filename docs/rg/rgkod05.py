@@ -1,9 +1,10 @@
-# jeżeli wokół są przeciwnicy, atakuj, ale tylko wtedy kiedy nie grozi ci śmierć
+# jeżeli wokół są przeciwnicy, atakuj
 # wersja wykorzystująca zbiory pól i operacje na zbiorach
 
 # poniżej wstaw definicje potrzebnych zbiorów
 
-# 9 to średni poziom uszkodzeń
+sasiednie = set(rg.locs_around(self.location)) - zablokowane
+sasiednie_wrogowie = sasiednie & wrogowie
+
 if sasiednie_wrogowie:
-    if 9*len(sasiednie_wrogowie) < self.hp:
-        return ['attack', sasiednie_wrogowie.pop()]
+    return ['attack', sasiednie_wrogowie.pop()]

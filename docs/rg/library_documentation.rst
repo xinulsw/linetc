@@ -12,7 +12,7 @@ w module ``rg``, który importujemy na początku pliku instrukcją ``import rg``
 
     <hr />
 
-Metoda **rg.dist(loc1, loc2)**
+**rg.dist(loc1, loc2)**
 *******************************
 
 Zwraca matematyczną odległość między dwoma położeniami.
@@ -21,7 +21,7 @@ Zwraca matematyczną odległość między dwoma położeniami.
 
     <hr />
 
-Metoda **rg.wdist(loc1, loc2)**
+**rg.wdist(loc1, loc2)**
 ********************************
 
 Zwraca różnice w ruchach między dwoma położeniami. Ponieważ robot nie może
@@ -31,7 +31,7 @@ poruszać się na ukos, jest suma ``dx + dy``.
 
     <hr />
 
-Metoda **rg.loc_types(loc)**
+**rg.loc_types(loc)**
 *******************************
 
 Zwraca listę typów położeń wskazywanych przez ``loc``. Możliwe wartości to:
@@ -51,7 +51,7 @@ Zwrócona lista może zawierać kombinacje wartości typu: ``['normal', 'obstacl
 
     <hr />
 
-Metoda **rg.locs_around(loc[, filter_out=None)**
+**rg.locs_around(loc[, filter_out=None)**
 *************************************************
 
 Zwraca listę położeń sąsiadujących z ``loc``. Jako drugi argument
@@ -63,7 +63,7 @@ Dla przykładu: ``rg.locs_around(self.location, filter_out=('invalid', 'obstacle
 
     <hr />
 
-Metoda **rg.toward(current_loc, dest_loc)**
+**rg.toward(current_loc, dest_loc)**
 ********************************************
 
 Zwraca następne położenie na drodze z bieżącego miejsca do podanego.
@@ -72,7 +72,7 @@ Np. poniższy kod:
 .. code-block:: python
 
     import rg
-    
+
     class Robot:
         def act(self, game):
             if self.location == rg.CENTER_POINT:
@@ -85,20 +85,19 @@ Np. poniższy kod:
 
     <hr />
 
-constant **rg.CENTER_POINT**
+**rg.CENTER_POINT**
 *****************************
 
-Położenie środkowego punktu planszy.
+Stała (ang. *constant*) definiująca położenie środkowego punktu planszy.
 
 .. raw:: html
 
     <hr />
 
-AttrDict **rg.settings**
+**rg.settings**
 *****************************
 
-Specjalny typ słownika zawierającego właściwości przechowujące
-ustawienia gry.
+Specjalny typ słownika (AttrDict) zawierający ustawienia gry.
 
 * ``rg.settings.spawn_every`` – ilość rozegranych rund od wejścia robota do gry;
 * ``rg.settings.spawn_per_player`` - ilość robotów wprowadzonych przez gracza;

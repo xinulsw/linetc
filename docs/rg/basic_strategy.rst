@@ -1,4 +1,4 @@
-*Gra robotów* – strategia podstawowa
+*Gra robotów* – podstawy
 ####################################
 
 Przykład robota
@@ -170,7 +170,7 @@ Wykorzystanie zbiorów
 Przy poruszaniu się i atakowaniu mamy tylko cztery możliwe kierunki, które
 zwraca funkcja ``rg.locs_around``. Możemy wykluczyć położenia zablokowane
 (ang. *obstacle*), ponieważ nigdy ich nie zajmujemy i nie atakujemy. Iloczyn zbiorów
-``sasiednie & wrogowie`` zwróci nam zbiór przeciwników w sąsiedztwie:
+``sasiednie & wrogowie`` da nam zbiór przeciwników w sąsiedztwie:
 
 .. code-block:: python
 
@@ -186,7 +186,7 @@ obok których są przeciwnicy. Wyłączamy sąsiednie pola zajęte przez członk
 .. code-block:: python
 
     # pola zajęte przez wrogów w odległości 2 kroków
-    sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna druzyna
+    sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
 
 Teraz musimy sprawdzić, które z położeń są bezpieczne. Usuwamy pola zajmowane
 przez przeciwników w odległości 1 i 2 kroków. Pozbywamy się także punktów
@@ -224,49 +224,13 @@ Składamy wszystko razem
 Po złożeniu wszystkich kawałków kodu razem otrzymujemy przykładową
 implemetację robota wyposażonego we wszystkie założone wyżej właściwości:
 
-.. code-block:: python
+.. raw:: html
 
-    import rg
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-    class Robot:
-        def act(self, game):
-            wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
-            wejscia = {loc for loc in wszystkie if 'wejscia' in rg.loc_types(loc)}
-            zablokowane = {loc for loc in wszystkie if 'zablokowane' in rg.loc_types(loc)}
-            druzyna = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
-            wrogowie = set(game.robots)-druzyna
-
-            sasiednie = set(rg.locs_around(self.location)) - zablokowane
-            sasiednie_wrogowie = sasiednie & wrogowie
-            sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
-            bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
-
-            def mindist(bots, loc):
-                return min(bots, key=lambda x: rg.dist(x, loc))
-
-            if wrogowie:
-                closest_wrogowie = mindist(wrogowie,self.location)
-            else:
-                closest_wrogowie = rg.CENTER_POINT
-
-            # akcja domyślna, którą nadpiszemy, jak znajdziemy coś lepszego
-            move = ['guard']
-
-            if self.location in wejscia:
-                if bezpieczne:
-                    move = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
-            elif sasiednie_wrogowie:
-                if 9*len(sasiednie_wrogowie) >= self.hp:
-                    if bezpieczne:
-                        move = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
-                else:
-                    move = ['attack', sasiednie_wrogowie.pop()]
-            elif sasiednie_wrogowie2:
-                move = ['attack', sasiednie_wrogowie2.pop()]
-            elif bezpieczne:
-                move = ['move', mindist(bezpieczne, closest_wrogowie)]
-
-            return move
+.. highlight:: python
+.. literalinclude:: robot.py
+   :linenos:
 
 .. raw:: html
 

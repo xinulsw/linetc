@@ -16,6 +16,7 @@ Poznaj zasady:
     rgkit.rst
     basic_strategy.rst
     klocki.rst
+    intermediate_strategy.rst
 
 .. note::
 
