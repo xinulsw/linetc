@@ -5,5 +5,4 @@ import random
 
 zakres = raw_input("Podaj zakres losowanych liczb: ")
 ileliczb = raw_input("Podaj ilość typowanych liczb: ")
-
-print "Proszę wytypować",ileliczb,"z",zakres
+print "Wytypuj",ileliczb,"z",zakres," liczb: "

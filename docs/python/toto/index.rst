@@ -23,7 +23,7 @@ domowy użytkownika. Obowiązkowa zawartość pliku:
 .. literalinclude:: toto01.py
     :linenos:
 
-Pierwsza linia to ścieżka do interpretera Pythona (jest to język interpretowalny),
+Pierwsza linia to ścieżka do interpretera Pythona (zob. :term:`interpreter`),
 druga linia informuje o użytym kodowaniu, dzięki czemu możemy używać
 polskich znaków.
 
@@ -45,9 +45,9 @@ z zakresu <a; b>. Do naszego pliku dopisujemy:
     :lineno-start: 1
     :lines: 1-
 
-Wylosowana liczba zostanie zapamiętana w **zmiennej** ``liczba``, instrukcja ``print``
-wydrukuje ją na ekranie (tylko na razie dla celów testowych). Program
-możemy już uruchomić wydając w katalogu z plikiem polecenie:
+Wylosowana liczba zostanie zapamiętana w **zmiennej** ``liczba`` (zob. :term:`zmienna` ).
+Instrukcja ``print`` wydrukuje ją na ekranie (tylko na razie).
+Program możemy już uruchomić wydając w katalogu z plikiem polecenie:
 
 .. code-block:: bash
 
@@ -61,6 +61,8 @@ możemy już uruchomić wydając w katalogu z plikiem polecenie:
     lub :kbd:`Ctrl+Alt+T`. Jeśli skróty nie działają szukamy w menu start.
     Skrót :kbd:`Ctrl+Shift+T` pozwala otworzyć kolejną kartę terminala,
     w każdej karcie możemy robić coś innego.
+
+    W Geany kod uruchamiamy naciskając klawisz :kbd:`F5`.
 
 Efekt działania naszego skryptu:
 
@@ -118,14 +120,15 @@ Uzupełniamy nasz program:
     :lines: 1-
 
 Używamy **instrukcji warunkowej** ``if``, która sprawdza prawdziwość warunku
-``liczba == int(odp)``. Jeżeli wylosowana i podana liczba są sobie równe (``==``),
+``liczba == int(odp)`` (zob. :term:`instrukcja warunkowa`).
+Jeżeli wylosowana i podana liczba są sobie równe (``==``),
 wyświetlamy informację o wygranej, w przeciwnym razie ``else:`` zachętę
 do ponownej próby. Dodatkowa funkcja ``int()`` zamienia podaną przez
 gracza wartość na liczbę całkowitą.
 
 .. note::
 
-    Instrukcja ``raw_input()`` wszystkie pobrane dane zapisuje jako tekst,
+    Instrukcja ``raw_input()`` wszystkie pobrane dane zwraca jako tekst,
     dlatego jeżeli wprowadzone wartości chcemy wykorzystywać jako liczby,
     musimy używać funkcji ``int(tekst)``, która próbuje podany tekst
     przekształcić na typ całkowity (*integer*). Jeżeli nie jest w stanie
@@ -154,8 +157,9 @@ dać graczowi 3 szanse. Zmieniamy i uzupełniamy kod:
     :lines: 1-
 
 Pobieranie i sprawdzanie kolejnych liczb wymaga powórzenia zakodowanych
-wcześniej operacji. Do tego celu używamy **pętli** ``for``. W jej wnętrzu umieszczamy
-blok poprzednio napisanego kodu odpowiednio wcięty (nt. wcięć zobacz niżej).
+wcześniej operacji. Do tego celu używamy **pętli** ``for`` (zob. :term:`pętla`).
+W jej wnętrzu umieszczamy blok poprzednio napisanego kodu odpowiednio
+wcięty (zob. :term:`formatowanie kodu` i komentarz niżej).
 
 Ilość powtórzeń określa wyrażenie ``i in range(3)``. **Zmienna iteracyjna** ``i``
 to "licznik" powtórzeń. Będzie się on zmieniał tyle razy, ile wartości
@@ -239,11 +243,15 @@ w zmiennej ``ileliczb``. Podobnie pobierz i zapisz zakres losowanych liczb
 w zmiennej ``zakres``. Na koniec wyświetl komunikat "Wytypuj x z y liczb: ".
 Zamiast *x* i *y* powinny wyświetlić się podane przez użytkownika wartości.
 
+.. tip::
+
+    Użyj instrukcji ``raw_iput()``.
+
 Losowanie wielu liczb
 *********************
 
 Do wylosowania podanej ilości liczb wykorzystamy pętlę ``while wyrażenie_logiczne:``,
-która wykonuje dopóki podane wyrżenie jest prawdziwe. Pętla ``for`` nie
+która powtarza kod dopóki podane wyrażenie jest prawdziwe. Pętla ``for`` nie
 nadaje się do losowania liczb, ponieważ wykonuje się określoną ilość razy,
 a nie możemy zagwarantować, że losowane liczby będą za każdym razem inne.
 Do pliku :file:`toto2.py` dopisujemy:
@@ -255,22 +263,137 @@ Do pliku :file:`toto2.py` dopisujemy:
 .. highlight:: python
 .. literalinclude:: toto22.py
     :linenos:
-    :lineno-start: 9
+    :lineno-start: 10
     :lines: 10-18
 
-Losowane liczby będziemy zapamiętywali w **liście** ``liczby``. Ta struktura
-danych zachowuje się podobnie do tablic i pozwala zapamiętać wiele danych.
+Losowane liczby będziemy zapamiętywali w **liście** ``liczby`` (zob. :term:`lista`).
 Zmienna ``i`` zlicza unikalne wylosowane liczby, korzystamy z niej w wyrażeniu
-``i < ileliczb``, które kontroluje ilość powtórzeń pętli. W instrukcji
+warunkowym ``i < ileliczb``, które kontroluje ilość powtórzeń pętli. W instrukcji
 warunkowej wykorzystujemy funkcję zliczającą wystąpienia wylosowanej wartości
-w liście: ``liczby.count(liczba)``, aby dodawać do listy tylko unikalne
-wartości: ``liczby.append(liczba)``.
+w liście: ``liczby.count(liczba)``, aby dodawać do listy liczby wcześniej
+niepodane: ``liczby.append(liczba)``.
 
 Ćwiczenie 6
 ==============
+
+Przetestuj w interpreterze Pythona działanie metod ``count()`` i ``apend()``.
+Utwórz listę ``liczby = [1, 2, 9, 8, 5, 5 ]``. Spróbuj dołączyć do niej liczby
+*3* i *5*, a następnie zlicz ilość ich wystąpień.
+
+Nasze typy
+***********
+
+Przy pobieraniu typów użytkownika użyjemy podobnie jak przed chwilą pętli
+``while``, ale typy zapisywać będziemy w zbiorze, który z założenia nie
+może zawierać duplikatów (zob. :term:`zbiór`):
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto23.py
+    :linenos:
+    :lineno-start: 20
+    :lines: 20-27
+
+W powyższym kodzie warto zwrócić uwagę na tworzenie pustego zbioru ``typy = set()``
+oraz na sposób sprawdzania, czy podana liczba nie została już w zbiorze
+umieszczona ``if typ not in typy:``. Jak można się domyśleć, gdybyśmy chcieli
+sprawdzić czy liczba jest w zbiorze, użylibyśmy wyrażenia ``typ in typy``.
+Kolejny element dodajemy do zbioru za pomocą metody ``add()``.
+
+Ile trafiliśmy
+***************
+
+Określenie ilości trafień w większości języków programowania wymagałoby
+przeszukiwania listy wylosowanych liczb dla każdego podanego typu. W Pythonie
+możemy użyć arytmetyki zbiorów: wyznaczymy część wspólną.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto24.py
+    :linenos:
+    :lineno-start: 31
+    :lines: 31-36
+
+Polecenie ``set(liczby)`` przekształca listę na zbiór. Z kolei operator ``&``
+pozwala wyznaczyć część wspólną zbiorów. Instrukcja ``if trafione:`` sprawdza,
+czy nowy zbiór zawiera jakiekolwiek elementy. Jeśli tak, drukujemy liczbę
+trafień i trafione liczby. Zapamiętajmy, że ilość elementów zbioru czy listy
+zwraca funkcja ``len()``.
+
+Ćwiczenie 7
+==============
+
+Przetestuj program dla liczby 5 typów z 10 losowanych liczb. Działa?
+Jeśli masz wątpliwości, wpisz wylosowane i wtypowane liczby w interpreterze,
+np.:
+
+.. code-block:: bash
+
+    >>> liczby = [1,4,2,6,7]
+    >>> typy = set([1,2,3,4,5])
+    >>> trafione = set(liczby) & typy
+    >>> if trafione:
+    ...   print len(trafione)
+    ...
+    >>> print trafione
+
+Wnioski? Logika kodu jest poprawna, czego dowodzi test w terminalu, ale
+program nie działa. Dlaczego?
+
+.. tip::
+
+    Przypomnij sobie, jakiego typu wartości zwraca funkcja ``raw_input()``.
+
+Ćwiczenie 7
+==============
+
+Zmodyfikuj program tak, aby wynik jegzo działania wyglądał następująco:
+
+.. figure:: img/toto25.png
+
+Ćwiczenie 8
+==============
+
+Zmodyfikuj program tak, aby użytkownik mógł 3 razy typować liczby z tej
+samej serii liczb wylosowanych. Wynik działania programu powinien przypominać
+poniższy zrzut:
+
+.. figure:: img/toto26.png
+
+.. tip::
+
+    Wykorzystaj pętlę ``for``.
+
+Uwaga: błędne dane!
+*******************
+
+Kod naszego programu do tej pory:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto26.py
+    :linenos:
+
+[todo]
+
+Ranking trafień
+****************
+
+[todo]
 
 .. raw:: html
 
     <hr />
 
 Jeżli masz ochotę na więcej, daj znać!
+
+.. include:: gloss_python.rst
