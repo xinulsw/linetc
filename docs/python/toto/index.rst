@@ -1,7 +1,7 @@
 Toto Lotek
 ##############
 
-W Toto Lotku trzeba zgadywać liczby, napiszmy prosty program, w którym
+W Toto Lotku trzeba zgadywać liczby. Napiszmy prosty program, w którym
 będziemy mieli podobne zadanie. Użyjemy języka Python.
 
 .. contents::
@@ -45,7 +45,7 @@ z zakresu <a; b>. Do naszego pliku dopisujemy:
     :lineno-start: 1
     :lines: 1-
 
-Wylosowana liczba zostanie zapamiętana w zmiennej ``liczba``, instrukcja ``print``
+Wylosowana liczba zostanie zapamiętana w **zmiennej** ``liczba``, instrukcja ``print``
 wydrukuje ją na ekranie (tylko na razie dla celów testowych). Program
 możemy już uruchomić wydając w katalogu z plikiem polecenie:
 
@@ -55,7 +55,7 @@ możemy już uruchomić wydając w katalogu z plikiem polecenie:
 
 .. note::
 
-    Terminal to tekstowa powłoka, pozwalająca sterować pracą komputera za
+    **Terminal** to tekstowa powłoka, pozwalająca sterować pracą komputera za
     pomocą poleceń wpisywanych z klawiatury (lub wklejanych ze schowka).
     W systemach Linux często da się go uruchomić skrótem :kbd:`Win+T`
     lub :kbd:`Ctrl+Alt+T`. Jeśli skróty nie działają szukamy w menu start.
@@ -83,7 +83,7 @@ na ile prób mu pozwolimy. Zacznijmy od jednej! Dopisujemy zatem:
     :lineno-start: 1
     :lines: 1-
 
-Na początku zakomentowujemy znakiem ``#`` instrukcję drukującą wylosowaną liczbę.
+Na początku **zakomentowujemy** znakiem ``#`` instrukcję drukującą wylosowaną liczbę.
 Nie będzie wykonywana :-) Liczbę podaną przez użytkownika pobieramy za pomocą
 instrukcji ``raw_input()`` i zapamiętujemy w zmiennej ``odp``.
 
@@ -117,11 +117,20 @@ Uzupełniamy nasz program:
     :lineno-start: 1
     :lines: 1-
 
-Używamy instrukcji warunkowej ``if``, która sprawdza prawdziwość warunku
-``liczba == int(odp)``. Jeżeli wywlosowana i podana liczba są sobie równe (``==``),
+Używamy **instrukcji warunkowej** ``if``, która sprawdza prawdziwość warunku
+``liczba == int(odp)``. Jeżeli wylosowana i podana liczba są sobie równe (``==``),
 wyświetlamy informację o wygranej, w przeciwnym razie ``else:`` zachętę
 do ponownej próby. Dodatkowa funkcja ``int()`` zamienia podaną przez
 gracza wartość na liczbę całkowitą.
+
+.. note::
+
+    Instrukcja ``raw_input()`` wszystkie pobrane dane zapisuje jako tekst,
+    dlatego jeżeli wprowadzone wartości chcemy wykorzystywać jako liczby,
+    musimy używać funkcji ``int(tekst)``, która próbuje podany tekst
+    przekształcić na typ całkowity (*integer*). Jeżeli nie jest w stanie
+    tego zrobić, zgłasza wyjątek ``ValueError``. Ich obsługę omówimy
+    później.
 
 Przetestuj kilkukrotnie działanie programu.
 
@@ -145,10 +154,10 @@ dać graczowi 3 szanse. Zmieniamy i uzupełniamy kod:
     :lines: 1-
 
 Pobieranie i sprawdzanie kolejnych liczb wymaga powórzenia zakodowanych
-wcześniej operacji. Do tego celu używamy pętli ``for``. W jej wnętrzu umieszczamy
+wcześniej operacji. Do tego celu używamy **pętli** ``for``. W jej wnętrzu umieszczamy
 blok poprzednio napisanego kodu odpowiednio wcięty (nt. wcięć zobacz niżej).
 
-Ilość powtórzeń określa wyrażenie ``i in range(3)``. Zmienna iteracyjna ``i``
+Ilość powtórzeń określa wyrażenie ``i in range(3)``. **Zmienna iteracyjna** ``i``
 to "licznik" powtórzeń. Będzie się on zmieniał tyle razy, ile wartości
 zwróci funkcja ``range(n)``. Funkcja ta generuje listę liczb całkowitych
 od *0* do *n-1*.
@@ -189,8 +198,8 @@ uwagę:
 =============
 
 Uzupełnij kod, tak aby program wyświetlał informację "Próba 1", "Próba 2"
-itd. przed podaniem liczby. **Wskazówki**: Wykorzystaj zmienną ``i`` i zobacz również w trybie interaktywnym,
-co się dzieje, kiedy wpiszesz:
+itd. przed podaniem liczby. **Wskazówki**: Wykorzystaj zmienną ``i`` i
+zobacz również w trybie interaktywnym, co się dzieje, kiedy wpiszesz:
 
 .. code-block:: python
 
@@ -215,7 +224,50 @@ Ostateczny wynik działania naszego programu prezentuje się tak:
 Duży Lotek
 ************
 
-Jedna liczba to za mało, wylosujmy ich 5!
+Jedna liczba to za mało, wylosujmy ich więcej! Zasady dużego lotka to typowanie
+6 liczb z 49. Ponieważ trafienie jest tu bardzo trudne, napiszemy program
+w taki sposób, aby można było łatwo dostosować poziom jego trudności.
+Na początku utwórz nowy plik :file:`toto2.py` i uzupełnij go wymaganymi
+liniami wskazujacymi interpreter pythona i użyte kodowanie.
+
+Ćwiczenie 5
+=============
+
+Niech użytkownik określi ile liczb chce typować i z jakiego zakresu.
+Pobierz od użytkownika ilość typowanych liczb, podaną wartość przechowaj
+w zmiennej ``ileliczb``. Podobnie pobierz i zapisz zakres losowanych liczb
+w zmiennej ``zakres``. Na koniec wyświetl komunikat "Wytypuj x z y liczb: ".
+Zamiast *x* i *y* powinny wyświetlić się podane przez użytkownika wartości.
+
+Losowanie wielu liczb
+*********************
+
+Do wylosowania podanej ilości liczb wykorzystamy pętlę ``while wyrażenie_logiczne:``,
+która wykonuje dopóki podane wyrżenie jest prawdziwe. Pętla ``for`` nie
+nadaje się do losowania liczb, ponieważ wykonuje się określoną ilość razy,
+a nie możemy zagwarantować, że losowane liczby będą za każdym razem inne.
+Do pliku :file:`toto2.py` dopisujemy:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto22.py
+    :linenos:
+    :lineno-start: 9
+    :lines: 10-18
+
+Losowane liczby będziemy zapamiętywali w **liście** ``liczby``. Ta struktura
+danych zachowuje się podobnie do tablic i pozwala zapamiętać wiele danych.
+Zmienna ``i`` zlicza unikalne wylosowane liczby, korzystamy z niej w wyrażeniu
+``i < ileliczb``, które kontroluje ilość powtórzeń pętli. W instrukcji
+warunkowej wykorzystujemy funkcję zliczającą wystąpienia wylosowanej wartości
+w liście: ``liczby.count(liczba)``, aby dodawać do listy tylko unikalne
+wartości: ``liczby.append(liczba)``.
+
+Ćwiczenie 6
+==============
 
 .. raw:: html
 

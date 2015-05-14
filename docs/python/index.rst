@@ -5,7 +5,7 @@ Poniżej przedstawiamy realizację aplikacji internetowej "Czat"
 stworzonej przy użyciu frameworka Django.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     toto/index
     czat/index
