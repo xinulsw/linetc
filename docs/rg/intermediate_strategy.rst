@@ -26,17 +26,19 @@ Kolejne funkcje
 Śledź miejsca, na których byliśmy wcześniej
 Keep track of spots that are taken by our previous moves
 
-To raczej złożona funkcja, ale potrzebna jest, aby zmniejszyć ilość kolizji.
-Dotychczasowe boty próbują wejść na to samo miejsce i atkaują się nawzajem.
-Co prawda nie tracimy pukntów życia
-We don't lose HP from self-attacking but there will (almost) always be a better choice of move.
-If we keep track of all of our previous moves on a given turn we can avoid these conflicts.
-We'll need several pieces of code to do this.
-First we need to add a variable to keep track of whether this is the first
-robot called on a turn. If so, we should clear the list of taken moves
-and update the turn counter. We should put code in as the first lines of Robot.act:
+To raczej złożona funkcja, ale jest potrzebna, aby zmniejszyć ilość kolizji.
+Dotychczasowe boty drużyny próbują wejść na to samo miejsce i atakują się nawzajem.
+Co prawda nie tracimy wtedy pukntów życia, ale (prawie) zawsze mamy lepszy wybór.
+Jeżeli będziemy śledzić wszystkie nasze ruchy w ramach danej rundy, możemy
+uniknąć niepotrzebnych konfliktów. Niestety, to wymaga wielu fragementów kodu.
+Na początku dodamy zmienną, która posłuży do sprawdzenia, czy dany robot
+jest pierwszym wywoływanym w rundzie. Jeżeli tak, musimy wyczyścić listę
+poprzednich ruchów i zaktualizować licznik rund. Odpowiedni kod trzeba
+umieścić na początku ``Robot.act``:
 
-# You'll need to initialize the global variable turn_number
+.. attention::
+
+    Trzeba zainicjować zmienną globalną ``turn_number``.
 
 .. code-block:: python
 
@@ -45,44 +47,57 @@ and update the turn counter. We should put code in as the first lines of Robot.a
         turn_number = game.turn
         taken_moves = set()
 
-Next we need to add moves to the list of taken moves as we add them. We can write functions for both saving the move to the list and returning the move. These functions should be placed inside Robot.act so that they share the scope of Robot.act. Note that if we are moving we save the location we are moving to and if we are staying (guard, attack, suicide) we save the location that we are currently at:
-
-# If moving save the location we are moving to
+Kolejne fragmenty odpowiadać będzie za zapamiętywanie wykonywanych ruchów.
+Kod najwygodniej umieścić w jednej funkcji, która zanim zwróci
+podjęty ruch, zapisze go na liście. Warto zauważyć, że zapisywane będą
+współrzędne pól, na które wchodzimy lub na których pozostajemy (obrona, atak,
+samobójstwo). Funkcja musi znaleźć się w klasie Robot.act,
+aby współdzieliła jej przestrzeń nazw.
 
 .. code-block:: python
+
+    # Jeżeli się ruszamy, zapisujemy docelowe pole
 
     def moving(loc):
         taken_moves.add(loc)
         return ['move', loc]
 
-# If staying save the location that we are at, note the use of the self.location
-
-.. code-block:: python
+    # Jeżeli pozostajemy w miejscu, zapisujemy aktualne położenie
+    # przy użyciu self.location
 
     def staying(act, loc=None):
         taken_moves.add(self.location)
         return [act, loc]
 
-Next we need to remove the list of taken moves from the safe moves that we base the rest of our choices on:
+Kolejnym krokiem jest usunięcie listy wykonanych ruchów (``taken_moves``)
+ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
 
     safe = adjacent - adjacent_enemy - adjacent_enemy2 - spawn - team - taken_moves
 
-Robots that attack two moves away often form a perimeter around the enemy (a good thing) but it prevents your own bots from moving across the line. For that reason we can choose to not let a robot do an an adjacent_enemy2 attack if they are sitting in a taken spot.
+Roboty atakujące dwa kroki obok często otaczają przeciwnika (to dobrze),
+ale uniemożliwiają innym członkom drużyny wyjście z takiego okrążenia.
+Dlatego możemy blokować ataki na pola adjacent_enemy2, jeśli wymagają
+ruchu na zajęte pola.
+
+[Robots that attack two moves away often form a perimeter around the enemy
+(a good thing) but it prevents your own bots from moving across the line.
+For that reason we can choose to not let a robot do an an adjacent_enemy2
+attack if they are sitting in a taken spot.]
 
 .. code-block:: python
 
     elif adjacent_enemy2 and self.location not in taken_moves:
 
-Finally we need to replace every returned move with a call to one of our functions:
+Na koniec podmieniamy kod zwracający ruchy:
 
 .. code-block:: python
 
     move = ['move', mindist(safe, closest_enemy)]
     move = ['attack', adjacent_enemy.pop()]
 
-becomes:
+– tak aby wykorzystywał nowe funkcjce:
 
 .. code-block:: python
 
