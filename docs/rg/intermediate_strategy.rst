@@ -1,31 +1,40 @@
 *Gra robotów* – poziom wyżej
 ############################
 
-Building up from the basic guide
+Zacznijmy od znanego
 *********************************
+W poprzednim poradniku zaczęliśmy od bota wyposażonego w następujące funkcje:
 
-In the previous guide we took the example bot which originally had these features:
+* Broń się w środku planszy
+* Atakuj wrogów obok
+* Idź do środka
 
-    Stay put if at the center point
-    Attack an enemy if its adjacent to us
-    Move towards the center
+Zmieniliśmy lu dodaliśmy następujące funkcję:
 
-And changed/added the following features:
+* Opuść wejście
+* Uciekaj, jeśli masz zginąć
+* Atakuj wrogów dwa kroki obok
+* Wchodź na bezpieczne, niezajęte pola
+* Idż na wroga, jeśli w pobliżu go nie ma
 
-    Leave spawn
-    Flee if we're going to die
-    Attack towards enemies two steps away
-    Only move to safe spots which are unoccupied
-    Move towards the enemy if there isn't one within two steps
+Do powyższych dodamy kolejne funkcje w postaci fragmentów kodu wymagających
+zmian. Trzeba zintergrować je z kodem dotychczasowego bota, aby go ulepszyć.
 
-Let's build on that with more features. Note from this point forward we'll just look at snippets of code that are changing and you'll have to integrate them into the basic bot to improve.
+Kolejne funkcje
+****************
 
-Intermediate level - more features
-***********************************
-
+Śledź miejsca, na których byliśmy wcześniej
 Keep track of spots that are taken by our previous moves
 
-This feature adds a lot of complexity to our bot but its needed to prevent move conflicts. Our current bots can try to move into the same spot and also attack ourselves. We don't lose HP from self-attacking but there will (almost) always be a better choice of move. If we keep track of all of our previous moves on a given turn we can avoid these conflicts. We'll need several pieces of code to do this. First we need to add a variable to keep track of whether this is the first robot called on a turn. If so, we should clear the list of taken moves and update the turn counter. We should put code in as the first lines of Robot.act:
+To raczej złożona funkcja, ale potrzebna jest, aby zmniejszyć ilość kolizji.
+Dotychczasowe boty próbują wejść na to samo miejsce i atkaują się nawzajem.
+Co prawda nie tracimy pukntów życia
+We don't lose HP from self-attacking but there will (almost) always be a better choice of move.
+If we keep track of all of our previous moves on a given turn we can avoid these conflicts.
+We'll need several pieces of code to do this.
+First we need to add a variable to keep track of whether this is the first
+robot called on a turn. If so, we should clear the list of taken moves
+and update the turn counter. We should put code in as the first lines of Robot.act:
 
 # You'll need to initialize the global variable turn_number
 
