@@ -12,7 +12,7 @@ ale również jako podręczny sytem przenośny lub ratunkowy.
 .. contents:: Spis treści
     :backlinks: none
 
-.. _puppy:
+.. _lxpup:
 
 Klucz USB w Windows
 *************************
@@ -259,10 +259,19 @@ Konfiguracja LXDE
 Materiały dodatkowe
 *******************
 
-[todo]
+.. toctree::
+    :maxdepth: 2
+    :numbered:
 
-Metryka
-========
+    puppy_linux
+    konfiguracja
+    jvm
+    xfce
+    problemy_llusb
+
+.. raw:: html
+
+    <hr />
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 
