@@ -76,6 +76,9 @@ Plik zapisu zawiera zapisaną konfigurację systemu, czyli:
     się na `lxtahrsave`. Ewentualne utworzone wcześniej pliki zapisu
     trzeba albo skasować, albo zmienić im nazwy.
 
+    **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
+    *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Setup).
+
 .. note::
 
     Nazwa pliku :file:`pupsave` zawsze zaczyna się "lxtahrsave-", np.:
