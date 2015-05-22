@@ -27,9 +27,9 @@ wykonaj następujące czynności:
    zawierający pulpit `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_. System jest "odchudzoną" wersją Ubuntu 14.04 LTS.
 
 .. figure:: linimg/lxpup.png
-   :alt: Pulpit LxPup
+   :alt: Pulpit LxPupTahr
 
-   Pulpit LxPup ze środowiskiem LXDE
+   Pulpit LxPupTahr ze środowiskiem LXDE
 
 3) Przygotuj pendrajwa o pojemności min. 2GB zawierającego jedną, pustą,
    aktywną partycję FAT32. Taka partycja jest domyślna na większości kluczy.
@@ -53,7 +53,7 @@ Ale zanim to zrobisz przeczytaj jeszcze jeden rozdział poniżej!
 Plik zapisu
 ============
 
-LxPup po pierwszym uruchomieniu ma interfejs w języku angielskim i wymaga wstępnej konfiguracji.
+*LxPup* po pierwszym uruchomieniu ma interfejs w języku angielskim i wymaga wstępnej konfiguracji.
 Dlatego sugerujemy pobranie `pliku zapisu <http://puppylinux.org/wikka/SaveFile>`_
 (ang. *savefile*) :file:`lxtahrsave-lxde.2fs` udostępnionego w serwisie `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_,
 oraz dodatkowego pakietu `jre1.7.0_65_5.7.0.sfs <http://puppylinuxstuff.meownplanet.net/aarf/java_jre/jre1.7.0_65_5.7.0.sfs>`_.
@@ -94,7 +94,7 @@ Plik zapisu zawiera zapisaną konfigurację systemu, czyli:
     dowolne foldery i zapisywać pliki, np. *pet* i *sfs*, z których
     będziemy korzystać w miarę potrzeb. Dzięki temu unikniemy zbędnego
     rozrastania się pliku zapisu.
-    Należy uważać, aby z katalogu głównego nie usunąć plików LxPup.
+    Należy uważać, aby z katalogu głównego nie usunąć plików *LxPup*.
 
 Przechowywanie ustawień i dokumentów w pliku zapisu ma swoje zalety:
 
@@ -104,7 +104,13 @@ Przechowywanie ustawień i dokumentów w pliku zapisu ma swoje zalety:
   pendrajwa przygotowanego zgodnie z naszą instrukcją, a dostaną
   skonfigurawane środowisko i programy, a nawet ewentualne dokumenty.
 
-Obsługa LxPup
+Ostatecznie zawartość katalogu głównego pendrajwa przedstawiać powinna się
+następująco:
+
+.. figure:: linimg/lxpup_explorer.jpg
+   :alt: zawartość pendrajwa po wgraniu *LXPupTahr* i wymaganych plików
+
+Obsługa *LxPupTahr*
 ***********************
 
 System *LxPup* domyślnie wczytuje się w całości do pamięci RAM i uruchamia
@@ -176,7 +182,7 @@ W ten sposób możemy wyszukać i dodać kilka pakietów na raz, np. *python-pip
     warto instalować z repozytoriów, bo nie zawsze znajdziemy tam oprogramowanie
     odpowiednio dostosowane do naszej dystrybucji.
 
-LxPup oferuje jednak dwa inne sposoby doinstalowywania oprogramowania na żądanie!
+*LxPup* oferuje jednak dwa inne sposoby doinstalowywania oprogramowania na żądanie!
 Pierwszy to paczki w formacie `PET <http://puppylinux.org/wikka/PETs?redirect=no>`_,
 dostępne np. na stronie `pet_packages-tahr <http://distro.ibiblio.org/puppylinux/pet_packages-tahr/>`.
 Ściągamy je, a następnie instalujemy dwukrotnie klikając (uruchomi się narzędzie *petget*).

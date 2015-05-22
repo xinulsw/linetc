@@ -16,7 +16,7 @@ menedżera okien `JVM <http://www.joewing.net/projects/jwm/>`_ z pulpitem
 `ROX Desktop <http://rox.sourceforge.net/desktop/>`_ i menedżerem
 plików `ROX-Filer <http://rox.sourceforge.net/desktop/ROX-Filer>`_.
 
-Do naszych zastosowań wybraliśmy odmianę `LxPup <http://lx-pup.weebly.com/downloads.html>`_ 
+Do naszych zastosowań wybraliśmy odmianę `LxPupTahr <http://lx-pup.weebly.com/downloads.html>`_
 zawierającą domyślne środowisko `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 *LxPupTahr* jest wersją systemu `Puppy Linux 6.0.2 tahrpup CE <http://www.murga-linux.com/puppy/viewtopic.php?t=96178>`_
 opartą na systemie Ubuntu Tahr 14.04 LTS. Nic nie stoi na przeszkodzie,
@@ -25,9 +25,9 @@ opartą na systemie Ubuntu Tahr 14.04 LTS. Nic nie stoi na przeszkodzie,
 (ok. 201 MB). W wersji tej łatwo doinstalować również środowisko `XFCE <http://www.xfce.org/?lang=pl>`_.
 
 .. figure:: linimg/lxpup.png
-   :alt: Pulpit LxPup
+   :alt: Pulpit LxPupTahr
 
-   Pulpit LxPup ze środowiskiem LXDE
+   Pulpit LxPupTahr ze środowiskiem LXDE
 
 .. figure:: linimg/puptahr_jvm.png
    :alt: Pulpit JVM
