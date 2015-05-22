@@ -235,6 +235,27 @@ Domyślne katalogi
 * :file:`/root/.themes` – dodatkowe tematy Gtk
 * :file:`/usr/share/fonts/default/TTF/` – dodatkowe czcionki TrueType, np. z MS Windows
 
+Skróty klawiaturowe
+====================
+
+.. attention::
+
+    Poniższe skróty będą działać, jeżeli wykorzystamy udostępniony przez
+    nas plik zapisu, który zawiera odpowiednie ustawienia.
+
+Oznaczenia: C – Control, A – Alt, W - Windows (SuperKey).
+
+* **C+A+Left** - puplpit lewy
+* **C+A+Right** - pulpit prawy
+* **Alt + Space** - menu okna
+* **C+Esc** - menu start
+* **C+A+Del** - menedżer zadań
+* **W+f** - menedżer plików (pcmanfm)
+* **W+t** - terminal (LXTerminal)
+* **W+e** - Geany IDE
+* **W+p** - PyCharm IDE
+* **W+w** - przeglądarka WWW (Palemoon)
+
 Konfiguracja LXDE
 =================
 
