@@ -1,5 +1,7 @@
-*Gra robotów* – podstawy
-####################################
+.. _strategia1:
+
+Strategia podstawowa
+#####################
 
 Przykład robota
 *****************
@@ -12,7 +14,7 @@ Przykład robota
 .. literalinclude:: robot01.py
     :linenos:
 
-W powyższym kodzie warto zauważyć trzy cechy:
+Z powyższego kodu wynikają trzy zasady:
 
 * stój w miejscu, jeżeli jesteś w środku planszy;
 * atakuj przeciwnika, jeżeli jest w sąsiedztwie;
@@ -25,22 +27,23 @@ tylko te, które nam odpowiadają, i konstruować takie roboty, jakie chcemy.
 Startegie indywidualne
 ***********************
 
-Rozbudujmy przykład podstawowy. Oto lista przykładowych usprawnień:
+Rozbudujmy przykład podstawowy. Oto lista przykładowych reguł,
+które weźmiemy pod uwagę:
 
-* **Ulepszenie 1: opuść punkt wejścia.**
+* **Reguła 1: Opuść punkt wejścia.**
 
 Pozostawanie w punkcie wejścia nie jest dobre. Sprawdźmy, czy jesteśmy
 w punkcie wejścia i czy powinniśmy z niego wyjść. Nawet wtedy, gdy jest
 ktoś do zaatakowania, ponieważ nie chcemy zostać zamknięci w pułapce wejścia.
 
-* **Ulepszenie 2: uciekamy, jeśli grozi nam śmierć.**
+* **Reguła 2: Uciekaj, jeśli masz zginąć.**
 
 Przykładowy robot atakuje aż do śmierci. Ponieważ jednak wygrana zależy od
 liczby pozostałych robotów, a nie ich zdrowia, bardziej opłaca się zachować
 robota niż poświęcić go na zadanie dodakowych obrażeń przeciwnikowi. Jeżeli
 więc jesteśmy zagrożeni śmiercią, uciekamy, a nie giniemy na próżno.
 
-* **Ulepszenie 3: Atakujemy przeciwnika o dwa kroki od nas.**
+* **Reguła 3: Atakuje przeciwnika o dwa kroki od ciebie.**
 
 Przyjrzyj się grającemu wg reguł robotowi, zauważysz, że kiedy wchodzi na pole
 atakowane przez przeciwnika, odnosi obrażenia. Dlatego, jeśli prawdopodobne jest,
@@ -64,7 +67,7 @@ Dzięki temu nit się do nas bezkarnie nie zbliży.
     (co w tym wypadku jest mało przydatne). Wszystko bez uszczerbku na zdrowiu słabszego
     robota.
 
-* **Ulepszenie 4: przesuwamy się tylko na wolne pola.**
+* **Reguła 4: Wchodź tylko na wolne pola.**
 
 Przykładowy robot idzie do środka planszy, ale w wielu wypadkach lepiej zrobić
 coś innego. Np. iść tam, gdzie jest bezpiecznie, zamiast narażać się na
@@ -73,7 +76,7 @@ ruch na pole przeciwnika lub wchodzenie w jego sąsiedztwo. Wiadomo też, że
 nie możemy wchodzić na zajęte pola i że możemy zmniejszyć ilość kolizji,
 nie wchodząc na pola zajęte przez naszą drużynę.
 
-* **Ulepszenie 5: Idź na wroga, jeżeli go nie ma w zasięgu dwóch kroków.**
+* **Reguła 5: Idź na wroga, jeżeli go nie ma w zasięgu dwóch kroków.**
 
 Po co iść do środka, skoro mamy inne bezpieczne możliwości? Wprawdzie stanie
 w punkcie wejścia jest złe, ale to nie znaczy, że środek planszy jest dobry.
@@ -87,7 +90,7 @@ na tym, co ustaliliśmy.
 Łączenie ulepszeń
 *******************
 
-Zapiszmy wszystkie ulepszenia w pseudokodzie. Możemy użyć do tego jednej
+Zapiszmy wszystkie reguły w pseudokodzie. Możemy użyć do tego jednej
 rozbudowanej instrukcji warunkowej if/else.
 
 .. code-block:: python
@@ -133,7 +136,8 @@ Podstawowe operacje na zbiorach, których użyjemy to:
 
 Załóżmy, że zaczniemy od wygenerowania następujących list:
 ``drużyna`` – członkowie drużyny, ``wrogowie`` – przeciwnicy,
-``wejścia`` – punkty wejścia oraz ``przeszkody`` – położenia zablokowane.
+``wejścia`` – punkty wejścia oraz ``przeszkody`` – położenia zablokowane,
+tzn. szare kwadraty.
 
 Zbiory pól
 ****************************

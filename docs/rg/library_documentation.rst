@@ -51,7 +51,7 @@ Zwrócona lista może zawierać kombinacje wartości typu: ``['normal', 'obstacl
 
     <hr />
 
-**rg.locs_around(loc[, filter_out=None)**
+**rg.locs_around(loc, filter_out=None)**
 *************************************************
 
 Zwraca listę położeń sąsiadujących z ``loc``. Jako drugi argument

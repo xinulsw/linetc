@@ -1,7 +1,7 @@
+.. _linuxlive:
+
 Linux Live USB
 ###################
-
-.. _linuxlive:
 
 Scenariusze zawarte w naszym serwisie tworzone są w oparciu o system Linux,
 ale można je również realizować na systemach Windows. Poniżej przedstawiamy,
@@ -12,7 +12,7 @@ ale również jako podręczny sytem przenośny lub ratunkowy.
 .. contents:: Spis treści
     :backlinks: none
 
-.. _lxpup:
+.. _usbwin:
 
 Klucz USB w Windows
 *************************

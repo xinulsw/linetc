@@ -24,7 +24,7 @@ domowy użytkownika. Obowiązkowa zawartość pliku:
     :linenos:
 
 Pierwsza linia to ścieżka do interpretera Pythona (zob. :term:`interpreter`),
-druga linia informuje o użytym kodowaniu, dzięki czemu możemy używać
+druga linia deklaruje sposób kodowania znaków, dzięki czemu możemy używać
 polskich znaków.
 
 Losowanie liczby
@@ -46,23 +46,13 @@ z zakresu <a; b>. Do naszego pliku dopisujemy:
     :lines: 1-
 
 Wylosowana liczba zostanie zapamiętana w **zmiennej** ``liczba`` (zob. :term:`zmienna` ).
-Instrukcja ``print`` wydrukuje ją na ekranie (tylko na razie).
-Program możemy już uruchomić wydając w katalogu z plikiem polecenie:
+Instrukcja ``print`` wydrukuje ją razem z komunikatem na ekranie.
+Program możemy już uruchomić w terminalu (zob. :term:`terminal`),
+wydając w katalogu z plikiem polecenie:
 
 .. code-block:: bash
 
     ~$ python toto.py
-
-.. note::
-
-    **Terminal** to tekstowa powłoka, pozwalająca sterować pracą komputera za
-    pomocą poleceń wpisywanych z klawiatury (lub wklejanych ze schowka).
-    W systemach Linux często da się go uruchomić skrótem :kbd:`Win+T`
-    lub :kbd:`Ctrl+Alt+T`. Jeśli skróty nie działają szukamy w menu start.
-    Skrót :kbd:`Ctrl+Shift+T` pozwala otworzyć kolejną kartę terminala,
-    w każdej karcie możemy robić coś innego.
-
-    W Geany kod uruchamiamy naciskając klawisz :kbd:`F5`.
 
 Efekt działania naszego skryptu:
 
@@ -105,7 +95,7 @@ Przetestuj jego działanie.
 Sprawdzanie
 **************
 
-Mamy wylosowaną liczbę i strzał gracza, musimy sprawdzić, czy trafił.
+Mamy wylosowaną liczbę i typ gracza, musimy sprawdzić, czy trafił.
 Uzupełniamy nasz program:
 
 .. raw:: html
@@ -122,7 +112,7 @@ Uzupełniamy nasz program:
 Używamy **instrukcji warunkowej** ``if``, która sprawdza prawdziwość warunku
 ``liczba == int(odp)`` (zob. :term:`instrukcja warunkowa`).
 Jeżeli wylosowana i podana liczba są sobie równe (``==``),
-wyświetlamy informację o wygranej, w przeciwnym razie ``else:`` zachętę
+wyświetlamy informację o wygranej, w przeciwnym razie (``else:``) zachętę
 do ponownej próby. Dodatkowa funkcja ``int()`` zamienia podaną przez
 gracza wartość na liczbę całkowitą.
 
@@ -130,7 +120,7 @@ gracza wartość na liczbę całkowitą.
 
     Instrukcja ``raw_input()`` wszystkie pobrane dane zwraca jako tekst,
     dlatego jeżeli wprowadzone wartości chcemy wykorzystywać jako liczby,
-    musimy używać funkcji ``int(tekst)``, która próbuje podany tekst
+    musimy używać funkcji ``int()``, która próbuje podany tekst
     przekształcić na typ całkowity (*integer*). Jeżeli nie jest w stanie
     tego zrobić, zgłasza wyjątek ``ValueError``. Ich obsługę omówimy
     później.
@@ -158,8 +148,8 @@ dać graczowi 3 szanse. Zmieniamy i uzupełniamy kod:
 
 Pobieranie i sprawdzanie kolejnych liczb wymaga powórzenia zakodowanych
 wcześniej operacji. Do tego celu używamy **pętli** ``for`` (zob. :term:`pętla`).
-W jej wnętrzu umieszczamy blok poprzednio napisanego kodu odpowiednio
-wcięty (zob. :term:`formatowanie kodu` i komentarz niżej).
+Umieszczamy w niej blok poprzednio napisanego kodu odpowiednio
+wcięty (zob. :term:`formatowanie kodu`).
 
 Ilość powtórzeń określa wyrażenie ``i in range(3)``. **Zmienna iteracyjna** ``i``
 to "licznik" powtórzeń. Będzie się on zmieniał tyle razy, ile wartości
@@ -203,9 +193,9 @@ uwagę:
 
 Uzupełnij kod, tak aby program wyświetlał informację "Próba 1", "Próba 2"
 itd. przed podaniem liczby. **Wskazówki**: Wykorzystaj zmienną ``i`` i
-zobacz również w trybie interaktywnym, co się dzieje, kiedy wpiszesz:
+sprawdź również w trybie interaktywnym, co się dzieje, kiedy wpiszesz:
 
-.. code-block:: python
+.. code-block:: bash
 
     ~$ python
     >>> i = 0
@@ -239,8 +229,8 @@ liniami wskazujacymi interpreter pythona i użyte kodowanie.
 
 Niech użytkownik określi ile liczb chce typować i z jakiego zakresu.
 Pobierz od użytkownika ilość typowanych liczb, podaną wartość przechowaj
-w zmiennej ``ileliczb``. Podobnie pobierz i zapisz zakres losowanych liczb
-w zmiennej ``zakres``. Na koniec wyświetl komunikat "Wytypuj x z y liczb: ".
+w zmiennej ``ileliczb``. Podobnie pobierz i zapisz maksymalną losowaną liczbę
+w zmiennej ``maksliczba``. Na koniec wyświetl komunikat "Wytypuj x z y liczb: ".
 Zamiast *x* i *y* powinny wyświetlić się podane przez użytkownika wartości.
 
 .. tip::
@@ -250,11 +240,60 @@ Zamiast *x* i *y* powinny wyświetlić się podane przez użytkownika wartości.
 Losowanie wielu liczb
 *********************
 
-Do wylosowania podanej ilości liczb wykorzystamy pętlę ``while wyrażenie_logiczne:``,
-która powtarza kod dopóki podane wyrażenie jest prawdziwe. Pętla ``for`` nie
-nadaje się do losowania liczb, ponieważ wykonuje się określoną ilość razy,
+Ćwiczenie 6
+=============
+
+Jedną wylosowaną liczbę zapamiętywaliśmy w jednej zmiennej, ale przechowywanie
+wielu wartości w osobnych zmiennych nie jest dobrym pomysłem. Najwygodniej
+byłoby mieć jedną zmienną, w której można zapisać wiele wartości. W Pythonie
+takim złożonym typem danych jest :term:`lista`.
+
+Przetestuj w interpreterze następujące polecenia:
+
+.. code-block:: bash
+
+    ~$ python
+    >>> liczby = []
+    >>> liczby
+    >>> liczby.append(1)
+    >>> liczby.append(2)
+    >>> liczby.append(4)
+    >>> liczby.append(4)
+    >>> liczby
+    >>> liczby.count(1)
+    >>> liczby.count(4)
+    >>> liczby.count(0)
+
+.. tip::
+
+    Zamiast wpisywać w terminalu powtarzające się lub podobne polecenia,
+    użyj klawiszy kursora (góra, dół) do przywoływania poprzednich
+    poleceń. Każde przywołane polecenie możesz przed zatwierdzeniem
+    zmienić używając klawiszy lewo, prawo, del i backspace.
+
+Jak widać po zadeklarowaniu pustej listy, metoda ``.append()`` pozwala dodawać
+do niej wartości, a metoda ``.count()`` podaje, ile razy wartość wystąpiła
+w liście. To się nam przyda ;-)
+
+Wróćmy do programu i pliku :file:`toto2.py`. Losowanie wielu liczb to...
+powtarzające się losowanie jednej liczby, czyli pętla. Spróbuj użyć poznanej
+wcześniej instrukcji ``for``, aby dopisać kod losujący ``ileliczb``
+z zakresu ograniczonego przez ``maksliczba``. Wylosowane wartości wydrukuj
+w terminalu... Przetestuj program, powinien wypisywać kolejne losowane
+liczby.
+
+Kontynuujemy ćwiczenie. Przed pętlą zadeklaruj pustą listę. Wewnątrz pętli
+umieść polecenie dodające wylosowane liczby do listy. Na końcu programu
+(uwaga na wcięcia) wydrukuj zawartość listy. Wielokrotnie przetestuj program;
+czy lista zawsze zawiera akceptowalne wartości?
+
+.. figure:: img/toto22_0.png
+
+Pętla ``for`` nie nadaje się do losowania liczb, ponieważ wykonuje się określoną ilość razy,
 a nie możemy zagwarantować, że losowane liczby będą za każdym razem inne.
-Do pliku :file:`toto2.py` dopisujemy:
+Do wylosowania podanej ilości liczb wykorzystamy więc pętlę ``while wyrażenie_logiczne:``,
+która powtarza kod dopóki podane wyrażenie jest prawdziwe.
+Kod w pliku :file:`toto2.py` zmieniamy następująco:
 
 .. raw:: html
 
@@ -267,13 +306,13 @@ Do pliku :file:`toto2.py` dopisujemy:
     :lines: 10-18
 
 Losowane liczby będziemy zapamiętywali w **liście** ``liczby`` (zob. :term:`lista`).
-Zmienna ``i`` zlicza unikalne wylosowane liczby, korzystamy z niej w wyrażeniu
-warunkowym ``i < ileliczb``, które kontroluje ilość powtórzeń pętli. W instrukcji
+Zmienna ``i`` przechowuje ilość unikalnych wylosowanych liczb, korzystamy z niej w wyrażeniu
+warunkowym ``i < ileliczb``, które kontroluje powtórzenia pętli. W instrukcji
 warunkowej wykorzystujemy funkcję zliczającą wystąpienia wylosowanej wartości
-w liście: ``liczby.count(liczba)``, aby dodawać do listy liczby wcześniej
-niepodane: ``liczby.append(liczba)``.
+w liście (``liczby.count(liczba)``), aby dodawać (``liczby.append(liczba)``)
+do listy liczby wcześniej niepodane.
 
-Ćwiczenie 6
+Ćwiczenie 7
 ==============
 
 Przetestuj w interpreterze Pythona działanie metod ``count()`` i ``apend()``.
@@ -326,7 +365,7 @@ czy nowy zbiór zawiera jakiekolwiek elementy. Jeśli tak, drukujemy liczbę
 trafień i trafione liczby. Zapamiętajmy, że ilość elementów zbioru czy listy
 zwraca funkcja ``len()``.
 
-Ćwiczenie 7
+Ćwiczenie 8
 ==============
 
 Przetestuj program dla liczby 5 typów z 10 losowanych liczb. Działa?
@@ -350,14 +389,14 @@ program nie działa. Dlaczego?
 
     Przypomnij sobie, jakiego typu wartości zwraca funkcja ``raw_input()``.
 
-Ćwiczenie 7
+Ćwiczenie 9
 ==============
 
 Zmodyfikuj program tak, aby wynik jegzo działania wyglądał następująco:
 
 .. figure:: img/toto25.png
 
-Ćwiczenie 8
+Ćwiczenie 10
 ==============
 
 Zmodyfikuj program tak, aby użytkownik mógł 3 razy typować liczby z tej

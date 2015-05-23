@@ -21,7 +21,7 @@
         jest stosowanie takich samych wcięć w obrębie pliku, np. 4 spacji
         i ich wielokrotności. Wcięcia odpowiadają nawiasom w innych językach,
         służą grupowaniu instrukcji i wydzielaniu bloków kodu.
-        Błędy wcięć zgłaszane są jako ``IndentationError``.
+        Błędy wcięć zgłaszane są jako wyjątki ``IndentationError``.
 
     zmienna
         nazwa określająca jakąś zapamiętywaną i wykorzystywaną w programie wartość
@@ -78,3 +78,7 @@
 
     for i in range(11):
         print i
+
+    wyjątki
+        to komunikaty zgłaszane przez interpreter Pythona, pozwalające ustalić
+        przyczyny błędnego działania kodu.

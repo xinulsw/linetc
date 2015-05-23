@@ -8,11 +8,8 @@ maksliczba = raw_input("Podaj maksymalną losowaną liczbę: ")
 #print "Wytypuj",ileliczb,"z",makliczba," liczb: "
 
 liczby = []
-i = 0
-while i < int(ileliczb):
+for i in range(int(ileliczb)):
     liczba = random.randint(1, int(maksliczba))
-    if liczby.count(liczba) == 0:
-        liczby.append(liczba)
-        i = i + 1
+    liczby.append(liczba)
 
 print "Wylosowane liczby:",liczby
