@@ -235,7 +235,8 @@ Zamiast *x* i *y* powinny wyświetlić się podane przez użytkownika wartości.
 
 .. tip::
 
-    Użyj instrukcji ``raw_iput()``.
+    Skorzystaj z instrukcji ``raw_iput()``, której użyj jako argumentu
+    funkcji ``int()``.
 
 Losowanie wielu liczb
 *********************
@@ -271,9 +272,9 @@ Przetestuj w interpreterze następujące polecenia:
     poleceń. Każde przywołane polecenie możesz przed zatwierdzeniem
     zmienić używając klawiszy lewo, prawo, del i backspace.
 
-Jak widać po zadeklarowaniu pustej listy, metoda ``.append()`` pozwala dodawać
-do niej wartości, a metoda ``.count()`` podaje, ile razy wartość wystąpiła
-w liście. To się nam przyda ;-)
+Jak widać po zadeklarowaniu pustej listy (``liczby = []``), metoda ``.append()``
+pozwala dodawać do niej wartości, a metoda ``.count()`` podaje, ile razy
+dana wartość wystąpiła w liście. To się nam przyda ;-)
 
 Wróćmy do programu i pliku :file:`toto2.py`. Losowanie wielu liczb to...
 powtarzające się losowanie jednej liczby, czyli pętla. Spróbuj użyć poznanej
@@ -293,7 +294,7 @@ Pętla ``for`` nie nadaje się do losowania liczb, ponieważ wykonuje się okre�
 a nie możemy zagwarantować, że losowane liczby będą za każdym razem inne.
 Do wylosowania podanej ilości liczb wykorzystamy więc pętlę ``while wyrażenie_logiczne:``,
 która powtarza kod dopóki podane wyrażenie jest prawdziwe.
-Kod w pliku :file:`toto2.py` zmieniamy następująco:
+Uzupełniamy Kod w pliku :file:`toto2.py`:
 
 .. raw:: html
 
@@ -302,29 +303,48 @@ Kod w pliku :file:`toto2.py` zmieniamy następująco:
 .. highlight:: python
 .. literalinclude:: toto22.py
     :linenos:
-    :lineno-start: 10
-    :lines: 10-18
+    :emphasize-lines: 10-19
+    :lineno-start: 1
+    :lines: 1-
 
-Losowane liczby będziemy zapamiętywali w **liście** ``liczby`` (zob. :term:`lista`).
-Zmienna ``i`` przechowuje ilość unikalnych wylosowanych liczb, korzystamy z niej w wyrażeniu
+Losowane liczby zapamiętujemy w **liście** ``liczby`` (zob. :term:`lista`).
+Zmienna ``i`` to licznik unikalnych wylosowanych liczb, korzystamy z niej w wyrażeniu
 warunkowym ``i < ileliczb``, które kontroluje powtórzenia pętli. W instrukcji
 warunkowej wykorzystujemy funkcję zliczającą wystąpienia wylosowanej wartości
 w liście (``liczby.count(liczba)``), aby dodawać (``liczby.append(liczba)``)
 do listy liczby wcześniej niepodane.
-
-Ćwiczenie 7
-==============
-
-Przetestuj w interpreterze Pythona działanie metod ``count()`` i ``apend()``.
-Utwórz listę ``liczby = [1, 2, 9, 8, 5, 5 ]``. Spróbuj dołączyć do niej liczby
-*3* i *5*, a następnie zlicz ilość ich wystąpień.
 
 Nasze typy
 ***********
 
 Przy pobieraniu typów użytkownika użyjemy podobnie jak przed chwilą pętli
 ``while``, ale typy zapisywać będziemy w zbiorze, który z założenia nie
-może zawierać duplikatów (zob. :term:`zbiór`):
+może zawierać duplikatów (zob. :term:`zbiór`).
+
+Ćwiczenie 7
+=============
+
+W interpreterze Pythona przetestuj następujące polecenia:
+
+.. code-block:: bash
+
+    ~$ python
+    >>> typy = set()
+    >>> typy.add(1)
+    >>> typy.add(2)
+    >>> typy
+    >>> typy.add(2)
+    >>> typy
+    >>> typy.add(0)
+    >>> typy.add(9)
+    >>> typy
+
+Pierwsza instrukcja deklaruje pusty zbiór (``typy = set()``). Metoda ``.add()``
+dodaje do zbioru elementy, ale nie da się dodać dwóch takich samych elementów.
+Drugą cechą zbiorów jest to, że ich elementy nie są w żaden sposób uporządkowane.
+
+Wykorzystajmy poznany typ, aby pobrać od użytkownika typy liczb. W pliku
+:file:`toto2.py` dopisujemy:
 
 .. raw:: html
 
@@ -336,11 +356,10 @@ może zawierać duplikatów (zob. :term:`zbiór`):
     :lineno-start: 20
     :lines: 20-27
 
-W powyższym kodzie warto zwrócić uwagę na tworzenie pustego zbioru ``typy = set()``
-oraz na sposób sprawdzania, czy podana liczba nie została już w zbiorze
-umieszczona ``if typ not in typy:``. Jak można się domyśleć, gdybyśmy chcieli
-sprawdzić czy liczba jest w zbiorze, użylibyśmy wyrażenia ``typ in typy``.
-Kolejny element dodajemy do zbioru za pomocą metody ``add()``.
+W powyższym kodzie warto zwrócić na sposób sprawdzania, czy podana liczba
+nie została już w zbiorze umieszczona: ``if typ not in typy:``. Gdybyśmy
+chcieli sprawdzić, czy liczba jest w zbiorze, użylibyśmy wyrażenia ``typ in typy``.
+Przetestuj rogram.
 
 Ile trafiliśmy
 ***************
@@ -348,6 +367,29 @@ Ile trafiliśmy
 Określenie ilości trafień w większości języków programowania wymagałoby
 przeszukiwania listy wylosowanych liczb dla każdego podanego typu. W Pythonie
 możemy użyć arytmetyki zbiorów: wyznaczymy część wspólną.
+
+Ćwiczenie 8
+==============
+
+W interpreterze przetestuj poniższe instrukcje:
+
+.. code-block:: bash
+
+    ~$ python
+    >>> liczby = [1,3,5,7,9]
+    >>> typy = set([2,3,4,5,6])
+    >>> set(liczby) | typy
+    >>> set(liczby) - typy
+    >>> trafione = set(liczby) & typy
+    >>> len(trafione)
+
+Polecenie ``set(liczby)`` przekształca listę na zbiór. Kolejne operatory
+zwracają sumę (``|``), różnicę (``-``) i iloczyn (``&``), czyli część
+wspólną zbiorów. Ta ostania operacja bardzo dobrze nadaje się do sprawdzenia,
+ile liczb trafił użytkownik. Funkcja ``len()`` zwraca ilość elementów m.in.
+listy i zbioru.
+
+Do pliku :file:`toto2.py` dopisujemy:
 
 .. raw:: html
 
@@ -359,17 +401,14 @@ możemy użyć arytmetyki zbiorów: wyznaczymy część wspólną.
     :lineno-start: 31
     :lines: 31-36
 
-Polecenie ``set(liczby)`` przekształca listę na zbiór. Z kolei operator ``&``
-pozwala wyznaczyć część wspólną zbiorów. Instrukcja ``if trafione:`` sprawdza,
-czy nowy zbiór zawiera jakiekolwiek elementy. Jeśli tak, drukujemy liczbę
-trafień i trafione liczby. Zapamiętajmy, że ilość elementów zbioru czy listy
-zwraca funkcja ``len()``.
+Instrukcja ``if trafione:`` sprawdza, czy część wspólna zawiera jakiekolwiek elementy.
+Jeśli tak, drukujemy liczbę trafień i trafione liczby.
 
-Ćwiczenie 8
+Ćwiczenie 9
 ==============
 
-Przetestuj program dla liczby 5 typów z 10 losowanych liczb. Działa?
-Jeśli masz wątpliwości, wpisz wylosowane i wtypowane liczby w interpreterze,
+Przetestuj program dla 5 typów z 10 liczb. Działa?
+Jeśli masz wątpliwości, wpisz wylosowane i wytypowane liczby w interpreterze,
 np.:
 
 .. code-block:: bash
@@ -389,17 +428,17 @@ program nie działa. Dlaczego?
 
     Przypomnij sobie, jakiego typu wartości zwraca funkcja ``raw_input()``.
 
-Ćwiczenie 9
+Ćwiczenie 10
 ==============
 
 Zmodyfikuj program tak, aby wynik jegzo działania wyglądał następująco:
 
 .. figure:: img/toto25.png
 
-Ćwiczenie 10
+Ćwiczenie 11
 ==============
 
-Zmodyfikuj program tak, aby użytkownik mógł 3 razy typować liczby z tej
+Zmień program tak, aby użytkownik mógł 3 razy typować liczby z tej
 samej serii liczb wylosowanych. Wynik działania programu powinien przypominać
 poniższy zrzut:
 
@@ -412,7 +451,7 @@ poniższy zrzut:
 Uwaga: błędne dane!
 *******************
 
-Kod naszego programu do tej pory:
+Kod naszego programu do tej pory przedstawia się mniej więcej tak:
 
 .. raw:: html
 
@@ -422,7 +461,33 @@ Kod naszego programu do tej pory:
 .. literalinclude:: toto26.py
     :linenos:
 
-[todo]
+Uruchom program i zamiast liczby podaj tekst. Co się dzieje? Zgłoszony
+zostaje wyjątek "ValuError" (zob.: :term:`wyjątki`) i komunikat "invalid literal for int() with base 10",
+który informuje, że fukncja ``int()`` nie jest w stanie przekształcić podanego
+ciągu znaków na liczbę całkowitą.
+
+Spróbujmy zmodyfikować program tak, aby był nieco odporniejszy na niepoprawne dane:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto27.py
+    :linenos:
+    :lineno-start: 6
+    :lines: 6-11
+
+Do przechwytywania wyjątków używamy konstrukcji ``try: ... except: ...``, czyli
+spróbuj wykonać kod w bloku ``try``, a w razie błędów przechwyć wyjątek ``ValueError``.
+Przetestuj program wprowadzając tekst zamiast liczb.
+
+Ćwiczenie 12
+=============
+
+Program powinien być odporny na błędne dane we wszystkich miejscach, w których
+pobiera dane od użytkownika. Wprowadź konieczne poprawki kodu i przetestuj
+swoje rozwiązania.
 
 Ranking trafień
 ****************

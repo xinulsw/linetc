@@ -79,6 +79,8 @@
     for i in range(11):
         print i
 
+.. glossary::
+
     wyjątki
         to komunikaty zgłaszane przez interpreter Pythona, pozwalające ustalić
         przyczyny błędnego działania kodu.
