@@ -1,9 +1,11 @@
+.. _konfiguracja:
+
 Konfiguracja
 ################
 
 Jeżeli nie chcesz używać udostępnionych przez nas plików zapisu,
 możesz sam skonfigurować swój system. Poniżej wskazówki.
-    
+
 Ustawienia wstępne
 *******************
 
@@ -44,9 +46,24 @@ informacyjnym "Ok". Na koniec zamykamy okno *Welcome* kreatora.
 Przeglądarka WWW
 *****************
 
-Uaktualnioanie i polonizacja interfejsu omówiona została w dokumnecie
-głównym, poniżej konfiguracja dodatkowa.
+Domyślną przeglądarkę *Pale Moon* należy od czasu do czasu aktualizować.
+W tym celu wybieramy *Start/Internet/Palemoon-updater*, zaznaczamy "Update Pale Moon" i klikamy OK.
 
+.. figure:: linimg/palemoon01.png
+.. figure:: linimg/palemoon02.png
+.. figure:: linimg/palemoon03.png
+
+Jeśli po aktualizacji przywita nas angielskojęzyczny interfejs, na stronie powitalnej
+klikamy link "Language Packs", pobieramy plik tłumaczeń :file:`pl.xpi` i instalujemy.
+Na koniec wpisujemy polu adresu polecenie "about:config", w pole wyszukiwania
+"useragent" i zmieniamy opcję "general.useragent.locale" na "pl-PL" (o ile potrzeba).
+
+.. figure:: linimg/palemoon04.png
+.. figure:: linimg/palemoon05.png
+.. figure:: linimg/palemoon06.png
+.. figure:: linimg/palemoon07.png
+
+Dotakowe ustawienia są opcjonalne, ale wskazane.
 Wybieramy "Edycja/Preferencje", aby skonfigurować stronę domyślną,
 i katalog pobieranych plików, np. :file:`root/Pobrane` (trzeba go utworzyć),
 wreszcie opcje śledzenia i historii. Te ostatnie ustawienia wpływają na rozmiar wolnego
@@ -65,6 +82,9 @@ lokalny, co uniemożliwi jakąkolwiek z nimi komunikację ;-)
 
 Plik zapisu
 ************
+
+Poniżej omówiono tworzenie nowego pliku zapisu. W rozdziale :ref:`puppy`
+znajdziesz dodatkowe informacje o tym pliku.
 
 Podczas pierwszego zamknięcia system prosi o utworzenie pliku `zapisu <http://puppylinux.org/wikka/SaveFile>`_
 (ang. *savefile*), w którym zapisywane będą wprowadzane przez nas zmiany:

@@ -1,6 +1,8 @@
 JVM
 ####
 
+Menedżer JVM wykorzystywany jest domyślnie w systemie *TahrPup*.
+
 * Wygląd: Menu/Pulpit/Chtheme wybór motywu GTK; Menu/Pulpit/JVM konfiguracja/Wybierz motyw JVM.
 * Tapeta: umieść plik graficzny w :file:`/root/my-documents/clipart`, kliknij prawym klawiszem
   myszy i wybierz "set background".

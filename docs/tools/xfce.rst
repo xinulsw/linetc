@@ -1,15 +1,15 @@
 XFCE
 ######
 
-Jeżeli nie przypadnie nam do gustu domyślne środowisko systemu TahrPup,
-czyli JVM/ROX Desktop/ROX-Filer, wystarczy zaktualizować pakiety w narzędziu
-*quickpet-tahr* (omówione wyżej), zrestartować je, a następnie zainstalować
+Jeżeli nie przypadnie nam do gustu domyślne środowisko systemu *TahrPup*,
+czyli *JVM/ROX Desktop/ROX-Filer*, lub *LXPupTahr* – *LXDE*, wystarczy
+zaktualizować pakiety w narzędziu :ref:`quickpet-tahr <instalacjaprog>`, zrestartować je, a następnie zainstalować
 pulpit XFCE z kategorii "desktops". Po zakończeniu instalacji wybieramy narzędzie
 przełączania menedżerów okien WM Switcher (Menu/Pulpit/), zaznaczamy XFCE i klikamy
 przycisk "Restart X".
 
-* Menu "Start": domyślnie są na pasku zadań dwa, tradycyjny aplet "Programy"
-  i nowsze "Menu Whisker" – na niepotrzebnym kliknij prawym klawiszem i wybierz "Usuń".
+* Menu "Start": domyślnie są na pasku zadań dwa menu, tradycyjny aplet "Programy"
+  i nowszy "Menu Whisker". Niepotrzebne kliknij prawym klawiszem i wybierz "Usuń".
 * Menu Whisker: prawy klawisz na ikonie i "Właściwości"; wpisywanie pierwszych liter
   programu wyszukuje go w menu.
 * Wygląd: Programy/Ustawienia/Wygląd

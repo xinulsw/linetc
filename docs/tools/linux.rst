@@ -17,14 +17,14 @@ ale również jako podręczny sytem przenośny lub ratunkowy.
 Klucz USB w Windows
 *************************
 
-Aby w systemie MS Windows przygotować bootowalny klucz USB z opcją persistent,
-wykonaj następujące czynności:
+Aby w systemie MS Windows przygotować bootowalny klucz USB z możliwością
+zapisu ustawień i dokumentów, wykonaj następujące czynności:
 
 1) Pobierz program `Rufus <https://rufus.akeo.ie/>`_ – małe, szybkie i sprawdzone (:-)) narzędzie
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
-2) Pobierz plik `LxPupTahr-15.03.1-pae.iso <http://lx-pup.weebly.com/upup-tahr.html>`_ (ok. 250 MB),
-   zawierający pulpit `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_. System jest "odchudzoną" wersją Ubuntu 14.04 LTS.
+2) Pobierz plik :file:`kzkbox_25052015.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
+   Plik zawiera dostosowany obraz systemu LxPupTahr 15.03 z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
    :alt: Pulpit LxPupTahr
@@ -41,86 +41,31 @@ wykonaj następujące czynności:
     * z listy "Urządzenie" wybierz pendrajwa kierując się oznaczeniem literowym i pojemnością;
     * zaznacz w razie potrzeby opcję "Szybkie formatowanie" (domyślna)
     * zaznacz opcję "Utwórz bootowalny dysk używając" -> "Obraz ISO",
-      kliknij ikonę obok i wskaż ściągnięty plik :file:`LxPupTahr-15.03.1-pae.iso`;
-    * kliknij "Start" i po chwili (naprawdę szybko) powinieneś zobaczyć napis "Gotowe".
+      kliknij ikonę obok i wskaż ściągnięty plik :file:`kzkbox_25052015.iso`;
+    * wybierz "Opcje formatowania" i zaznacz "Dodaj łatkę dla starych biosów";
+    * kliknij "Start" i po 4-5 min. powinieneś zobaczyć napis "Gotowe".
 
-.. figure:: linimg/rufus01.jpg
+.. figure:: linimg/rufus02.jpg
 
-Możesz spróbować uruchomić komputer z wykorzystaniem tak przygotowanego pendrajwa
-i... eksperymentować, ile chcesz. Wprowadzonych zmian nie musisz zapisywać.
-Ale zanim to zrobisz przeczytaj jeszcze jeden rozdział poniżej!
-
-Plik zapisu
-============
-
-*LxPup* po pierwszym uruchomieniu ma interfejs w języku angielskim i wymaga wstępnej konfiguracji.
-Dlatego sugerujemy pobranie `pliku zapisu <http://puppylinux.org/wikka/SaveFile>`_
-(ang. *savefile*) :file:`lxtahrsave-lxde.2fs` udostępnionego w serwisie `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_,
-oraz dodatkowego pakietu `jre1.7.0_65_5.7.0.sfs <http://puppylinuxstuff.meownplanet.net/aarf/java_jre/jre1.7.0_65_5.7.0.sfs>`_.
-Obydwa pliki należy wgrać do głównego katalogu pendrajwa.
-
-Plik zapisu zawiera zapisaną konfigurację systemu, czyli:
-
-* zaktualizowane listy oprogramowania;
-* zaktualizowaną i spolszczoną domyślną przeglądarkę `Pale Moon <https://www.palemoon.org/>_`
-  (otwartoźrodłówa, oparta na Firefoksie);
-* fonty Droid, Ubuntu oraz podstawowe z Windows;
-* pakiety python-pip, python-virtualenv oraz bibliotekę pygame;
-* skonfigurowane mini środowisko programistyczne IDE – Geany.
-* środowisko PyCharm IDE Educational
-* skonfigurowane elementy interfejsu LXDE
+Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego pendrajwa.
+Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
+:kbd:`F1`, :kbd:`F2`, :kbd:`F10`, :kbd:`F12` lub :kbd:`DEL`.
 
 .. attention::
 
-    Na pendrajwie nie może znajdować się żaden inny plik o nazwie rozpoczynającej
-    się na `lxtahrsave`. Ewentualne utworzone wcześniej pliki zapisu
-    trzeba albo skasować, albo zmienić im nazwy.
+    Do przechowywania wprowdzonych zmian wykorzystywany jest plik zapisu
+    :file:`lxtahrsave-kzk.2fs` umieszczony w głównym katalogu pendrajwa.
 
     **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
     *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Setup).
 
-.. note::
-
-    Nazwa pliku :file:`pupsave` zawsze zaczyna się "lxtahrsave-", np.:
-    :file:`lxtahrsave-lxde.2fs`. Położenie jest dowolne, tzn. można go zapisać
-    na kluczu USB, ale równie dobrze może być zapisany na dowolnej partycji
-    szybkiego dysku stacjonarnego. Podczas uruchamiania *LxPup* potrafi
-    odnaleźć ten plik na wszystkich dostępnych partycjach i załadować go!
-
-.. tip::
-
-    Pracując w systemie, mamy dostęp do głównego katalogu naszego pendrajwa
-    (zazwyczaj oznaczonego w menedżerze plików ``sdb1``). Możemy w nim tworzyć
-    dowolne foldery i zapisywać pliki, np. *pet* i *sfs*, z których
-    będziemy korzystać w miarę potrzeb. Dzięki temu unikniemy zbędnego
-    rozrastania się pliku zapisu.
-    Należy uważać, aby z katalogu głównego nie usunąć plików *LxPup*.
-
-Przechowywanie ustawień i dokumentów w pliku zapisu ma swoje zalety:
-
-* wystarczy usunąć omawiany plik, a system uruchomi się w wersji domyślnej;
-  będzie można skonfigurować go od podstaw;
-* można udostępniać innym pliki zapisu; wystarczy, że wgrają go na
-  pendrajwa przygotowanego zgodnie z naszą instrukcją, a dostaną
-  skonfigurawane środowisko i programy, a nawet ewentualne dokumenty.
-
-Ostatecznie zawartość katalogu głównego pendrajwa przedstawiać powinna się
-następująco:
-
-.. figure:: linimg/lxpup_explorer.jpg
-   :alt: zawartość pendrajwa po wgraniu *LXPupTahr* i wymaganych plików
-
 Obsługa *LxPupTahr*
 ***********************
 
-System *LxPup* domyślnie wczytuje się w całości do pamięci RAM i uruchamia
+System *LxPupTahr* domyślnie wczytuje się w całości do pamięci RAM i uruchamia
 środowisko graficzne LXDE z zalogowanym użytkownikiem *root*, czyli administratorem
-w systemach linuksowych.
-
-Jeżeli system uruchamiany jest po raz pierwszy, wita nas kreator konfiguracji.
-Jeżeli jednak skorzystamy z poleconego wyżej pliku zapisu, czynnością,
-którą będziemy chcieli wykonać na początku, jest nawiązanie połączenia
-z internetem.
+w systemach linuksowych. Czynnością, którą będziesz chciał wykonać na początku,
+jest nawiązanie połączenia z internetem.
 
 Połączenie z internetem
 =========================
@@ -144,6 +89,25 @@ informacyjnym "Ok".
 .. figure:: lxpupimg/internet03.png
 .. figure:: lxpupimg/internet04.png
 .. figure:: lxpupimg/internet05.png
+
+Przeglądarka WWW
+==================
+
+Domyślną przeglądarką jest `PaleMoon <https://www.palemoon.org/>`_, otwartoźródłowa
+odmiana oparta na Firefoksie. Od czasu do czasu warto ją zaktualizować.
+
+Domyślne katalogi
+==================
+
+* :file:`/root/my-documents` lub :file:`/root/Dokumenty`
+* :file:`/root/my-documents/clipart` lub :file:`/root/Pobrane` - tu zapisywane są pliki pobierane z internetu
+* :file:`/root/my-documents/clipart` lub :file:`/root/Obrazy`
+* :file:`/root/my-documents/tmp` lub :file:`/root/tmp` - katalogi tymczasowe
+* :file:`/root/.icons` – dodatkowe zestawy ikon
+* :file:`/root/.themes` – dodatkowe tematy Gtk
+* :file:`/usr/share/fonts/default/TTF/` – dodatkowe czcionki TrueType, np. z MS Windows
+
+.. _instalacjaprog:
 
 Instalacja programów
 ====================
@@ -171,8 +135,8 @@ Na koniec zamykamy okno aktualizacji przyciskiem "OK", co zrestartuje menedżera
 
 Po ponownym uruchomieniu PPM, wpisujemy nazwę szukanego pakietu w pole wyszukiwania,
 następnie wybieramy pakiet z wyświetlonej listy, co dodaje go do kolejki.
-W ten sposób możemy wyszukać i dodać kilka pakietów na raz, np. *python-pip*,
-*python-virtual*, *pygame*. Na koniec zatwierdzamy instalację przyciskiem "Do it!"
+W ten sposób możemy wyszukać i dodać kilka pakietów na raz.
+Na koniec zatwierdzamy instalację przyciskiem "Do it!"
 
 .. figure:: lxpupimg/ppm04.png
 
@@ -204,50 +168,23 @@ działania systemu. Korzystamy z narzędzia *SFS-Load w locie* (Start/Setup).
 
 .. figure:: linimg/pcmanfm01.png
 
-.. note::
-
-    Pod adresem `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_ znajdziesz
-    niedługo przydatne pakiety w formacie PET i SFS.
-
-Przeglądarka WWW
-==================
-
-Domyślną przeglądarką jest `PaleMoon <https://www.palemoon.org/>`_, otwartoźródłowa
-odmiana oparta na Firefoksie. Aktualizujemy ją wybierając *Start/Internet/Palemoon-updater*.
-Zaznaczamy "Update Pale Moon" i klikamy OK.
-
-.. figure:: linimg/palemoon01.png
-.. figure:: linimg/palemoon02.png
-.. figure:: linimg/palemoon03.png
-
-Jeśli po aktualizacji przywita nas angielskojęzyczny interfejs, na stronie powitalnej
-klikamy link "Language Packs", pobieramy plik tłumaczeń :file:`pl.xpi` i instalujemy.
-Na koniec wpisujemy polu adresu polecenie "about:config", w pole wyszukiwania
-"useragent" i zmieniamy opcję "general.useragent.locale" na "pl-PL" (o ile potrzeba).
-
-.. figure:: linimg/palemoon04.png
-.. figure:: linimg/palemoon05.png
-.. figure:: linimg/palemoon06.png
-.. figure:: linimg/palemoon07.png
-
-Domyślne katalogi
-==================
-
-* :file:`/root/my-documents` lub :file:`/root/Dokumenty`
-* :file:`/root/my-documents/clipart` lub :file:`/root/Obrazy`
-* :file:`/root/my-documents/tmp` lub :file:`/root/tmp` - katalog tymczasowy
-  oŋólnego przeznaczenia, wszystkie dane są z niego usuwane po zakończeniu sesji!
-* :file:`/root/.icons` – dodatkowe zestawy ikon
-* :file:`/root/.themes` – dodatkowe tematy Gtk
-* :file:`/usr/share/fonts/default/TTF/` – dodatkowe czcionki TrueType, np. z MS Windows
-
 Skróty klawiaturowe
 ====================
 
 .. attention::
 
-    Poniższe skróty będą działać, jeżeli wykorzystamy udostępniony przez
-    nas plik zapisu, który zawiera odpowiednie ustawienia.
+    Poniższe skróty zadziałają, jeżeli po każdorazowym uruchomieniu systemu
+    ustawimy odpowiedni typ klawiatury. Procedura jest bardzo prosta.
+    Uruchamiamy "Ustawienia Puppy" (pierwsza ikona obok przycisku Start,
+    lub Start/Setup/Wizard Kreator), wybieramy "Mysz/Klawiatura". W następnym
+    oknie "Zaawansowana konfiguracja", potwierdzamy "OK", dalej "Model klawiatury"
+    i na koniec zaznaczamy "pc105". Pozostaje potwierdzenie "OK" i jeszcze
+    kliknięcie przycisku "Tak" w poprzednim oknie, aby aktywować ustawienia.
+
+.. figure:: lxpupimg/lxpup_ustawienia.png
+.. figure:: lxpupimg/lxpup_klawiatura01.png
+.. figure:: lxpupimg/lxpup_klawiatura02.png
+.. figure:: lxpupimg/lxpup_klawiatura03.png
 
 Oznaczenia: C – Control, A – Alt, W - Windows (SuperKey).
 
@@ -283,8 +220,25 @@ Konfiguracja LXDE
 * **Terminale** Start/Utility
 * **Ustawienie daty i czasu**: Start/Desktop
 
+Wskazówki
+==========
+
+1. Dwukrotne kliknięcie – menedżer plików PcManFm domyślnie otwiera pliki
+   i katalogi po pojedynczym kliknięciu. Jeżeli chcielibyśmy to zmienić,
+   wybieramy "Edycja/Preferencje".
+
 Materiały dodatkowe
 *******************
+
+.. note::
+
+    Winę za niebootujący system z klucza USB częściej ponosi sprzęt niż
+    sam pendrajw czy nagrany na nim system. Niestety, dotyczy to głównie
+    przestarzałych maszyn oraz... najnowszych. Pierwsze mają niedostosowany BIOS,
+    drugie zbyt "nowe" komponenty, do których może brakować sterowników.
+    Problematyczne mogą być też laptopy z biosem UEFI, plus SecureBoot,
+    z preinstalowanym "jedynym słusznym" systemem... Przeczytaj rozdział
+    "Problemy".
 
 .. toctree::
     :maxdepth: 2
