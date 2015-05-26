@@ -3,14 +3,20 @@
 
 import random
 
-ileliczb = int(raw_input("Podaj ilość typowanych liczb: "))
-maksliczba = int(raw_input("Podaj maksymalną losowaną liczbę: "))
+try:
+    ileliczb = int(raw_input("Podaj ilość typowanych liczb: "))
+    maksliczba = int(raw_input("Podaj maksymalną losowaną liczbę: "))
+    if ileliczb > maksliczba:
+        print "Błędne dane!"
+        exit()
+except:
+    print "Błędne dane!"
+    exit()
 
 liczby = []
 i = 0
-while i < ileliczb:
+while i < int(ileliczb):
     liczba = random.randint(1, maksliczba)
-    print "Wylosowane liczba:",liczba
     if liczby.count(liczba) == 0:
         liczby.append(liczba)
         i = i + 1
@@ -20,7 +26,12 @@ for i in range(3):
     typy = set()
     i = 0
     while i < ileliczb:
-        typ = int(raw_input("Podaj liczbę "+str(i+1)+": "))
+        try:
+            typ = int(raw_input("Podaj liczbę "+str(i+1)+": "))
+        except ValueError:
+            print "Błędne dane!"
+            continue
+
         if typ not in typy:
             typy.add(typ)
             i = i + 1

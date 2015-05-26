@@ -84,3 +84,14 @@
     wyjątki
         to komunikaty zgłaszane przez interpreter Pythona, pozwalające ustalić
         przyczyny błędnego działania kodu.
+
+    funkcja
+        blok często wykonywanego kodu wydzielony słowem kluczowym ``def``,
+        opatrzony unikalną w danym zasięgu nazwą; może przyjmować dane
+        i zwracać wartości za pomocą słowa kluczowego ``return``.
+
+    moduł
+        plik zawierający wiele zazwyczaj często używanych w wielu programach
+        funkcji lub klas; zanim skorzystamy z zawartych w nim fragmentów kodu,
+        trzeba je lub cały moduł zaimportować za pomocą słowa kluczowego
+        ``import``.

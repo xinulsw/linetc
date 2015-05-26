@@ -461,10 +461,23 @@ Kod naszego programu do tej pory przedstawia się mniej więcej tak:
 .. literalinclude:: toto26.py
     :linenos:
 
-Uruchom program i zamiast liczby podaj tekst. Co się dzieje? Zgłoszony
-zostaje wyjątek "ValuError" (zob.: :term:`wyjątki`) i komunikat "invalid literal for int() with base 10",
-który informuje, że fukncja ``int()`` nie jest w stanie przekształcić podanego
-ciągu znaków na liczbę całkowitą.
+Uruchom powyższy program i podaj ilość losowanych liczb większą od maksymalnej losowanej liczby.
+Po chwili stwierdzimy, że program wpada w nieskończoną pętlę! Po chwili zastanowienia dojdziemy
+do wniosku, że nie da się wylosować np. 6 unikalnych liczb z zakresu 1-5.
+
+Ćwiczenie 12
+=============
+
+Dodaj odpowiednią instrukcję warunkową, która w przypadku gdy zmienna ``ileliczb``
+będzie mniejsza od zmiennej ``maksliczba`` wyświetli komunikat "Błędne dane!"
+i przerwie wykonywanie programu – użyj funkcji ``exit()``. Przetestuj program.
+
+Niestety, nasz program nadal nie jest odporny na błędne dane.
+Uruchom program i zamiast liczby podaj tekst. Co się dzieje?
+
+Zgłoszony zostaje wyjątek "ValuError" (zob.: :term:`wyjątki`) i komunikat
+"invalid literal for int() with base 10", który informuje, że fukncja ``int()``
+nie jest w stanie przekształcić podanego ciągu znaków na liczbę całkowitą.
 
 Spróbujmy zmodyfikować program tak, aby był nieco odporniejszy na niepoprawne dane:
 
@@ -473,21 +486,58 @@ Spróbujmy zmodyfikować program tak, aby był nieco odporniejszy na niepoprawne
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: toto27.py
+.. literalinclude:: toto28.py
     :linenos:
     :lineno-start: 6
-    :lines: 6-11
+    :lines: 6-14
 
 Do przechwytywania wyjątków używamy konstrukcji ``try: ... except: ...``, czyli
-spróbuj wykonać kod w bloku ``try``, a w razie błędów przechwyć wyjątek ``ValueError``.
+spróbuj wykonać kod w bloku ``try``, a w razie błędów przechwyć wyjątek ``ValueError``
+i wykonaj podporządkowane instrukcje. W powyższym przypadku wyświetlamy odpowiedni
+komunikat i kończymy działanie programu (``exit()``).
+
 Przetestuj program wprowadzając tekst zamiast liczb.
 
-Ćwiczenie 12
+Ćwiczenie 13
 =============
 
 Program powinien być odporny na błędne dane we wszystkich miejscach, w których
 pobiera dane od użytkownika. Wprowadź konieczne poprawki kodu i przetestuj
 swoje rozwiązania.
+
+.. tip::
+
+    Problemem może być pobieranie typów od użytkownika. Odpowiednią instrukcję
+    należy wpisać w konstrukcję ``try... except...``, pamiętając o wcięciach!
+    Co powinno się jednak stać, jeśli użytkownik poda błędne dane?
+    Przerwanie programu, jak w poprzednich przypadkach, nie jest najlepszym
+    pomysłem. Użyj instrukcji ``continue``, które pomija dalsze polecenia,
+    ale kontynuuje wykonywanie pętli.
+
+Funkcje
+*********
+
+Tam, gdzie w programie występuje powtarzające się działanie, wskazane jest
+używanie funkcji, czyli nazwanych bloków kodu, które można grupować w ramach
+modułów (zob. :term:`funkcja`, zob. :term:`moduł`). Do tej pory korzystaliśmy
+np. z funkcji ``randit()`` zawartej w module ``random``.
+
+Spróbujmy powtarzające się w naszym programie operacje przekształcić w funkcje.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto30.py
+    :linenos:
+    :emphasize-lines: 6, 19, 48, 52
+
+Kod odpowiedzialny za losowanie liczb i pobieranie typów użytkownika umieszczony
+został w osobnyhc funkcjach, które jako argumenty przyjmują ilość losowanych
+liczb i maksymalną losowaną wartość. Obydwie funkcje zwracają za pomocą
+instruckji ``return`` dane: listę wylosowanych liczb i zbiór typów, które
+zostają zapisane w momencie wywołania funkcji do podanej zmiennej.
 
 Ranking trafień
 ****************

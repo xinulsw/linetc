@@ -31,7 +31,7 @@ print "Wytypowane liczby:",typy
 
 trafione = set(liczby) & typy
 if trafione:
-    print "Ilość trafień: ",len(trafione)
+    print "\nIlość trafień: ",len(trafione)
     print "Trafione liczby: ",trafione
 else:
     print "Brak trafień. Spróbuj jeszcze raz!"
