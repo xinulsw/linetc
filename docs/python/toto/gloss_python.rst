@@ -1,3 +1,5 @@
+Słownik Pythona
+#################
 
 .. glossary::
 
