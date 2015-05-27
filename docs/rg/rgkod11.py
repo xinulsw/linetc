@@ -12,4 +12,4 @@ else:
     najblizszy_wrog = rg.CENTER_POINT
 
 if bezpieczne:
-    move = ['move', mindist(bezpieczne, najblizszy_wrog)]
+    ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]

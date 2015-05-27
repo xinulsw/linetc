@@ -8,4 +8,4 @@ def mindist(bots, loc):
 
 if self.location in wejscia:
     if bezpieczne:
-        move = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+        ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]

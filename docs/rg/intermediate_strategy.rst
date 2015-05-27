@@ -83,7 +83,7 @@ Dlatego możemy blokować ataki na pola sasiednie_wrogowie2, jeśli znajdują si
 na liście wykonanych ruchów.
 
 [Robots that attack two moves away often form a perimeter around the enemy
-(a good thing) but it prevents your own bots from ruch across the line.
+(a good thing) but it prevents your own bots from run across the line.
 For that reason we can choose to not let a robot do an an adjacent_enemy2
 attack if they are sitting in a taken spot.]
 
@@ -98,7 +98,7 @@ Na koniec podmieniamy kod zwracający ruchy:
     ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
     ruch = ['attack', sasiednie_wrogowie.pop()]
 
-– tak aby wykorzystywał nowe funkcjce:
+– tak aby wykorzystywał nowe funkcje:
 
 .. code-block:: python
 

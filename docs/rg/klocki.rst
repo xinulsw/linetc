@@ -227,6 +227,12 @@ Wersja wykorzystująca zbiory. Idź bezpiecznie w kierunku najbliższego wroga.
 .. literalinclude:: rgkod11.py
     :linenos:
 
+Śledź wybrane miejsca
+**********************
+
+Aby unikać niepotrzebnych kolizji, nie należy wchodzić na wybrane wcześniej
+pola.
+
 .. raw:: html
 
     <hr />

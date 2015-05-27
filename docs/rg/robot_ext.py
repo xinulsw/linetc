@@ -53,9 +53,11 @@ class Robot:
                     ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
             else:
                 ruch = ['attack', sasiednie_wrogowie.pop()]
-        elif sasiednie_wrogowie2:
-            ruch = ['attack', sasiednie_wrogowie2.pop()]
+        elif sasiednie_wrogowie2 and self.location not in wybrane_ruchy:
+            #ruch = ['attack', sasiednie_wrogowie2.pop()]
+            if sasiednie_wrogowie:
+                ruch = stoj('attack',sasiednie_wrogowie.pop())
         elif bezpieczne:
-            ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
-
+            #ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
+            ruch = ruszaj(mindist(bezpieczne, najblizszy_wrog))
         return ruch
