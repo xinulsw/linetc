@@ -17,16 +17,14 @@ Zmieniliśmy lub dodaliśmy następujące reguły:
 * Uciekaj, jeśli masz zginąć
 * Atakuj wrogów dwa kroki obok
 * Wchodź na bezpieczne, niezajęte pola
-* Idż na wroga, jeśli w pobliżu go nie ma
+* Idź na wroga, jeśli w pobliżu go nie ma
 
 Do powyższych dodamy kolejne reguły w postaci fragmentów kodu, które trzeba
 zintergrować z dotychczasową implementacją bota, aby go ulepszyć.
 
-Kolejne funkcje
-****************
 
 Śledź wybrane miejsca
-======================
+**********************
 
 To raczej złożona funkcja, ale jest potrzebna, aby zmniejszyć ilość kolizji.
 Dotychczasowe boty drużyny próbują wejść na to samo miejsce i atakują się nawzajem.
@@ -51,11 +49,11 @@ umieścić na początku metody ``Robot.act``:
         wybrane_ruchy = set()
 
 Kolejne fragmenty odpowiadać będą za zapamiętywanie wykonywanych ruchów.
-Kod najwygodniej umieścić w jednej funkcji, która zanim zwróci
-wybrany ruch, zapisze go na liście. Warto zauważyć, że zapisywane będą
+Kod najwygodniej umieścić w pojedynczych funkcjach, które zanim zwrócą
+wybrany ruch, zapiszą go na liście. Warto zauważyć, że zapisywane będą
 współrzędne pól, na które wchodzimy lub na których pozostajemy (obrona, atak,
-samobójstwo). Funkcja musi znaleźć się w ``Robot.act``,
-aby współdzieliła jej przestrzeń nazw.
+samobójstwo). Funkcje muszą znaleźć się w metodzie ``Robot.act``,
+aby współdzieliły jej przestrzeń nazw.
 
 .. code-block:: python
 
@@ -72,7 +70,7 @@ aby współdzieliła jej przestrzeń nazw.
         wybrane_ruchy.add(self.location)
         return [act, loc]
 
-Kolejnym krokiem jest usunięcie listy wykonanych ruchów (``wybrane_ruchy``)
+Następnym krokiem jest usunięcie listy ``wybrane_ruchy``
 ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
@@ -97,14 +95,14 @@ Na koniec podmieniamy kod zwracający ruchy:
 
 .. code-block:: python
 
-    ruch = ['move', mindist(safe, najblizszy_wrog)]
+    ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
     ruch = ['attack', sasiednie_wrogowie.pop()]
 
 – tak aby wykorzystywał nowe funkcjce:
 
 .. code-block:: python
 
-    ruch = ruszaj(mindist(safe, closest_enemy))
+    ruch = ruszaj(mindist(bezpieczne, najblizszy_wrog))
     ruch = stoj('attack', sasiednie_wrogowie.pop())
 
 Warto wspomnieć, że roboty nie mogą zamieniać się miejscami. Wprawdzie

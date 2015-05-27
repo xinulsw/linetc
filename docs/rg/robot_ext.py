@@ -3,8 +3,25 @@
 
 import rg
 
+runda_numer = 0
+wybrane_ruchy = set()
+
 class Robot:
+
     def act(self, game):
+        global runda_numer, wybrane_ruchy
+        if game.turn != runda_numer:
+            runda_numer = game.turn
+            wybrane_ruchy = set()
+
+        def ruszaj(loc):
+            wybrane_ruchy.add(loc)
+            return ['move', loc]
+
+        def stoj(act, loc=None):
+            wybrane_ruchy.add(self.location)
+            return [act, loc]
+
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
         wejscia = {loc for loc in wszystkie if 'spawn' in rg.loc_types(loc)}
         zablokowane = {loc for loc in wszystkie if 'obstacle' in rg.loc_types(loc)}
@@ -14,7 +31,7 @@ class Robot:
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
         sasiednie_wrogowie = sasiednie & wrogowie
         sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
-        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
+        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_ruchy
 
         def mindist(bots, loc):
             return min(bots, key=lambda x: rg.dist(x, loc))
