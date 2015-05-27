@@ -32,7 +32,7 @@ for i in range(3):
             print "Błędne dane!"
             continue
 
-        if typ not in typy:
+        if typ > 0 and typ <= maksliczba and typ not in typy:
             typy.add(typ)
             i = i + 1
 

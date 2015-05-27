@@ -507,22 +507,63 @@ swoje rozwiązania.
 
 .. tip::
 
-    Problemem może być pobieranie typów od użytkownika. Odpowiednią instrukcję
-    należy wpisać w konstrukcję ``try... except...``, pamiętając o wcięciach!
-    Co powinno się jednak stać, jeśli użytkownik poda błędne dane?
-    Przerwanie programu, jak w poprzednich przypadkach, nie jest najlepszym
-    pomysłem. Użyj instrukcji ``continue``, które pomija dalsze polecenia,
-    ale kontynuuje wykonywanie pętli.
+    Problemem może być pobieranie typów od użytkownika. Nie dość, że użytkownik
+    może wpisać literę zamiast cyfry, to jeszcze podane liczby mogą być poza zakresem.
 
-Funkcje
-*********
+    Trzeba więc użyć konstrukcji ``try... except...``. Ale co powinno się stać,
+    jeśli użytkownik poda błędne dane? Przerwanie programu, jak wcześniej,
+    nie jest najlepszym pomysłem. Lepiej użyć polecenia ``continue``, które
+    pomija dalszy kod, ale kontynuuje wykonywanie pętli.
+
+    Trzeba również dodać odpowiednie warunki sprawdzające porawność podanych liczb.
+    Wyrażenia logiczne można umieścić wykorzystując operator logiczny ``and``
+    w warunku sprawdzającym, czy wylosowanej liczby nie ma w zbiorze.
+
+Funkcje i moduły
+*****************
 
 Tam, gdzie w programie występuje powtarzające się działanie, wskazane jest
 używanie funkcji, czyli nazwanych bloków kodu, które można grupować w ramach
 modułów (zob. :term:`funkcja`, zob. :term:`moduł`). Do tej pory korzystaliśmy
 np. z funkcji ``randit()`` zawartej w module ``random``.
 
-Spróbujmy powtarzające się w naszym programie operacje przekształcić w funkcje.
+Spróbujmy powtarzające się operacje lub fragmenty realizujące logicznie odrębne zadania
+w naszym programie przekształcić w funkcje. Można je umieszczać w jednym pliku,
+zwykle na początku, razem z kodem głównym – muszą wtedy ten kod poprzedzać.
+Można, i tak zrobimy, w osobnych modułach, dzięki czemu prgram główny będzie
+bardziej zwarty i przejrzysty.
+
+Tworzymy więc nowy plik :file:`totomodul.py` rozpoczynający się liniami wskazującymi
+interpreter i kodowanie. Umieszczamy w nim następujący kod:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: totomodul30.py
+    :linenos:
+    :emphasize-lines: 6, 9, 16, 21, 30, 33, 48
+
+Kod odpowiedzialny za ustalenie trudności gry, losowanie liczb i pobieranie typów
+użytkownika umieszczony został w osobnych funkcjach sygnalizowanych słowem
+kluczowym ``def`` i wcięciami. Funkcje mogą przyjmować argumenty, np.
+ilość losowanych liczb i maksymalną losowaną wartość. Warto zauważyć, że
+nazwy zmiennych w funkcjach są niezależne od nazw zmiennych w programie
+głównym. Są to dwa różne zasięgi czy też przestrzenie nazw.
+
+Wszystkie nasze funkcje zwracają (choć nie jest to wymagane) dane za pomocą
+instruckji ``return`` . Warto zauważyć, że można zwracać więcej niż jedną wartość naraz,
+np. w postaci tupli ``(ile, maks)``.
+
+Tupla zachowuje się jak nieedytowalna lista (zob. :term:`tupla`) i jest
+często stosowana w takich sytuacjach. Kod wywołujący funkcję ``trudnosc()``
+to z kolei przykład jednoczesnego przypisania wartości dwóm zmiennym,
+w tym wypadku za pomocą tzw. rozpakowania tupli: ``ileliczb, maksliczba = trudnosc()``.
+
+Dwie pozostałe funkcje zwracają listę wylosowanych liczb i zbiór typów.
+
+Program główny po zmianach przedstawia się następująco:
 
 .. raw:: html
 
@@ -531,18 +572,33 @@ Spróbujmy powtarzające się w naszym programie operacje przekształcić w funk
 .. highlight:: python
 .. literalinclude:: toto30.py
     :linenos:
-    :emphasize-lines: 6, 19, 48, 52
+    :emphasize-lines: 4, 9, 12, 16
 
-Kod odpowiedzialny za losowanie liczb i pobieranie typów użytkownika umieszczony
-został w osobnyhc funkcjach, które jako argumenty przyjmują ilość losowanych
-liczb i maksymalną losowaną wartość. Obydwie funkcje zwracają za pomocą
-instruckji ``return`` dane: listę wylosowanych liczb i zbiór typów, które
-zostają zapisane w momencie wywołania funkcji do podanej zmiennej.
+Na początku z modułu ``totomodul``, którego nazwa jest taka sama jak nazwa pliku,
+importujemy potrzebne funkcje. Później wywołujemy je w wyniku czego zwracanego
+przez nie wartości zostają przypisane podanym zmiennym. Jak widać, program stał
+się czytelniejszy.
+
+.. note::
+
+    W rozbudowanych programach dobrą praktyką ułatwiającą późniejsze przeglądanie
+    i poprawianie kodu jest opatrywanie jego fragmentów komentarzami. Można je
+    umieszczać po znaku ``#``. Z kolei funkcje opatruje się krótkim opisem
+    działania i/lub wymaganych argumentów, ograniczanym potrójnymi cudzysłowami.
+    Notacja ``"""..."""`` lub ``'''...'''`` pozwala zamieszczać teksty wielowierszowe.
 
 Ranking trafień
 ****************
 
-[todo]
+Uruchamiając wielokrotnie program, moglibyśmy zapamiętywać z jednej strony
+wyniki osiągane przez użytkowników, z drugiej zaś prowadzić rejestr losowań
+do celów statystycznych. Obydwa zadania wymagają zapisu danych na dysku
+albo w plikach, albo w bazie danych.
+
+Ze względu na przejrzystość kodu odpowiednią funkcję umieścimy w module:
+
+
+
 
 .. raw:: html
 

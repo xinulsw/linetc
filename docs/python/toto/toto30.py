@@ -1,48 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import random
+from totomodul import trudnosc, losujliczby, pobierztypy
 
-def losujliczby(ileliczb, maksliczba):
-    """Funkcja losuje podaną ilość unikalnych liczb
-    z zakresu od 1 do maksliczba"""
-    liczby = []
-    i = 0
-    while i < ileliczb:
-        liczba = random.randint(1, maksliczba)
-        if liczby.count(liczba) == 0:
-            liczby.append(liczba)
-            i = i + 1
-    return liczby
+# program główny
 
-
-def pobierztypy(ileliczb, maksliczba):
-    """Funkcja pobiera od użytkonika jego typy wylosowanych liczb"""
-    print "Wytypuj",ileliczb,"z",maksliczba," liczb: "
-    typy = set()
-    i = 0
-    while i < ileliczb:
-        try:
-            typ = int(raw_input("Podaj liczbę "+str(i+1)+": "))
-        except ValueError:
-            print "Błędne dane!"
-            continue
-
-        if typ not in typy:
-            typy.add(typ)
-            i = i + 1
-    return typy
-
-# pobieramy wstępne dane
-try:
-    ileliczb = int(raw_input("Podaj ilość typowanych liczb: "))
-    maksliczba = int(raw_input("Podaj maksymalną losowaną liczbę: "))
-    if ileliczb > maksliczba:
-        print "Błędne dane!"
-        exit()
-except:
-    print "Błędne dane!"
-    exit()
+# ustalamy trudność gry
+ileliczb, maksliczba = trudnosc()
 
 # losujemy liczby
 liczby = losujliczby(ileliczb, maksliczba)
