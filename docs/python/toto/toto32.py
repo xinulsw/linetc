@@ -14,14 +14,7 @@ liczby = losujliczby(ileliczb, maksliczba)
 # pobieramy typy użytkownika i sprawdzamy, ile liczb trafił
 for i in range(ilerazy):
     typy = pobierztypy(ileliczb, maksliczba)
-    trafione = set(liczby) & typy
-    if trafione:
-        print "\nIlość trafień: ",len(trafione)
-        print "Trafione liczby: ",trafione
-    else:
-        print "Brak trafień. Spróbuj jeszcze raz!"
-
-    print "\n"+"x"*40+"\n" # wydrukuj 40 znaków x
+    trafione = wyniki(set(liczby), typy)
 
 print "Wylosowane liczby:",liczby
 
@@ -36,7 +29,7 @@ losowania.append({
     "czas": time.time(),
     "dane": (ileliczb, maksliczba),
     "wylosowane": liczby,
-    "ile": len(trafione)
+    "ile": trafione
 })
 
 zapisz(nazwapliku, losowania)

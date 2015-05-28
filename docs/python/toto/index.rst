@@ -522,16 +522,16 @@ swoje rozwiązania.
 Funkcje i moduły
 *****************
 
-Tam, gdzie w programie występuje powtarzające się działanie, wskazane jest
-używanie funkcji, czyli nazwanych bloków kodu, które można grupować w ramach
-modułów (zob. :term:`funkcja`, zob. :term:`moduł`). Do tej pory korzystaliśmy
-np. z funkcji ``randit()`` zawartej w module ``random``.
+Tam, gdzie w programie występują powtarzające się operacje lub zestaw poleceń
+realizujący wyodrębnione zadanie, wskazane jest używanie funkcji.
+Są to nazwane bloki kodu, które można grupować w ramach modułów (zob. :term:`funkcja`, zob. :term:`moduł`).
+Funkcje zawarte w modułach można importować do różnych programów.
+Do tej pory korzystaliśmy np. z funkcji ``randit()`` zawartej w module ``random``.
 
-Spróbujmy powtarzające się operacje lub fragmenty realizujące logicznie odrębne zadania
-w naszym programie przekształcić w funkcje. Można je umieszczać w jednym pliku,
-zwykle na początku, razem z kodem głównym – muszą wtedy ten kod poprzedzać.
-Można, i tak zrobimy, w osobnych modułach, dzięki czemu prgram główny będzie
-bardziej zwarty i przejrzysty.
+Wyodrębnienie funkcji ułatwia sprawdzanie i poprawianie kodu, ponieważ
+wymusza podział programu na logicznie uporządkowane kroki. Jeżeli
+program korzysta z niewelu funkcji, można umieszczać je na początku pliku
+programu głównego.
 
 Tworzymy więc nowy plik :file:`totomodul.py` rozpoczynający się liniami wskazującymi
 interpreter i kodowanie. Umieszczamy w nim następujący kod:
@@ -543,23 +543,28 @@ interpreter i kodowanie. Umieszczamy w nim następujący kod:
 .. highlight:: python
 .. literalinclude:: totomodul30.py
     :linenos:
-    :emphasize-lines: 6, 9, 16, 21, 30, 33, 48
+    :emphasize-lines: 6, 9, 17, 22, 31, 34, 49
 
-Kod odpowiedzialny za ustalenie trudności gry, losowanie liczb i pobieranie typów
+Kod odpowiedzialny za ustawienia gry, losowanie liczb i pobieranie typów
 użytkownika umieszczony został w osobnych funkcjach sygnalizowanych słowem
-kluczowym ``def`` i wcięciami. Funkcje mogą przyjmować argumenty, np.
-ilość losowanych liczb i maksymalną losowaną wartość. Warto zauważyć, że
-nazwy zmiennych w funkcjach są niezależne od nazw zmiennych w programie
-głównym. Są to dwa różne zasięgi czy też przestrzenie nazw.
+kluczowym ``def`` i wcięciami. Funkcje mogą przyjmować definiowane w nawiasach
+dane wejściowe, np. ``losujliczby(ile, maks)``, które podajemy jako argumenty
+w momencie wywołania funkcji. Funkcje mogą zwracać dane wyjściowe za pomocą
+instrukcji ``return``.
 
-Wszystkie nasze funkcje zwracają (choć nie jest to wymagane) dane za pomocą
-instruckji ``return`` . Warto zauważyć, że można zwracać więcej niż jedną wartość naraz,
-np. w postaci tupli ``(ile, maks)``.
+Warto zauważyć, że można zwracać więcej niż jedną wartość naraz,
+np. w postaci tupli ``(ile, maks, ilelos)``. Tupla to rodzaj listy, w której
+nie możemy zmieniać wartości (zob. :term:`tupla`), jest często stosowana
+do przechowywania i przekazywania stałych danych.
 
-Tupla zachowuje się jak nieedytowalna lista (zob. :term:`tupla`) i jest
-często stosowana w takich sytuacjach. Kod wywołujący funkcję ``trudnosc()``
-to z kolei przykład jednoczesnego przypisania wartości dwóm zmiennym,
-w tym wypadku za pomocą tzw. rozpakowania tupli: ``ileliczb, maksliczba = trudnosc()``.
+Nazwy zmiennych lokalnych w funkcjach są niezależne od nazw zmiennych w programie
+głównym, ponieważ definiwane są w różnych zasięgach czy też przestrzeniach nazw.
+Możliwe jest tworzenie zmiennych globalnych dostępnych w całym programie,
+w funkcji odwołujemy się do nich za pomocą polecenia typu: ``global nazwa_zmiennej``.
+
+Wiele wartości zwracanych w tupli przez funkcję ``ustawienia()`` można
+jednocześnie przypisać kilku zmiennym dzięki operacji tzw. rozpakowania
+tupli: ``ileliczb, maksliczba, ilerazy = ustawienia()``.
 
 Dwie pozostałe funkcje zwracają listę wylosowanych liczb i zbiór typów.
 
@@ -575,9 +580,9 @@ Program główny po zmianach przedstawia się następująco:
     :emphasize-lines: 4, 9, 12, 16
 
 Na początku z modułu ``totomodul``, którego nazwa jest taka sama jak nazwa pliku,
-importujemy potrzebne funkcje. Później wywołujemy je w wyniku czego zwracanego
-przez nie wartości zostają przypisane podanym zmiennym. Jak widać, program stał
-się czytelniejszy.
+importujemy potrzebne funkcje. Później wywołujemy je podając nazwę i ewentualne
+argumenty. W efekcie zwracane przez nie wartości zostają przypisane podanym zmiennym.
+Jak widać, program stał się czytelniejszy.
 
 .. note::
 
@@ -587,18 +592,95 @@ się czytelniejszy.
     działania i/lub wymaganych argumentów, ograniczanym potrójnymi cudzysłowami.
     Notacja ``"""..."""`` lub ``'''...'''`` pozwala zamieszczać teksty wielowierszowe.
 
-Ranking trafień
+Historia losowań
 ****************
 
-Uruchamiając wielokrotnie program, moglibyśmy zapamiętywać z jednej strony
-wyniki osiągane przez użytkowników, z drugiej zaś prowadzić rejestr losowań
-do celów statystycznych. Obydwa zadania wymagają zapisu danych na dysku
-albo w plikach, albo w bazie danych.
+Uruchamiając wielokrotnie program, moglibyśmy zapamiętywać losowania
+użytkownika, tworząc rejestr do celów informacyjnych i/lub statystycznych.
+Zadanie wymaga po pierwsez zdefiniowania jakieś struktury, w której będziemy
+przechowywali dane, po drugie zaś zapisu danych np. na dysku albo w plikach,
+albo w bazie danych.
 
-Ze względu na przejrzystość kodu odpowiednią funkcję umieścimy w module:
+Na początku dopiszemy kod w programie głównym :file:`toto2.py`:
 
+.. raw:: html
 
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
+.. highlight:: python
+.. literalinclude:: toto31.py
+    :linenos:
+    :emphasize-lines: 34-39
+    :lineno-start: 28
+    :lines: 28-
+
+Dane graczy zapisywać będziemy w osobnych plikach nazywanych nickiem
+użytkownika z rozszerzeniem ".json": ``nazwapliku = nick + ".json"``.
+Informacje o grach przechowywać będziemy w liście ``losowania``,
+do której próbujemy na początku wczytać zapisane ewentualnie wcześniej
+dane: ``losowania = czytaj(nazwapliku)``.
+
+Elementami listy danych są natomiast słowniki, tzn. dane pogrupowane w parach
+"klucz: wartość", przy czym kluczami mogą być nie tylko liczby, ale również
+ciągi znakowe (zob. :term:`słownik`).
+
+Jak widać, do listy ``losowania`` dodajemy słownik zawierający datę (nie
+zapomnijmy dodać importu modułu ``time``!), ustawienia, wylosowane liczby
+oraz ilość trafień. Na końcu listę wszystkich losowań gracza zapisujemy
+do pliku.
+
+Teraz zobaczmy, jak wyglądają funkcje ``czytaj()`` i ``zapisz()`` w module
+:file:`totomodul31.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: totomodul31.py
+    :linenos:
+    :lineno-start: 51
+    :lines: 51-
+
+Kiedy czytamy i zapisujemy dane, ważną sprawą staje się ich format. Najprościej
+zapisywać dane jako znaki, jednak najczęściej programy użytkowe
+potrzebują zapisywać nie tyle teksty, ile złożone struktury danych, np.
+listy, zbiory czy słowniki. Znakowy zapis wymagałby wtedy wielu dodatkowych
+manipulacji, aby możliwe było poprawne odtworzenie informacji. Prościej
+jest skorzystać z serializacji, czyli zapisu danych obiektowych (zob. :term:`serializacja`).
+Jednym z szerzej stosowanych jest prosty format tekstowy :term:`JSON`.
+
+W funkcji ``czytaj()`` po sprawdzeniu, czy na dysku istnieje podany plik,
+otwieramy go w trybie odczytu ``"r"`` i jego zawartość dekodujemy do
+listy dane: ``dane = json.load(plik)``.
+
+Funkcja ``zapisz()`` oprócz nazwy pliku wymaga listy danych. Po otwarciu
+pliku w trybie zapisu ``plik = open(nazwapliku, "w")``, co powoduje wyczyszczenie
+jego zawartości, dane są serializowane i zapisywane formacie JSON:
+``json.dump(dane, plik)``.
+
+Dobrą praktyką jest zwalnianie uchwytu do pliku i przyddzielonych mu zasobów
+poprzez jego zamknięcie: ``plik.close()``.
+
+Przetestuj, przynajmniej kilkukrotnie, działanie programu.
+
+Ćwiczenie 14
+=============
+
+W programie w pętli ``for`` wielokrotnie powtarzać się może obliczanie
+ilości trafień i drukowanie komunikatów. Spróbuj utworzyć funkcję ``wyniki()``
+realizującą te operacje. Funkcję umieść w module programu, a następnie
+użyj jej w pętli. Zastanów się, jakie argumenty należy jej przekazać i co
+powinna zwracać.
+
+.. tip::
+
+    Zwróć uwagę, jakie dalsze operacje są zależne od zastępowanego kodu.
+
+Wydruk historii
+****************
+
+[todo]
 
 .. raw:: html
 

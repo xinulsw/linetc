@@ -1,18 +1,18 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from totomodul import trudnosc, losujliczby, pobierztypy
+from totomodul import ustawienia, losujliczby, pobierztypy
 
 # program główny
 
 # ustalamy trudność gry
-ileliczb, maksliczba = trudnosc()
+ileliczb, maksliczba, ilerazy = ustawienia()
 
 # losujemy liczby
 liczby = losujliczby(ileliczb, maksliczba)
 
 # trzy razy pobieramy typy użytkownika i sprawdzamy, ile liczb trafił
-for i in range(3):
+for i in range(ilerazy):
     typy = pobierztypy(ileliczb, maksliczba)
     trafione = set(liczby) & typy
     if trafione:

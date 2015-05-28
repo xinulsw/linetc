@@ -36,6 +36,7 @@ Słownik Pythona
         jedna z podstawowych struktur danych, indeksowana sekwencja takich samych
         lub różnych elementów, które można zmieniać. Przypomina tabele z innych
         języków programowania. Np. ``imiona = ['Ala', 'Ola', 'Ela']``.
+        Deklaracja pustej listy: ``lista = []``.
 
     tupla
         podbnie jak lista, zawiera indeksowaną sekwencję takich samych lub
@@ -43,18 +44,22 @@ Słownik Pythona
         przechowywania lub przekazywania ustawień, stałych wartości itp.
         Np. ``imiona = ('Ala', 'Ola', 'Ela')``. 1-elementową tuplę należy
         zapisywać z dodatkowym przecinkiem: ``tupla1 = (1,)``.
+        
 
     zbiór
         nieuporządkowany, nieindeksowany zestaw elementów tego samego lub
         różnych typów, nie może zawierać duplikatów, obsługuje charakterystyczne
         dla zbiorów operacje: sumę, iloczyn oraz różnicę.
-        Np. ``imiona = set(['Ala', 'Ola', 'Ela'])``.
+        Np. ``imiona = set(['Ala', 'Ola', 'Ela'])``. Deklaracja pustego zbioru:
+        ``zbior = set()``.
 
     słownik
-        zestaw par elementów w postaci klucz:wartość. Zarówno klucze,
-        jak i wartości mogą być tego samego lub różnych typów. Największą
-        zaletą słownika jest to, że klucze mogą być ciągami znaków.
-        Np. ``osoby = {'Ala': 'Lipiec' , 'Ola': 'Maj', 'Ela': 'Styczeń'}``.
+        zestaw par elementów w postaci "klucz: wartość". Kluczami mogą być
+        liczby, ciągi znaków czy tuple. Wartości mogą być tego samego lub
+        różnych typów. Np. ``osoby = {'Ala': 'Lipiec' , 'Ola': 'Maj', 'Ela': 'Styczeń'}``.
+        Dane ze słownika łatwo wydobyć: ``slownik['klucz']``,
+        lub zmienić: ``slownik['klucz'] = wartosc``.
+        Deklaracja pustego słownika: ``slownik = dict()``.
 
     instrukcja warunkowa
         podstawowa konstrukcja w programowaniu, wykorzystuje wyrażenie logiczne
@@ -97,3 +102,7 @@ Słownik Pythona
         funkcji lub klas; zanim skorzystamy z zawartych w nim fragmentów kodu,
         trzeba je lub cały moduł zaimportować za pomocą słowa kluczowego
         ``import``.
+        
+    serializacja
+        proces przekształcania obiektów w strumień znaków lub bajtów,
+        który można zapisać w pliku (bazie) lub przekazać do innego programu.

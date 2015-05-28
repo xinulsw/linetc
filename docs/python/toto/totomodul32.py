@@ -47,3 +47,31 @@ def pobierztypy(ile, maks):
             typy.add(typ)
             i = i + 1
     return typy
+
+import os, json
+
+def czytaj(nazwapliku):
+    """Funkcja odczytuje dane w formacie json z pliku"""
+    dane = []
+    if os.path.isfile(nazwapliku):
+        plik = open(nazwapliku, "r")
+        dane = json.load(plik)
+        plik.close()
+    return dane
+
+def zapisz(nazwapliku, dane):
+    """Funkcja zapisuje dane w formacie json do pliku"""
+    plik = open(nazwapliku, "w")
+    json.dump(dane, plik)
+    plik.close()
+
+def wyniki(liczby, typy):
+    trafione = liczby & typy
+    if trafione:
+        print "\nIlość trafień: ",len(trafione)
+        print "Trafione liczby: ",trafione
+    else:
+        print "Brak trafień. Spróbuj jeszcze raz!"
+    print "\n"+"x"*40+"\n" # wydrukuj 40 znaków x
+
+    return len(trafione)

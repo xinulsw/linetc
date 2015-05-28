@@ -3,9 +3,9 @@
 
 import random
 
-def trudnosc():
-    """Funkcja pobiera ilość losowanych liczb i maksymalną losowaną
-    wartość. Pozwala określić stopień trudności gry"""
+def ustawienia():
+    """Funkcja pobiera ilość losowanych liczb, maksymalną losowaną wartość
+    oraz ilość prób. Pozwala określić stopień trudności gry."""
     while 1:
         try:
             ile = int(raw_input("Podaj ilość typowanych liczb: "))
@@ -13,7 +13,8 @@ def trudnosc():
             if ile > maks:
                 print "Błędne dane!"
                 continue
-            return (ile, maks)
+            ilelos = int(raw_input("Ile losowań: "))
+            return (ile, maks, ilelos)
         except:
             print "Błędne dane!"
             continue
@@ -47,11 +48,19 @@ def pobierztypy(ile, maks):
             i = i + 1
     return typy
 
-import os, datetime, time, json
+import os, json
 
-def zapisz(losowanie, plik):
+def czytaj(nazwapliku):
+    """Funkcja odczytuje dane w formacie json z pliku"""
+    dane = []
     if os.path.isfile(nazwapliku):
-        plik = open(nazwapliku, "a")
-    else:
-        plik = open(nazwapliku, "w")
-    print >>plik, json.dumps(losowanie)
+        plik = open(nazwapliku, "r")
+        dane = json.load(plik)
+        plik.close()
+    return dane
+
+def zapisz(nazwapliku, dane):
+    """Funkcja zapisuje dane w formacie json do pliku"""
+    plik = open(nazwapliku, "w")
+    json.dump(dane, plik)
+    plik.close()
