@@ -1,33 +1,37 @@
-# zapamiętaj wybrane ruchy w zbiorze wykonane_ruchy
+# zapamiętaj wybrane pola w zbiorze wykonane_ruchy
 # dzięki któremu możemy unikać kolizji z własnymi botami
 
 # poniższe definicje umieszczamy przed klasą Robot jako globalne
 
 runda_numer = 0
-wybrane_ruchy = set()
+wybrane_pola = set()
 
 # poniższy kod umieszczamy wewnątrz metody Robot.act, na początku:
 
-        global runda_numer, wybrane_ruchy
+        # wyzeruj zbiór wybrane_pola przy pierwszym robocie w rundzie
+        global runda_numer, wybrane_pola
         if game.turn != runda_numer:
             runda_numer = game.turn
-            wybrane_ruchy = set()
+            wybrane_pola = set()
 
+        # jeżeli się ruszamy, zapisujemy docelowe pole
         def ruszaj(loc):
-            wybrane_ruchy.add(loc)
+            wybrane_pola.add(loc)
             return ['move', loc]
 
+        # jeżeli stoimy, zapisujemy zajmowane miejsce
         def stoj(act, loc=None):
-            wybrane_ruchy.add(self.location)
+            wybrane_pola.add(self.location)
             return [act, loc]
 
 # poniżej wstaw definicje potrzebnych zbiorów
-# Uwaga: ze zbioru bezpieczne wyłączamy wybrane_ruchy
 
-        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_ruchy
+# Uwaga: ze zbioru bezpieczne wyłączamy wybrane_pola
+
+        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_pola
 
 # stosujemy nowy kod w regułach atakowania wrogów
-        elif sasiednie_wrogowie2 and self.location not in wybrane_ruchy:
+        elif sasiednie_wrogowie2 and self.location not in wybrane_pola:
             #ruch = ['attack', sasiednie_wrogowie2.pop()]
             if sasiednie_wrogowie:
                 ruch = stoj('attack',sasiednie_wrogowie.pop())

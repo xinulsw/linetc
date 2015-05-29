@@ -43,10 +43,10 @@ umieścić na początku metody ``Robot.act``:
 
 .. code-block:: python
 
-    global runda_numer, wybrane_ruchy
+    global runda_numer, wybrane_pola
     if game.turn != runda_numer:
         runda_numer = game.turn
-        wybrane_ruchy = set()
+        wybrane_pola = set()
 
 Kolejne fragmenty odpowiadać będą za zapamiętywanie wykonywanych ruchów.
 Kod najwygodniej umieścić w pojedynczych funkcjach, które zanim zwrócą
@@ -60,22 +60,22 @@ aby współdzieliły jej przestrzeń nazw.
     # Jeżeli się ruszamy, zapisujemy docelowe pole
 
     def ruszaj(loc):
-        wybrane_ruchy.add(loc)
+        wybrane_pola.add(loc)
         return ['move', loc]
 
     # Jeżeli pozostajemy w miejscu, zapisujemy aktualne położenie
     # przy użyciu self.location
 
     def stoj(act, loc=None):
-        wybrane_ruchy.add(self.location)
+        wybrane_pola.add(self.location)
         return [act, loc]
 
-Następnym krokiem jest usunięcie listy ``wybrane_ruchy``
+Następnym krokiem jest usunięcie listy ``wybrane_pola``
 ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
 
-    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_ruchy
+    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_pola
 
 Roboty atakujące przeciwnika o dwa kroki obok często otaczają go (to dobrze),
 ale uniemożliwiają innym członkom drużyny poruszanie się po linii.
@@ -89,7 +89,7 @@ attack if they are sitting in a taken spot.]
 
 .. code-block:: python
 
-    elif sasiednie_wrogowie and self.location not in wybrane_ruchy:
+    elif sasiednie_wrogowie2 and self.location not in wybrane_pola:
 
 Na koniec podmieniamy kod zwracający ruchy:
 
@@ -105,7 +105,7 @@ Na koniec podmieniamy kod zwracający ruchy:
     ruch = ruszaj(mindist(bezpieczne, najblizszy_wrog))
     ruch = stoj('attack', sasiednie_wrogowie.pop())
 
-Warto wspomnieć, że roboty nie mogą zamieniać się miejscami. Wprawdzie
+Warto pamiętać, że roboty nie mogą zamieniać się miejscami. Wprawdzie
 jest możliwe zakodowanie tego, ale zamiana nie dojdzie do skutku.
 
 Atakuj najsłabszego wroga

@@ -235,4 +235,12 @@ pola.
 
 .. raw:: html
 
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod12.py
+    :linenos:
+
+.. raw:: html
+
     <hr />
