@@ -1,7 +1,8 @@
 Python
 ###################
 
-Poniżej przedstawiamy realizację aplikacji internetowej "Czat"
+Poniżej przedstawiamy materiał "Toto Lotek" wprowadzający do programowania
+w języku Python, realizację aplikacji internetowej "Czat" w wersji rozszerzonej
 stworzonej przy użyciu frameworka Django.
 
 .. toctree::
@@ -9,6 +10,11 @@ stworzonej przy użyciu frameworka Django.
 
     toto/index
     czat/index
+
+Propozycja scenariuszy warsztatów
+************************************
+
+* :download:`python_warsztaty.pdf <python_warsztaty.pdf>`
 
 Metryka
 **********

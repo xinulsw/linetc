@@ -8,7 +8,7 @@ będziemy mieli podobne zadanie. Użyjemy języka Python.
     :depth: 1
     :local:
 
-Plik programu
+Mały Lotek
 **************
 
 Zaczynamy od utworzenia pliku o nazwie :file:`toto.py` w dowolnym katalogu
@@ -462,7 +462,7 @@ Kod naszego programu do tej pory przedstawia się mniej więcej tak:
     :linenos:
 
 Uruchom powyższy program i podaj ilość losowanych liczb większą od maksymalnej losowanej liczby.
-Po chwili stwierdzimy, że program wpada w nieskończoną pętlę! Po chwili zastanowienia dojdziemy
+Program wpada w nieskończoną pętlę! Po chwili zastanowienia dojdziemy
 do wniosku, że nie da się wylosować np. 6 unikalnych liczb z zakresu 1-5.
 
 Ćwiczenie 12
@@ -470,10 +470,11 @@ do wniosku, że nie da się wylosować np. 6 unikalnych liczb z zakresu 1-5.
 
 Dodaj odpowiednią instrukcję warunkową, która w przypadku gdy zmienna ``ileliczb``
 będzie mniejsza od zmiennej ``maksliczba`` wyświetli komunikat "Błędne dane!"
-i przerwie wykonywanie programu – użyj funkcji ``exit()``. Przetestuj program.
+i przerwie wykonywanie programu – użyj funkcji ``exit()``. Sprawdź działanie programu.
 
-Niestety, nasz program nadal nie jest odporny na błędne dane.
-Uruchom program i zamiast liczby podaj tekst. Co się dzieje?
+
+Tetsujemy dalej. Uruchom program i zamiast liczby podaj tekst.
+Co się dzieje?
 
 Zgłoszony zostaje wyjątek "ValuError" (zob.: :term:`wyjątki`) i komunikat
 "invalid literal for int() with base 10", który informuje, że fukncja ``int()``
