@@ -1,4 +1,4 @@
-# jeżeli wokół są przeciwnicy, atakuj, ale tylko wtedy kiedy nie grozi ci śmierć
+# jeżeli wokół są przeciwnicy, atakuj, jeżeli nie grozi ci śmierć
 # wersja wykorzystująca zbiory pól i operacje na zbiorach
 
 # poniżej wstaw definicje potrzebnych zbiorów

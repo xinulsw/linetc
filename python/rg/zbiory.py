@@ -1,6 +1,6 @@
 import rg
 
-rg.settings.max_turns = 5
+rg.settings.max_turns = 2
 
 class Robot:
 
@@ -29,29 +29,8 @@ class Robot:
 
         bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
 
+        print wejscia
         # domyślne działanie robota: ruch do środka
         ruch = ['move', rg.toward(self.location, rg.CENTER_POINT)]
 
-        # jeżeli jesteś w punkcie wejscia, idź do środka, o ile to bezpieczne
-        if self.location in wejscia:
-            if bezpieczne:
-                ruch = ['move',  rg.toward(self.location, rg.CENTER_POINT)]
-
-        # jeżeli jesteś w środku, broń się w miejscu
-        if self.location == rg.CENTER_POINT:
-            ruch = ['guard']
-
-        # jeżeli wokół są przeciwnicy i nie zginiesz, atakuj
-
-        if sasiednie_wrogowie:
-            if 9*len(sasiednie_wrogowie) < self.hp:
-                ruch = ['attack', sasiednie_wrogowie.pop()]
-            else:
-                if bezpieczne:
-                    ruch = ['move', rg.toward(self.location, rg.CENTER_POINT)]
-
-        if sasiednie_wrogowie2:
-            ruch = ['attack', sasiednie_wrogowie2.pop()]
-
-        print bezpieczne
         return ruch

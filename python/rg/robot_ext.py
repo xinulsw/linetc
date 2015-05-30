@@ -4,22 +4,22 @@
 import rg
 
 runda_numer = 0
-wybrane_pola = set()
+wybrane_ruchy = set()
 
 class Robot:
 
     def act(self, game):
-        global runda_numer, wybrane_pola
+        global runda_numer, wybrane_ruchy
         if game.turn != runda_numer:
             runda_numer = game.turn
-            wybrane_pola = set()
+            wybrane_ruchy = set()
 
         def ruszaj(loc):
-            wybrane_pola.add(loc)
+            wybrane_ruchy.add(loc)
             return ['move', loc]
 
         def stoj(act, loc=None):
-            wybrane_pola.add(self.location)
+            wybrane_ruchy.add(self.location)
             return [act, loc]
 
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
@@ -31,7 +31,7 @@ class Robot:
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
         sasiednie_wrogowie = sasiednie & wrogowie
         sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
-        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_pola
+        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_ruchy
 
         def mindist(bots, loc):
             return min(bots, key=lambda x: rg.dist(x, loc))
@@ -53,7 +53,7 @@ class Robot:
                     ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
             else:
                 ruch = ['attack', sasiednie_wrogowie.pop()]
-        elif sasiednie_wrogowie2 and self.location not in wybrane_pola:
+        elif sasiednie_wrogowie2 and self.location not in wybrane_ruchy:
             #ruch = ['attack', sasiednie_wrogowie2.pop()]
             if sasiednie_wrogowie:
                 ruch = stoj('attack',sasiednie_wrogowie.pop())
