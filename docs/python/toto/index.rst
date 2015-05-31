@@ -689,4 +689,4 @@ Wydruk historii
 
 Jeżli masz ochotę na więcej, daj znać!
 
-.. include:: gloss_python.rst
+.. include:: ../gloss_python.rst

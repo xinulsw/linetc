@@ -1,5 +1,5 @@
 Słownik Pythona
-#################
+################
 
 .. glossary::
 
@@ -32,6 +32,12 @@ Słownik Pythona
         danych, np.: ``imiona = ('Ala', 'Ola', 'Ela')``. W nazwach zmiennych
         nie używamy znaków narodowych, nie rozpoczynamy ich od cyfr.
 
+    typy danych
+        Podstawowe proste typy danych to: string – łańcuch znaków, integer –
+        liczba całkowita, float – liczba zmiennoprzecinkowa (separatorem jest
+        kropka), boolean – wartość logiczna True (prawda) lub False (fałsz).
+        [todo]
+
     lista
         jedna z podstawowych struktur danych, indeksowana sekwencja takich samych
         lub różnych elementów, które można zmieniać. Przypomina tabele z innych
@@ -44,7 +50,7 @@ Słownik Pythona
         przechowywania lub przekazywania ustawień, stałych wartości itp.
         Np. ``imiona = ('Ala', 'Ola', 'Ela')``. 1-elementową tuplę należy
         zapisywać z dodatkowym przecinkiem: ``tupla1 = (1,)``.
-        
+
 
     zbiór
         nieuporządkowany, nieindeksowany zestaw elementów tego samego lub
@@ -88,6 +94,9 @@ Słownik Pythona
 
 .. glossary::
 
+    wyrażenie listowe
+        [todo]
+
     wyjątki
         to komunikaty zgłaszane przez interpreter Pythona, pozwalające ustalić
         przyczyny błędnego działania kodu.
@@ -102,7 +111,7 @@ Słownik Pythona
         funkcji lub klas; zanim skorzystamy z zawartych w nim fragmentów kodu,
         trzeba je lub cały moduł zaimportować za pomocą słowa kluczowego
         ``import``.
-        
+
     serializacja
         proces przekształcania obiektów w strumień znaków lub bajtów,
         który można zapisać w pliku (bazie) lub przekazać do innego programu.

@@ -2,19 +2,22 @@ Python
 ###################
 
 Poniżej przedstawiamy materiał "Toto Lotek" wprowadzający do programowania
-w języku Python, realizację aplikacji internetowej "Czat" w wersji rozszerzonej
-stworzonej przy użyciu frameworka Django.
+w języku Python, "Python kreśli" to krótkie wprowadzenie do biblioteki `matplotlib <http://en.wikipedia.org/wiki/Matplotlib>`_,
+w "Czacie" – realizujemy aplikację internetową w wersji rozszerzonej
+przy użyciu frameworka Django.
 
 .. toctree::
     :maxdepth: 1
 
     toto/index
+    pylab/index
     czat/index
 
 Propozycja scenariuszy warsztatów
-************************************
+**********************************
 
 * :download:`python_warsztaty.pdf <python_warsztaty.pdf>`
+
 
 Metryka
 **********
