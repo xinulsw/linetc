@@ -208,11 +208,16 @@ Uruchom i przetestuj działanie programu.
 Ćwiczenie 5
 ============
 
+Spróbuj samodzielnie przygotować wykres funkcji kwadratowej:
+*f(x) = a*x^2 + b*x + c*, gdzie *x* = <-10;10> z krokiem 1, przyjmij następujące
+wartości współczynników: *a = 1, b = -3, c = 1*.
+
+Uzyskany wykres powinien wyglądać następująco:
+
+.. figure:: img/pylab01.png
 
 .. raw:: html
 
     <hr />
 
 Jeżli masz ochotę na więcej, daj znać!
-
-.. include:: ../gloss_python.rst

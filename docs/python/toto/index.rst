@@ -688,5 +688,3 @@ Wydruk historii
     <hr />
 
 Jeżli masz ochotę na więcej, daj znać!
-
-.. include:: ../gloss_python.rst

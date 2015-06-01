@@ -12,12 +12,13 @@ przy użyciu frameworka Django.
     toto/index
     pylab/index
     czat/index
+    gloss_python.rst
+    gloss_system.rst
 
 Propozycja scenariuszy warsztatów
 **********************************
 
 * :download:`python_warsztaty.pdf <python_warsztaty.pdf>`
-
 
 Metryka
 **********
