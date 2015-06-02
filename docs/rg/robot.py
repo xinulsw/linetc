@@ -4,7 +4,9 @@
 import rg
 
 class Robot:
+
     def act(self, game):
+
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
         wejscia = {loc for loc in wszystkie if 'spawn' in rg.loc_types(loc)}
         zablokowane = {loc for loc in wszystkie if 'obstacle' in rg.loc_types(loc)}

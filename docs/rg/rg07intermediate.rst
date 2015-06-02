@@ -1,7 +1,7 @@
+.. _strategia2:
+
 Strategia pośrednia
 ####################
-
-.. _strategia2:
 
 Zacznijmy od znanego
 *********************************

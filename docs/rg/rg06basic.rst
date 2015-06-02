@@ -16,19 +16,18 @@ Przykład robota
 
 Z powyższego kodu wynikają trzy zasady:
 
-* stój w miejscu, jeżeli jesteś w środku planszy;
-* atakuj przeciwnika, jeżeli jest w sąsiedztwie;
-* przemieszczaj się w kierunku środka.
+* broń się, jeżeli jesteś w środku planszy;
+* atakuj przeciwnika, jeżeli jest obok;
+* idź do środka.
 
 To pozwala nam rozpocząć grę, ale wiele możemy też dodać. Większość usprawnień (ang. *feature*),
-które zostaną omówione, to rozszerzenia wersji podstawowej. Można więc wybierać
-tylko te, które nam odpowiadają, i konstruować takie roboty, jakie chcemy.
+które zostaną omówione, to rozszerzenia wersji podstawowej. Konstruując
+robota, można je stosować wybiórczo.
 
 Startegie indywidualne
 ***********************
 
-Rozbudujmy przykład podstawowy. Oto lista przykładowych reguł,
-które weźmiemy pod uwagę:
+Rozbudujemy przykład podstawowy. Oto lista przykładowych reguł, które warto rozważyć:
 
 * **Reguła 1: Opuść punkt wejścia.**
 
@@ -40,30 +39,29 @@ ktoś do zaatakowania, ponieważ nie chcemy zostać zamknięci w pułapce wejśc
 
 Przykładowy robot atakuje aż do śmierci. Ponieważ jednak wygrana zależy od
 liczby pozostałych robotów, a nie ich zdrowia, bardziej opłaca się zachować
-robota niż poświęcić go na zadanie dodakowych obrażeń przeciwnikowi. Jeżeli
+robota niż poświęcać go, żeby zadał dodakowe obrażenia przeciwnikowi. Jeżeli
 więc jesteśmy zagrożeni śmiercią, uciekamy, a nie giniemy na próżno.
 
 * **Reguła 3: Atakuje przeciwnika o dwa kroki od ciebie.**
 
 Przyjrzyj się grającemu wg reguł robotowi, zauważysz, że kiedy wchodzi na pole
 atakowane przez przeciwnika, odnosi obrażenia. Dlatego, jeśli prawdopodobne jest,
-że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go atakować.
+że przeciwnik może znaleźć się w naszym sąsiedztwie, trzeba go zatakować.
 Dzięki temu nit się do nas bezkarnie nie zbliży.
-
 
 .. note::
 
-    Połączenie ucieczki i ataku w kierunku przeciwnika rzeczywiście jest skuteczne.
+    Połączenie ucieczki i ataku w kierunku przeciwnika naprawdę jest skuteczne.
     Każdy agresywny wróg zanim nas zaatakuje, sam spotyka się z atakiem.
     Jeżeli w porę odskoczysz, zanim się zbliży, działanie takie możesz powtórzyć.
-    W grach technika ta nazywana jest `kiting <http://gaming.stackexchange.com/questions/18903/what-is-kiting>`_,
+    Technika ta nazywana jest w grach `kiting <http://gaming.stackexchange.com/questions/18903/what-is-kiting>`_,
     a jej działanie ilustruje poniższa animacja:
 
 .. figure:: img/kiting.gif
 
     Zwróć uwagę na słabego robota ze zdrowiem 8 HP, który podchodzi do mocnego robota
     z 50 HP, a następnie ucieka. Zbliżając się atakuje pole, na które wchodzi przeciwnik,
-    ucieka i ponawia działanie. trwa to do momentu, kiedy silniejszy robot popełni samobójstwo
+    ucieka i ponawia działanie. Trwa to do momentu, kiedy silniejszy robot popełni samobójstwo
     (co w tym wypadku jest mało przydatne). Wszystko bez uszczerbku na zdrowiu słabszego
     robota.
 

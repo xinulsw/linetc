@@ -4,4 +4,4 @@
 # poniżej wstaw definicje potrzebnych zbiorów
 
 if self.location in wejscia:
-    move = ['move',  rg.toward(self.location, rg.CENTER_POINT)]
+    ruch = ['move',  rg.toward(self.location, rg.CENTER_POINT)]

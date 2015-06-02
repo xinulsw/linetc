@@ -33,10 +33,14 @@ Słownik Pythona
         nie używamy znaków narodowych, nie rozpoczynamy ich od cyfr.
 
     typy danych
-        Podstawowe proste typy danych to: string – łańcuch znaków, integer –
-        liczba całkowita, float – liczba zmiennoprzecinkowa (separatorem jest
-        kropka), boolean – wartość logiczna True (prawda) lub False (fałsz).
-        [todo]
+        Wszystkie dane w Pythonie są obiektami i jako takie przynależą do
+        określonego typu, który determinuje możliwe na nich operacje. W pewnym
+        uproszczeniu podstawowe typy danych to:
+        *string* – napis (łańcuch znaków), podtyp sekwencji;
+        *integer* – dodatnie i ujemne liczby całkowite;
+        *float* – liczba zmiennoprzecinkowa (separatorem jest kropka);
+        *boolean* – wartość logiczna True (prawda, 1) lub False (fałsz, 0), podtyp
+        typu całkowitego.
 
     lista
         jedna z podstawowych struktur danych, indeksowana sekwencja takich samych
@@ -51,7 +55,6 @@ Słownik Pythona
         Np. ``imiona = ('Ala', 'Ola', 'Ela')``. 1-elementową tuplę należy
         zapisywać z dodatkowym przecinkiem: ``tupla1 = (1,)``.
 
-
     zbiór
         nieuporządkowany, nieindeksowany zestaw elementów tego samego lub
         różnych typów, nie może zawierać duplikatów, obsługuje charakterystyczne
@@ -60,7 +63,7 @@ Słownik Pythona
         ``zbior = set()``.
 
     słownik
-        zestaw par elementów w postaci "klucz: wartość". Kluczami mogą być
+        typ mapowania, zestaw par elementów w postaci "klucz: wartość". Kluczami mogą być
         liczby, ciągi znaków czy tuple. Wartości mogą być tego samego lub
         różnych typów. Np. ``osoby = {'Ala': 'Lipiec' , 'Ola': 'Maj', 'Ela': 'Styczeń'}``.
         Dane ze słownika łatwo wydobyć: ``slownik['klucz']``,

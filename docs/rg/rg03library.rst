@@ -1,12 +1,12 @@
-Dokumentacja biblioteki
-#######################
+Biblioteka rg
+##############
 
 *Gra robotów* udostępnia bibliotekę ułatwiającą programowanie. Zawarta jest
 w module ``rg``, który importujemy na początku pliku instrukcją ``import rg``.
 
 .. attention::
 
-    Położenie robota (``loc``) reprezentowane jest przez tuplę (x, y)
+    Położenie robota (``loc``) reprezentowane jest przez tuplę (x, y).
 
 .. raw:: html
 
@@ -24,8 +24,8 @@ Zwraca matematyczną odległość między dwoma położeniami.
 **rg.wdist(loc1, loc2)**
 ********************************
 
-Zwraca różnice w ruchach między dwoma położeniami. Ponieważ robot nie może
-poruszać się na ukos, jest suma ``dx + dy``.
+Zwraca różnicę w ruchach między dwoma położeniami. Ponieważ robot nie może
+poruszać się na ukos, jest to suma ``dx + dy``.
 
 .. raw:: html
 

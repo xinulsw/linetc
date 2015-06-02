@@ -1,4 +1,4 @@
-# zbiory pól na planszy
+# wyznaczamy zbiory różnych pól na planszy
 
 # wszystkie pola
 wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
