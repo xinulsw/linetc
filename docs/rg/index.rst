@@ -17,6 +17,7 @@ Poznaj zasady:
     rg06basic.rst
     rg07intermediate.rst
     klocki.rst
+    ../python/gloss_python.rst
 
 .. note::
 
