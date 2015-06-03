@@ -51,13 +51,11 @@ Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego
 Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
 :kbd:`F1`, :kbd:`F2`, :kbd:`F10`, :kbd:`F12` lub :kbd:`DEL`.
 
-.. attention::
+5) Do przechowywania wprowdzonych zmian wykorzystywany jest plik zapisu
+   :file:`lxtahrsave-kzk.2fs` umieszczony w głównym katalogu pendrajwa.
 
-    Do przechowywania wprowdzonych zmian wykorzystywany jest plik zapisu
-    :file:`lxtahrsave-kzk.2fs` umieszczony w głównym katalogu pendrajwa.
-
-    **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
-    *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Setup).
+   **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
+   *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Utility).
 
 Obsługa *LxPupTahr*
 ***********************
