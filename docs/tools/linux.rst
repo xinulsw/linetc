@@ -57,7 +57,7 @@ Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
     :file:`lxtahrsave-kzk.2fs` umieszczony w głównym katalogu pendrajwa.
 
     **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
-    *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Setup).
+    *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Utility).
 
 Obsługa *LxPupTahr*
 ***********************

@@ -34,8 +34,8 @@ przeczytaj poniższe wskazówki.
 8. Zmień maszynę, być może jest za stara lub za nowa!
 
 9. Jeżeli masz bios UEFI z włączonym mechanizmem `SecureBoot <http://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#Secure_boot>`_,
-   co stanowi normę dla laptopów z preinstalowanym Windows 7/8/... Spróbuj wyłączyć zabezpieczenie w biosie,
-   możesz zajrzeć do instrukcji:
+   co stanowi normę dla laptopów z preinstalowanym Windows 7/8/...
+   Spróbuj wyłączyć zabezpieczenie w biosie, możesz zajrzeć do instrukcji:
 
    - `pomoc Ubuntu`_
    - `pomoc Microsoft`_

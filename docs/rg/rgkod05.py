@@ -1,10 +1,7 @@
-# jeżeli wokół są przeciwnicy, atakuj
-# wersja wykorzystująca zbiory pól i operacje na zbiorach
-
-# poniżej wstaw definicje potrzebnych zbiorów
-
+# jeżeli obok są przeciwnicy, atakuj
+# wersja oparta na zbiorach
 sasiednie = set(rg.locs_around(self.location)) - zablokowane
 sasiednie_wrogowie = sasiednie & wrogowie
 
 if sasiednie_wrogowie:
-    return ['attack', sasiednie_wrogowie.pop()]
+    ruch = ['attack', sasiednie_wrogowie.pop()]

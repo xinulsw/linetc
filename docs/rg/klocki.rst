@@ -137,8 +137,10 @@ Zbiory pól
 
 Zmieńmy podejście. Sprawdzanie wszystkich położeń w poszukiwaniu wrogów
 lub członków drużyny wymaga ciągłego korzystania z pętli przeglądającej słownik
-``robot.game``. Wygodniej będzie skorzystać z wyrażeń listowych (zob. :term:`wyrażanie listowe`),
-zbiorów i operacji na nich (zob. :term:`zbiory`), aby wyznaczyć określone grupy pól.
+``robot.game``. Wygodniej będzie użyć wyrażeń listowych (zob. :term:`wyrażanie listowe`),
+zbiorów i operacji na nich (zob. :term:`zbiory`), aby wyznaczyć grupy pól, zajmowane
+przez określone roboty.
+
 Poniższy kod wstawiamy na początku metody ``Robot.act()``:
 
 .. raw:: html
@@ -149,17 +151,26 @@ Poniższy kod wstawiamy na początku metody ``Robot.act()``:
 .. literalinclude:: rgzbiory.py
     :linenos:
 
-Metodą z biblioteki *rg*, która ułatwia nam zadanie, jest ``rg.loc_types(loc)``,
-która zwraca typ położenia wskazywanego przez współrzędne ``loc``.
+Metoda ``rg.loc_types()`` z biblioteki *rg* ułatwia nam zadanie,
+zwraca typ położenia wskazywanego przez podane współrzędne, np.
+instrukcja warunkowa ``if 'spawn' in rg.loc_types(loc)`` sprawdza,
+czy badane popłożenie ``loc`` jest punktem wejścia.
 
 .. raw:: html
 
     <hr />
 
-Opuść wejście
-**********************
+Ćwiczenie 1
+============
 
-Wersja wykorzystująca zbiory pól.
+Następną wersję robota zapisz w kolejnym pliku, wykorzystaj *Kod nr 5* jako
+punkt wyjścia. Na początku ``Robot.act()`` umieść wymagane do działania podanych
+niżej fragmentów kodu definicje zbiorów pól. Wykorzystaj te fragmenty, aby
+dodać regułę nakazującą opuszczanie punktów wejścia oraz zmodyfikuj regułę
+ataku wrogów obok tak, aby wykorzystywała zbiory. Przetestuj kod.
+
+Opuść wejście
+--------------
 
 .. raw:: html
 
@@ -169,14 +180,8 @@ Wersja wykorzystująca zbiory pól.
 .. literalinclude:: rgkod04.py
     :linenos:
 
-.. raw:: html
-
-    <hr />
-
 Atakuj obok
-**************************
-
-Wersja wykorzystująca zbiory pól.
+--------------
 
 .. raw:: html
 
@@ -186,14 +191,19 @@ Wersja wykorzystująca zbiory pól.
 .. literalinclude:: rgkod05.py
     :linenos:
 
+.. tip::
+
+    Wyrażenia tworzące zbiory (również nowe) trzymaj w kodzie razem.
+    Zastanów się na miejscem (kolejnością) umieszczenia powyższych reguł.
+
 .. raw:: html
 
     <hr />
 
 Atakuj, jeśli nie umrzesz
-***********************************
+**************************
 
-Wersja wykorzystująca zbiory pól.
+Wersja wykorzystująca zbiory pól. Warto atakować, ale nie wtedy, gdy grozi nam śmierć.
 
 .. raw:: html
 
