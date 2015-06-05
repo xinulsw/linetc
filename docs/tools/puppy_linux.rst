@@ -3,7 +3,7 @@
 Puppy Linux
 ###################
 
-`LxPupTahr <http://lx-pup.weebly.com/downloads.html>`_ to wersja systemu `Puppy Linux 6.0.2 tahrpup CE <http://www.murga-linux.com/puppy/viewtopic.php?t=96178>`_
+`LxPupTahr <http://lx-pup.weebly.com/downloads.html>`_ to wersja systemu `Puppy Linux 6.0.3 tahrpup CE <http://www.murga-linux.com/puppy/viewtopic.php?t=96178>`_
 opartego na systemie Ubuntu Tahr 14.04 LTS. `Puppy Linux <http://puppylinux.org/main/Overview%20and%20Getting%20Started.htm>`_
 to dystrybucja zaprojektowanych specjalnie do pracy w trybie live,
 ale z możliwością przechowywania dokonywanych zmian, takich jak
@@ -14,7 +14,7 @@ LxPupTahr
 
 Zaproponowana przez nas wersja jest dostosowana do potrzeb szkoleń z Pythona.
 Bez problemu można jednak przygotować swoją wersję. Wystarczy pobrać oryginalny
-obraz `LxPupTahr-15.03.1-pae.iso <http://lx-pup.weebly.com/upup-tahr.html>`_ (ok. 250 MB)
+obraz `LxPupTahr-15.05.1-pae.iso <http://lx-pup.weebly.com/upup-tahr.html>`_ (251 MB)
 i wgrać go na pendrajwa.
 
 .. figure:: linimg/lxpup.png

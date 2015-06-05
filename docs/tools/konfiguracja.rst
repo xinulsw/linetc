@@ -80,41 +80,44 @@ w którym wybieramy serwis "Mvps.org" i klikamy ikonę koła zębatego.
 zostanie dodana do pliku :file:`/etc/hosts` i przekierowana na adres
 lokalny, co uniemożliwi jakąkolwiek z nimi komunikację ;-)
 
+.. _plikzapisu:
+
 Plik zapisu
 ************
 
-Poniżej omówiono tworzenie nowego pliku zapisu. W rozdziale :ref:`puppy`
-znajdziesz dodatkowe informacje o tym pliku.
+Podczas pierwszego zamknięcia system prosi o utworzenie `pliku zapisu <http://puppylinux.org/wikka/SaveFile>`_
+(ang. *savefile*, dodatkowe informacje zob. w :ref:`puppy`), w którym
+zapisywane będą wprowadzane przez nas zmiany: konfiguracja,
+instalacja programów, utworzone dokumenty.
 
-Podczas pierwszego zamknięcia system prosi o utworzenie pliku `zapisu <http://puppylinux.org/wikka/SaveFile>`_
-(ang. *savefile*), w którym zapisywane będą wprowadzane przez nas zmiany:
-konfiguracja, instalacja programów, utworzone dokumenty.
+Na początku może pojawić się pytanie o przetłumaczenie informacji rozruchowych,
+wybieramy "Yes" i potwierdzamy kolejny komunikat. Gdyby pytanie to pojawiło się
+następnym razem, wybierz "No".
 
-Klikamy więc "Zapisz", następnie "administrator",
-wybieramy partycję oznaczającą pendrajwa. W konfiguracjach z 1 dyskiem twardym
+.. figure:: lxpupimg/lxpsave01.png
+.. figure:: lxpupimg/lxpsave02.png
+
+W następnym oknie klikamy "Zapisz", następnie "administrator".
+Wybieramy partycję oznaczającą pendrajwa: w konfiguracjach z 1 dyskiem twardym
 będzie ona oznaczona najczęsciej `sdb1` (kierujemy się rozmiarem i typem plików: vfat).
 
-.. figure:: linimg/pupsave01.png
-.. figure:: linimg/pupsave02.png
-.. figure:: linimg/pupsave03.png
+.. figure:: lxpupimg/lxpsave03.png
+.. figure:: lxpupimg/lxpsave04.png
+.. figure:: lxpupimg/lxpsave05.png
 
 Następnie wybieramy ewentualnie szyfrowanie i system plików. Sugerujemy
-`ext2` – najszybszy. Minimalny rozmiar to 512MB, zalecany 768MB.
+`ext2` – najszybszy. Minimalny rozmiar to 32MB, zalecamy 512MB lub więcej.
 
-.. figure:: linimg/pupsave04.png
-.. figure:: linimg/pupsave05.png
-.. figure:: linimg/pupsave06.png
+.. figure:: lxpupimg/lxpsave06.png
+.. figure:: lxpupimg/lxpsave07.png
+.. figure:: lxpupimg/lxpsave08.png
 
 Opcjonalnie rozszerzamy domyślną nazwę i potwierdzamy zapis.
 
-.. figure:: linimg/pupsave07.png
-.. figure:: linimg/pupsave08.png
+.. figure:: lxpupimg/lxpsave09.png
+.. figure:: lxpupimg/lxpsave10.png
 
-Na końcu może pojawić się pytanie o przetłumaczenie informacji rozruchowych,
-wybieramy "Yes" i potwierdzamy kolejny komunikat. Gdyby pytanie to pojawiło się
-następnym razem, wybierzmy "No".
-
-.. figure:: linimg/pupsave09.png
+Należy spokojnie poczekać na utworzenie pliku i wyłącznie komputera.
 
 Czcionki
 *********

@@ -23,8 +23,8 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
 1) Pobierz program `Rufus <https://rufus.akeo.ie/>`_ – małe, szybkie i sprawdzone (:-)) narzędzie
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
-2) Pobierz plik :file:`kzkbox_25052015.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
-   Plik zawiera dostosowany obraz systemu LxPupTahr 15.03 z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
+2) Pobierz plik :file:`kzkbox_20150605_pc.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
+   Plik zawiera dostosowany obraz systemu LxPupTahr 15.05 z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
    :alt: Pulpit LxPupTahr
@@ -51,26 +51,47 @@ Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego
 Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
 :kbd:`F1`, :kbd:`F2`, :kbd:`F10`, :kbd:`F12` lub :kbd:`DEL`.
 
-.. attention::
+Pierwsze uruchomienie
+=======================
 
-    Do przechowywania wprowdzonych zmian wykorzystywany jest plik zapisu
-    :file:`lxtahrsave-kzk.2fs` umieszczony w głównym katalogu pendrajwa.
+Po pierwszym uruchomieniu zatwierdź okno kreatora ustawień przyciskiem "Ok"
+i zamknij kreator połączenia z internetem. Następnie:
 
-    **ZALECAMY powiększyć rozmiar pliku zapisu do 1024 MB** za pomocą narzędzia:
-    *Zmiana rozmiaru pliku osobistego przechowywania* (Start/Utility).
+* :ref:`skonfiguruj typ klawiatury <klawiatura>`, aby działały skróty klawiszowe;
+* zamknij system, aby zapisać ustawienia i :ref:`utworzyć plik zapisu <plikzapisu>`.
+
+Po ponownym uruchomieniu system gotowy będzie do pracy :-)
 
 Obsługa *LxPupTahr*
 ***********************
 
-System *LxPupTahr* domyślnie wczytuje się w całości do pamięci RAM i uruchamia
-środowisko graficzne LXDE z zalogowanym użytkownikiem *root*, czyli administratorem
-w systemach linuksowych. Czynnością, którą będziesz chciał wykonać na początku,
-jest nawiązanie połączenia z internetem.
+System w dostosowanej wersji zawiera:
+
+Plik zapisu zawiera konfigurację systemu, czyli:
+
+* spolszczone prawie wszystkie elementy systemu;
+* zaktualizowane listy oprogramowania;
+* zaktualizowaną i spolszczoną przeglądarkę `Pale Moon <https://www.palemoon.org/>_`
+  (otwartoźrodłówa, oparta na Firefoksie);
+* fonty Ubuntu oraz podstawowe z Windows;
+* pakiety *python-pip*, *python-virtualenv*, *git* oraz bibliotekę *Pygame*;
+* skonfigurowane mini środowisko programistyczne *Geany IDE*;
+* środowisko *PyCharm IDE Proffesional Trial*;
+* skonfigurowane elementy interfejsu LXDE;
+* skonfigurowane skróty klawiszowe.
+
+Wszystkie pozostałe biblioteki potrzebne do realizacji `Szkolenia z Pythona
+Kzk <http://python101.readthedocs.org>`_ zainstalujemy przy użyciu narzędzia *pip*.
 
 Połączenie z internetem
 =========================
 
-Z menu "Start/Setup" uruchamiamy *Internet kreator połączenia*, klikamy
+System *LxPupTahr* domyślnie wczytuje się w całości do pamięci RAM i uruchamia
+środowisko graficzne LXDE z zalogowanym użytkownikiem *root*, czyli administratorem
+w systemach linuksowych. Na początku będziesz chciał nawiązać połączenie
+z internetem.
+
+Z menu "Start/Konfiguracja" uruchamiamy *Internet kreator połączenia*, klikamy
 "Wired or wireless LAN", w następnym oknie wybieramy narzędzie
 "Simple Network Setup".
 
@@ -103,8 +124,6 @@ Domyślne katalogi
 * :file:`/root/my-documents/clipart` lub :file:`/root/Pobrane` - tu zapisywane są pliki pobierane z internetu
 * :file:`/root/my-documents/clipart` lub :file:`/root/Obrazy`
 * :file:`/root/my-documents/tmp` lub :file:`/root/tmp` - katalogi tymczasowe
-* :file:`/root/.icons` – dodatkowe zestawy ikon
-* :file:`/root/.themes` – dodatkowe tematy Gtk
 * :file:`/usr/share/fonts/default/TTF/` – dodatkowe czcionki TrueType, np. z MS Windows
 
 .. _instalacjaprog:
@@ -113,7 +132,7 @@ Instalacja programów
 ====================
 
 Jeżeli chcemy coś doinstalować, uruchamiamy **Quickpet tahr**
-z menu "Start/Setup". Na początku klikamy "tahrpup updates",
+z menu "Start/Konfiguracja". Na początku klikamy "tahrpup updates",
 aby zaktualizować listę dostępnych aplikacji. Następnie restartujemy
 program i sprawdzamy, czy w poszczególnych zakładkach znajdziemy potrzebne
 nam narzędzia, np.: Firefox, Chrome, Flash, Skype i inne.
@@ -121,7 +140,7 @@ nam narzędzia, np.: Firefox, Chrome, Flash, Skype i inne.
 .. figure:: linimg/pet_quickpet03.png
 
 Jeżeli w *Quickpet tahr* nie znajdziemy wymaganej aplikacji, uruchamiamy
-**Puppy Package Manager/Puppy Manager Pakietów** z menu "Start/Setup".
+**Puppy Package Manager/Puppy Manager Pakietów** z menu "Start/Konfiguracja".
 Aktualizujemy listę dostępnych aplikacaji: klikamy ikonę ustawień obok koła ratunkowego,
 w następnym oknie zakładkę "Update database/Aktualizuj bazę danych"
 i przycisk "Update now/Aktualizuj teraz". Po uruchomieniu okna terminala naciskamy
@@ -156,7 +175,7 @@ dostępne np. na stronie `pet_packages-tahr <http://distro.ibiblio.org/puppylinu
 Drugim formatem stosowanym dla dużych pakietów, które używamy od czasu
 do czasu, jest format `SFS <http://puppylinux.org/wikka/SquashFS>`_.
 Spakowane w ten sposób oprogramowanie możemy dodawać "w locie" w trakcie
-działania systemu. Korzystamy z narzędzia *SFS-Load w locie* (Start/Setup).
+działania systemu. Korzystamy z narzędzia *SFS-Load w locie* (Start/Konfiguracja).
 
 .. tip::
 
@@ -168,15 +187,16 @@ działania systemu. Korzystamy z narzędzia *SFS-Load w locie* (Start/Setup).
 
 .. figure:: linimg/pcmanfm01.png
 
+.. _klawiatura:
+
 Skróty klawiaturowe
 ====================
 
 .. attention::
 
-    Poniższe skróty zadziałają, jeżeli po każdorazowym uruchomieniu systemu
-    ustawimy odpowiedni typ klawiatury. Procedura jest bardzo prosta.
-    Uruchamiamy "Ustawienia Puppy" (pierwsza ikona obok przycisku Start,
-    lub Start/Setup/Wizard Kreator), wybieramy "Mysz/Klawiatura". W następnym
+    Poniższe skróty zadziałają, jeżeli ustawimy odpowiedni typ klawiatury.
+    Procedura jest bardzo prosta. Uruchamiamy "Ustawienia Puppy" (pierwsza ikona obok przycisku Start,
+    lub Start/Konfiguracja/Wizard Kreator), wybieramy "Mysz/Klawiatura". W następnym
     oknie "Zaawansowana konfiguracja", potwierdzamy "OK", dalej "Model klawiatury"
     i na koniec zaznaczamy "pc105". Pozostaje potwierdzenie "OK" i jeszcze
     kliknięcie przycisku "Tak" w poprzednim oknie, aby aktywować ustawienia.
@@ -202,23 +222,23 @@ Oznaczenia: C – Control, A – Alt, W - Windows (SuperKey).
 Konfiguracja LXDE
 =================
 
-* **Wygląd, Ikony, Tapeta, Panel**: Start/Desktop/Change appearance.
+* **Wygląd, Ikony, Tapeta, Panel**: Start/Pulpit/Zmiana wyglądu.
 * **Ekran(y)**: Start/System/System/Ustawienia wyświetlania.
-* **Czcionki**: Start/Desktop/Desktop/Manager Fontu.
+* **Czcionki**: Start/Pulpit/Desktop/Manager Fontu.
 * **Menedżer plików**: Edycja/Preferencje w programie.
-* **Ustawienia Puppy**: Start/Setup/Wizard Kreator
-* **Internet kreator połączenia**: Start/Setup
-* **Zmiana rozmiaru pliku osobistego przechowywania**: Start/Utility
-* **Puppy Manager Pakietów**: Start/Setup
-* **Quickpet tahr**: Start/Setup
-* **SFS-załadowanie w locie**: Start/Setup/SFS-Załadowanie w locie
-* **QuickSetup ustawienia pierwszego uruchamiania**: Start/Setup
-* **Restart menedżera okien** (RestartWM): Session Control
+* **Ustawienia Puppy**: Start/Konfiguracja/Wizard Kreator
+* **Internet kreator połączenia**: Start/Konfiguracja
+* **Zmiana rozmiaru pliku zapisu**: Start/Akcesoria
+* **Puppy Manager Pakietów**: Start/Konfiguracja
+* **Quickpet tahr**: Start/Konfiguracja
+* **SFS-załadowanie w locie**: Start/Konfiguracja/SFS-Załadowanie w locie
+* **QuickSetup ustawienia pierwszego uruchamiania**: Start/Konfiguracja
+* **Restart menedżera okien** (RestartWM): Start/Zamknij
 * **WM Switcher** – switch windowmanagers:
-* **Startup Control – kontrola aplikacji startowych**: Start/Setup
-* **Domyślne aplikacje**: Start/Desktop/Preferowane programy
-* **Terminale** Start/Utility
-* **Ustawienie daty i czasu**: Start/Desktop
+* **Startup Control – kontrola aplikacji startowych**: Start/Konfiguracja
+* **Domyślne aplikacje**: Start/Pulpit/Preferowane programy
+* **Terminale** Start/Akcesoria
+* **Ustawienie daty i czasu**: Start/Pulpit
 
 Wskazówki
 ==========
