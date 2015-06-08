@@ -14,7 +14,7 @@ ale również jako podręczny sytem przenośny lub ratunkowy.
 
 .. _usbwin:
 
-Klucz USB w Windows
+W Windows
 *************************
 
 Aby w systemie MS Windows przygotować bootowalny klucz USB z możliwością
@@ -51,7 +51,7 @@ Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego
 Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
 :kbd:`F1`, :kbd:`F2`, :kbd:`F10`, :kbd:`F12` lub :kbd:`DEL`.
 
-Klucz USB w Linuksie
+W Linuksie
 *************************
 
 * W Ubuntu i pochodnych instalujemy program `Unetbootin <http://unetbootin.sourceforge.net>`_ poleceniami:
@@ -91,7 +91,7 @@ Klucz USB w Linuksie
 .. figure:: linimg/unetbootin_lxpup.png
 
 Pierwsze uruchomienie
-=======================
+*********************
 
 Po pierwszym uruchomieniu zatwierdź okno kreatora ustawień przyciskiem "Ok"
 i zamknij kreator połączenia z internetem. Następnie:
