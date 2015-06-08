@@ -24,14 +24,14 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
 2) Pobierz plik :file:`kzkbox_20150605_pc.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
-   Plik zawiera dostosowany obraz systemu LxPupTahr 15.05 z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
+   Plik zawiera dostosowany obraz systemu `LxPupTahr 15.05.01 <http://lx-pup.weebly.com/>`_ z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
    :alt: Pulpit LxPupTahr
 
    Pulpit LxPupTahr ze środowiskiem LXDE
 
-3) Przygotuj pendrajwa o pojemności min. 2GB zawierającego jedną, pustą,
+3) Przygotuj pendrajwa o pojemności min. 2GB zawierającego jedną, główną,
    aktywną partycję FAT32. Taka partycja jest domyślna na większości kluczy.
    Pamiętaj, że zostanie ona sformatowana! A więc zarchiwizuj ewentualne dane.
    Podłącz napęd do komputera i sprawdź, jaką literę przydzielił mu system.
@@ -51,6 +51,45 @@ Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego
 Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej
 :kbd:`F1`, :kbd:`F2`, :kbd:`F10`, :kbd:`F12` lub :kbd:`DEL`.
 
+Klucz USB w Linuksie
+*************************
+
+* W Ubuntu i pochodnych instalujemy program `Unetbootin <http://unetbootin.sourceforge.net>`_ poleceniami:
+
+.. code-block:: bash
+
+    ~$ sudo apt-add-repository ppa:gezakovacs/ppa
+    ~$ sudo apt-get update
+    ~$ sudo apt-get install unetbootin
+
+* W Debianie Jessie 8 ściągamy pakiet `unetbootin_608-1_i386.deb <http://ftp.pl.debian.org/debian/pool/main/u/unetbootin/unetbootin_608-1_i386.deb>`_,
+  a następnie w katalogu z pobranym plikiem wydajemy polecenia jako root:
+
+.. code-block:: bash
+
+    ~# dpkg -i unetbootin_608-1_i386.deb
+    ~# apt-get install -f
+
+*  W Arch Linuksie i pochodnych jako root wydajemy polecenia:
+
+.. code-block:: bash
+
+    ~# pacman -Syu
+    ~# pacman -S unetbootin
+
+* Wpinamy pendrajwa o pojemności min. 4GB dla dystrybucji *SRU* (*Xubuntu*). Pendrajw
+  powinien mieć przynajmniej jedną główną i aktywną partycję FAT32 – tak jest zazwyczaj.
+* Po uruchomieniu programu "Unetbootin" zaznaczamy opcję "Obraz dysku", klikamy
+  przycisk "..." i wskazujemy pobrany obraz.
+* Jeżeli wybraliśmy obraz *Xubuntu*, *SRU* lub *FREE_DESKTOP*, w polu "Przestrzeń
+  używana do zachowania plików..." wpisujemy min. ``512``. Jeżeli wybraliśmy
+  obraz *LxPupTahr* przechodzimy do następnego punktu.
+* Upewniamy się, że w polu "Napęd:" wyświetlona jest litera przydzielona
+  właściwemu pendrajwowi i klikamy "OK". Czekamy w zależności od wybranej
+  dystrybucji i prędkości klucza USB od 1-20 minut.
+
+.. figure:: linimg/unetbootin_lxpup.png
+
 Pierwsze uruchomienie
 =======================
 
@@ -66,8 +105,6 @@ Obsługa *LxPupTahr*
 ***********************
 
 System w dostosowanej wersji zawiera:
-
-Plik zapisu zawiera konfigurację systemu, czyli:
 
 * spolszczone prawie wszystkie elementy systemu;
 * zaktualizowane listy oprogramowania;
