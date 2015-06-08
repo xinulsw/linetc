@@ -18,10 +18,14 @@ class Robot:
         sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
         bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
 
-        ruch = ['move', rg.toward(self.location, rg.CENTER_POINT)]
+        def mindist(bots, loc):
+            return min(bots, key=lambda x: rg.dist(x, loc))
+
+        ruch = ['guard']
 
         if self.location in wejscia:
-            ruch = ['move',  rg.toward(self.location, rg.CENTER_POINT)]
+            if bezpieczne:
+                ruch = ['move',  mindist(bezpieczne, rg.CENTER_POINT)]
 
         if self.location == rg.CENTER_POINT:
             ruch = ['guard']

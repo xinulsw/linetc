@@ -1,4 +1,4 @@
-*Gra robotów* – klocki
+*Gra robotów* – klocki 1
 ####################################
 
 Środowisko testowe przygotowujemy wg dokumentu :ref:`rgkit`.
@@ -137,8 +137,8 @@ Zbiory pól
 
 Zmieńmy podejście. Sprawdzanie wszystkich położeń w poszukiwaniu wrogów
 lub członków drużyny wymaga ciągłego korzystania z pętli przeglądającej słownik
-``robot.game``. Wygodniej będzie użyć wyrażeń listowych (zob. :term:`wyrażanie listowe`),
-zbiorów i operacji na nich (zob. :term:`zbiory`), aby wyznaczyć grupy pól, zajmowane
+``robot.game``. Wygodniej będzie użyć wyrażeń listowych (zob. :term:`wyrażenie listowe`),
+zbiorów i operacji na nich (zob. :term:`zbiór`), aby wyznaczyć grupy pól, zajmowane
 przez określone roboty.
 
 Poniższy kod wstawiamy na początku metody ``Robot.act()``:
@@ -235,11 +235,12 @@ Jeżeli w odległości 2 kroków jest przeciwnik, atakuj.
 
     <hr />
 
-Bezpieczne pola
-****************
+Do środka bezpiecznie i szybko
+*******************************
 
 Wersja wykorzystująca zbiory pól.
-Zbiór sąsiednich pól, na które można wejść bez ryzyka.
+
+Po pierwsze wyznaczamy zbiór sąsiednich pól, na które można bezpiecznie wejść.
 
 .. raw:: html
 
@@ -249,16 +250,8 @@ Zbiór sąsiednich pól, na które można wejść bez ryzyka.
 .. literalinclude:: rgkod08.py
     :linenos:
 
-.. raw:: html
-
-    <hr />
-
-Najbliżej do celu
-*******************
-
-Wersja wykorzystująca zbiory pól.
-Funkcja, która z podanego zbioru pól (bots) zwraca pole, na które należy wejść,
-aby najszybciej dostać się do celu (loc), np. środka planszy lub wroga.
+Po drugie konstruujemy funkcję, która z podanego zbioru pól (``loc``) zwróci
+pole najbliższe celu (``loc``):
 
 .. raw:: html
 
@@ -268,15 +261,9 @@ aby najszybciej dostać się do celu (loc), np. środka planszy lub wroga.
 .. literalinclude:: rgkod09.py
     :linenos:
 
-.. raw:: html
 
-    <hr />
-
-Bezpiecznie do środka
-**************************
-
-Wersja wykorzystująca zbiory pól.
-Idź z punktu wejścia bezpiecznie do środka.
+Teraz spróbujmy wykorzystać dwa nowe "klocki", aby zbudować trzeci.
+A więc: idź z punktu wejścia bezpiecznie do środka:
 
 .. raw:: html
 
@@ -286,6 +273,27 @@ Idź z punktu wejścia bezpiecznie do środka.
 .. literalinclude:: rgkod10.py
     :linenos:
 
+Ćwiczenie 2
+============
+
+Po uzupenieniu kodu przetestuj interakcje robotów z wykorzystaniem symulatora RG.
+
+* Czy domyślna akcja (idź do środka) jest najlepsza? Na jaką inną można by ją zmienić?
+  Każda reguła sprawdzana jest w osobnej instrukcji warunkowej, czy to dobre
+  podejście? Czy wszystkie dotychczasowe reguły są potrzebne po dodaniu nowych?
+
+Żeby odpowiedzieć na te pytania, przetestuj uzupełniony kod robota z jego poprzednią
+wersją (bez wprowadzonych w tym punkcie zasad) w symulatzorze RG oraz w rogrywce.
+
+Spróbuj zmienić kod:
+
+* zakoduj inne niż do tej pory domyślne zachowanie;
+* usuń niepotrzebne reguły (o ile rozumiesz dlaczego i po co);
+* zmień instrukcje warunkowe tak, aby znalezienie dopasowania do reguły kończyło algorytm
+  wyznaczania zachowania robota.
+
+Przetestuj zmiany! Jak zachowuje się zmieniony robot?
+
 .. raw:: html
 
     <hr />
@@ -293,7 +301,8 @@ Idź z punktu wejścia bezpiecznie do środka.
 Najbliższy wróg
 *****************
 
-Wersja wykorzystująca zbiory. Idź bezpiecznie w kierunku najbliższego wroga.
+Wersja wykorzystująca zbiory. Do znalezienia najbliżej położonego wroga można
+wykorzystać dodaną wcześniej funkcję ``mindist()``:
 
 .. raw:: html
 
@@ -303,19 +312,30 @@ Wersja wykorzystująca zbiory. Idź bezpiecznie w kierunku najbliższego wroga.
 .. literalinclude:: rgkod11.py
     :linenos:
 
-Śledź wybrane miejsca
-**********************
+Po wykonaniu powyższego kodu zmienna ``najbliższy_wrog`` powinna zawierać
+położenie najbliższego przeciwnika.
 
-Aby unikać niepotrzebnych kolizji, nie należy wchodzić na wybrane wcześniej
-pola.
+* W którym miejscu należy użyć tej zmiennej, aby zaimplementować regułę:
+  idź bezpiecznie w kierunku najbliższego wroga?
+* Gdzie można by jeszcze wykorzystać zbiór ``bezpieczne``?
+
+Mamy robota
+*************
+
+Budowany dotychczas robot może przedstawiać się następująco:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: rgkod12.py
+.. literalinclude:: robot11.py
     :linenos:
+
+Porównaj ze swoim, a jeżeli znajdziesz różnice, zastanów się, czy warto je poprawiać.
+Zanim to zrobisz, wystaw do walki swoją maszynę i powyższą. Która jest lepsza?
+Nie gwarantujemy, że powyższa implementacja jest najlepszą możliwą do
+złożenia z podanych klocków :-)
 
 .. raw:: html
 

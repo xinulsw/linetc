@@ -16,7 +16,8 @@ Poznaj zasady:
     rg04rgkit.rst
     rg06basic.rst
     rg07intermediate.rst
-    klocki.rst
+    klocki01.rst
+    klocki02.rst
     ../python/gloss_python.rst
 
 .. note::

@@ -67,7 +67,7 @@ Listę dostępnych robotów najłatwiej użyskać wydając polecenie:
 
     (env)~/robot$ ls bots
 
-Aby zmierzyć się z wybranym robotem – na początek sugerujemy *stupid26.py –
+Aby zmierzyć się z wybranym robotem – na początek sugerujemy *stupid26.py* –
 wydajemy polecenie:
 
 .. code-block:: bash

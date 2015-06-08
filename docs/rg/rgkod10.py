@@ -1,11 +1,6 @@
-# zwróć z podanego zbioru pól (bots) pole najbliższe podanego celu (loc)
-# wersja wykorzystująca zbiory pól i operacje na zbiorach
-
-# poniżej wstaw definicje potrzebnych zbiorów
-
-def mindist(bots, loc):
-    return min(bots, key=lambda x: rg.dist(x, loc))
+# idź do środka bezpiecznie i szybko
+# wersja oparta na zbiorach
 
 if self.location in wejscia:
     if bezpieczne:
-        ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+        ruch = ['move',  mindist(bezpieczne, rg.CENTER_POINT)]
