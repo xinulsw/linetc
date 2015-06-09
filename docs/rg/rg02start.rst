@@ -12,14 +12,15 @@ Podstawowa struktura klasy reprezentującej każdego robota jest następująca:
 .. code-block:: python
 
     class Robot:
-    def act(self, game):
-        return [<some action>, <params>]
 
-Na początku gry powstaje jedna instanacja twojej klasy ``Robot``. Oznacza to,
+        def act(self, game):
+            return [<some action>, <params>]
+
+Na początku gry powstaje jedna instanacja klasy ``Robot``. Oznacza to,
 że właściwości klasy oraz globalne zmienne modułu są współdzielone między
 wywołaniami. W każdej rundzie system wywołuje metodę ``act`` tej instancji
-dla każdego robota, aby określić jego działanie. (Uwaga: na początku przeczytaj
-reguły.)
+dla każdego robota, aby określić jego działanie.
+(Uwaga: na początku przeczytaj reguły.)
 
 Metoda ``act`` musi zwrócić jedną z następujących odpowiedzi:
 
@@ -31,7 +32,7 @@ Metoda ``act`` musi zwrócić jedną z następujących odpowiedzi:
     ['suicide']
 
 Jeżeli metoda ``act`` zwróci wyjątek lub błędne polecenie, robot pozostaje
-w obronie, ale jeżeli powtórzy się to zbyt wiele razy, zostaniesz zmuszony
+w obronie, ale jeżeli powtórzy się to zbyt wiele razy, gracz zostanie zmuszony
 do kapitulacji. Szczegóły omówiono w dziale *Zabezbieczenia*.
 
 Odczytywanie właściwości robota

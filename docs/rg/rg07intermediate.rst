@@ -75,10 +75,11 @@ ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
 
-    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna - wybrane_pola
+    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 \
+                 - wejscia - druzyna - wybrane_pola
 
 Roboty atakujące przeciwnika o dwa kroki obok często otaczają go (to dobrze),
-ale uniemożliwiają innym członkom drużyny poruszanie się po linii.
+ale uniemożliwiają innym członkom drużyny przekroczenie linii.
 Dlatego możemy blokować ataki na pola sasiednie_wrogowie2, jeśli znajdują się
 na liście wykonanych ruchów.
 

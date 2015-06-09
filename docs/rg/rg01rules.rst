@@ -8,14 +8,14 @@ rozgrywki.
 
 .. figure:: img/rules1.png
 
-Czarne kwadraty (pola) oznaczają pola, na które nie ma wstępu. Ich układ
-tworzy więc kolistą arenę, na której mogą walczyć roboty.
+Czarne kwadraty to pola, na które nie ma wstępu. Wyznaczają kolistą
+arenę dla walk robotów.
 
-Zielone kwadraty oznaczają punkty wejścia do gry robotów.
-Co 10 rund po 5 robotów każdego gracza rozpoczyna walkę w losowych punktach wejścia
+Zielone kwadraty oznaczają punkty wejścia do gry.
+Co **10** rund po **5** robotów każdego gracza rozpoczyna walkę w losowych punktach wejścia
 (ang. *spawn points*). Roboty z poprzednich tur pozostające w tych punktach giną.
 
-Każdy robot rozpoczyna grę z 50 punktami życia HP (ang. *health points*).
+Każdy robot rozpoczyna grę z 50 punktami HP (ang. *health points*).
 
 Roboty mogą działać (przemieszczać się, atakować itd.) na przyległych
 kwdratach w pionie (góra, dół) i w poziomie (lewo, prawo).
@@ -49,8 +49,8 @@ wyrządzają szkody tylko przeciwnikom.
 
 Wygrawa gracz, który po 100 rundach ma największą liczbę robotów na planszy.
 
-Zadaniem gracza jest zakodować sztuczną inteligencję (ang. AI – *artificial itelligance*),
-której będą używały wszystkie jego roboty. Aby wygrać, roboty gracza muszą ze sobą współpracować,
+Zadaniem gracza jest zakodowanie sztucznej inteligencji (ang. AI – *artificial itelligance*),
+dla wszystkie swoich robotów. Aby wygrać, roboty gracza muszą ze sobą współpracować,
 np. żeby otoczyć przeciwnika.
 
 .. note::
