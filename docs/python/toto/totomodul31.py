@@ -43,7 +43,7 @@ def pobierztypy(ile, maks):
             print "Błędne dane!"
             continue
 
-        if typ > 0 and typ <= maks and typ not in typy:
+        if 0 < typ <= maks and typ not in typy:
             typy.add(typ)
             i = i + 1
     return typy

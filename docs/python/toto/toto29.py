@@ -15,7 +15,7 @@ except:
 
 liczby = []
 i = 0
-while i < int(ileliczb):
+while i < ileliczb:
     liczba = random.randint(1, maksliczba)
     if liczby.count(liczba) == 0:
         liczby.append(liczba)
@@ -32,7 +32,7 @@ for i in range(3):
             print "Błędne dane!"
             continue
 
-        if typ > 0 and typ <= maksliczba and typ not in typy:
+        if 0 < typ <= maksliczba and typ not in typy:
             typy.add(typ)
             i = i + 1
 

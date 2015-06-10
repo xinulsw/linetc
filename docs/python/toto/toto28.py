@@ -15,7 +15,7 @@ except:
 
 liczby = []
 i = 0
-while i < int(ileliczb):
+while i < ileliczb:
     liczba = random.randint(1, maksliczba)
     if liczby.count(liczba) == 0:
         liczby.append(liczba)
@@ -26,8 +26,13 @@ for i in range(3):
     typy = set()
     i = 0
     while i < ileliczb:
-        typ = int(raw_input("Podaj liczbę "+str(i+1)+": "))
-        if typ not in typy:
+        try:
+            typ = int(raw_input("Podaj liczbę "+str(i+1)+": "))
+        except ValueError:
+            print "Błędne dane!"
+            continue
+
+        if 0 < typ <= maksliczba and typ not in typy:
             typy.add(typ)
             i = i + 1
 

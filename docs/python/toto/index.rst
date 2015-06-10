@@ -356,10 +356,9 @@ Wykorzystajmy poznany typ, aby pobrać od użytkownika typy liczb. W pliku
     :lineno-start: 20
     :lines: 20-27
 
-W powyższym kodzie warto zwrócić na sposób sprawdzania, czy podana liczba
-nie została już w zbiorze umieszczona: ``if typ not in typy:``. Gdybyśmy
-chcieli sprawdzić, czy liczba jest w zbiorze, użylibyśmy wyrażenia ``typ in typy``.
-Przetestuj rogram.
+W powyższym kodzie warto zwrócić uwagę na sposób sprawdzania, czy podanej liczby
+nie ma już w zbiorze: ``if typ not in typy:``. Gdybyśmy chcieli sprawdzić,
+czy liczba jest w zbiorze, użylibyśmy wyrażenia ``typ in typy``. Przetestuj program.
 
 Ile trafiliśmy
 ***************
@@ -431,9 +430,10 @@ program nie działa. Dlaczego?
 Ćwiczenie 10
 ==============
 
-Zmodyfikuj program tak, aby wynik jegzo działania wyglądał następująco:
+Zmodyfikuj program tak, aby wynik jego działania wyglądał następująco:
 
 .. figure:: img/toto25.png
+
 
 Ćwiczenie 11
 ==============
@@ -472,13 +472,15 @@ Dodaj odpowiednią instrukcję warunkową, która w przypadku gdy zmienna ``ilel
 będzie mniejsza od zmiennej ``maksliczba`` wyświetli komunikat "Błędne dane!"
 i przerwie wykonywanie programu – użyj funkcji ``exit()``. Sprawdź działanie programu.
 
-
 Tetsujemy dalej. Uruchom program i zamiast liczby podaj tekst.
-Co się dzieje?
+Co się dzieje? Uruchom jeszcze raz, ale tym razem jako typy podaj
+wartości spoza zakresu <0;maksliczba>. Da się to zrobić?
 
-Zgłoszony zostaje wyjątek "ValuError" (zob.: :term:`wyjątki`) i komunikat
-"invalid literal for int() with base 10", który informuje, że fukncja ``int()``
-nie jest w stanie przekształcić podanego ciągu znaków na liczbę całkowitą.
+Jak pewnie zauważyłeś, w pierwszym wypadku zgłoszony zostaje wyjątek "ValuError"
+(zob.: :term:`wyjątki`) i komunikat ``invalid literal for int() with base 10``,
+który informuje, że fukncja ``int()`` nie jest w stanie przekształcić podanego
+ciągu znaków na liczbę całkowitą. W drugim wypadku podanie nielogicznych
+typów jest możliwe.
 
 Spróbujmy zmodyfikować program tak, aby był nieco odporniejszy na niepoprawne dane:
 
@@ -497,28 +499,26 @@ spróbuj wykonać kod w bloku ``try``, a w razie błędów przechwyć wyjątek `
 i wykonaj podporządkowane instrukcje. W powyższym przypadku wyświetlamy odpowiedni
 komunikat i kończymy działanie programu (``exit()``).
 
-Przetestuj program wprowadzając tekst zamiast liczb.
+.. raw:: html
 
-Ćwiczenie 13
-=============
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-Program powinien być odporny na błędne dane we wszystkich miejscach, w których
-pobiera dane od użytkownika. Wprowadź konieczne poprawki kodu i przetestuj
-swoje rozwiązania.
+.. highlight:: python
+.. literalinclude:: toto28.py
+    :linenos:
+    :lineno-start: 28
+    :lines: 28-37
 
-.. tip::
+Pobierając typy od użytkownika również musimy spróbować przekształcić
+podane znaki na liczbę (``int()``) i w razie błędu przechwycić wyjątek
+(``try...except``). Poza tym jednak trzeba sprawdzić, czy użytkownik podaje
+sensowane typy. Odpowiada za to warunek ``0 < typ <= maksliczba``.
+Jest to skrócony zapis wyrażenia: ``typ > 0 and typ <= maksliczba``.
 
-    Problemem może być pobieranie typów od użytkownika. Nie dość, że użytkownik
-    może wpisać literę zamiast cyfry, to jeszcze podane liczby mogą być poza zakresem.
-
-    Trzeba więc użyć konstrukcji ``try... except...``. Ale co powinno się stać,
-    jeśli użytkownik poda błędne dane? Przerwanie programu, jak wcześniej,
-    nie jest najlepszym pomysłem. Lepiej użyć polecenia ``continue``, które
-    pomija dalszy kod, ale kontynuuje wykonywanie pętli.
-
-    Trzeba również dodać odpowiednie warunki sprawdzające porawność podanych liczb.
-    Wyrażenia logiczne można umieścić wykorzystując operator logiczny ``and``
-    w warunku sprawdzającym, czy wylosowanej liczby nie ma w zbiorze.
+Na koniec warto zauważyć, co dzieje się, kiedy przechwytujemy wyjątek.
+Nie kończymy programu (``exit()``), ani nie przerywamy pętli (``break()``),
+zamiast tego pomijamy dalsze polecenia i wznawiamy wykonywanie pętli
+kolejny raz. Tak działa polecenie ``continue``.
 
 Funkcje i moduły
 *****************

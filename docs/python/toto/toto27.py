@@ -11,7 +11,7 @@ if ileliczb > maksliczba:
 
 liczby = []
 i = 0
-while i < int(ileliczb):
+while i < ileliczb:
     liczba = random.randint(1, maksliczba)
     if liczby.count(liczba) == 0:
         liczby.append(liczba)

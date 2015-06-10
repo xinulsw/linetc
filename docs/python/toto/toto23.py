@@ -20,7 +20,7 @@ while i < ileliczb:
 print "Wytypuj",ileliczb,"z",maksliczba," liczb: "
 typy = set()
 i = 0
-while i < int(ileliczb):
+while i < ileliczb:
     typ = raw_input("Podaj liczbę "+str(i+1)+": ")
     if typ not in typy:
         typy.add(typ)
