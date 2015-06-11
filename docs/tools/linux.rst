@@ -23,7 +23,7 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
 1) Pobierz program `Rufus <https://rufus.akeo.ie/>`_ – małe, szybkie i sprawdzone (:-)) narzędzie
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
-2) Pobierz plik :file:`kzkbox_20150605_pc.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
+2) Pobierz plik :file:`kzkbox_20150611_pc.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
    Plik zawiera dostosowany obraz systemu `LxPupTahr 15.05.01 <http://lx-pup.weebly.com/>`_ z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
