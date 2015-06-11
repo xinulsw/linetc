@@ -1,5 +1,5 @@
-Toto Lotek
-##############
+Toto Lotek – Python od podstaw
+##############################
 
 W Toto Lotku trzeba zgadywać liczby. Napiszmy prosty program, w którym
 będziemy mieli podobne zadanie. Użyjemy języka Python.
@@ -682,11 +682,11 @@ Program można ulepszyć:
 #. Dane użytkownika, czyli *nick*, powinny być pobierane na początku razem
    z ustawieniami. Podobnie lista gier może być inicjowana wcześniej.
    Zmodyfikuj odpowiednią funkcję.
-   
+
 #. Do listy gier dodawana jest informacja tylko o ostatniej grze w ramach
    danego uruchomienia programu. Zmień kod tak, aby zapamiętywane były wszystkie
    typowania użytkownika.
-   
+
 Przetestuj wprowadzone zmiany :-)
 
 .. tip::
