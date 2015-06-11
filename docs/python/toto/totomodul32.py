@@ -6,6 +6,9 @@ import random
 def ustawienia():
     """Funkcja pobiera ilość losowanych liczb, maksymalną losowaną wartość
     oraz ilość prób. Pozwala określić stopień trudności gry."""
+    
+    nick = raw_input("\nPodaj swój nick: ")
+    
     while 1:
         try:
             ile = int(raw_input("Podaj ilość typowanych liczb: "))
@@ -14,7 +17,7 @@ def ustawienia():
                 print "Błędne dane!"
                 continue
             ilelos = int(raw_input("Ile losowań: "))
-            return (ile, maks, ilelos)
+            return (ile, maks, ilelos, nick)
         except:
             print "Błędne dane!"
             continue

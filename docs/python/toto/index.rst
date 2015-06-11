@@ -615,20 +615,24 @@ Na początku dopiszemy kod w programie głównym :file:`toto2.py`:
     :lineno-start: 28
     :lines: 28-
 
-Dane graczy zapisywać będziemy w osobnych plikach nazywanych nickiem
+Dane graczy zapisywać będziemy w plikach nazwanych nickiem
 użytkownika z rozszerzeniem ".json": ``nazwapliku = nick + ".json"``.
-Informacje o grach przechowywać będziemy w liście ``losowania``,
-do której próbujemy na początku wczytać zapisane ewentualnie wcześniej
-dane: ``losowania = czytaj(nazwapliku)``.
 
-Elementami listy danych są natomiast słowniki, tzn. dane pogrupowane w parach
-"klucz: wartość", przy czym kluczami mogą być nie tylko liczby, ale również
-ciągi znakowe (zob. :term:`słownik`).
+Informacje o grach przechowywać będziemy w liście ``losowania``. Na początku
+będziemy ją inicjować danymi o grach zapisanymi wcześniej:
+``losowania = czytaj(nazwapliku)``.
 
-Jak widać, do listy ``losowania`` dodajemy słownik zawierający datę (nie
-zapomnijmy dodać importu modułu ``time``!), ustawienia, wylosowane liczby
-oraz ilość trafień. Na końcu listę wszystkich losowań gracza zapisujemy
-do pliku.
+Każda gra w liście ``losowania`` zapisana będzie jako :term:`słownik`.
+Struktura ta pozwala przechowywać dane w parach "klucz: wartość", przy
+czym indeksami mogą być napisy:
+
+* ``"czas"`` będzie indeksem daty gry (potrzebny import modułu ``time``!),
+* ``"dane"`` wskazywał będzie tuplę z ustawieniami,
+* ``"wylosowane"`` - listę wylosowanych liczb,
+* ``"ile"`` - ilość trafień.
+
+Na koniec dane ostatniej gry dopisujemy do listy (``losowania.append()``),
+a całą listę zapisujemy zapisujemy do pliku: ``zapisz(nazwapliku, losowania)``.
 
 Teraz zobaczmy, jak wyglądają funkcje ``czytaj()`` i ``zapisz()`` w module
 :file:`totomodul31.py`:
@@ -648,12 +652,12 @@ zapisywać dane jako znaki, jednak najczęściej programy użytkowe
 potrzebują zapisywać nie tyle teksty, ile złożone struktury danych, np.
 listy, zbiory czy słowniki. Znakowy zapis wymagałby wtedy wielu dodatkowych
 manipulacji, aby możliwe było poprawne odtworzenie informacji. Prościej
-jest skorzystać z serializacji, czyli zapisu danych obiektowych (zob. :term:`serializacja`).
+jest skorzystać z *serializacji*, czyli zapisu danych obiektowych (zob. :term:`serializacja`).
 Jednym z szerzej stosowanych jest prosty format tekstowy :term:`JSON`.
 
 W funkcji ``czytaj()`` po sprawdzeniu, czy na dysku istnieje podany plik,
 otwieramy go w trybie odczytu ``"r"`` i jego zawartość dekodujemy do
-listy dane: ``dane = json.load(plik)``.
+listy: ``dane = json.load(plik)``.
 
 Funkcja ``zapisz()`` oprócz nazwy pliku wymaga listy danych. Po otwarciu
 pliku w trybie zapisu ``plik = open(nazwapliku, "w")``, co powoduje wyczyszczenie
@@ -668,11 +672,22 @@ Przetestuj, przynajmniej kilkukrotnie, działanie programu.
 Ćwiczenie 14
 =============
 
-W programie w pętli ``for`` wielokrotnie powtarzać się może obliczanie
-ilości trafień i drukowanie komunikatów. Spróbuj utworzyć funkcję ``wyniki()``
-realizującą te operacje. Funkcję umieść w module programu, a następnie
-użyj jej w pętli. Zastanów się, jakie argumenty należy jej przekazać i co
-powinna zwracać.
+Program można ulepszyć:
+
+#. Użytkownik może typować liczby kilka razy w ramach jednego uruchomienia programu.
+   Powtarzany w pętli ``for`` kod warto przenieść do funkcji zapisanej w module
+   programu i nazwanej np. ``wyniki()``. Zastanów się, jakie argumenty należy
+   jej przekazać i co powinna zwracać.
+
+#. Dane użytkownika, czyli *nick*, powinny być pobierane na początku razem
+   z ustawieniami. Podobnie lista gier może być inicjowana wcześniej.
+   Zmodyfikuj odpowiednią funkcję.
+   
+#. Do listy gier dodawana jest informacja tylko o ostatniej grze w ramach
+   danego uruchomienia programu. Zmień kod tak, aby zapamiętywane były wszystkie
+   typowania użytkownika.
+   
+Przetestuj wprowadzone zmiany :-)
 
 .. tip::
 
