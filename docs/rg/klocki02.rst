@@ -37,7 +37,7 @@ Na początku definiujemy dwie zmienne globalne i inicjujemy dane:
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: rgkod12a.py
+.. literalinclude:: rgkod22a.py
     :linenos:
 
 Do zapamiętywania wybranych w rundzie pól posłużą funkcje ``ruszaj()``
@@ -48,7 +48,7 @@ i ``stoj()``:
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: rgkod12b.py
+.. literalinclude:: rgkod22b.py
     :linenos:
 
 Ze zbioru ``bezpieczne`` wyłączamy wybrane pola i stosujemy nowe funkcje:
@@ -58,9 +58,64 @@ Ze zbioru ``bezpieczne`` wyłączamy wybrane pola i stosujemy nowe funkcje:
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: rgkod12c.py
+.. literalinclude:: rgkod22c.py
     :linenos:
 
 .. raw:: html
 
     <hr />
+
+.. tip::
+
+    Można zapamiętywać wszystkie wybrane ruchy lub tylko niektóre. Przetestuj,
+    czy ma to wpływ na skuteczność AI.
+
+Atakuj najsłabszego
+********************
+
+Do tej pory atakowaliśmy przypadkowego robota wokół nas, lepiej wybrać
+najsłabszego.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod23.py
+    :linenos:
+
+Funkcja ``minhp()`` zwróci nam położenie najsłabszego wroga. Argument
+parametru ``key``, czyli wyrażenie :ref:`lambda <lambda>` wskazuje cechę
+robotów, wg której są porównywane.
+
+.. raw:: html
+
+    <hr />
+
+Samobójstwo lepsze niż śmierć?
+******************************
+
+Jeżeli grozi nam śmierć, a nie ma bezpiecznego miejsca, aby uciec, lepiej
+popełnić samobójstwo:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod24.py
+    :linenos:
+
+Unikaj nierównych starć
+************************
+
+Nie warto walczyć z przeważającą liczbą wrogów. Regułę tę można dodać
+na kilka sposobów, np.:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod25.py
+    :linenos:

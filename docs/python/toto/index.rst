@@ -598,7 +598,7 @@ Historia losowań
 
 Uruchamiając wielokrotnie program, moglibyśmy zapamiętywać losowania
 użytkownika, tworząc rejestr do celów informacyjnych i/lub statystycznych.
-Zadanie wymaga po pierwsez zdefiniowania jakieś struktury, w której będziemy
+Zadanie wymaga po pierwsze zdefiniowania jakieś struktury, w której będziemy
 przechowywali dane, po drugie zaś zapisu danych np. na dysku albo w plikach,
 albo w bazie danych.
 

@@ -3,6 +3,8 @@
 
 import rg
 
+#rg.settings.max_turns = 21
+
 class Robot:
 
     def act(self, game):
@@ -16,20 +18,29 @@ class Robot:
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
         sasiednie_wrogowie = sasiednie & wrogowie
         sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
+        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
 
-        ruch = ['move', rg.toward(self.location, rg.CENTER_POINT)]
+        def mindist(bots, loc):
+            return min(bots, key=lambda x: rg.dist(x, loc))
+
+        if wrogowie:
+            najblizszy_wrog = mindist(wrogowie,self.location)
+        else:
+            najblizszy_wrog = rg.CENTER_POINT
+
+        ruch = ['guard']
 
         if self.location in wejscia:
-            ruch = ['move',  rg.toward(self.location, rg.CENTER_POINT)]
-
-        if self.location == rg.CENTER_POINT:
-            ruch = ['guard']
-
-        if sasiednie_wrogowie:
+            if bezpieczne:
+                ruch = ['move',  mindist(bezpieczne, rg.CENTER_POINT)]
+        elif sasiednie_wrogowie:
             if 9*len(sasiednie_wrogowie) < self.hp:
                 ruch = ['attack', sasiednie_wrogowie.pop()]
-
-        if sasiednie_wrogowie2:
+            elif bezpieczne:
+                ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+        elif sasiednie_wrogowie2:
             ruch = ['attack', sasiednie_wrogowie2.pop()]
+        elif bezpieczne:
+            ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
 
         return ruch

@@ -12,8 +12,9 @@ przy użyciu frameworka Django.
     toto/index
     pylab/index
     czat/index
-    gloss_python.rst
-    gloss_system.rst
+    index5
+    gloss_python
+    gloss_system
 
 Propozycja scenariuszy warsztatów
 **********************************

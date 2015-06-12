@@ -19,12 +19,13 @@ liczby = losujliczby(ileliczb, maksliczba)
 for i in range(ilerazy):
     typy = pobierztypy(ileliczb, maksliczba)
     trafione = wyniki(set(liczby), typy)
-    losowania.append({
-        "czas": time.time(),
-        "dane": (ileliczb, maksliczba),
-        "wylosowane": liczby,
-        "ile": trafione
-    })
+
+losowania.append({
+    "czas": time.time(),
+    "dane": (ileliczb, maksliczba),
+    "wylosowane": liczby,
+    "ile": trafione
+})
 
 print "Wylosowane liczby:",liczby
 

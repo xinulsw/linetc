@@ -41,6 +41,9 @@ class Robot:
         def mindist(bots, loc):
             return min(bots, key=lambda x: rg.dist(x, loc))
 
+        def minhp(bots):
+            return min(bots, key=lambda x: game.robots[x].hp)
+
         if wrogowie:
             najblizszy_wrog = mindist(wrogowie,self.location)
         else:
@@ -53,10 +56,9 @@ class Robot:
                 ruch = ['move',  mindist(bezpieczne, rg.CENTER_POINT)]
         elif sasiednie_wrogowie:
             if 9*len(sasiednie_wrogowie) < self.hp:
-                #ruch = ['attack', sasiednie_wrogowie.pop()]
-                ruch = stoj('attack',sasiednie_wrogowie.pop())
+                ruch = stoj('attack',minhp(sasiednie_wrogowie.pop()))
             elif bezpieczne:
-                ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+                ruch = ruszaj(mindist(bezpieczne, rg.CENTER_POINT))
         elif sasiednie_wrogowie2 and self.location not in wybrane_pola:
             ruch = ['attack', sasiednie_wrogowie2.pop()]
         elif bezpieczne:

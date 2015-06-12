@@ -130,10 +130,6 @@ Kod przyjmie następującą postać:
     :lineno-start: 6
     :lines: 6-
 
-.. raw:: html
-
-    <hr />
-
 Zbiory pól
 ****************
 

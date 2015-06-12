@@ -131,11 +131,11 @@ losowe roboty.
         else:
             ruch = stoj('attack', minhp(sasiednie_wrogowie))
 
-Popełnij samobójstwo jeśli lepiej nie można
-********************************************
+Samobójstwo lepsze niż śmierć
+******************************
 
 Na razie usiłujemy uciec, jeżeli grozi nam śmierć, ale czasami może się
-nam nie udać, bo natkniemy się na atak wroga. Jeżeli brak bezpiecznego
+nam nie udać, bo natkniemy się na atakującego wroga. Jeżeli brak bezpiecznego
 ruchu, a grozi nam śmierć, o ile pozostaniemy  w miejscu, możemy
 popełnić samobójstwo, co osłabi wrogów bardziej niż atak.
 
@@ -143,7 +143,7 @@ popełnić samobójstwo, co osłabi wrogów bardziej niż atak.
 
     elif sasiednie_wrogowie:
         if 9*len(sasiednie_wrogowie) >= self.hp:
-            if safe:
+            if bezpieczne:
                 ruch = ruszaj(mindist(safe, rg.CENTER_POINT))
             else:
                 ruch = stoj('suicide')
