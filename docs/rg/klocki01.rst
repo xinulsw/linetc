@@ -6,7 +6,7 @@
 Środowisko testowe przygotowujemy wg dokumentu :ref:`rgkit`.
 
 Tworzenie sztucznej inteligencji robota można sprowadzić do odpowiedzi na
-pytanie, według jakich zasad ma działać robot w określonych sytuacjach?
+pytanie, według jakich zasad ma działać robot w określonych sytuacjach.
 Na podstawie odpowiedzi określamy regułę zachowania, implementujemy ją
 i testujemy, np.:
 
@@ -16,24 +16,26 @@ i testujemy, np.:
 4) Czy to działa?
 
 Poniżej przedstawiamy kilka przykładów reguł i realizującego je kodu. Zadaniem
-gracza jest odpowiedzieć, kiedy robot ma podjąć dane działanie i w jakiej kolejności.
+gracza jest ustalić, kiedy robot ma podjąć dane działanie i w jakiej kolejności.
 Składając te "klocki", gracz tworzy strategię działania robota.
 
 .. tip::
 
     * Każdy "klocek" można testować osobno, a później w połączeniu z innymi.
       Warto i trzeba zmieniać kolejność stosowanych reguł!
-    * Kolejne wersje robota zapisujemy w osobnych plikach w katalogu :file:`robot`, np.:
-      :file:`robot01.py`, :file:`robot02.py`, ...
+    * Kolejne wersje robota zapisuj w osobnych plikach w katalogu :file:`robot`, np.:
+      *robot01.py*, *robot02.py*, ...
     * Do "sparingów" :-) można wystawić robota przeciwko samemu sobie, przeciwko
       kolejnej wersji lub konfrontować go z botami open source.
-    * Warto korzystać z symulatora!
+    * Korzystaj z symulatora!
 
 .. code-block:: bash
 
     (env)~/robot$ rgrun robot01.py robot01.py
     (env)~/robot$ rgrun robot01.py robot02.py
     (env)~/robot$ rgrun bots/stupid26.py robot01.py
+    (env)~/robot$ rgsimulator/rgsimulator.py robot01.py
+    (env)~/robot$ rgsimulator/rgsimulator.py robot01.py robot02.py
 
 Aby rozpocząć, wydajemy w terminalu polecenia:
 

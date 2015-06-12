@@ -119,3 +119,30 @@ na kilka sposobów, np.:
 .. highlight:: python
 .. literalinclude:: rgkod25.py
     :linenos:
+
+Goń najsłabszych
+*****************
+
+Zamiast atakować słabego uciekającego robota, lepiej go gonić, może
+trafi w gorsze miejsce...
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod26.py
+    :linenos:
+
+Podsumowanie
+***************
+
+Nie myśl, że zastosowanie wszystkich powyższych reguł automatycznie ulepszy
+robota. Weź pod uwagę fakt, że roboty pojawiają się w losowych punktach,
+oraz to, że strategia przeciwnika może być inna od zakładanej. Zaproponowane
+połączenie klocków nie musi być optymalne. Przetestuj kolejne wersje robotów,
+ustal ich zalety i wady, eksperymentuj, aby znaleźć lepsze rozwiązania.
+
+.. raw:: html
+
+    <hr />

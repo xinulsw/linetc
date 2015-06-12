@@ -23,8 +23,8 @@ Do powyższych dodamy kolejne reguły w postaci fragmentów kodu, które trzeba
 zintergrować z dotychczasową implementacją bota, aby go ulepszyć.
 
 
-Śledź wybrane miejsca
-**********************
+Śledź wybierane miejsca
+************************
 
 To raczej złożona funkcja, ale jest potrzebna, aby zmniejszyć ilość kolizji.
 Dotychczasowe boty drużyny próbują wejść na to samo miejsce i atakują się nawzajem.
@@ -175,21 +175,20 @@ Walka z wykorzystaniem przewagi jest zresztą warunkiem wygranej w większości 
 Goń słabe roboty
 ******************
 
-Możemy przypuszczać, że słabe roboty będą uciekać. Zamiast je atakować podczas
-ucieczki, powinniśmy je gonić. W ten sposób możemy
-je zmusić do ponownego ruchu w następnej turze, dzięki czemu trafią
-być może w gorsze mmiejsce. Bierzemy pod uwagę roboty, które mają maksymalnie
-5 punktów HP, ponieważ nawet gdy zaatakują zamiast uciekać, zginą w wyniku
-uszkodzeń z powodu kolizji.
+Możemy założyć, że słabe roboty będą uciekać. Zamiast atakować podczas
+ucieczki, powinniśmy je gonić. W ten sposób możemy wymusić kolejny ruch
+w następnej turze, dzięki czemu trafią być może w gorsze miejsce.
+Bierzemy pod uwagę roboty, które mają maksymalnie 5 punktów HP,
+nawet gdy zaatakują zamiast uciekać, zginą w wyniku uszkodzeń z powodu kolizji.
 
 .. code-block:: python
 
     elif sasiednie_wrogowie:
         ...
         else:
-            target - minhp(sasiednie_wrogowie)
-            if game.robots[target].hp <= 5:
-                ruch = ruszaj(target)
+            cel = minhp(sasiednie_wrogowie)
+            if game.robots[cel].hp <= 5:
+                ruch = ruszaj(cel)
             else:
                 ruch = stoj('attack', minhp(sasiednie_wrogowie))
 
@@ -203,9 +202,9 @@ Podsumowanie
 
 Poniżej zestawienie reguł, które dodaliśmy:
 
-* Śledź wybrane miejsca w poprzednich ruchach
-* Popełnij samobójstwo jeśli lepiej nie można
-* Atakuj najsłabszego wroga obok zamiast przypadkowego
+* Śledź wybierane miejsca
+* Atakuj najsłabszego wroga
+* Samobójstwo lepsze niż śmierć
 * Unikaj nierównych starć
 * Goń słabe roboty
 
