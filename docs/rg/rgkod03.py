@@ -1,6 +1,6 @@
 # jeżeli obok są przeciwnicy, atakuj
 # wersja z pętlą przeglądającą wszystkie pola zajęte przez roboty
-for loc, bot in game.robots.iteritems():
-    if bot.player_id != self.player_id:
-        if rg.dist(loc, self.location) <= 1:
-            return ['attack', loc]
+for poz, robot in game.robots.iteritems():
+    if robot.player_id != self.player_id:
+        if rg.dist(poz, self.location) <= 1:
+            return ['attack', poz]
