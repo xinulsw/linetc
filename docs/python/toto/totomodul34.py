@@ -6,6 +6,9 @@ import random
 def ustawienia():
     """Funkcja pobiera ilość losowanych liczb, maksymalną losowaną wartość
     oraz ilość prób. Pozwala określić stopień trudności gry."""
+    
+    nick = raw_input("Podaj swój nick: ")
+    
     while 1:
         try:
             ile = int(raw_input("Podaj ilość typowanych liczb: "))
@@ -14,7 +17,7 @@ def ustawienia():
                 print "Błędne dane!"
                 continue
             ilelos = int(raw_input("Ile losowań: "))
-            return (ile, maks, ilelos)
+            return (ile, maks, ilelos, nick)
         except:
             print "Błędne dane!"
             continue
@@ -58,3 +61,37 @@ def wyniki(liczby, typy):
     print "\n"+"x"*40+"\n" # wydrukuj 40 znaków x
 
     return len(trafione)
+
+import os, json
+
+def czytaj_str(nazwapliku):
+    """Funkcja odczytuje dane w formacie txt z pliku"""
+    dane = []
+    if os.path.isfile(nazwapliku):
+        plik = open(nazwapliku, "r")
+        dane = json.load(plik)
+        plik.close()
+    return dane
+
+def czytaj_json(nazwapliku):
+    """Funkcja odczytuje dane w formacie json z pliku"""
+    dane = []
+    if os.path.isfile(nazwapliku):
+        with open(nazwapliku, "r") as plik:
+            dane = json.load(plik)
+    return dane
+
+def zapisz_str(nazwapliku, dane):
+    """Funkcja zapisuje dane w formacie json do pliku"""
+    plik = open(nazwapliku, "w")
+    for slownik in dane:
+        linia =[k+":"+str(w) for k, w in slownik.iteritems()]
+        linia = ";".join(linia) 
+        #plik.write(linia+"\n")
+        print >>plik, linia
+    plik.close()
+
+def zapisz_json(nazwapliku, dane):
+    """Funkcja zapisuje dane w formacie json do pliku"""
+    with open(nazwapliku, "w") as plik:
+        json.dump(dane, plik)

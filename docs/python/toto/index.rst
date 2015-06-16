@@ -560,8 +560,8 @@ do przechowywania i przekazywania stałych danych.
 
 Nazwy zmiennych lokalnych w funkcjach są niezależne od nazw zmiennych w programie
 głównym, ponieważ definiwane są w różnych zasięgach czy też przestrzeniach nazw.
-Możliwe jest tworzenie zmiennych globalnych dostępnych w całym programie,
-w funkcji odwołujemy się do nich za pomocą polecenia typu: ``global nazwa_zmiennej``.
+Możliwe jest modyfikowanie zmiennych globalnych dostępnych w całym programie,
+w funkcji musimy tylko umieścić polecenie: ``global nazwa_zmiennej``.
 
 Wiele wartości zwracanych w tupli przez funkcję ``ustawienia()`` można
 jednocześnie przypisać kilku zmiennym dzięki operacji tzw. rozpakowania
@@ -593,10 +593,26 @@ Jak widać, program stał się czytelniejszy.
     działania i/lub wymaganych argumentów, ograniczanym potrójnymi cudzysłowami.
     Notacja ``"""..."""`` lub ``'''...'''`` pozwala zamieszczać teksty wielowierszowe.
 
-Historia losowań
-****************
+Ćwiczenie 13
+=================
 
-Uruchamiając wielokrotnie program, moglibyśmy zapamiętywać losowania
+Użytkownik może typować liczby kilka razy w ramach jednego uruchomienia programu.
+Powtarzany w pętli ``for`` kod warto przenieść do funkcji zapisanej w module
+programu i nazwanej np. ``wyniki()``. Zastanów się, jakie argumenty należy
+jej przekazać i co powinna zwracać.
+
+Ustawienia i historia losowań
+******************************
+
+Uruchamiając wielokrotnie program, musimy podawać wiele danych, aby zadziałał.
+Dodamy więc możliwość zapamiętywania ustawień i ich zmiany. Dane zapisywać
+będziemy w zwykłym pliku tekstowym, w którego nazwie użyjemy nicka użytkownika.
+W pliku :file:`toto2.py` dopisujemy:
+
+
+
+
+moglibyśmy zapamiętywać losowania
 użytkownika, tworząc rejestr do celów informacyjnych i/lub statystycznych.
 Zadanie wymaga po pierwsze zdefiniowania jakieś struktury, w której będziemy
 przechowywali dane, po drugie zaś zapisu danych np. na dysku albo w plikach,
@@ -674,10 +690,7 @@ Przetestuj, przynajmniej kilkukrotnie, działanie programu.
 
 Program można ulepszyć:
 
-#. Użytkownik może typować liczby kilka razy w ramach jednego uruchomienia programu.
-   Powtarzany w pętli ``for`` kod warto przenieść do funkcji zapisanej w module
-   programu i nazwanej np. ``wyniki()``. Zastanów się, jakie argumenty należy
-   jej przekazać i co powinna zwracać.
+
 
 #. Dane użytkownika, czyli *nick*, powinny być pobierane na początku razem
    z ustawieniami. Podobnie lista gier może być inicjowana wcześniej.

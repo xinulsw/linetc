@@ -1,14 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from totomodul32 import ustawienia, losujliczby, pobierztypy
+from totomodul32 import ustawienia, losujliczby, pobierztypy, czytaj, zapisz, wyniki
+import time
 
 # program główny
 
 # ustalamy trudność gry
 ileliczb, maksliczba, ilerazy, nick = ustawienia()
-print ileliczb, maksliczba, ilerazy, nick
-exit()
+
+nazwapliku = nick + ".json"
+losowania = czytaj(nazwapliku)
+
 # losujemy liczby
 liczby = losujliczby(ileliczb, maksliczba)
 
@@ -17,4 +20,15 @@ for i in range(ilerazy):
     typy = pobierztypy(ileliczb, maksliczba)
     trafione = wyniki(set(liczby), typy)
 
+losowania.append({
+    "czas": time.time(),
+    "dane": (ileliczb, maksliczba),
+    "wylosowane": liczby,
+    "ile": trafione
+})
+
 print "Wylosowane liczby:",liczby
+
+zapisz(nazwapliku, losowania)
+
+print "\n",losowania
