@@ -4,8 +4,9 @@
 import random, os
 
 def ustawienia():
-    """Funkcja pobiera ilość losowanych liczb, maksymalną losowaną wartość
-    oraz ilość prób. Pozwala określić stopień trudności gry. Ustawienia zapisuje."""
+    """Funkcja pobiera nick użytkownika, ilość losowanych liczb, maksymalną
+    losowaną wartość oraz ilość typowań. Ustawienia zapisuje."""
+
     nick = raw_input("Podaj nick: ")
     nazwapliku = nick + ".ini"
     gracz = czytaj_ust(nazwapliku)
@@ -16,7 +17,7 @@ def ustawienia():
         print "Z Maks:",gracz[2]
         print "Losowań:",gracz[3]
         odp = raw_input("Zmieniasz (t/n)? ")
-    
+
     if not gracz or odp.lower() == "t":
         while 1:
             try:
@@ -37,17 +38,17 @@ def ustawienia():
 def czytaj_ust(nazwapliku):
     if os.path.isfile(nazwapliku):
         plik = open(nazwapliku, "r")
-        ustawienia = plik.readline()
-        if ustawienia:
-            return ustawienia.split(";")
+        linia = plik.readline()
+        if linia:
+            return linia.split(";")
     return False
 
 def zapisz_ust(nazwapliku, gracz):
     plik = open(nazwapliku, "w")
-    plik.write(";".join(gracz)+"\n")
+    plik.write(";".join(gracz))
     plik.close()
     return gracz
-    
+
 def losujliczby(ile, maks):
     """Funkcja losuje ile unikalnych liczb całkowitych od 1 do maks"""
     liczby = []

@@ -5,10 +5,9 @@ from totomodul32 import ustawienia, losujliczby, pobierztypy
 
 # program główny
 
-# ustalamy trudność gry
-ileliczb, maksliczba, ilerazy, nick = ustawienia()
-print ileliczb, maksliczba, ilerazy, nick
-exit()
+# ustawienia gry
+nick, ileliczb, maksliczba, ilerazy = ustawienia()
+
 # losujemy liczby
 liczby = losujliczby(ileliczb, maksliczba)
 

@@ -606,10 +606,59 @@ Ustawienia i historia losowań
 
 Uruchamiając wielokrotnie program, musimy podawać wiele danych, aby zadziałał.
 Dodamy więc możliwość zapamiętywania ustawień i ich zmiany. Dane zapisywać
-będziemy w zwykłym pliku tekstowym, w którego nazwie użyjemy nicka użytkownika.
-W pliku :file:`toto2.py` dopisujemy:
+będziemy w zwykłym pliku tekstowym. W pliku :file:`toto2.py` uzupełniamy
+tylko jedną linię:
 
+.. raw:: html
 
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: toto32.py
+    :linenos:
+    :emphasize-lines: 2
+    :lineno-start: 8
+    :lines: 8-9
+
+W pliku :file:`totomodul.py` zmieniamy funkcję ``ustawienia()`` oraz dodajemy
+dwie nowe: ``czytaj_ust()`` i ``zapisz_ust()``.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+
+.. literalinclude:: totomodul32.py
+    :linenos:
+    :emphasize-lines: 12, 21, 34
+    :lineno-start: 1
+    :lines: 1-50
+
+W funkcji ``ustawienia()`` pobieramy nick użytkownika i tworzymy nazwę pliku
+z ustawieniami, następnie próbujemy je odczytać wywołując funkcję ``czytaj_ust()``.
+Funkcja ta sprawdza, czy podany plik istnieje na dysku i otwiera go do odczcytu:
+``plik = open(nazwapliku, "r")``. Plik powinien zawierać 1 linię, która przechowuje
+ustawienia w formacie: ``nick;ile_liczb;maks_liczba;ile_prób``. Po jej
+odczytaniu za pomocą metody ``.readline()`` i rozbiciu na elementy
+zwracamy ją jako listę ``gracz``.
+
+Jeżeli uda się odczytać zapisane ustawienia, drukujemy je, a następnie
+pytamy, czy użytkownik chce je zmienić. Jeżeli nie znaleźliśmy zapisanych
+ustawień lub użytkownik nacisnął klawisz "t" lub "T" wykonujemy poprzedni
+kod. Na koniec zwracamy wynik zdziałania funkcji zapisującej ustawienia:
+
+Funkcja ``zapisz_ust()`` pobiera tuplę zawierającą ustawienia. Otwiera plik
+do zapisu i  przekształcone do typu
+znakowego. Następnie złączamy te dane używając znaku
+średnika w jedną linię, którą zapisujemy do pliku: ``plik.write(";".join(gracz))``.
+
+W powyższym kodzie widać, jakie operacje można wykonywać na tekstach, tj.:
+* operator ``+``: łączenie tekstów,
+* ``linia.split(";")`` – rozbijanie tekstu wg podanego znaku na elementy listy,
+* ``";".join(gracz)`` – złączanie elementów listy za pomocą podanego znaku,
+* ``odp.lower()`` – zmiana wszystkich znaków na małe litery,
+* ``str(arg)`` – przekształcanie podanego argumentu na typ tekstowy.
 
 
 moglibyśmy zapamiętywać losowania
@@ -620,16 +669,7 @@ albo w bazie danych.
 
 Na początku dopiszemy kod w programie głównym :file:`toto2.py`:
 
-.. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: toto31.py
-    :linenos:
-    :emphasize-lines: 34-39
-    :lineno-start: 28
-    :lines: 28-
 
 Dane graczy zapisywać będziemy w plikach nazwanych nickiem
 użytkownika z rozszerzeniem ".json": ``nazwapliku = nick + ".json"``.
