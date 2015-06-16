@@ -601,8 +601,8 @@ Powtarzany w pętli ``for`` kod warto przenieść do funkcji zapisanej w module
 programu i nazwanej np. ``wyniki()``. Zastanów się, jakie argumenty należy
 jej przekazać i co powinna zwracać.
 
-Ustawienia i historia losowań
-******************************
+Ustawienia 
+***********
 
 Uruchamiając wielokrotnie program, musimy podawać wiele danych, aby zadziałał.
 Dodamy więc możliwość zapamiętywania ustawień i ich zmiany. Dane zapisywać
@@ -628,10 +628,9 @@ dwie nowe: ``czytaj_ust()`` i ``zapisz_ust()``.
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-
 .. literalinclude:: totomodul32.py
     :linenos:
-    :emphasize-lines: 12, 21, 34
+    :emphasize-lines: 12, 21, 34, 38, 46
     :lineno-start: 1
     :lines: 1-50
 
@@ -646,105 +645,124 @@ zwracamy ją jako listę ``gracz``.
 Jeżeli uda się odczytać zapisane ustawienia, drukujemy je, a następnie
 pytamy, czy użytkownik chce je zmienić. Jeżeli nie znaleźliśmy zapisanych
 ustawień lub użytkownik nacisnął klawisz "t" lub "T" wykonujemy poprzedni
-kod. Na koniec zwracamy wynik zdziałania funkcji zapisującej ustawienia:
-
-Funkcja ``zapisz_ust()`` pobiera tuplę zawierającą ustawienia. Otwiera plik
-do zapisu i  przekształcone do typu
-znakowego. Następnie złączamy te dane używając znaku
-średnika w jedną linię, którą zapisujemy do pliku: ``plik.write(";".join(gracz))``.
+kod. Na koniec zmiennej ``gracz`` przypisujemy listę ustwień przekazaną
+do zapisu funkcji ``zapisz_ust()``. Funkcja ta zapisuje dane złączone za
+pomocą średnika w jedną linię do pliku: ``plik.write(";".join(gracz))``.
 
 W powyższym kodzie widać, jakie operacje można wykonywać na tekstach, tj.:
+
 * operator ``+``: łączenie tekstów,
 * ``linia.split(";")`` – rozbijanie tekstu wg podanego znaku na elementy listy,
 * ``";".join(gracz)`` – złączanie elementów listy za pomocą podanego znaku,
 * ``odp.lower()`` – zmiana wszystkich znaków na małe litery,
 * ``str(arg)`` – przekształcanie podanego argumentu na typ tekstowy.
 
+Na szczególną uwagę zasługuje konstrukcja ``return gracz[0:1] + map(lambda x: int(x), gracz[1:4])``,
+której używamy, aby zwrócić odczytane/zapisane ustawienia do programu głównego.
+Dane w pliku przechowujemy, a także pobieramy od użytkownika jako znaki.
+Natomiast program główny oczekuje 4 wartości typu: znak, liczba, liczba, liczba.
+Stosujemy więc notację wycinkową (ang. *slice*), aby wydobyć nick użytkownika:
+``gracz[0:1]``. Pierwsza wartość mówi od którego elementu, a druga do którego
+elementu wycinamy wartości z listy (przećwicz w konsoli Pythona!).
+Funkcja ``map()`` pozwala zastosować do pozostałych 3 elementów – ``gracz[1:4]`` –
+funkcję, która zamienia je w wartości liczbowe. Wykorzystujemy tu :term:`wyrażenia lambda`,
+czyli skrócony zapis 1-argumentowej funkcji (zob. :ref:`mapowanie funkcji <fun_map>`).
 
-moglibyśmy zapamiętywać losowania
-użytkownika, tworząc rejestr do celów informacyjnych i/lub statystycznych.
-Zadanie wymaga po pierwsze zdefiniowania jakieś struktury, w której będziemy
-przechowywali dane, po drugie zaś zapisu danych np. na dysku albo w plikach,
+
+Historia losowań
+******************
+
+Skoro umiemy już zapamiętywać wstępne ustawienia programu, możemy również
+zapamiętywać losowania użytkownika, tworząc rejestr do celów informacyjnych
+i/lub statystycznych. Zadanie wymaga po pierwsze zdefiniowania jakieś struktury,
+w której będziemy przechowywali dane, po drugie zapisu danych albo w plikach,
 albo w bazie danych.
 
 Na początku dopiszemy kod w programie głównym :file:`toto2.py`:
-
-
-
-Dane graczy zapisywać będziemy w plikach nazwanych nickiem
-użytkownika z rozszerzeniem ".json": ``nazwapliku = nick + ".json"``.
-
-Informacje o grach przechowywać będziemy w liście ``losowania``. Na początku
-będziemy ją inicjować danymi o grach zapisanymi wcześniej:
-``losowania = czytaj(nazwapliku)``.
-
-Każda gra w liście ``losowania`` zapisana będzie jako :term:`słownik`.
-Struktura ta pozwala przechowywać dane w parach "klucz: wartość", przy
-czym indeksami mogą być napisy:
-
-* ``"czas"`` będzie indeksem daty gry (potrzebny import modułu ``time``!),
-* ``"dane"`` wskazywał będzie tuplę z ustawieniami,
-* ``"wylosowane"`` - listę wylosowanych liczb,
-* ``"ile"`` - ilość trafień.
-
-Na koniec dane ostatniej gry dopisujemy do listy (``losowania.append()``),
-a całą listę zapisujemy zapisujemy do pliku: ``zapisz(nazwapliku, losowania)``.
-
-Teraz zobaczmy, jak wyglądają funkcje ``czytaj()`` i ``zapisz()`` w module
-:file:`totomodul31.py`:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: totomodul31.py
+.. literalinclude:: toto33.py
     :linenos:
-    :lineno-start: 51
-    :lines: 51-
+    :emphasize-lines: 4-6, 13-14, 24-29, 31
+    :lineno-start: 1
+    :lines: 1-
+
+Dane graczy zapisywać będziemy w plikach nazwanych nickiem
+użytkownika z rozszerzeniem ".json": ``nazwapliku = nick + ".json"``.
+Informacje o grach umieścimy w liście ``losowania``, którą na początku
+zainicjujemy danymi o grach zapisanymi wcześniej: ``losowania = czytaj(nazwapliku)``.
+
+Każda gra w liście ``losowania`` to :term:`słownik`. Struktura ta pozwala
+przechowywać dane w parach "klucz: wartość", przy czym indeksami mogą być napisy:
+
+* ``"czas"`` – będzie indeksem daty gry (potrzebny import modułu ``time``!),
+* ``"dane"`` – będzie wskaywał tuplę z ustawieniami,
+* ``"wylosowane"`` – listę wylosowanych liczb,
+* ``"ile"`` – ilość trafień.
+
+Na koniec dane ostatniej gry dopiszemy do listy (``losowania.append()``),
+a całą listę zapiszemy do pliku: ``zapisz(nazwapliku, losowania)``.
+
+Teraz zobaczmy, jak wyglądają funkcje ``czytaj_json()`` i ``zapisz_json()`` w module
+:file:`totomodul.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: totomodul33.py
+    :linenos:
+    :lineno-start: 92
+    :lines: 92-
 
 Kiedy czytamy i zapisujemy dane, ważną sprawą staje się ich format. Najprościej
-zapisywać dane jako znaki, jednak najczęściej programy użytkowe
-potrzebują zapisywać nie tyle teksty, ile złożone struktury danych, np.
+zapisywać dane jako znaki, tak jak zrobiliśmy to z ustawieniami, jednak często
+programy użytkowe potrzebują zapisywać złożone struktury danych, np.
 listy, zbiory czy słowniki. Znakowy zapis wymagałby wtedy wielu dodatkowych
 manipulacji, aby możliwe było poprawne odtworzenie informacji. Prościej
 jest skorzystać z *serializacji*, czyli zapisu danych obiektowych (zob. :term:`serializacja`).
 Jednym z szerzej stosowanych jest prosty format tekstowy :term:`JSON`.
 
-W funkcji ``czytaj()`` po sprawdzeniu, czy na dysku istnieje podany plik,
-otwieramy go w trybie odczytu ``"r"`` i jego zawartość dekodujemy do
-listy: ``dane = json.load(plik)``.
-
+W funkcji ``czytaj()`` zawartość podanego pliki dekodujemy do listy: ``dane = json.load(plik)``.
 Funkcja ``zapisz()`` oprócz nazwy pliku wymaga listy danych. Po otwarciu
-pliku w trybie zapisu ``plik = open(nazwapliku, "w")``, co powoduje wyczyszczenie
-jego zawartości, dane są serializowane i zapisywane formacie JSON:
-``json.dump(dane, plik)``.
+pliku w trybie zapisu ``"w"``, co powoduje wyczyszczenie jego zawartości,
+dane są serializowane i zapisywane formacie JSON: ``json.dump(dane, plik)``.
 
-Dobrą praktyką jest zwalnianie uchwytu do pliku i przyddzielonych mu zasobów
-poprzez jego zamknięcie: ``plik.close()``.
+Dobrą praktyką jest zwalnianie uchwytu do otwartego pliku i przyddzielonych mu zasobów
+poprzez jego zamknięcie: ``plik.close()``. Tak robiliśmy w funkcjach
+czytających i zapisujących ustawienia. Teraz jednak pliki otworzyliśmy przy
+użyciu konstrukcji typu ``with open(nazwapliku, "r") as plik:``, która zadba
+o ich włąsciwe zmaknięcie.
 
 Przetestuj, przynajmniej kilkukrotnie, działanie programu.
 
 Ćwiczenie 14
-=============
+==============
 
-Program można ulepszyć:
+Załóżmy, że jednak chcielibyśmy zapisywać historię losowań w pliku tekstowym,
+którego poszczególne linie zawierałyby dane jednego losowania, np.:
+``wylosowane:[4, 5, 7];dane:(3, 10);ile:0;czas:1434482711.67``
 
+Funkcja zapisująca dane mogłaby wyglądać np. tak:
 
+.. code-block: python
 
-#. Dane użytkownika, czyli *nick*, powinny być pobierane na początku razem
-   z ustawieniami. Podobnie lista gier może być inicjowana wcześniej.
-   Zmodyfikuj odpowiednią funkcję.
+    def zapisz_str(nazwapliku, dane):
+        """Funkcja zapisuje dane w formacie txt do pliku"""
+        with open(nazwapliku, "w") as plik:
+            for slownik in dane:
+                linia =[k+":"+str(w) for k, w in slownik.iteritems()]
+                linia = ";".join(linia) 
+                # plik.write(linia+"\n") – zamiast tak, można:
+                print >>plik, linia
 
-#. Do listy gier dodawana jest informacja tylko o ostatniej grze w ramach
-   danego uruchomienia programu. Zmień kod tak, aby zapamiętywane były wszystkie
-   typowania użytkownika.
-
-Przetestuj wprowadzone zmiany :-)
-
-.. tip::
-
-    Zwróć uwagę, jakie dalsze operacje są zależne od zastępowanego kodu.
+Napisz funkcję ``czytaj_str()`` odczytującą tak zapisane dane. Funkcja
+powinna zwrócić listę słowników.
 
 Wydruk historii
 ****************
@@ -754,5 +772,3 @@ Wydruk historii
 .. raw:: html
 
     <hr />
-
-Jeżli masz ochotę na więcej, daj znać!

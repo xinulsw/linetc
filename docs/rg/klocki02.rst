@@ -11,7 +11,7 @@ W pierwszej części klocków stworzyliśmy takiego robota:
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot11.py
+.. literalinclude:: robot07.py
     :linenos:
 
 Jego działanie opiera się na zbiorach pól określonego typu i następujących

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from totomodul31 import ustawienia, losujliczby, pobierztypy, wyniki
+from totomodul import ustawienia, losujliczby, pobierztypy, wyniki
 
 # program główny
 

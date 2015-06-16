@@ -31,9 +31,9 @@ def ustawienia():
             except:
                 print "Błędne dane!"
                 continue
-        return zapisz_ust(nazwapliku, (nick, str(ile), str(maks), str(ilelos)))
-    else:
-        return gracz
+        gracz = zapisz_ust(nazwapliku, [nick, str(ile), str(maks), str(ilelos)])
+
+    return gracz[0:1] + map(lambda x: int(x), gracz[1:4])
 
 def czytaj_ust(nazwapliku):
     if os.path.isfile(nazwapliku):
