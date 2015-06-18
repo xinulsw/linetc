@@ -10,17 +10,7 @@ Poznaj zasady:
 .. toctree::
     :maxdepth: 2
 
-    rg01rules.rst
-    rg02start.rst
-    rg03library.rst
-    rg04rgkit.rst
-    rg06basic.rst
-    rg07intermediate.rst
+    dokumentacja/index
     klocki01.rst
     klocki02.rst
     ../python/gloss_python.rst
-
-.. note::
-
-    Niniejsza dokumentacja jest nieautoryzowanym tłumaczeniem oficjalnej dokumentacji
-    dostępnej na stonie `RobotGame <https://robotgame.net>`_.
