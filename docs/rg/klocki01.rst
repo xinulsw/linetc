@@ -178,10 +178,16 @@ w symulatorze. Zaobserwuj zachowanie się robotów:
 
     (env)~/robot$ python ./symuluj robot02.py robot02.py
 
-Zbiory pól
+Typy pól
 ***********
 
-Zmieńmy podejście. Sprawdzanie wszystkich położeń w poszukiwaniu wrogów
+Zmieńmy podejście. Zobaczmy, w jaki sposób dowiedzieć się, czy znajdujemy się
+w punkcie wejścia, gdzie wokół mamy wrogów lub pola, na które można wejść.
+Możliwe są dwa podejścia:
+
+
+
+ Sprawdzanie wszystkich położeń w poszukiwaniu wrogów
 lub członków drużyny wymaga korzystania z pętli przeglądającej słownik
 ``robot.game``. Można użyć zbiorów (zob. :term:`zbiór`) tworzonych za pomocą
 wyrażeń listowych (zob. :term:`wyrażenie listowe`), aby wyznaczyć pola
