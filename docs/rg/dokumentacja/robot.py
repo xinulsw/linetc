@@ -10,13 +10,13 @@ class Robot:
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
         wejscia = {loc for loc in wszystkie if 'spawn' in rg.loc_types(loc)}
         zablokowane = {loc for loc in wszystkie if 'obstacle' in rg.loc_types(loc)}
-        druzyna = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
-        wrogowie = set(game.robots)-druzyna
+        przyjaciele = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
+        wrogowie = set(game.robots)-przyjaciele
 
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
-        sasiednie_wrogowie = sasiednie & wrogowie
-        sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
-        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
+        wrogowie_obok = sasiednie & wrogowie
+        wrogowie_obok2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - przyjaciele
+        bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - wejscia - przyjaciele
 
         def mindist(bots, loc):
             return min(bots, key=lambda x: rg.dist(x, loc))
@@ -32,14 +32,14 @@ class Robot:
         if self.location in wejscia:
             if bezpieczne:
                 ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
-        elif sasiednie_wrogowie:
-            if 9*len(sasiednie_wrogowie) >= self.hp:
+        elif wrogowie_obok:
+            if 9*len(wrogowie_obok) >= self.hp:
                 if bezpieczne:
                     ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
             else:
-                ruch = ['attack', sasiednie_wrogowie.pop()]
-        elif sasiednie_wrogowie2:
-            ruch = ['attack', sasiednie_wrogowie2.pop()]
+                ruch = ['attack', wrogowie_obok.pop()]
+        elif wrogowie_obok2:
+            ruch = ['attack', wrogowie_obok2.pop()]
         elif bezpieczne:
             ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
 

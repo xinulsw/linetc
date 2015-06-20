@@ -1,80 +1,7 @@
 .. _klocki01:
 
-*Gra robotów* – klocki 1
-####################################
-
-Środowisko testowe
-*******************
-
-Do budowania i testowania robotów używamy pakietu *rgkit*. W tym celu
-przygotowujemy środowisko deweloperskie w katalogu :file:`robot`,
-zawierające bibliotekę ``rg``. W terminalu wydajemy polecenia:
-
-.. code-block:: bash
-
-    ~$ mkdir robot; cd robot
-    ~robot$ virtualenv env
-    ~robot$ source env/bin/activate
-    (env):~/robot$ pip install rgkit
-
-Dodatkowo instalujemy pakiet zawierający roboty open source, następnie symulator
-ułatwiający testowanie, a na koniec tworzymy skrót do jego uruchamiania:
-
-.. code-block:: bash
-
-    (env):~/robot$ git clone https://github.com/mpeterv/robotgame-bots bots
-    (env):~/robot$ git clone https://github.com/mpeterv/rgsimulator.git
-    (env):~/robot$ ln -s rgsimulator/rgsimulator.py symuluj
-
-Po wykonaniu wszystkich powyższych poleceń i wykonaniu komendy ``ls -l``
-powinniśmy zobaczyć:
-
-.. figure:: img/rgkit_env.png
-
-Kolejne wersje robota będziemy zapisywać w plikach *robot01.py*, *robot02.py*
-itd. Zapisane roboty można uruchamiać lub testować za pomocą poleceń:
-
-.. code-block:: bash
-
-    (env)~/robot$ rgrun robot01.py robot02.py
-    (env)~/robot$ rgrun bots/stupid26.py robot01.py
-    (env)~/robot$ ./symuluj robot01.py robot02.py
-
-Symulatorem sterujemy za pomocą klawiszy:
-
-* Klawisz F: utworzenie robota-przyjaciela w zaznaczonym polu.
-* Klawisz E: utworzenie robota-wroga w zaznaczonym polu.
-* Klawisze Delete or Backspace: usunięcie robota z zaznaczonego pola.
-* Klawisz H: zmiana punktów HP robota.
-* Klawisz C: wyczyszczenie planszy gry.
-* Klawisz Spacja: pokazuje planowane ruchy robotów.
-* Klawisz Enter: uruchomienie rundy.
-* Klawisz G: tworzy i usuwa roboty w punktach wejścia (ang. *spawn locations*), "generowanie robotów".
-
-.. attention::
-
-    Pokazana powyżej instalacja zakłada użycie środowiska wirtualnego tworzonego
-    przez pakiet *virtualenv*, dlatego przed uruchomieniem rozgrywki
-    lub symulacji trzeba pamiętać o wydaniu w katalogu :file:`robot` polecenia
-    ``source env/bin/activate``. Poleceniem ``deactivate`` opuszczamy
-    środowisko wirtualne.
-
-Sztuczna inteligencja
-**********************
-
-Tworzenie sztucznej inteligencji robota można sprowadzić do odpowiedzi na
-pytanie, według jakich zasad ma działać robot w określonych sytuacjach.
-Na podstawie odpowiedzi określamy regułę zachowania, implementujemy ją
-i testujemy, np.:
-
-1) Gdzie ma iść robot po po wejściu na arenę?
-2) Odpowiedź, czyli reguła AI, np.: "Idź do środka".
-3) Jaki kod umożliwi robotowi realizowanie tej reguły?
-4) Czy to działa?
-
-Poniżej przedstawiamy kilka reguł i realizującego je kodu. Zadaniem
-gracza jest ustalić, kiedy robot ma podjąć dane działanie i w jakiej kolejności.
-Składając te "klocki", gracz tworzy strategię działania robota.
+*RG* – klocki 1
+################
 
 .. tip::
 
@@ -94,6 +21,12 @@ zawierającym niezbędne minimum działającego bota:
 .. highlight:: python
 .. literalinclude:: rgkod01.py
    :linenos:
+
+**Metody i właściwości biblioteki** *rg*:
+
+* ``rg.toward(poz_wyj, poz_cel)`` – zwraca następne położenie na drodze z bieżącego miejsca do podanego.
+* ``self.location`` – pozycja robota, który podejmuje działanie (``self``).
+* ``rg.CENTER_POINT`` – środek areny.
 
 W środku broń się lub giń
 **************************
@@ -122,234 +55,452 @@ Wersja wykorzystująca pętlę.
 .. literalinclude:: rgkod03.py
     :linenos:
 
-Informacje o każdym robocie wydobywane są ze słownika ``game.robots`` za pomocą
-metody ``.iteritems()``, która zwraca indeks ``loc``, czyli tuplę *(x,y)*
-oznaczającą położenie robota, oraz słownik ``bot`` opisujący właściwości robota:
+**Metody i właściwości biblioteki** *rg*:
 
-* *player_id* – identyfikator gracza, do którego należy robot;
-* *hp* – ilość punktów HP robota;
-* *location* – tupla (x, y) oznaczająca położenie robota na planszy;
-* *robot_id* – identyfikator robota, o ile jest w Twojej drużynie.
+* Słownik ``game.robots`` zawiera dane wszystkich robotów na planszy.
+  Metoda  ``.iteritems()`` zwraca indeks ``poz``, czyli położenie *(x,y)*
+  robota, oraz słownik ``robot`` opisujący jego właściwości, czyli:
+
+    * *player_id* – identyfikator gracza, do którego należy robot;
+    * *hp* – ilość punktów HP robota;
+    * *location* – tupla (x, y) oznaczająca położenie robota na planszy;
+    * *robot_id* – identyfikator robota w Twojej drużynie.
+
+* ``rg.dist(poz1, poz1)`` – zwraca matematyczną odległość między dwoma położeniami.
 
 Robot podstawowy
 *****************
 
-Łącząc omówione wyżej trzy podstawowe reguły, otrzymujemy podstawowego robota:
+Łącząc omówione wyżej trzy podstawowe reguły, otrzymujemy robota podstawowego:
 
 .. raw:: html
 
-    <div class="code_no">Plik robot01.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <em>robot04a.py</em>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: dokumentacja/robot01.py
+.. literalinclude:: rgkod04a.py
     :linenos:
 
 Wybrane działanie robota zwracamy za pomocą instrukcji ``return``.
-Bardzo ważna jest tu kolejność umieszczenia reguł, pierwszy spełniony warunek
-powoduje bowiem wyjście z funkcji, pozostałe możliwości nie są już sprawdzane.
+Zwróć uwagę, jak ważna jest w tej wersji kodu **kolejność umieszczenia reguł**,
+pierwszy spełniony warunek powoduje wyjście z funkcji, więc pozostałe
+możliwości nie są już sprawdzane!
 
 .. raw:: html
 
     <hr />
 
-W miarę rozbudowywania robota przydatniejsze będzie podejście niejako odwrotne.
-Zainicjujemy zmienną pomocniczą ``ruch`` działaniem domyślnym, które w kolejnych
-regułach będzie można zmienić. Dopiero na końcu zwrócimy ustaloną akcję.
-Kod przyjmie następującą postać:
+Powyższy kod można przekształcić wykorzystując zmienną pomocniczą ``ruch``,
+inicjowaną działaniem domyślnym, które może zostać zmienione przez kolejne reguły.
+Dopiero na końcu zwracamy ustaloną akcję:
 
 .. raw:: html
 
-    <div class="code_no">Plik robot02.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <em>robot04b.py</em>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot02.py
+.. literalinclude:: rgkod04b.py
     :linenos:
-    :emphasize-lines: 5, 8, 13,15
-    :lineno-start: 6
-    :lines: 6-
+    :emphasize-lines: 10, 13, 18, 20
+    :lineno-start: 1
+    :lines: 1-
 
 Ćwiczenie 1
 =============
 
 Przetestuj działanie robota podstawowego wystawiając go do gry z samym sobą
-w symulatorze. Zaobserwuj zachowanie się robotów:
+w symulatorze. Zaobserwuj zachowanie się robotów tworząc różne układy początkowe:
 
 .. code-block:: bash
 
-    (env)~/robot$ python ./symuluj robot02.py robot02.py
+    (env)~/robot$ python ./symuluj robot04a.py robot04b.py
 
 Typy pól
 ***********
 
-Zmieńmy podejście. Zobaczmy, w jaki sposób dowiedzieć się, czy znajdujemy się
-w punkcie wejścia, gdzie wokół mamy wrogów lub pola, na które można wejść.
-Możliwe są dwa podejścia:
+Zobaczmy, w jaki sposób dowiedzieć się, w jakim miejscu się znajdujemy,
+gdzie wokół mamy wrogów lub pola, na które można wejść. Dysponując takimi
+informacjami, będziemy mogli podejmować bardziej przemyślane działania.
+Możliwe są dwa podejścia: wykorzystanie funkcji lub wyrażeń zbiorów (ang. *set comprehensions*)
+(zob. :term:`wyrażenie listowe`) i operacji na zbiorach (zob. :term:`zbiór`).
 
-
-
- Sprawdzanie wszystkich położeń w poszukiwaniu wrogów
-lub członków drużyny wymaga korzystania z pętli przeglądającej słownik
-``robot.game``. Można użyć zbiorów (zob. :term:`zbiór`) tworzonych za pomocą
-wyrażeń listowych (zob. :term:`wyrażenie listowe`), aby wyznaczyć pola
-zajmowane przez określone roboty.
-
-Poniższy kod wstawiamy na początku metody ``Robot.act()``:
+Czy to wejście?
+================
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em></strong> (oparta na funkcjach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgzbiory.py
-    :linenos:
+.. code-block:: python
 
-Metoda ``rg.loc_types()`` z biblioteki *rg* ułatwia nam zadanie,
-zwraca typ położenia wskazywanego przez podane współrzędne, np.
-instrukcja warunkowa ``if 'spawn' in rg.loc_types(poz)`` sprawdza,
-czy badane położenie ``poz`` jest punktem wejścia.
+    # funkcja zwróci prawdę, jeżeli "poz" wskazuje punkt wejścia
+    def czy_wejscie(poz):
+        if 'spawn' in rg.loc_types(poz):
+            return True
+        return False
+
+.. raw:: html
+
+    <div class="code_no"><strong>Wersja <em>B</em></strong> (oparta na zbiorach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # wszystkie pola na planszy jako współrzędne (x, y)
+    wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
+    
+    # punkty wejścia (spawn)
+    wejscia = {poz for poz in wszystkie if 'spawn' in rg.loc_types(poz)}
+
+    # warunek sprawdzający, czy "poz" jest w punkcie wejścia
+    if poz in wejscia:
+        pass
+
+**Metody i właściwości biblioteki** *rg*:
+
+* ``gr.loc_types(poz)`` – zwraca typ pola wskazywanego przez ``poz``:
+
+    * ``invalid`` – poza granicami planszy(np. (-1, -5) lub (23, 66));
+    * ``normal`` – w ramach planszy;
+    * ``spawn`` – punkt wejścia robotów;
+    * ``obstacle`` – pola zablokowane ograniczające arenę.
+
+Czy obok jest wróg?
+====================
+
+.. raw:: html
+
+    <div class="code_no"><strong>Wersja <em>A</em></strong> (oparta na funkcjach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # funkcja zwróci prawdę, jeżeli "poz" wskazuje wroga
+    def czy_wrog(poz):
+        if game.robots.get(poz) != None:
+            if game.robots[poz].player_id != self.player_id:
+                return True
+        return False
+
+    # lista wrogów obok
+    wrogowie_obok = []
+    for poz in rg.locs_around(self.location):
+        if czy_wrog(poz):
+            wrogowie_obok.append(poz)
+
+    # warunek sprawdzający, czy obok są wrogowie
+    if len(wrogowie_obok):
+        pass
+
+W powyższym kodzie metoda ``.get(poz)`` pozwala pobrać dane robota, którego
+kluczem w słowniku jest ``poz``.
+
+Wersja oparta na zbiorach wykorzystuje różnicę i cześć wspólną zbiorów.
+
+.. raw:: html
+
+    <div class="code_no"><strong>Wersja <em>B</em></strong> (oparta na zbiorach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # pola zablokowane
+    zablokowane = {poz for poz in wszystkie if 'obstacle' in rg.loc_types(poz)}
+
+    # pola zajęte przez nasze roboty
+    przyjaciele = {poz for poz in game.robots if game.robots[poz].player_id == self.player_id}
+
+    # pola zajęte przez wrogów
+    wrogowie = set(game.robots) - przyjaciele
+    
+    # pola sąsiednie
+    sasiednie = set(rg.locs_around(self.location)) - zablokowane
+
+    # pola obok zajęte przez wrogów
+    wrogowie_obok = sasiednie & wrogowie
+
+    # warunek sprawdzający, czy obok są wrogowie
+    if wrogowie_obok:
+        pass
+
+**Metody i właściwości biblioteki** *rg*:
+
+* ``rg.locs_around(poz, filter_out=None)`` – zwraca listę położeń sąsiadujących
+  z ``poz``. Jako ``filter_out`` można podać typy położeń do wyeliminowania, np.:
+  ``rg.locs_around(self.location, filter_out=('invalid', 'obstacle'))``.
 
 .. raw:: html
 
     <hr />
 
-Zapiszy dotychczasowy kod w pliku :file:`robot03.py`, definicje zbiorów
-umieść na początku metody ``Robot.act()``. Zdefiniowane zbiory wykorzystamy
-w określaniu reguł zachowania robota.
+.. tip::
 
-Opuść wejście
-**************
+    Definicje funkcji i list czy też zbiorów należy wstawić na początku
+    metody ``Robot.act()`` – przed pierwszym użyciem.
 
-Po instrukcji określającej akcję domyślną umieść kod:
+
+Wykorzystując powyższe "klocki" możemy napisać roboty realizujące następujące reguły:
+
+#. Opuść jak najszybciej wejście;
+#. Atakuj wrogów obok;
+#. W środku broń się;
+#. W ostateczności idź do środka.
+
+Implementacje
+==============
+
+Przykładowe implementacje mogą wyglądać następująco:
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em></strong> (oparta na funkcjach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: rgkod04.py
+.. literalinclude:: rgkod05a.py
     :linenos:
+
+.. raw:: html
+
+    <div class="code_no"><strong>Wersja <em>B</em></strong> (oparta na zbiorach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod05b.py
+    :linenos:
+
+Metoda ``.pop()`` zastosowana do listy zwraca jej ostatni element, natomiast
+w przypadku zbioru zwraca element losowy.
+
+Ćwiczenie 2
+===============
+
+Zapisz obie wersje w dwóch różnych plikach w katalogu :file:`robot` i przetestuj
+je w symulatorze, a następnie wystaw je przeciw sobie do walki. Poeksperymentuj
+z kolejnością reguł, która określa ich priorytety!
+
+.. tip::
+
+    Do kontrolowania logiki działania robota zamiast rozłącznych instrukcji
+    warunkowych: ``if war1: ... if war2: ...`` itd. można użyć instrukcji
+    złożonej: ``if war1: ... elif war2: ... [elif war3: ...] else: ...``.
 
 Atakuj, jeśli nie umrzesz
 **************************
 
-Warto atakować, ale nie wtedy, gdy grozi nam śmierć.
-Zamień dotychczasowy kod atakujący wroga obok na następujący:
+Warto atakować, ale nie wtedy, gdy grozi nam śmierć. Można przyjąć zasadę,
+że atakujemy tylko wtedy, kiedy suma potencjalnych uszkodzeń będzie mniejsza
+niż zdrowie naszego robota. Zmień więc dotychczasowe reguły ataku wroga korzystając
+z poniższych "klocków":
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em> i <em>B</em>.</strong> Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod05.py
-    :linenos:
+.. code-block:: python
 
-.. tip::
+    # WERSJA A
+    # jeżeli suma potencjalnych uszkodzeń jest mniejsza od naszego zdrowia
+    # funkcja zwróci prawdę
+    def czy_atak():
+        if 9*len(wrogowie_obok) < self.hp:
+            return True
+        return False
 
-    Wyrażenia tworzące zbiory (również nowe) trzymaj w kodzie razem.
+    # WERSJA B
+    # jeżeli obok są przeciwnicy, atakuj
+    if wrogowie_obok:
+        if 9*len(wrogowie_obok) >= self.hp:
+            pass
+        else:
+            ruch = ['attack', wrogowie_obok.pop()]
 
-W sumie powinnieneś uzyskać następujący kod robota:
+**Metody i właściwości biblioteki** *rg*:
+
+* ``self.hp`` – ilość punktów HP robota.
+
+Ćwiczenie 3
+===============
+
+Dodaj powyższą regułę do wersji A i B robotów.
+
+Ruszaj się bezpiecznie 
+***********************
+
+Zamiast iść na oślep lepiej wchodzić czy uciekać na bezpieczne pola.
+Za "bezpieczne" przyjmiemy na razie pole puste, niezablokowane i nie będące
+punktem wejścia.
 
 .. raw:: html
 
-    <div class="code_no">Plik robot03.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em> i <em>B</em>.</strong> Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: robot03.py
-    :linenos:
+.. code-block:: python
+
+    # WERSJA A
+    # funkcja zwróci prawdę jeżeli pole poz będzie puste
+    def czy_puste(poz):
+        if ('normal' in rg.loc_types(poz)) and not ('obstacle' in rg.loc_types(poz)):
+            if game.robots.get(poz) == None:
+                return True
+        return False
+    
+    puste = [] # lista pustych pól obok
+    bezpieczne = [] # lista bezpiecznych pól obok
+
+    for poz in rg.locs_around(self.location):
+        if czy_puste(poz):
+            puste.append(poz)
+        if czy_puste(poz) and not czy_wejscie(poz):
+            bezpieczne.append(poz)
+
+    # WERSJA B
+    # zbiór bezpiecznych pól
+    bezpieczne = sasiednie - wrogowie_obok - wejscia - przyjaciele
+
 
 Atakuj na 2 kroki
 *******************
 
-Dotychczasowy kod zapisz w pliku
-:file:`robot04.py` i dodaj do niego nową regułę.
-
-Jeżeli w odległości 2 kroków jest przeciwnik, lepiej zaatakuj.
+Jeżeli w odległości 2 kroków jest przeciwnik, zamiast iść w jego kierunku
+i narażać się na szkody, lepiej go zaatakuj, aby nie mógł bezkarnie się
+do nas zbliżyć.
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em> i <em>B</em>.</strong> Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod06.py
-    :linenos:
+.. code-block:: python
+
+    # WERSJA A
+    # funkcja zwróci prawdę, jeżeli w odległości 2 kroków z przodu jest wróg
+    def zprzodu(l1, l2):
+        if rg.wdist(l1, l2) == 2:
+            if abs(l1[0] - l2[0]) == 1:
+                return False
+            else:
+                return True
+        return False
+
+    # funkcja zwróci współrzędne pola środkowego między dwoma innymi
+    # oddalonymi o 2 kroki
+    def miedzypole(p1, p2):
+        return (int((p1[0]+p2[0]) / 2), int((p1[1]+p2[1]) / 2))
+
+    for poz, robot in game.get('robots').items():
+        if czy_wrog(poz):
+            if rg.wdist(poz, self.location) == 2:
+                if zprzodu(poz, self.location):
+                    return ['attack', miedzypole(poz, self.location)]
+                if rg.wdist(rg.toward(loc, rg.CENTER_POINT), self.location) == 1:
+                    return ['attack', rg.toward(poz, rg.CENTER_POINT)]
+                else:
+                    return ['attack', (self.location[0], poz[1])]
+
+    # WERSJA B
+    wrogowie_obok2 = {poz for poz in sasiednie if (set(rg.locs_around(poz)) & wrogowie)} - przyjaciele
+
+    if wrogowie_obok2:
+        ruch = ['attack', wrogowie_obok2.pop()]
 
 .. raw:: html
 
     <hr />
 
-Do środka bezpiecznie i szybko
-*******************************
+Składamy reguły
+****************
 
-Dotychczasowy kod zapisz w pliku :file:`robot05.py` i wprowadź omawiane zmiany.
-Zamiast iść na oślep lepiej szybko i bezpiecznie iść do celu.
-Wyznaczamy więc zbiór sąsiednich pól, na które można bezpiecznie
-wejść. Następnie definiujemy funkcję zwracającą pole, na które należy wejść,
-aby dostać się do celu jak najszybciej. Na koniec zmieniamy kod nakazujący
-robotowi opuszczać punkt wejścia.
+Ćwiczenie 4
+==============
+
+Jeżeli czujesz się na siłach, spróbuj dokładać do robota w wersji **A**
+(oparty na funkcjach) i **B** (oparty na zbiorach) po jednej z przedstawionych
+reguł, czyli: 1) Atakuj, jeśli nie umrzesz; 2) Ruszaj się bezpiecznie;
+3) Atakuj na 2 kroki. Przetestuj w symulatorze każdą zmianę.
+
+Omówione reguły można poskładać w różny sposób. W wersji **A** (z funkcjami)
+kod mógłby być taki:
 
 .. raw:: html
 
-    <div class="code_no">Plik robot05.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no"><strong>Wersja <em>A</em></strong> (oparta na funkcjach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot05.py
+.. literalinclude:: rgkod09a.py
     :linenos:
-    :emphasize-lines: 1, 3-4, 10-11
-    :lines: 18-28
+
+W wersji **B** opartej na zbiorach:
 
 .. raw:: html
 
-    <hr />
+    <div class="code_no"><strong>Wersja <em>B</em></strong> (oparta na zbiorach). Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-Idź na najbliższego wroga
-*************************
+.. highlight:: python
+.. literalinclude:: rgkod09b.py
+    :linenos:
 
-W pliku :file:`robot06.py` dodamy jeszcze jedną regułę. Funkcję ``mindist()``
-można użyć do znalezienia najbliższego wroga, aby iść w jego kierunku,
-gdy opuścimy punkt wejścia:
+Ćwiczenie 5
+============
+
+To nie są takie same roboty! Przetestuj je w symulatorze i wystaw kilka
+razy do walki. Który jest lepszy i dlaczego?
+
+Możliwe ulepszenia
+**********************
+
+Poniżej pokazujemy "klocki", których możesz użyć, aby zoptymalizować roboty.
+Zamieszczamy również listę pytań do przemyślenia, aby zachęcić cię do
+samodzielnego konstruowania najlepszego robota :-)
+
+Atakuj najsłabszego
+====================
+
+.. raw:: html
+
+    <div class="code_no"><strong>Wersja <em>A</em> i <em>B</em>.</strong> Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. code-block:: python
+
+    # wersja A
+
+    # funkcja zwracająca atak na najsłabszego wroga obok
+    def atakuj():
+        r = wrogowie_obok[0]
+        for poz in wrogowie_obok:
+            if game.robots[poz]['hp'] > game.robots[r]['hp']:
+                r = poz
+        return ['attack', r]
+
+    # wersja B
+
+    # funkcja znajdująca najsłabszego wroga obok z podanego zbioru (bots)
+    def minhp(bots):
+        return min(bots, key=lambda x: game.robots[x].hp)
+    
+    if wrogowie_obok:
+        ...
+        else:
+            ruch = ['attack', minhp(wrogowie_obok)]
+
+Najkrócej do celu
+==================
+
+Funkcję ``mindist()`` można użyć do znalezienia najbliższego wroga,
+aby iść w jego kierunku, gdy opuścimy punkt wejścia:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod08.py
-    :linenos:
+.. code-block:: python
 
-Możę się zdarzyć, że nie będzie można bezpiecznie się ruszyć, wtedy pozostaje
-obrona jako działanie domyślne.
+    # funkcja zwraca ze zbioru pól (bots) pole najbliższe podanego celu (poz)
+    def mindist(bots, poz):
+        return min(bots, key=lambda x: rg.dist(x, poz))
 
-Mamy robota
-*************
+Inne
+=================
 
-Po złożeniu wszystkich powyższych klocków budowany dotychczas robot może przedstawiać się następująco:
-
-.. raw:: html
-
-    <div class="code_no">Plik robot06.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: robot06.py
-    :linenos:
-
-Jeżeli wystawisz go do walki np. z robotem 2, okaże się, że jest od niego gorszy!
-Jak myślisz, dlaczego? Spróbujmy go poprawić: usuń regułę mówiącą, żeby
-robot bronił się w środku – jest niepotrzebna, jeśli domyślną akcją jest obrona.
-Zmień również niezależne funkcje warunkowe w łańcuch decyzyjny ``if...elif...else...``.
-Poprawiony kod będzie wyglądał tak:
-
-
-.. raw:: html
-
-    <div class="code_no">Plik robot07.py. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: robot07.py
-    :linenos:
-
-Przetestuj różne wersje robotów. Która radzi sobie najlepiej? Na koniec
-uwaga: nie gwarantujemy, że zaproponowana implementacja jest najlepszą możliwą do
-złożenia z podanych klocków :-)
+* Czy warto atakować, jeśli obok jest więcej niż 1 wróg?
+* Czy warto atakować 1 wroga obok, ale mocniejszego od nas?
+* Możę się zdarzyć, że nie będzie można bezpiecznie się ruszyć, wtedy być może
+  obrona będzie najlepszym działaniem domyślnym.
+* Jeśli jesteśmy otoczeni przez wrogów, może lepiej popełnić samobójstwo...
 
 .. raw:: html
 

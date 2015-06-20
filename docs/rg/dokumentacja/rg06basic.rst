@@ -20,14 +20,14 @@ Z powyższego kodu wynikają trzy zasady:
 * atakuj przeciwnika, jeżeli jest obok;
 * idź do środka.
 
-To pozwala nam rozpocząć grę, ale wiele możemy też dodać. Większość usprawnień (ang. *feature*),
+To pozwala nam rozpocząć grę, ale wiele możemy ulepszyć. Większość usprawnień (ang. *feature*),
 które zostaną omówione, to rozszerzenia wersji podstawowej. Konstruując
 robota, można je stosować wybiórczo.
 
-Startegie indywidualne
+Kolejne reguły
 ***********************
 
-Rozbudujemy przykład podstawowy. Oto lista przykładowych reguł, które warto rozważyć:
+Rozbudujemy przykład podstawowy. Oto lista reguł, które warto rozważyć:
 
 * **Reguła 1: Opuść punkt wejścia.**
 
@@ -59,11 +59,11 @@ Dzięki temu nit się do nas bezkarnie nie zbliży.
 
 .. figure:: img/kiting.gif
 
-    Zwróć uwagę na słabego robota ze zdrowiem 8 HP, który podchodzi do mocnego robota
-    z 50 HP, a następnie ucieka. Zbliżając się atakuje pole, na które wchodzi przeciwnik,
-    ucieka i ponawia działanie. Trwa to do momentu, kiedy silniejszy robot popełni samobójstwo
-    (co w tym wypadku jest mało przydatne). Wszystko bez uszczerbku na zdrowiu słabszego
-    robota.
+Zwróć uwagę na słabego robota ze zdrowiem 8 HP, który podchodzi do mocnego robota
+z 50 HP, a następnie ucieka. Zbliżając się atakuje pole, na które wchodzi przeciwnik,
+ucieka i ponawia działanie. Trwa to do momentu, kiedy silniejszy robot popełni samobójstwo
+(co w tym wypadku jest mało przydatne). Wszystko bez uszczerbku na zdrowiu słabszego
+robota.
 
 * **Reguła 4: Wchodź tylko na wolne pola.**
 
@@ -158,10 +158,10 @@ używamy wyrażeń listowych (ang. *list comprehensions*).
     zablokowane = {loc for loc in wszystkie if 'obstacle' in rg.loc_types(loc)}
 
     # pola zajęte przez nasze roboty
-    druzyna = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
+    przyjaciele = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
 
     # pola zajęte przez wrogów
-    wrogowie = set(game.robots) - druzyna
+    wrogowie = set(game.robots) - przyjaciele
 
 Warto zauważyć, że zbiór wrogich robotów otrzymujemy jako różnicę zbioru
 wszystkich robotów i tych z naszej drużyny.
@@ -180,7 +180,7 @@ zwraca funkcja ``rg.locs_around``. Możemy wykluczyć położenia zablokowane
     sasiednie = set(rg.locs_around(self.location)) - zablokowane
 
     # pola sąsiednie zajęte przez wrogów
-    sasiednie_wrogowie = sasiednie & wrogowie
+    wrogowie_obok = sasiednie & wrogowie
 
 Aby odnaleźć wrogów oddalonych o dwa kroki, szukamy przyległych kwadratów,
 obok których są przeciwnicy. Wyłączamy sąsiednie pola zajęte przez członków drużyny.
@@ -188,7 +188,7 @@ obok których są przeciwnicy. Wyłączamy sąsiednie pola zajęte przez członk
 .. code-block:: python
 
     # pola zajęte przez wrogów w odległości 2 kroków
-    sasiednie_wrogowie2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - druzyna
+    wrogowie_obok2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - przyjaciele
 
 Teraz musimy sprawdzić, które z położeń są bezpieczne. Usuwamy pola zajmowane
 przez przeciwników w odległości 1 i 2 kroków. Pozbywamy się także punktów
@@ -199,7 +199,7 @@ najlepsze, co możemy zrobić.
 
 .. code-block:: python
 
-    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
+    bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - wejscia - przyjaciele
 
 Potrzebujemy funkcji, która wybierze ze zbioru położeń pole najbliższe podanego.
 Możemy użyć tej funkcji do znajdowania najbliższego wroga, jak również
@@ -240,6 +240,6 @@ implemetację robota wyposażonego we wszystkie założone wyżej właściwości
 
 .. note::
 
-    Niniejsza dokumentacja jest swobodnym i nieautoryzowanym tłumaczeniem dokumentacji
-    dostępnej na stonie `Robotgame basic strategy
+    Niniejsza dokumentacja jest swobodnym i nieautoryzowanym tłumaczeniem materiałów
+    dostępnych na stonie `Robotgame basic strategy
     <https://github.com/ramk13/robotgame/blob/master/strategy_guide/robotgame_basic_strategy.md>`_.

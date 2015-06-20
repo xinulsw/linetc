@@ -23,6 +23,7 @@ Spis treści:
     web/index
     python/index
     rg/index
+    
     galerie/index
 
 Indeks

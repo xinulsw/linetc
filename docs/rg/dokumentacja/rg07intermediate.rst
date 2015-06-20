@@ -222,6 +222,6 @@ Jeśli jesteś gotów, sprawdź "Zaawansowane strategie" (już wkrótce...)
 
 .. note::
 
-    Niniejsza dokumentacja jest swobodnym i nieautoryzowanym tłumaczeniem dokumentacji
-    dostępnej na stonie `Robotgame Intermediate Strategy
+    Niniejsza dokumentacja jest swobodnym i nieautoryzowanym tłumaczeniem materiałów
+    dostępnych na stonie `Robotgame Intermediate Strategy
     <https://github.com/ramk13/robotgame/blob/master/strategy_guide/robotgame_intermediate_strategy.md>`_.

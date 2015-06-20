@@ -1,12 +1,12 @@
-Robot Game – dokumentacja
-##########################
+RG – dokumentacja
+##################
 
-Robot Game to gra, w której walczą ze sobą programy – boty.
-Serwis powstał w oparciu o projekt `RobotGame <https://robotgame.net>`_.
-Poniżej dokumentacja:
+`RobotGame <https://robotgame.net>`_ to gra, w której walczą ze sobą programy – boty.
+Poniżej nieautoryzowane tłumaczenie oryginalnej dokumentacji oraz materiałów
+dodatkowych:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     rg01rules.rst
     rg02start.rst
@@ -18,4 +18,5 @@ Poniżej dokumentacja:
 .. note::
 
     Niniejsza dokumentacja jest nieautoryzowanym tłumaczeniem oficjalnej dokumentacji
-    dostępnej na stonie `RobotGame <https://robotgame.net>`_.
+    dostępnej na stronie *RobotGame* oraz materiałów dodatkowych dostępnych
+    na stronie `robotgame <https://github.com/ramk13/robotgame>`_.
