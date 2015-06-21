@@ -1,5 +1,5 @@
 # samobójstwo lepsze niż śmierć
-elif sasiednie_wrogowie:
+elif wrogowie_obok:
     ...
     else:
         ruch = stoj('suicide')

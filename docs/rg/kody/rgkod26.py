@@ -1,9 +1,9 @@
 # goń najsłabszych wrogów
-elif sasiednie_wrogowie:
+elif wrogowie_obok:
     ...
     else:
-        cel = minhp(sasiednie_wrogowie)
+        cel = minhp(wrogowie_obok)
         if game.robots[cel].hp <= 5:
             ruch = ruszaj(cel)
         else:
-            ruch = stoj('attack', minhp(sasiednie_wrogowie))
+            ruch = stoj('attack', minhp(wrogowie_obok))

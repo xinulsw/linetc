@@ -147,7 +147,7 @@ Czy to wejście?
 
     # wszystkie pola na planszy jako współrzędne (x, y)
     wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
-    
+
     # punkty wejścia (spawn)
     wejscia = {poz for poz in wszystkie if 'spawn' in rg.loc_types(poz)}
 
@@ -209,7 +209,7 @@ Wersja oparta na zbiorach wykorzystuje różnicę i cześć wspólną zbiorów.
 
     # pola zajęte przez wrogów
     wrogowie = set(game.robots) - przyjaciele
-    
+
     # pola sąsiednie
     sasiednie = set(rg.locs_around(self.location)) - zablokowane
 
@@ -319,7 +319,7 @@ z poniższych "klocków":
 
 Dodaj powyższą regułę do wersji A i B robotów.
 
-Ruszaj się bezpiecznie 
+Ruszaj się bezpiecznie
 ***********************
 
 Zamiast iść na oślep lepiej wchodzić czy uciekać na bezpieczne pola.
@@ -339,7 +339,7 @@ punktem wejścia.
             if game.robots.get(poz) == None:
                 return True
         return False
-    
+
     puste = [] # lista pustych pól obok
     bezpieczne = [] # lista bezpiecznych pól obok
 
@@ -354,7 +354,7 @@ punktem wejścia.
     bezpieczne = sasiednie - wrogowie_obok - wejscia - przyjaciele
 
 
-Atakuj na 2 kroki
+Atakuj 2 kroki obok
 *******************
 
 Jeżeli w odległości 2 kroków jest przeciwnik, zamiast iść w jego kierunku
@@ -471,7 +471,7 @@ Atakuj najsłabszego
     # funkcja znajdująca najsłabszego wroga obok z podanego zbioru (bots)
     def minhp(bots):
         return min(bots, key=lambda x: game.robots[x].hp)
-    
+
     if wrogowie_obok:
         ...
         else:
@@ -480,8 +480,8 @@ Atakuj najsłabszego
 Najkrócej do celu
 ==================
 
-Funkcję ``mindist()`` można użyć do znalezienia najbliższego wroga,
-aby iść w jego kierunku, gdy opuścimy punkt wejścia:
+Funkcji ``mindist()`` można użyć do znalezienia najbliższego wroga,
+aby iść w jego kierunku, kiedy opuścimy punkt wejścia:
 
 .. raw:: html
 
@@ -493,6 +493,9 @@ aby iść w jego kierunku, gdy opuścimy punkt wejścia:
     def mindist(bots, poz):
         return min(bots, key=lambda x: rg.dist(x, poz))
 
+    # WERSJA B
+    najblizszy_wrog = mindist(wrogowie,self.location)
+
 Inne
 =================
 
@@ -501,6 +504,10 @@ Inne
 * Możę się zdarzyć, że nie będzie można bezpiecznie się ruszyć, wtedy być może
   obrona będzie najlepszym działaniem domyślnym.
 * Jeśli jesteśmy otoczeni przez wrogów, może lepiej popełnić samobójstwo...
+* Może warto zmienić akcję domyślną w wersji **B** korzystającej ze zbiorów?
+* Może w wersji **B** warto użyć jednej złożonej instrukcji warunkowej?
+
+Proponujemy, żebyś sam zaczął wprowadzać i testować zasugerowane ulepszenia.
 
 .. raw:: html
 

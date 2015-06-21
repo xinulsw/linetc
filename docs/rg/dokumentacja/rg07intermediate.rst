@@ -75,8 +75,8 @@ ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
 
-    bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 \
-                 - wejscia - druzyna - wybrane_pola
+    bezpieczne = sasiednie - wrogowie_obok - sasiednie_wrogowie2 \
+                 - wejscia - przyjaciele - wybrane_pola
 
 Roboty atakujące przeciwnika o dwa kroki obok często otaczają go (to dobrze),
 ale uniemożliwiają innym członkom drużyny przekroczenie linii.
@@ -97,14 +97,14 @@ Na koniec podmieniamy kod zwracający ruchy:
 .. code-block:: python
 
     ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
-    ruch = ['attack', sasiednie_wrogowie.pop()]
+    ruch = ['attack', wrogowie_obok.pop()]
 
 – tak aby wykorzystywał nowe funkcje:
 
 .. code-block:: python
 
     ruch = ruszaj(mindist(bezpieczne, najblizszy_wrog))
-    ruch = stoj('attack', sasiednie_wrogowie.pop())
+    ruch = stoj('attack', wrogowie_obok.pop())
 
 Warto pamiętać, że roboty nie mogą zamieniać się miejscami. Wprawdzie
 jest możliwe zakodowanie tego, ale zamiana nie dojdzie do skutku.
@@ -126,10 +126,10 @@ losowe roboty.
     def minhp(bots):
         return min(bots, key=lambda x: robots[x].hp)
 
-    elif sasiednie_wrogowie:
+    elif wrogowie_obok:
         ...
         else:
-            ruch = stoj('attack', minhp(sasiednie_wrogowie))
+            ruch = stoj('attack', minhp(wrogowie_obok))
 
 Samobójstwo lepsze niż śmierć
 ******************************
@@ -141,14 +141,14 @@ popełnić samobójstwo, co osłabi wrogów bardziej niż atak.
 
 .. code-block:: python
 
-    elif sasiednie_wrogowie:
-        if 9*len(sasiednie_wrogowie) >= self.hp:
+    elif wrogowie_obok:
+        if 9*len(wrogowie_obok) >= self.hp:
             if bezpieczne:
                 ruch = ruszaj(mindist(safe, rg.CENTER_POINT))
             else:
                 ruch = stoj('suicide')
         else:
-            ruch = stoj('attack', minhp(sasiednie_wrogowie))
+            ruch = stoj('attack', minhp(wrogowie_obok))
 
 Unikaj nierównych starć
 ************************
@@ -163,14 +163,14 @@ Walka z wykorzystaniem przewagi jest zresztą warunkiem wygranej w większości 
 
 .. code-block:: python
 
-    elif sasiednie_wrogowie:
-        if 9*len(sasiednie_wrogowie) >= self.hp:
+    elif wrogowie_obok:
+        if 9*len(wrogowie_obok) >= self.hp:
             ...
-        elif len(sasiednie_wrogowie) > 1:
+        elif len(wrogowie_obok) > 1:
             if bezpieczne:
                 ruch = ruszaj(mindist(safe, rg.CENTER_POINT))
         else:
-            ruch = stoj('attack', minhp(sasiednie_wrogowie))
+            ruch = stoj('attack', minhp(wrogowie_obok))
 
 Goń słabe roboty
 ******************
@@ -183,14 +183,14 @@ nawet gdy zaatakują zamiast uciekać, zginą w wyniku uszkodzeń z powodu koliz
 
 .. code-block:: python
 
-    elif sasiednie_wrogowie:
+    elif wrogowie_obok:
         ...
         else:
-            cel = minhp(sasiednie_wrogowie)
+            cel = minhp(wrogowie_obok)
             if game.robots[cel].hp <= 5:
                 ruch = ruszaj(cel)
             else:
-                ruch = stoj('attack', minhp(sasiednie_wrogowie))
+                ruch = stoj('attack', minhp(wrogowie_obok))
 
 Trzeba pamiętać, że startegia gonienia słabego robota ma jedną oczywistą
 wadę. Jeżeli słaby robot wybierzez obronę, goniący odniesie uszkodzenia
