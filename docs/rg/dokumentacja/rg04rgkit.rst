@@ -128,6 +128,6 @@ Symulatorem sterujemy za pomocą klawiszy:
 .. note::
 
     Niniejsza dokumentacja jest nieautoryzowanym tłumaczeniem oficjalnej dokumentacji
-    dostępnej na stonie `RobotGame <https://robotgame.net>`_, a także `RobotGame – rgkit <https://github.com/RobotGame/rgkit>`.
+    dostępnej na stonie `RobotGame <https://robotgame.net>`_, a także `RobotGame – rgkit <https://github.com/RobotGame/rgkit>`_.
     Opis działania symulatora robotów przetłumaczono na podstawie strony
-    projektu `rgsimulator <https://github.com/mpeterv/rgsimulator>`.
+    projektu `Rgsimulator <https://github.com/mpeterv/rgsimulator>`_.

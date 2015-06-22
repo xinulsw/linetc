@@ -19,4 +19,4 @@ dodatkowych:
 
     Niniejsza dokumentacja jest nieautoryzowanym tłumaczeniem oficjalnej dokumentacji
     dostępnej na stronie *RobotGame* oraz materiałów dodatkowych dostępnych
-    na stronie `robotgame <https://github.com/ramk13/robotgame>`_.
+    na stronie `robotgame robots and scripts <https://github.com/ramk13/robotgame>`_.

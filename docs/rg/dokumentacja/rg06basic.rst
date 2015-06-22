@@ -11,7 +11,7 @@ Przykład robota
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot01.py
+.. literalinclude:: robot_p.py
     :linenos:
 
 Z powyższego kodu wynikają trzy zasady:
@@ -231,7 +231,7 @@ implemetację robota wyposażonego we wszystkie założone wyżej właściwości
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot.py
+.. literalinclude:: robot_b.py
    :linenos:
 
 .. raw:: html

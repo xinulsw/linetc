@@ -1,6 +1,6 @@
-.. _klocki02:
+.. _klocki03b:
 
-*RG* – klocki 2
+*RG* – klocki 3B
 ################
 
 Robot dotychczasowy
@@ -144,7 +144,8 @@ popełnić samobójstwo:
 
     # samobójstwo lepsze niż śmierć
     elif wrogowie_obok:
-        ...
+        if bezpieczne:
+            ...
         else:
             ruch = stoj('suicide')
 
@@ -164,7 +165,7 @@ Nie warto walczyć z przeważającą liczbą wrogów.
             ...
         elif len(wrogowie_obok) > 1:
             if bezpieczne:
-                ruch = ruszaj(mindist(safe, rg.CENTER_POINT))
+                ruch = ruszaj(mindist(bezpieczne, rg.CENTER_POINT))
         else:
             ruch = stoj('attack', minhp(wrogowie_obok))
 
@@ -191,6 +192,19 @@ trafi w gorsze miejsce...
 
 Robot zaawansowany
 *******************
+
+Po dodaniu/zmodyfikowaniu omwionych powyej reguł kod naszego robota może
+wyglądać tak:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: rgkod30b.py
+    :linenos:
+
+Na koniec trzeba przetestować robota. Czy rzeczywiście jest lepszy od poprzednich wersji?
 
 Podsumowanie
 ***************

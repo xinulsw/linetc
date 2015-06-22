@@ -28,6 +28,13 @@ class Robot:
             wybrane_pola.add(self.location)
             return [act, poz]
 
+        # funkcja znajdująca najsłabszego wroga obok
+        def minhp(bots):
+            return min(bots, key=lambda x: game.robots[x].hp)
+
+        def mindist(bots, poz):
+            return min(bots, key=lambda x: rg.dist(x, poz))
+
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
         wejscia = {poz for poz in wszystkie if 'spawn' in rg.loc_types(poz)}
         zablokowane = {poz for poz in wszystkie if 'obstacle' in rg.loc_types(poz)}
@@ -40,9 +47,6 @@ class Robot:
         # ze zbioru bezpieczne wyłączamy wybrane_pola
         bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - \
                      wejscia - przyjaciele - wybrane_pola
-
-        def mindist(bots, poz):
-            return min(bots, key=lambda x: rg.dist(x, poz))
 
         if wrogowie:
             najblizszy_wrog = mindist(wrogowie, self.location)
@@ -59,8 +63,17 @@ class Robot:
             if 9*len(wrogowie_obok) >= self.hp:
                 if bezpieczne:
                     ruch = ruszaj(mindist(bezpieczne, rg.CENTER_POINT))
+                else:
+                    ruch = stoj('suicide')
+            elif len(wrogowie_obok) > 1:
+                if bezpieczne:
+                    ruch = ruszaj(mindist(bezpieczne, rg.CENTER_POINT))
             else:
-                ruch = stoj('attack', wrogowie_obok.pop())
+                cel = minhp(wrogowie_obok)
+                if game.robots[cel].hp <= 5:
+                    ruch = ruszaj(cel)
+                else:
+                    ruch = stoj('attack', minhp(wrogowie_obok))
         elif wrogowie_obok2 and self.location not in wybrane_pola:
             ruch = stoj('attack', wrogowie_obok2.pop())
         elif bezpieczne:
