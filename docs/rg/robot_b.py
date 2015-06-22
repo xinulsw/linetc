@@ -10,12 +10,13 @@ class Robot:
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
         wejscia = {poz for poz in wszystkie if 'spawn' in rg.loc_types(poz)}
         zablokowane = {poz for poz in wszystkie if 'obstacle' in rg.loc_types(poz)}
-        druzyna = {poz for poz in game.robots if game.robots[poz].player_id == self.player_id}
-        wrogowie = set(game.robots) - druzyna
+        przyjaciele = {poz for poz in game.robots if game.robots[poz].player_id == self.player_id}
+        wrogowie = set(game.robots) - przyjaciele
+
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
-        sasiednie_wrogowie = sasiednie & wrogowie
-        sasiednie_wrogowie2 = {poz for poz in sasiednie if (set(rg.locs_around(poz)) & wrogowie)} - druzyna
-        bezpieczne = sasiednie - sasiednie_wrogowie - sasiednie_wrogowie2 - wejscia - druzyna
+        wrogowie_obok = sasiednie & wrogowie
+        wrogowie_obok2 = {poz for poz in sasiednie if (set(rg.locs_around(poz)) & wrogowie)} - przyjaciele
+        bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - wejscia - przyjaciele
 
         def mindist(bots, poz):
             return min(bots, key=lambda x: rg.dist(x, poz))
@@ -30,15 +31,15 @@ class Robot:
 
         if self.location in wejscia:
             if bezpieczne:
-                ruch = ['move',  mindist(bezpieczne, rg.CENTER_POINT)]
-        elif sasiednie_wrogowie:
-            if 9*len(sasiednie_wrogowie) >= self.hp:
+                ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+        elif wrogowie_obok:
+            if 9*len(wrogowie_obok) >= self.hp:
                 if bezpieczne:
                     ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
             else:
-                ruch = ['attack', sasiednie_wrogowie.pop()]
-        elif sasiednie_wrogowie2:
-            ruch = ['attack', sasiednie_wrogowie2.pop()]
+                ruch = ['attack', wrogowie_obok.pop()]
+        elif wrogowie_obok2:
+            ruch = ['attack', wrogowie_obok2.pop()]
         elif bezpieczne:
             ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
 

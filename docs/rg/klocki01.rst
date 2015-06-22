@@ -501,13 +501,13 @@ Inne
 
 * Czy warto atakować, jeśli obok jest więcej niż 1 wróg?
 * Czy warto atakować 1 wroga obok, ale mocniejszego od nas?
-* Możę się zdarzyć, że nie będzie można bezpiecznie się ruszyć, wtedy być może
-  obrona będzie najlepszym działaniem domyślnym.
+* Jeżeli nie można bezpiecznie się ruszyć, może lepiej się bronić?
 * Jeśli jesteśmy otoczeni przez wrogów, może lepiej popełnić samobójstwo...
-* Może warto zmienić akcję domyślną w wersji **B** korzystającej ze zbiorów?
-* Może w wersji **B** warto użyć jednej złożonej instrukcji warunkowej?
+* Spróbuj zmienić akcję domyślną w wersji **B** korzystającej ze zbiorów.
+* Spróbuj użyć jednej złożonej instrukcji warunkowej w wersji **B**.
 
 Proponujemy, żebyś sam zaczął wprowadzać i testować zasugerowane ulepszenia.
+Możesz też zajrzeć do drugiego :ref:`zestawu klocków <klocki02>`.
 
 .. raw:: html
 

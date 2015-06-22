@@ -8,25 +8,25 @@ class Robot:
     def act(self, game):
 
         wszystkie = {(x, y) for x in xrange(19) for y in xrange(19)}
-        wejscia = {loc for loc in wszystkie if 'spawn' in rg.loc_types(loc)}
-        zablokowane = {loc for loc in wszystkie if 'obstacle' in rg.loc_types(loc)}
-        przyjaciele = {loc for loc in game.robots if game.robots[loc].player_id == self.player_id}
-        wrogowie = set(game.robots)-przyjaciele
+        wejscia = {poz for poz in wszystkie if 'spawn' in rg.loc_types(poz)}
+        zablokowane = {poz for poz in wszystkie if 'obstacle' in rg.loc_types(poz)}
+        przyjaciele = {poz for poz in game.robots if game.robots[poz].player_id == self.player_id}
+        wrogowie = set(game.robots) - przyjaciele
 
         sasiednie = set(rg.locs_around(self.location)) - zablokowane
         wrogowie_obok = sasiednie & wrogowie
-        wrogowie_obok2 = {loc for loc in sasiednie if (set(rg.locs_around(loc)) & wrogowie)} - przyjaciele
+        wrogowie_obok2 = {poz for poz in sasiednie if (set(rg.locs_around(poz)) & wrogowie)} - przyjaciele
         bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - wejscia - przyjaciele
 
-        def mindist(bots, loc):
-            return min(bots, key=lambda x: rg.dist(x, loc))
+        def mindist(bots, poz):
+            return min(bots, key=lambda x: rg.dist(x, poz))
 
         if wrogowie:
             najblizszy_wrog = mindist(wrogowie,self.location)
         else:
             najblizszy_wrog = rg.CENTER_POINT
 
-        # akcja domyślna, którą nadpiszemy, jak znajdziemy coś lepszego
+        # działanie domyślne:
         ruch = ['guard']
 
         if self.location in wejscia:

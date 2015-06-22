@@ -75,12 +75,12 @@ ze zbioru bezpiecznych pól, które są podstawą dalszych wyborów:
 
 .. code-block:: python
 
-    bezpieczne = sasiednie - wrogowie_obok - sasiednie_wrogowie2 \
+    bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 \
                  - wejscia - przyjaciele - wybrane_pola
 
-Roboty atakujące przeciwnika o dwa kroki obok często otaczają go (to dobrze),
-ale uniemożliwiają innym członkom drużyny przekroczenie linii.
-Dlatego możemy blokować ataki na pola sasiednie_wrogowie2, jeśli znajdują się
+Roboty atakujące przeciwnika o dwa kroki obok często go otaczają (to dobrze),
+ale jednocześnie blokują innych członków drużyny.
+Dlatego możemy wykluczać ataki na pola *wrogowie_obok2*, jeśli znajdują się
 na liście wykonanych ruchów.
 
 [Robots that attack two moves away often form a perimeter around the enemy
@@ -90,7 +90,7 @@ attack if they are sitting in a taken spot.]
 
 .. code-block:: python
 
-    elif sasiednie_wrogowie2 and self.location not in wybrane_pola:
+    elif wrogowie_obok2 and self.location not in wybrane_pola:
 
 Na koniec podmieniamy kod zwracający ruchy:
 

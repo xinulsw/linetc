@@ -1,44 +1,59 @@
+.. _klocki02:
+
 *RG* – klocki 2
 ################
 
 Robot dotychczasowy
 *******************
 
-W pierwszej części klocków stworzyliśmy takiego robota:
+Na podstawie reguł i klocków z części pierwszej mogliśmy stworzyć następującego
+robota:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: robot07.py
+.. literalinclude:: robot_b.py
     :linenos:
 
-Jego działanie opiera się na zbiorach pól określonego typu i następujących
-regułach:
+Jego działanie opiera się na wyznaczeniu zbiorów pól określonego typu
+zastosowaniu następujących reguł:
 
-#. jeżeli nie ma nic lepszego, broń się
+#. jeżeli nie ma nic lepszego, broń się,
 #. z punktu wejścia idź bezpiecznie do środka;
 #. atakuj wrogów wokół siebie, o ile to bezpieczne, jeżeli nie,
    idź bezpiecznie do środka;
 #. atakuj wrogów dwa pola obok;
-#. idź bezpiecznie na wroga
+#. idź bezpiecznie na najbliższego wroga.
 
-Spróbujemy go ulepszyć!
+Spróbujemy go ulepszyć dodając, ale i prezycując reguły.
 
 Śledź wybrane miejsca
 **********************
 
 Aby unikać niepotrzebnych kolizji, nie należy wchodzić na wybrane wcześniej pola.
-Na początku definiujemy dwie zmienne globalne i inicjujemy dane:
+Trzeba więc zapamiętywać pola wybrane w danej rundzie.
+
+Przed klasą ``Robot`` definiujemy dwie zmienne globalne, następnie na początku
+metody ``.act()`` inicjujemy dane:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod22a.py
-    :linenos:
+.. code-block:: python
+
+    # zmienne globalne
+    runda_numer = 0 # numer rundy
+    wybrane_pola = set() # zbiór wybranych w rundzie pól
+
+    # inicjacja danych
+    # wyzeruj zbiór wybrane_pola przy pierwszym robocie w rundzie
+    global runda_numer, wybrane_pola
+    if game.turn != runda_numer:
+        runda_numer = game.turn
+        wybrane_pola = set()
 
 Do zapamiętywania wybranych w rundzie pól posłużą funkcje ``ruszaj()``
 i ``stoj()``:
@@ -47,9 +62,17 @@ i ``stoj()``:
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod22b.py
-    :linenos:
+.. code-block:: python
+
+    # jeżeli się ruszamy, zapisujemy docelowe pole
+    def ruszaj(poz):
+        wybrane_pola.add(poz)
+        return ['move', poz]
+
+    # jeżeli stoimy, zapisujemy zajmowane miejsce
+    def stoj(act, poz=None):
+        wybrane_pola.add(self.location)
+        return [act, poz]
 
 Ze zbioru ``bezpieczne`` wyłączamy wybrane pola i stosujemy nowe funkcje:
 
@@ -57,13 +80,25 @@ Ze zbioru ``bezpieczne`` wyłączamy wybrane pola i stosujemy nowe funkcje:
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod22c.py
-    :linenos:
+.. code-block:: python
 
-.. raw:: html
+    # ze zbioru bezpieczne wyłączamy wybrane_pola
+    bezpieczne = sasiednie - wrogowie_obok - wrogowie_obok2 - \
+                 wejscia - przyjaciele - wybrane_pola
 
-    <hr />
+    # stosujemy nowy kod w regule "atakuj wroga dwa pola obok"
+    elif wrogowie_obok2 and self.location not in wybrane_pola:
+
+    # stosujemy funkcje "ruszaj()" i "stoj()"
+
+    # zamiast: ruch = ['move', mindist(bezpieczne, rg.CENTER_POINT)]
+    ruch = ruszaj(mindist(bezpieczne, rg.CENTER_POINT))
+
+    # zamiast: ruch = ['attack', wrogowie_obok.pop()]
+    ruch = stoj('attack', wrogowie_obok.pop())
+
+    # zamiast: ruch = ['move', mindist(bezpieczne, najblizszy_wrog)]
+    ruch = ruszaj(mindist(bezpieczne, najblizszy_wrog))
 
 .. tip::
 
@@ -73,24 +108,27 @@ Ze zbioru ``bezpieczne`` wyłączamy wybrane pola i stosujemy nowe funkcje:
 Atakuj najsłabszego
 ********************
 
-Do tej pory atakowaliśmy przypadkowego robota wokół nas, lepiej wybrać
-najsłabszego.
+Do tej pory atakowaliśmy przypadkowego robota wokół nas,
+lepiej wybrać najsłabszego.
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod23.py
-    :linenos:
+.. code-block:: python
 
-Funkcja ``minhp()`` zwróci nam położenie najsłabszego wroga. Argument
-parametru ``key``, czyli wyrażenie :ref:`lambda <lambda>` wskazuje cechę
-robotów, wg której są porównywane.
+    # funkcja znajdująca najsłabszego wroga obok
+    def minhp(bots):
+        return min(bots, key=lambda x: game.robots[x].hp)
 
-.. raw:: html
+    elif wrogowie_obok:
+        ...
+        else:
+            ruch = stoj('attack', minhp(wrogowie_obok))
 
-    <hr />
+Funkcja ``minhp()`` poda nam położenie najsłabszego wroga. Argument
+parametru ``key``, czyli wyrażenie :ref:`lambda <lambda>` zwraca właściwość
+robotów, czyli punkty HP, wg której są porównywane.
 
 Samobójstwo lepsze niż śmierć?
 ******************************
@@ -102,23 +140,33 @@ popełnić samobójstwo:
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod24.py
-    :linenos:
+.. code-block:: python
+
+    # samobójstwo lepsze niż śmierć
+    elif wrogowie_obok:
+        ...
+        else:
+            ruch = stoj('suicide')
 
 Unikaj nierównych starć
 ************************
 
-Nie warto walczyć z przeważającą liczbą wrogów. Regułę tę można dodać
-na kilka sposobów, np.:
+Nie warto walczyć z przeważającą liczbą wrogów.
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod25.py
-    :linenos:
+.. code-block:: python
+
+    elif wrogowie_obok:
+        if 9*len(wrogowie_obok) >= self.hp:
+            ...
+        elif len(wrogowie_obok) > 1:
+            if bezpieczne:
+                ruch = ruszaj(mindist(safe, rg.CENTER_POINT))
+        else:
+            ruch = stoj('attack', minhp(wrogowie_obok))
 
 Goń najsłabszych
 *****************
@@ -130,9 +178,19 @@ trafi w gorsze miejsce...
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
-.. literalinclude:: rgkod26.py
-    :linenos:
+.. code-block:: python
+
+    elif wrogowie_obok:
+        ...
+        else:
+            cel = minhp(wrogowie_obok)
+            if game.robots[cel].hp <= 5:
+                ruch = ruszaj(cel)
+            else:
+                ruch = stoj('attack', minhp(wrogowie_obok))
+
+Robot zaawansowany
+*******************
 
 Podsumowanie
 ***************
