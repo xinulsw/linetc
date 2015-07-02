@@ -239,8 +239,10 @@ w konsoli:
 Git
 **********************
 
-`Git <http://pl.wikipedia.org/wiki/Git_%28oprogramowanie%29>`_ Source Code Mirror – to rozproszony system wersjonowania kodów źródłowych napisany
-przez `Linusa Torvaldsa <http://pl.wikipedia.org/wiki/Linus_Torvalds>`_, twórcę `jądra Linux <http://pl.wikipedia.org/wiki/Linux_%28j%C4%85dro%29>`_.
+`Git <http://pl.wikipedia.org/wiki/Git_%28oprogramowanie%29>`_ Source Code Mirror
+– to rozproszony system wersjonowania kodów źródłowych napisany
+przez `Linusa Torvaldsa <http://pl.wikipedia.org/wiki/Linus_Torvalds>`_,
+twórcę `jądra Linux <http://pl.wikipedia.org/wiki/Linux_%28j%C4%85dro%29>`_.
 Skrót SCM bywa również rozwijany jako *software configuration management*,
 co oznacza "zarządzanie konfiguracją oprogramowania". Gita można używać
 do rozwijania zarówno małych, jak i dużych projektów (np. Arch Linux, GIMP, jQuery).
@@ -281,7 +283,7 @@ i instalujemy wybierając domyślne opcje.
 
 Po opanowaniu podstaw obsługi Gita można oczywiście zainstalować programy
 z graficznym interfejsem użytkownika, jednak w większości przypadków
-jest to niekonieczne.
+nie jest to konieczne.
 
 Lokalne repozytorium
 ====================
@@ -294,7 +296,7 @@ tekstową) i wydajemy polecenie:
 
     ~$ git clone https://github.com/nazwa_użytkownika/nazwa_repozytorium.git
 
-Jak widać argumentem jest tutaj `Git url`, czyli schematyczny adres repozytorium,
+Jak widać argumentem jest tutaj `Git URL`, czyli schematyczny adres repozytorium,
 który możemy sprawdzić na stronie `github.com`. Domyślnym protokołem transferu jest
 ``https``, chociaż można wykorzystywać również inne, np. ``SSH``.
 W rezultacie w bieżącym folderze (zazwyczaj katalogu domowym użytkownika)
@@ -306,9 +308,8 @@ konfiguracyjny ``.git``, którego nie należy usuwać.
 
     Za pomocą narzędzia ``git`` można również utworzyć zupełnie nowy projekt.
     Służy do tego opcja ``init``. Możliwe jest również sklonowanie istniejącego
-    projektu do katalogu o narzuconej nazwie, trzeba ją dodać na końcu polecenia
-    ``git clone``.
-
+    projektu do katalogu o narzuconej nazwie, np.:
+    ``https://github.com/koduj-z-klasa/python101.git``.
 
 Podstawy Gita
 =====================
