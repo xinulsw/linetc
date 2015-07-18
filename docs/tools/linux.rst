@@ -23,7 +23,7 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
 1) Pobierz program `Rufus <https://rufus.akeo.ie/>`_ – małe, szybkie i sprawdzone (:-)) narzędzie
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
-2) Pobierz plik :file:`kzkbox_20150611_pc.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
+2) Pobierz plik :file:`kzkbox_20150716.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
    Plik zawiera dostosowany obraz systemu `LxPupTahr 15.05.01 <http://lx-pup.weebly.com/>`_ z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
@@ -41,7 +41,7 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
     * z listy "Urządzenie" wybierz pendrajwa kierując się oznaczeniem literowym i pojemnością;
     * zaznacz w razie potrzeby opcję "Szybkie formatowanie" (domyślna)
     * zaznacz opcję "Utwórz bootowalny dysk używając" -> "Obraz ISO",
-      kliknij ikonę obok i wskaż ściągnięty plik :file:`kzkbox_25052015.iso`;
+      kliknij ikonę obok i wskaż ściągnięty plik :file:`kzkbox_20150716.iso`;
     * wybierz "Opcje formatowania" i zaznacz "Dodaj łatkę dla starych biosów";
     * kliknij "Start" i po 4-5 min. powinieneś zobaczyć napis "Gotowe".
 
@@ -112,8 +112,8 @@ System w dostosowanej wersji zawiera:
   (otwartoźrodłówa, oparta na Firefoksie);
 * fonty Ubuntu oraz podstawowe z Windows;
 * pakiety *python-pip*, *python-virtualenv*, *git* oraz bibliotekę *Pygame*;
-* skonfigurowane mini środowisko programistyczne *Geany IDE*;
-* środowisko *PyCharm IDE Proffesional Trial*;
+* skonfigurowane środowiska programistyczne *Geany IDE* oraz *Sublime Text 3*;
+* możliwość łatwej instalacji środowiska *PyCharm Proffesional*;
 * skonfigurowane elementy interfejsu LXDE;
 * skonfigurowane skróty klawiszowe.
 
@@ -253,6 +253,7 @@ Oznaczenia: C – Control, A – Alt, W - Windows (SuperKey).
 * **W+f** - menedżer plików (pcmanfm)
 * **W+t** - terminal (LXTerminal)
 * **W+e** - Geany IDE
+* **W+s** - Sublime Text 3
 * **W+p** - PyCharm IDE
 * **W+w** - przeglądarka WWW (Palemoon)
 

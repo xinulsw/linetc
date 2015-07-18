@@ -496,7 +496,7 @@ formularza logowania ``AuthenticationForm``. Dzięki temu nie musimy
 "ręcznie" sprawdzać poprawności podanych danych, robi to metoda ``is_valid()``
 formularza. Jeżeli nie zwróci ona błędu, możemy zalogować użytkownika za
 pomocą funkcji ``login()``, której przekazujemy obiekty ``HttpRequest``
-(przesłane żadanie) i ``User`` – obiekt użytkownika zwrócony przez metodę
+(przesłane żądanie) i ``User`` – obiekt użytkownika zwrócony przez metodę
 ``get_user()`` formularza.
 
 Wylogowanie polega na użyciu funkcji ``logout(request)`` – wyloguje ona
@@ -728,7 +728,7 @@ pozwala ona określić w postaci listy pola, które mają znaleźć się na form
 Jak widać, pomijamy pole ``autor``.
 
 Właśnie dlatego musimy nadpisać metodę ``form_valid()``, która sprawdza
-poprawność przesłanych danych i zapisuje je w bazie. Żadanie POST otrzymane od
+poprawność przesłanych danych i zapisuje je w bazie. Żądanie POST otrzymane od
 użytkownika nie będzie zawierało danych autora. Musimy je uzupełnić.
 Polecenie ``wiadomosc = form.save(commit=False)`` tworzy obiekt wiadomości,
 ale go nie zapisuje. Dzięki temu w następnych instrukcjach możemy
