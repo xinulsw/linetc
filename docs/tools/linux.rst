@@ -23,8 +23,10 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
 1) Pobierz program `Rufus <https://rufus.akeo.ie/>`_ – małe, szybkie i sprawdzone (:-)) narzędzie
    do tworzenia bootowalnych kluczy USB. Narzędzie nie wymaga instalacji.
 
-2) Pobierz plik :file:`kzkbox_20150716.iso`, który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
-   Plik zawiera dostosowany obraz systemu `LxPupTahr 15.05.01 <http://lx-pup.weebly.com/>`_ z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
+2) Pobierz plik :file:`kzkbox.iso` lub :file:`kzkbox_full.iso` (zawiera dodatkowe edytory programistyczne),
+   który udostępniamy pod adresem: `Copy.com <https://copy.com/9WzmbHVn8T8UxsSN>`_.
+   Obraz zawiera dostosowany system `LxPupTahr 15.05.02 <http://lx-pup.weebly.com/>`_
+   z pulpitem `LXDE <http://pl.wikipedia.org/wiki/LXDE>`_.
 
 .. figure:: linimg/lxpup.png
    :alt: Pulpit LxPupTahr
@@ -41,11 +43,16 @@ zapisu ustawień i dokumentów, wykonaj następujące czynności:
     * z listy "Urządzenie" wybierz pendrajwa kierując się oznaczeniem literowym i pojemnością;
     * zaznacz w razie potrzeby opcję "Szybkie formatowanie" (domyślna)
     * zaznacz opcję "Utwórz bootowalny dysk używając" -> "Obraz ISO",
-      kliknij ikonę obok i wskaż ściągnięty plik :file:`kzkbox_20150716.iso`;
+      kliknij ikonę obok i wskaż ściągnięty plik *.iso*;
     * wybierz "Opcje formatowania" i zaznacz "Dodaj łatkę dla starych biosów";
     * kliknij "Start" i po 4-5 min. powinieneś zobaczyć napis "Gotowe".
 
 .. figure:: linimg/rufus02.jpg
+
+.. tip::
+
+    Programu Rufus możesz użyć do przygotowania uruchomieniowego pendrajwa
+    z innymi dystrybucjami Linuksa, np.: Debian, (X(L)(U)buntu itp.
 
 Możesz już spróbować uruchomić komputer z wykorzystaniem tak przygotowanego pendrajwa.
 Wystarczy, że podczas uruchamiania wciśniesz odpowiedni klawisz, najczęściej

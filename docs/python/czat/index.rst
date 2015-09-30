@@ -656,7 +656,7 @@ Do pliku :file:`urls.py` dopisujemy importy:
 .. code-block:: python
 
     from django.contrib.auth.decorators import login_required
-    from django.views.generic.list import ListView, DeleteView
+    from django.views.generic.list import ListView
     from czat.models import Wiadomosc
 
 – i wiążemy adres */wiadomosci* z wywołaniem widoku:
@@ -767,7 +767,7 @@ kod wyświetlający formularz:
 Dodamy teraz dwa widoki przeznaczone do aktualizaowania i usuwania wpisów.
 Zakładamy, że adresy do tych operacji będą miały postać: */aktualizuj/id_wiadomości*
 oraz */usun/id_wiadomości*, gdzie *id_wiadomosci* jest identyfikatorem
-obiektu do usunięcia. Tym razem zaczniemy od zmian w pliku :file:`urls.py`:
+obiektu do zaktualizowania/usunięcia. Tym razem zaczniemy od zmian w pliku :file:`urls.py`:
 
 .. raw:: html
 
@@ -786,9 +786,9 @@ parametrem, np. ``r'^aktualizuj/(?P<pk>\d+)/'``. Część ``/(?P<pk>\d+)`` oznac
 "klucz główny". Zmienna ta oznaczać będzie identyfikator wiadomości i dostępna
 będzie w widokach.
 
-**Usuwanie danych** realizujemy za pomocą widoku ``DeleteView``, który powinien
-być już zaimportowany razem z widokiem ``ListView``. Domyślny szablon
-dla tego widoku przyjmuje nnazwę *<nazwa-modelu>_confir_delete.html*,
+**Usuwanie danych** realizujemy za pomocą widoku ``DeleteView``, który należy
+zaimportować w pliku :file:`urls.py`: ``from django.views.generic.edit import DeleteView``.
+Domyślny szablon dla tego widoku przyjmuje nazwę *<nazwa-modelu>_confirm_delete.html*,
 dlatego uproścliśmy jego nazwę we właściwości ``template_name``.
 
 Ćwiczenie 6
