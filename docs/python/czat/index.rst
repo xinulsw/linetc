@@ -18,7 +18,7 @@ który pozwoli śledzić postęp pracy. W katalogu domowym wydajemy polecenia w 
 
 .. raw:: html
 
-    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. code-block:: bash
 
@@ -77,35 +77,11 @@ W pliku :file:`setting.py` zmieniamy następujące linie:
     w komentarzach, na początku każdego pliku powinna znaleźć się linia
     definiująca kodowanie: ``# -*- coding: utf-8 -*-``.
 
-Model – Widok – Kontroler
-**************************
-
-W projektowaniu aplikacji internetowych za pomocą Django odwołujemy się do wzorca M(odel)V(iew)C(ontroller),
-czyli Model–Widok–Kontroler [#]_, co pozwala na oddzielenie danych od ich prezentacji oraz logiki aplikacji.
-Funkcje kolejnych elementów są następujące:
-
-* Modele – :term:`model` w Django reprezentuje źródło informacji;
-  są to klasy Pythona odwzorowujące pojedyncze tabele w bazie danych [#]_;
-  każda klasa zawiera właściwości odpowiadające polom tabeli,
-  może też zawierać funkcje wykonujące operacje na danych.
-  Instancja takiej klasy odpowiada rekordowi danych.
-  Modele definiujemy w pliku :file:`models.py`.
-* Widoki – :term:`widok` w Django to funkcja czy klasa Pythona, która na podstawie żądań www
-  (dla danych adresów URL) zwraca odpowiedź, najczęściej w postaci kodu HTML
-  generowanego w szablonach (templates); odpowiedzią może być również
-  przekierowanie na inny adres, jakiś dokument lub obrazek.
-  Django zawiera wiele widoków wbudowanych. Widoki modyfikujemy
-  lub definiujemy w pliku :file:`views.py`.
-* Kontroler – :term:`kontroler` to mechanizm kierujący kolejne żądania
-  do odpowiednich widoków na podstawie wzorców adresów URL zawartych w pliku :file:`urls.py`.
-
-.. [#] Twórcy Django traktują jednak ten wzorzec elastycznie, mówiąc że ich
-   framework wykorzystuje wzorzec MTV, czyli model (model), szablon (template), widok (view).
-.. [#] Takie odwzorowanie nosi nazwę mapowania obiektowo-relacyjnego (ORM).
-   ORM odwzorowuje strukturę bazy na obiekty Pythona.
-
 Model danych i baza
 **********************
+
+W projektowaniu aplikacji internetowych za pomocą Django odwołujemy się do wzorca M(odel)V(iew)C(ontroller),
+czyli :ref:`Model–Widok–Kontroler <mvc>`, co pozwala na oddzielenie danych od ich prezentacji oraz logiki aplikacji.
 
 Pisanie aplikacji zaczynamy od zdefiniowania modelu, czyli klasy opisującej
 tabelę zawierającą wiadomości. Instancje tej klasy będą konkretnymi wiadomościami
@@ -131,7 +107,7 @@ Podajemy te dane po wydaniu w katalogu projektu w terminalu polecenia:
 
 .. raw:: html
 
-    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. code-block:: bash
 
@@ -141,16 +117,8 @@ Podajemy te dane po wydaniu w katalogu projektu w terminalu polecenia:
 
 .. note::
 
-    Domyślnie Django korzysta z bazy SQLite, która przechowywana jest w jednym pliku :file:`db.sqlite3` w katalogu aplikacji.
-    Warto zobaczyć, jak wygląda. Potrzebny będzie jednak interpreter, który w razie
-    potrzeby doinstalujemy poleceniem ``apt-get install sqlite3``. Następnie
-    W terminalu wydajemy polecenie ``python manage.py dbshell``,
-    które uruchamia interpreter bazy. Następnie możemy wylistować utworzone tabele
-    poleceniem ``.tables``. Możemy również zobaczyć jakie instrukcje SQL-a
-    zostały użyte do utworzenia naszej tabeli: ``.schema czat_wiadomosc``.
-    Z interpretera wychodzimy poleceniem ``.quit``.
-
-.. figure:: img/czat03ter.png
+  Domyślnie Django korzysta z :ref:`bazy SQLite <sqlite3>`, która przechowywana jest w jednym pliku :file:`db.sqlite3`
+  w katalogu aplikacji.
 
 Panel administracyjny
 **********************
@@ -167,52 +135,18 @@ i rejestrujemy w nim nasz model jako element panelu administracyjnego:
 .. literalinclude:: admin_z1.py
     :linenos:
 
-.. caution::
-
-    Jeżeli korzystamy z Django w wersji 1.6 przed skorzystaniem z panelu administratora
-    jako superużytkownik, musimy dodać linię: ``admin.autodiscover()`` w pliku
-    :file:`urls.py` przed deklaracją zmiennej ``urlpatterns``. (Zobacz kod nr 7
-    poniżej.)
-
 Po ewentualnym ponownym uruchomieniu serwera wchodzimy na adres *127.0.0.1:8080/admin/*.
 Logujemy się podając dane wprowadzone podczas tworzenia bazy.
-Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości [#]_.
-
-.. [#] Bezpieczna aplikacja powinna dysponować osobnym mechanizmem rejestracji
-   użytkowników i dodawania wiadomości, tak by nie trzeba było udostępniać
-   panelu administracyjnego osobom postronnym.
+Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości.
 
 .. figure:: img/czat04adm.png
 
 .. figure:: img/czat05adm.png
 
-W panelu administratora widać, że etykiety oznaczające pojedynczą wiadomość
-jak i wiele wiadomości nie są spolszczone, podobnie pole daty oznaczone
-jest etykietą "Data pub". Aby w pełni spolszczyć nasz model, w pliku :file:`models.py`
-dopisujemy:
+Cw_1 – dodawanie użytkowników i wiadomości
+===========================================
 
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: models_z2.py
-    :linenos:
-
-Jak widać, w definicjach każdego pola jako pierwszy argument możemy dopisać
-spolszczoną etykietę, np. ``u'data publikacji'``. W podklasie ``Meta`` podajemy natomiast
-nazwy modelu w liczbie pojedynczej i mnogiej. Po odświeżeniu panelu
-adminitracyjnego (np. klawiszem :kbd:`F5`) nazwy zostaną spolszczone.
-
-.. note::
-
-    Prefix ``u`` przed łańcuchami znaków oznacza kodowanie unikod (ang. *unicode*)
-    umożliwiające wyświetlanie m.in. znaków narodowych.
-
-Ćwiczenie 1
-============
-
-Po zalogowaniu na konto administratora dodajemy użytkownika "adam".
+Po zalogowaniu na konto administratora dodajemy zwykłego użytkownika "adam".
 Na stronie szczegółów, która wyświetli się po jego utworzeniu, zaznaczamy
 opcję "W zespole", następnie w panelu "Dostępne uprawnienia" zaznaczmy opcje
 dodawania (add), zmieniania (change) oraz usuwania (del) wiadomości
@@ -225,10 +159,14 @@ Przelogowujemy się na konto "adam" i dodajemy kilka przykładowych wiadomości.
 
 .. figure:: img/czat08adm.png
 
-Jak można zauważyć, dodane wiadomości wyświetlają się na liście jako "Wiadomosc object".
-Aby to poprawić, uzupełniamy definicję naszego modelu o funkcję,
-której zadaniem jest "autoprezentacja", czyli wyświetlenie treści wiadomości.
-W pliku :file:`models.py` dopisujemy zachowując wcięcia (!):
+Model w panelu
+===============
+
+W panelu administratora widać, że etykiety oznaczające pojedynczą wiadomość
+jak i wiele wiadomości nie są spolszczone, podobnie pole daty oznaczone
+jest etykietą "Data pub". Z kolei dodane wiadomości wyświetlają się na liście jako "Wiadomosc object".
+
+Aby w pełni spolszczyć nasz model, w pliku :file:`models.py` dopisujemy:
 
 .. raw:: html
 
@@ -237,10 +175,23 @@ W pliku :file:`models.py` dopisujemy zachowując wcięcia (!):
 .. highlight:: python
 .. literalinclude:: models_z3.py
     :linenos:
-    :lineno-start: 18
-    :lines: 18-19
+    :lineno-start: 1
+    :lines: 1-
+    :emphasize-lines: 11-12, 15-21
 
-.. figure:: img/czat09adm.png
+Jak widać, w definicjach każdego pola jako pierwszy argument możemy dopisać
+spolszczoną etykietę, np. ``u'data publikacji'``. W podklasie ``Meta`` podajemy natomiast
+nazwy modelu w liczbie pojedynczej i mnogiej, a także określamy domyślne sortowanie
+pobranych wiadomości (``ordering``). Funkcja ``__unicode__(self)`` – odpowiada z kolei
+za "autoprezentację", czyli opis obiektu wiadomości – w naszym przypadku
+jest to treść wiadomości.
+
+.. note::
+
+    Prefix ``u`` przed łańcuchami znaków oznacza kodowanie unikod (ang. *unicode*)
+    umożliwiające wyświetlanie m.in. znaków narodowych.
+
+Po odświeżeniu panelu adminitracyjnego (np. klawiszem :kbd:`F5`) nazwy zostaną spolszczone.
 
 Widoki i szablony
 **********************
@@ -250,26 +201,17 @@ niczego ciekawego poza standardowym powitaniem Django nie widzi. Zajmiemy się t
 stronami po stronie (:-)) użytkownika.
 
 Dodawanie stron w Django polega na wykorzystywaniu widoków wbudowanych lub
-tworzeniu nowych. Są to klasy lub funkcje Pythona wykonujące jakieś operacje
-po stronie serwera w odpowiedzi na żądania klienta. Widoki powiązane są
-z określonymi adresami url. Widoki najczęściej zwracają kod HTML
-wyrenderowany na podstawie szablonów, do których możemy przekazywać dodatkowe dane [#]_,
-np. z bazy. Dla przejrzystości przyjęto, że w katalogu aplikacji (:file:`czat/czat`):
+tworzeniu nowych. Są to klasy lub funkcje Pythona które:
 
-1. plik :file:`views.py` zawiera definicję widoków, w tym wywołania szablonów,
-2. plik :file:`url.py` zawiera reguły łączące adresy url z widokami,
-3. w katalogu :file:`czat/czat/templates/czat` zapisujemy szablony pod nazwami
-   określonymi w wywołujących je widokach, np. :file:`index.html`.
+* są powiązane z określonymi adresami URL w pliku :file:`url.py`;
+* wykonują operacje po stronie serwera w odpowiedzi na żądania klienta GET lub POST;
+* najczęściej zwracają kod HTML wyrenderowany na podstawie szablonów zapisanych w podkatalogu aplikacji :file:`templates/czat`.
 
-.. [#] Dane z bazy przekazywane są do szablonów za pomocą Pythonowego słownika.
-       Renderowanie polega na odszukaniu pliku szablonu, zastąpieniu przekazanych
-       zmiennych danymi i odesłaniu całości (HTML + dane) do użytkownika.
+Strona główna
+==============
 
-Aby utworzyć stronę główną, stworzymy pierwszy widok, czyli funkcję ``index()`` [#]_,
-którą powiążemy z adresem URL głównej strony (/). Najprostszy widok zwraca
-podany tekst. W pliku :file:`views.py` umieszczamy:
-
-.. [#] Nazwa ``index()`` jest przykładowa, funkcja mogłaby się nazywać inaczej.
+Aby utworzyć stronę główną, stworzymy pierwszy widok, czyli funkcję ``index()``,
+którą powiążemy z adresem URL strony głównej (/). W pliku :file:`views.py` umieszczamy:
 
 .. raw:: html
 
@@ -279,15 +221,16 @@ podany tekst. W pliku :file:`views.py` umieszczamy:
 .. literalinclude:: views_z1.py
     :linenos:
 
+Najprostszy widok zwraca w odpowiedzi na żądanie GET podany tekst za pomocą funkcji ``HttpResponse()``.
+
 .. note::
 
     Warto zapamiętać, że każdą funkcję, formularz czy widok udostępniane
     przez Django, których chcemy użyć, musimy najpierw zaimportować za pomocą
     klauzuli typu ``from <skąd> import <co>``.
 
-W pliku :file:`urls.py` przede wszystkim importujemy widoki naszej aplikacji:
-``from czat import views``. Następnie widok `index()` łączymy z adresem
-URL strony głównej (/):
+W pliku :file:`urls.py` importujemy widoki naszej aplikacji: ``from czat import views``.
+Następnie widok `index()` łączymy z adresem URL strony głównej (/) za pomocą funkcji ``url()``:
 
 .. raw:: html
 
@@ -296,44 +239,50 @@ URL strony głównej (/):
 .. highlight:: python
 .. literalinclude:: urls_z2.py
     :linenos:
-    :emphasize-lines: 6, 11
+    :emphasize-lines: 6, 10
 
-Podstawową funkcją jest tu ``url()``, która jako pierwszy parametr przyjmuje wyrażenie
-regularne oznaczane skrótem ``r`` przed łańcuchem. Symbol ``^`` oznacza początek
-łańcucha, ``$`` – koniec. Zapis ``u'^$'`` to adres główny serwera.
+Funkcja ``url()`` jako pierwszy parametr przyjmuje **wyrażenie
+regularne** oznaczane skrótem ``r`` przed łańcuchem ``r'^$'``.
+Symbol ``^`` oznacza początek łańcucha, ``$`` – koniec.
+Zapis ``r'^$'`` to adres główny serwera.
+
 Drugi parametr wskazuje widok (funkcję), która ma obsłużyć dany adres.
 Trzeci parametr ``name`` pozwala zapamiętać skojarzenie url-a i widoku pod nazwą,
 której będzie można użyć np. do wygenerowania adresu linku.
 
-Skoro mamy widok i przypisaliśmy go do jakiegoś adresu URL, możemy przetestować
-działanie aplikacji. Po wywołaniu strony głównej powinniśmy zobaczyć tekst
-podany jako argument funkcji ``HttpResponse()`` w pliku :file:`views.py`:
+Przetestuj działanie aplikacji, tj. uruchom serwer (jeśli nie działa) i wejdź na stronę
+główną lub ją odśwież:
 
 .. figure:: img/czat10.png
 
-Zazwyczaj odpowiedzią na wywołanie jakiegoś adresu URL będzie jednak jakaś
-strona zapisana w języku HTML. Szablony takich stron umieszczamy w podkatalogu
-``templates/nazwa aplikacji``. Tworzymy więc katalog:
+Prosty szablon
+==================
+
+Zazwyczaj odpowiedzią na żądanie typu GET z adresu URL będzie strona w HTML-u.
+Szablony takich stron umieszczamy w podkatalogu aplikacji, który tworzymy
+za pomocą menedżera plików lub poleceniem:
 
 .. raw:: html
 
-    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+    <div class="code_no">Terminal. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. code-block:: bash
 
     ~/czat/czat$ mkdir -p templates/czat
 
-Następnie tworzymy szablon, czyli plik :file:`~/czat/czat/templates/czat/index.html`, który zawiera:
+Następnie w nowym, pustym pliku umieszczamy kod:
 
 .. raw:: html
 
-    <div class="code_no">Plik index.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik <i>index.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: index_z2.html
     :linenos:
 
-W pliku :file:`views.py` zmieniamy instrukcje odpowiedzi:
+Plik zapisujemy pod nazwą :file:`~/czat/czat/templates/czat/index.html`.
+
+Na koniec w pliku :file:`views.py` zmieniamy instrukcje odpowiedzi:
 
 .. raw:: html
 
@@ -342,13 +291,13 @@ W pliku :file:`views.py` zmieniamy instrukcje odpowiedzi:
 .. highlight:: python
 .. literalinclude:: views_z2.py
     :linenos:
-    :emphasize-lines: 5, 9-10
+    :emphasize-lines: 5, 10-11
 
 Po zaimportowaniu funkcji ``render()`` używamy jej do zwrócenia szablonu.
-Jako pierwszy argument podajemy parametr ``request``, a jako drugi nazwę
-szablonu uwzględniającą katalog nadrzędny.
+Jako pierwszy argument podajemy obiekt ``request`` zawierający wszystkie dane żądania,
+a jako drugi nazwę szablonu uwzględniającą katalog nadrzędny.
 
-Po wpisaniu adresu *127.0.0.1:8000/* zobaczymy tekst, który umieściliśmy w szablonie:
+Sprawdź działanie aplikacji pod adresem *127.0.0.1:8000/*:
 
 .. figure:: img/czat11.png
 
@@ -395,7 +344,7 @@ Tworzymy nowy szablon :file:`~/czat/czat/templates/czat/rejestruj.html`:
 
 .. raw:: html
 
-    <div class="code_no">Plik rejestruj.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik rejestruj.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: rejestruj_z3.html
@@ -424,7 +373,7 @@ Modyfikujemy również szablon strony głównej:
 
 .. raw:: html
 
-    <div class="code_no">Plik index.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik index.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: index_z3.html
@@ -510,7 +459,7 @@ w ćwiczeniu 2. może wyglądać tak:
 
 .. raw:: html
 
-    <div class="code_no">Plik loguj.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik loguj.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: loguj_z4.html
@@ -690,7 +639,7 @@ Potrzebujemy jeszcze szablonu, którego Django szuka pod domyślną nazwą
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosc_list.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik wiadomosc_list.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: wiadomosc_list_z6.html
@@ -754,7 +703,7 @@ kod wyświetlający formularz:
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosc_form.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik wiadomosc_form.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: wiadomosc_form_z7.html
@@ -799,7 +748,7 @@ szablonach. Zamiast instrukcji wyświetlającej formularz umieść kod:
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosc_usun.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik wiadomosc_usun.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: wiadomosc_usun_z8.html
@@ -861,7 +810,7 @@ Wstaw w odpowiednie miejsce szablonu poniższy kod:
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosc_lista.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik wiadomosc_lista.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: wiadomosc_list_z8.html
@@ -913,7 +862,7 @@ i listy wiadomości dodanych.
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosci.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik wiadomosci.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: wiadomosci_z9.html
@@ -967,7 +916,7 @@ bazowego, który umieścimy w pliku :file:`~/czat/czat/templates/czat/baza.html`
 
 .. raw:: html
 
-    <div class="code_no">Plik baza.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik baza.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: baza_z10.html
@@ -984,7 +933,7 @@ Wykorzystując szablon podstawowy, zmieniamy stronę główną, czyli plik
 
 .. raw:: html
 
-    <div class="code_no">Plik index.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik index.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: index_z10.html
@@ -999,7 +948,7 @@ Postępując na tej samej zasadzie modyfikujemy szablon rejestracji:
 
 .. raw:: html
 
-    <div class="code_no">Plik rejestruj.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik rejestruj.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: rejestruj_z10.html
@@ -1023,7 +972,7 @@ W terminalu w katalogu projektu (!) wydajemy polecenie:
 
 .. raw:: html
 
-    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. code-block:: bash
 
@@ -1035,7 +984,7 @@ je utworzyć. Tworzymy również przykładowy plik :file:`~/czat/czat/static/cza
 
 .. raw:: html
 
-    <div class="code_no">Plik style.css nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik style.css nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: css
 .. literalinclude:: style_z11.css
@@ -1046,7 +995,7 @@ Do podkatalogu :file:`~/czat/czat/static/czat/img` wrzucamy obrazki z podanego
 
 .. raw:: html
 
-    <div class="code_no">Plik baza.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik baza.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: baza_z11.html
@@ -1090,7 +1039,7 @@ dodaj przed tagiem zamykającym ``</body>`` kod:
 
 .. raw:: html
 
-    <div class="code_no">Plik baza.html nr <script>var plik_no = plik_no || 1; document.write(plik_no++);</script></div>
+    <div class="code_no">Plik baza.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: baza_z12.html

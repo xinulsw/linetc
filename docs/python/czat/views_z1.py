@@ -3,6 +3,7 @@
 
 from django.http import HttpResponse
 
+
 def index(request):
-    """Strona główna aplikacji."""
+    """Widok dla strony głównej aplikacji."""
     return HttpResponse("Witaj w aplikacji Czat!")
