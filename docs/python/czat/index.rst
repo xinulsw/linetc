@@ -3,8 +3,17 @@ Czat (wersja rozszerzona)
 
 .. highlight:: python
 
-Zastosowanie Pythona i frameworka Django do stworzenia aplikacji internetowej Czat;
-prostego czata, w którym zarejestrowani użytkownicy będą mogli wymieniać się krótkimi wiadomościami.
+Zastosowanie Pythona i frameworka Django do stworzenia aplikacji internetowej
+Czat; prostego czata, w którym zarejestrowani użytkownicy będą mogli wymieniać się
+krótkimi wiadomościami.
+
+.. attention::
+
+    **Wymagane oprogramowanie**:
+
+      * Python v. 2.7.x
+      * Django v. 1.8.x
+      * Interpreter bazy SQLite3
 
 .. contents::
     :depth: 1
@@ -13,39 +22,24 @@ prostego czata, w którym zarejestrowani użytkownicy będą mogli wymieniać si
 Projekt i aplikacja
 **********************
 
-Tworzymy nowy projekt Django, a następnie uruchamiamy lokalny serwer,
-który pozwoli śledzić postęp pracy. W katalogu domowym wydajemy polecenia w terminalu:
+Tworzymy nowy projekt Django oraz szkielet naszej aplikacji. W katalogu domowym wydajemy polecenia w terminalu:
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
 
 .. code-block:: bash
 
-    ~$ django-admin.py startproject czat
-    ~$ cd czat
-    ~/czat$ python manage.py runserver
+    ~$ django-admin.py startproject czatpro
+    ~$ cd czatpro
+    ~/czatpro$ python manage.py migrate
+    ~/czatpro$ django-admin.py startapp czat
 
-Powstanie katalog projektu :file:`czat` i podkatalog aplikacji o takiej samej nazwie :file:`chatter`.
-Po wpisaniu w przeglądarce adresu *127.0.0.1:8000* zobaczymy stronę powitalną.
+Powstanie katalog projektu :file:`czatpro` z **podkatalogiem ustawień** o takiej samej nazwie :file:`czatpro`.
+Utworzona zostanie również inicjalna baza danych z tabelami wykorzystywanymi przez Django.
 
-.. figure:: img/czat01.png
-
-.. note::
-
-    Domyślnie serwer nasłuchuje na porcie ``8000``, można go jednak uruchomić
-    na innyn, jeżeli domyślny byłby zajęty. Wystarczy, że do polecenia dodamy
-    np.: ``127.0.0.1:8080``.
-
-    W systemach Linux możemy kliknąć w terminalu prawym klawiszem adres ``http://127.0.0.1:8000/``
-    i wybrać polecenie "Otwórz link", aby szybko otworzyć domyślną przeglądarkę.
-    Lokalny serwer deweloperski zatrzymujemy za pomocą skrótu :kbd:`Ctrl+C`.
-
-    Jeden projekt może zawierać wiele aplikacji zapisywanych w osobnych podkatalogach katalogu projektu.
-
-Rozpoczynamy od modyfikacji ustawień projektu, tak aby korzystał z polskiej wersji językowej
-oraz lokalnych ustawień daty i czasu. Musimy również zarejestrować naszą aplikację w projekcie.
-W pliku :file:`setting.py` zmieniamy następujące linie:
+Dostosowujemy ustawienia projektu: rejestrujemy naszą aplikację w projekcie, ustawiamy polską wersję językową oraz lokalizujemy
+datę i czas. Edytujemy plik :file:`czatpro/settings.py`:
 
 .. raw:: html
 
@@ -53,9 +47,8 @@ W pliku :file:`setting.py` zmieniamy następujące linie:
 
 .. code-block:: python
 
-    # czat/czat/settings.py
+    # czatpro/czatpro/settings.py
 
-    # rejestrujemy aplikacje
     INSTALLED_APPS = (
         'django.contrib.admin',
         'django.contrib.auth',
@@ -64,31 +57,52 @@ W pliku :file:`setting.py` zmieniamy następujące linie:
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-        'czat', # rejestrujemy aplikację
+        'czat',  # rejestrujemy aplikację
     )
 
-    LANGUAGE_CODE = 'pl' # ustawienie języka
+    LANGUAGE_CODE = 'pl'  # ustawienie języka
 
-    TIME_ZONE = 'Europe/Warsaw' # ustawienie strefy czasowej
+    TIME_ZONE = 'Europe/Warsaw'  # ustawienie strefy czasowej
 
-.. caution::
+.. note::
 
-    Uwaga: jeżeli w plikach Pythona chcemy stosować polskie znaki, m.in.
-    w komentarzach, na początku każdego pliku powinna znaleźć się linia
-    definiująca kodowanie: ``# -*- coding: utf-8 -*-``.
+    Jeżeli w jakimkolwiek pliku, np. ``settings.py`` chcemy używać polskich znaków,
+    musimy na początku wstawić deklarację kodowania: ``# -*- coding: utf-8 -*-``
 
-Model danych i baza
+Teraz uruchomimy :term:`serwer deweloperski`, wydając polecenie:
+
+.. raw:: html
+
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
+
+.. code-block:: bash
+
+    ~/czatpro$ python manage.py runserver
+
+Po wpisaniu w przeglądarce adresu *127.0.0.1:8000* zobaczymy stronę powitalną.
+
+.. figure:: img/czat01.png
+
+.. note::
+
+    * Domyślnie serwer nasłuchuje na porcie ``8000``, można to zmienić, podając port w poleceniu:
+      ``python manage.py runserver 127.0.0.1:8080``.
+
+    * Lokalny serwer deweloperski zatrzymujemy za pomocą skrótu :kbd:`Ctrl+C`.
+
+Budowanie aplikacji w Django nawiązuje do wzorca projektowego :term:`MVC`, czyli
+Model-Widok-Kontroler. Więcej informacji na ten temat umieściliśmy w osobnym
+materiale :ref:`MVC <mvc_wzorzec>`.
+
+Model danych
 **********************
 
-W projektowaniu aplikacji internetowych za pomocą Django odwołujemy się do wzorca M(odel)V(iew)C(ontroller),
-czyli :ref:`Model–Widok–Kontroler <mvc>`, co pozwala na oddzielenie danych od ich prezentacji oraz logiki aplikacji.
+Budując aplikację, zaczynamy od zdefiniowania modelu (zob. :term:`model`), czyli klasy opisującej tabelę zawierającą
+wiadomości. Atrybuty klasy odpowiadają polom tabeli. Instancje tej klasy będą reprezentować wiadomości
+utworzone przez użytkowników, czyli rekordy tabeli. Każda wiadomość będzie zwierała treść,
+datę dodania oraz wskazanie autora (użytkownika).
 
-Pisanie aplikacji zaczynamy od zdefiniowania modelu, czyli klasy opisującej
-tabelę zawierającą wiadomości. Instancje tej klasy będą konkretnymi wiadomościami
-utworzonymi przez użytkowników systemu.
-Każda wiadomość będzie zwierała treść, datę dodania oraz autora wiadomości (użytkownika).
-
-W pliku :file:`~/czat/czat/models.py`, który musimy utworzyć, wpisujemy:
+W pliku :file:`~/czatpro/czat/models.py` wpisujemy:
 
 .. raw:: html
 
@@ -98,120 +112,143 @@ W pliku :file:`~/czat/czat/models.py`, który musimy utworzyć, wpisujemy:
 .. literalinclude:: models_z1.py
     :linenos:
 
-Jak widać, podczas opisywania klasy ``Wiadomosc`` podajemy nazwy poszczególnych
-właściwości (pól) oraz typy przechowywanych w nich danych.
-Po zdefiniowaniu przynajmniej jednego modelu możemy utworzyć bazę danych
-dla naszej aplikacji, czyli wszystkie potrzebne tabele.
-Podczas tworzenia bazy Django pyta o nazwę, email i hasło administratora.
-Podajemy te dane po wydaniu w katalogu projektu w terminalu polecenia:
+Opisując klasę ``Wiadomosc`` podajemy nazwy poszczególnych właściwości (pól) oraz typy przechowywanych w nich danych.
+Po zdefiniowaniu przynajmniej jednego modelu możemy zaktualizować bazę danych,
+czyli zmienić/dodać potrzebne tabele:
 
 .. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
 
 .. code-block:: bash
 
-    ~/czat $ python manage.py syncdb
+    ~/czatpro$ python manage.py makemigrations czat
+    ~/czatpro$ python manage.py migrate
 
-.. figure:: img/czat02ter.png
+.. figure:: img/czat02.png
 
 .. note::
 
-  Domyślnie Django korzysta z :ref:`bazy SQLite <sqlite3>`, która przechowywana jest w jednym pliku :file:`db.sqlite3`
-  w katalogu aplikacji.
+    Domyślnie Django korzysta z bazy SQLite zapisanej w pliku :file:`db.sqlite3`.
+    Warto zobaczyć, jak wygląda. W terminalu wydajemy polecenie ``python manage.py dbshell``,
+    które otworzy bazę w interpreterze ``sqlite3``. Następnie:
+    * ``.tables`` - pokaże listę tabel;
+    * ``.schema czat_wiadomosc`` - pokaże instrukcje SQL-a użyte do utworzenia podanej tabeli
+    * ``.quit`` - wyjście z interpretera.
+
+.. figure:: img/czat03.png
 
 Panel administracyjny
 **********************
 
-Django pozwala szybko utworzyć panel administratora dla projektu, dzięki czemu będziemy mogli zacząć
-dodawać użytkowików i wprowadzać dane. Tworzymy więc plik :file:`~/czat/czat/admin.py`
-i rejestrujemy w nim nasz model jako element panelu administracyjnego:
+Utworzymy panel administratora dla projektu, dzięki czemu będziemy mogli zacząć
+dodawać użytkowników i wprowadzać dane. Otwieramy więc plik :file:`~/czat/czat/admin.py`
+i rejestrujemy w nim nasz model jako element panelu:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: admin_z1.py
+.. literalinclude:: admin.py
     :linenos:
-
-Po ewentualnym ponownym uruchomieniu serwera wchodzimy na adres *127.0.0.1:8080/admin/*.
-Logujemy się podając dane wprowadzone podczas tworzenia bazy.
-Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości.
-
-.. figure:: img/czat04adm.png
-
-.. figure:: img/czat05adm.png
-
-Cw_1 – dodawanie użytkowników i wiadomości
-===========================================
-
-Po zalogowaniu na konto administratora dodajemy zwykłego użytkownika "adam".
-Na stronie szczegółów, która wyświetli się po jego utworzeniu, zaznaczamy
-opcję "W zespole", następnie w panelu "Dostępne uprawnienia" zaznaczmy opcje
-dodawania (add), zmieniania (change) oraz usuwania (del) wiadomości
-(wpisy typu: "czat | wiadomosc | Can add wiadomosc") i przypisujemy je
-użytkownikowi naciskając strzałkę w prawo.
-
-.. figure:: img/czat06adm.png
-
-Przelogowujemy się na konto "adam" i dodajemy kilka przykładowych wiadomości.
-
-.. figure:: img/czat08adm.png
-
-Model w panelu
-===============
-
-W panelu administratora widać, że etykiety oznaczające pojedynczą wiadomość
-jak i wiele wiadomości nie są spolszczone, podobnie pole daty oznaczone
-jest etykietą "Data pub". Z kolei dodane wiadomości wyświetlają się na liście jako "Wiadomosc object".
-
-Aby w pełni spolszczyć nasz model, w pliku :file:`models.py` dopisujemy:
-
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: models_z3.py
-    :linenos:
-    :lineno-start: 1
-    :lines: 1-
-    :emphasize-lines: 11-12, 15-21
-
-Jak widać, w definicjach każdego pola jako pierwszy argument możemy dopisać
-spolszczoną etykietę, np. ``u'data publikacji'``. W podklasie ``Meta`` podajemy natomiast
-nazwy modelu w liczbie pojedynczej i mnogiej, a także określamy domyślne sortowanie
-pobranych wiadomości (``ordering``). Funkcja ``__unicode__(self)`` – odpowiada z kolei
-za "autoprezentację", czyli opis obiektu wiadomości – w naszym przypadku
-jest to treść wiadomości.
+    :emphasize-lines: 5, 8
 
 .. note::
 
-    Prefix ``u`` przed łańcuchami znaków oznacza kodowanie unikod (ang. *unicode*)
-    umożliwiające wyświetlanie m.in. znaków narodowych.
+    Warto zapamiętać, że każdy model, funkcję, formularz czy widok, których chcemy użyć,
+    musimy najpierw zaimportować za pomocą klauzuli typu ``from <skąd> import <co>``.
 
-Po odświeżeniu panelu adminitracyjnego (np. klawiszem :kbd:`F5`) nazwy zostaną spolszczone.
+Do celów administracyjnych potrzebne nam będzie odpowiednie konto. Tworzymy
+je, wydając w terminalu poniższe polecenie. Django zapyta o nazwę, email i hasło administratora.
+Podajemy: "admin", "", "admin".
 
-Widoki i szablony
-**********************
+.. raw:: html
 
-Panel administracyjny już mamy, ale po wejściu na stronę główną zwykły użytkownik
-niczego ciekawego poza standardowym powitaniem Django nie widzi. Zajmiemy się teraz
-stronami po stronie (:-)) użytkownika.
+    <div class="code_no">Terminal nr <script>var ter_no = ter_no || 1; document.write(ter_no++);</script></div>
 
-Dodawanie stron w Django polega na wykorzystywaniu widoków wbudowanych lub
-tworzeniu nowych. Są to klasy lub funkcje Pythona które:
+.. code-block:: bash
 
-* są powiązane z określonymi adresami URL w pliku :file:`url.py`;
-* wykonują operacje po stronie serwera w odpowiedzi na żądania klienta GET lub POST;
-* najczęściej zwracają kod HTML wyrenderowany na podstawie szablonów zapisanych w podkatalogu aplikacji :file:`templates/czat`.
+    ~/czatpro$ python manage.py createsuperuser
 
-Strona główna
+Po ewentualnym ponownym uruchomieniu serwera wchodzimy na adres *127.0.0.1:8000/admin/*.
+Logujemy się podając dane wprowadzone podczas tworzenia bazy.
+Otrzymamy dostęp do panelu administracyjnego, w którym możemy dodawać nowych użytkowników i wiadomości [#]_.
+
+.. [#] Bezpieczna aplikacja powinna dysponować osobnym mechanizmem rejestracji
+   użytkowników i dodawania wiadomości, tak by nie trzeba było udostępniać
+   panelu administracyjnego osobom postronnym.
+
+.. figure:: img/czat04.png
+
+Ćwiczenie 1
+============
+
+Po zalogowaniu na konto administratora dodaj użytkownika "adam".
+Na stronie szczegółów, która wyświetli się po jego utworzeniu, zaznacz
+opcję "W zespole", następnie w panelu "Dostępne uprawnienia" zaznacz opcje
+dodawania (*add*), zmieniania (*change*) oraz usuwania (*del*) wiadomości
+(wpisy typu: "czat | wiadomosc | Can add wiadomosc") i przypisz je
+użytkownikowi naciskając strzałkę w prawo.
+
+.. figure:: img/czat06.png
+
+Przeloguj się na konto "adam" i dodaj dwie przykładowe wiadomości.
+Następnie utwórz w opisany wyżej sposób kolejnego użytkownika o nazwie "ewa"
+i po przelogowaniu się dodaj co najmniej 1 wiadomość.
+
+.. figure:: img/czat05.png
+
+.. raw:: html
+
+    <hr />
+
+Model w panelu
 ==============
 
-Aby utworzyć stronę główną, stworzymy pierwszy widok, czyli funkcję ``index()``,
-którą powiążemy z adresem URL strony głównej (/). W pliku :file:`views.py` umieszczamy:
+W formularzu dodawania wiadomości widać, że etykiety nie są spolszczone, z kolei
+dodane wiadomości wyświetlają się na liście jako "Wiadomosc object".
+Aby poprawić te niedoskonałości, uzupełniamy plik :file:`models.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: models.py
+    :linenos:
+    :emphasize-lines: 2-3
+    :lineno-start: 10
+    :lines: 10-21
+
+W definicji każdego pola jako pierwszy argument dopisujemy spolszczoną etykietę,
+np. ``u'data publikacji'``. W podklasie ``Meta`` podajemy nazwy modelu w liczbie
+pojedynczej i mnogiej. Dodajemy też funkcję ``__unicode__``, której zadaniem
+jest "autoprezentacja" klasy, czyli wyświetlenie treści wiadomości.
+Po odświeżeniu panelu administracyjnego (np. klawiszem :kbd:`F5`) nazwy zostaną spolszczone.
+
+.. note::
+
+    Prefiks ``u`` wymagany w Pythonie v.2 przed łańcuchami znaków oznacza
+    kodowanie w unikodzie (ang. *unicode*) umożliwiające wyświetlanie m.in. znaków narodowych.
+
+.. tip::
+
+    W Pythonie v.3 zamiast nazwy funkcji ``_unicode__`` należy użyć ``str``.
+
+.. figure:: img/czat09.png
+
+Widoki i szablony
+*******************
+
+Panel administracyjny już mamy, ale po wejściu na stronę główną zwykły użytkownik
+niczego poza standardowym powitaniem Django nie widzi. Zajmiemy się teraz
+stronami po stronie (:-)) użytkownika.
+
+Aby utworzyć stronę główną, zakodujemy pierwszy :term:`widok` (zob. :ref:`więcej »»» <mvc_widok>`),
+czyli funkcję o przykładowej nazwie ``index()``, którą powiążemy z adresem URL głównej strony (/).
+Najprostszy widok zwraca jakiś tekst: ``return HttpResponse("Witaj w aplikacji Czat!")``.
+W pliku :file:`views.py` umieszczamy:
 
 .. raw:: html
 
@@ -220,40 +257,51 @@ którą powiążemy z adresem URL strony głównej (/). W pliku :file:`views.py`
 .. highlight:: python
 .. literalinclude:: views_z1.py
     :linenos:
+    :emphasize-lines: 9
 
-Najprostszy widok zwraca w odpowiedzi na żądanie GET podany tekst za pomocą funkcji ``HttpResponse()``.
-
-.. note::
-
-    Warto zapamiętać, że każdą funkcję, formularz czy widok udostępniane
-    przez Django, których chcemy użyć, musimy najpierw zaimportować za pomocą
-    klauzuli typu ``from <skąd> import <co>``.
-
-W pliku :file:`urls.py` importujemy widoki naszej aplikacji: ``from czat import views``.
-Następnie widok `index()` łączymy z adresem URL strony głównej (/) za pomocą funkcji ``url()``:
+Teraz musimy **powiązać widok z adresem url**. Na początku do pliku projektu :file:`czatpro/urls.py`
+dopiszemy import ustawień z naszej aplikacji:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: urls_z2.py
+.. literalinclude:: urls_p1.py
     :linenos:
-    :emphasize-lines: 6, 10
+    :emphasize-lines: 2-3
+    :lineno-start: 19
+    :lines: 19-
 
-Funkcja ``url()`` jako pierwszy parametr przyjmuje **wyrażenie
-regularne** oznaczane skrótem ``r`` przed łańcuchem ``r'^$'``.
-Symbol ``^`` oznacza początek łańcucha, ``$`` – koniec.
-Zapis ``r'^$'`` to adres główny serwera.
+Parametr ``namespace='czat'`` definiuje przestrzeń nazw, w której dostępne będą zdefiniowane
+dla naszej aplikacji mapowania między adresami url a widokami.
 
+Następnie **tworzymy (!)** plik :file:`czat/urls.py` o następującej treści:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls_z1.py
+    :linenos:
+    :emphasize-lines: 5, 8
+
+Podstawową funkcją wiążącą adres z widokiem jest ``url()``. Jako pierwszy parametr przyjmuje wyrażenie
+regularne oznaczane ``r`` przed łańcuchem dopasowania. Symbol ``^`` to początek,
+``$`` – koniec łańcucha. Zapis ``r'^$'`` to adres główny serwera.
 Drugi parametr wskazuje widok (funkcję), która ma obsłużyć dany adres.
 Trzeci parametr ``name`` pozwala zapamiętać skojarzenie url-a i widoku pod nazwą,
 której będzie można użyć np. do wygenerowania adresu linku.
 
-Przetestuj działanie aplikacji, tj. uruchom serwer (jeśli nie działa) i wejdź na stronę
-główną lub ją odśwież:
+Przetestujmy nasz widok wywołując adres ``127.0.0.1:8000``. Powinniśmy zobaczyć tekst
+podany jako argument funkcji ``HttpResponse()``:
 
 .. figure:: img/czat10.png
+
+.. raw:: html
+
+    <hr />
 
 Prosty szablon
 ==================
@@ -304,21 +352,19 @@ Sprawdź działanie aplikacji pod adresem *127.0.0.1:8000/*:
 Rejestrowanie użytkowników
 ***************************
 
-Zamiast zakładać konta użytkownikom w panelu administracyjnym udostępnimy
-im możliwość samodzielnego rejestrowania. Zadanie to można zrealizować na
-dwa sposoby. Pierwszy polega na "ręcznym" utworzeniu formularza i obsłużeniu
-przesłanych danych w skojarzonym widoku (funkcji).
-Przygotujemy więc widok ``rejestruj()``, który:
+Zamiast zakładać konta użytkownikom w panelu administracyjnym lepiej umozliwić
+samodzielne rejestrowanie. Utworzymy formularz i obsłużymy go w skojarzonym widoku (funkcji)
+``rejestruj()``, który:
 
-1. zwróci formularz przygotowany w szablonie :file:`rejestruj.html` w odpowiedzi
-   na żądanie typu :term:`GET`, wysłane przez przeglądarkę po wejściu
-   użytkownika na stronę rejestracji pod adres URL */rejestruj*;
-2. obsłuży żądanie typu :term:`POST`, czyli wysłanie danych z formularza na serwer,
-   sprawdzi poprawność przesłanych danych (nazwę użytkownika i hasło) i
-   utworzy konto;
-3. zaloguje nowego użytkownika i przekieruje go na stronę główną.
+* zwróci formularz przygotowany w szablonie :file:`rejestruj.html` w odpowiedzi
+  na żądanie typu :term:`GET`, wysłane spod adresu URL *http://127.0.0.1:8000/rejestruj*;
 
-Zaczynamy od uzupełnienia pliku :file:`views.py`. Dodajemy widok ``rejestruj()``:
+* sprawdzi poprawność przesłanych danych (nazwę użytkownika i hasło), utworzy konto
+  zaloguje użytkownika i przekieruje go na stronę główną
+  w odpowiedzi na żądanie typu :term:`POST`;
+
+Na początku pliku :file:`views.py` importujemy wymagane metody, później uzupełniamy
+widok ``index()`` i dodajemy widok ``rejestruj()``:
 
 .. raw:: html
 
@@ -327,30 +373,43 @@ Zaczynamy od uzupełnienia pliku :file:`views.py`. Dodajemy widok ``rejestruj()`
 .. highlight:: python
 .. literalinclude:: views_z3.py
     :linenos:
-    :lineno-start: 7
-    :lines: 7-
+    :lineno-start: 1
+    :lines: 1-
+    :emphasize-lines: 6-9, 19-36
 
-Powyższy kod pokazuje m .in., w jaki sposób przekazać dowolne dane do szablonu.
-Używamy słownika, w naszym przypadku nazwanego ``kontekst``, który zostaje
-użyty jako trzeci argument funkcji ``render()``. W ten sposób przekazujemy
-obiekt użytkownika w widoku strony głównej i formularz w widoku rejestracji.
+W odpowiedzi na żądanie GET funkcja zaimportuje wbudowany formularz tworzenia użytkowników,
+utworzy i zapisze jego instancję w słowniku ``kontekst``, na końcu zwróci wyrenderowany szablon
+:file:`rejestruj.html`, do którego przekazany zostanie wspomniany słownik.
+
+Szablon tworzymy w pliku :file:`~/czat/czat/templates/czat/rejestruj.html`:
+
+.. raw:: html
+
+    <div class="code_no"><i>rejestruj.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: rejestruj_z3.html
+    :linenos:
+
+W tagu ``{{ form.as_p }}`` odczytujemy przekazany formularz i wyświetlamy
+jego pola w znacznikach akapitów (``<p></p>``).
+
+Aby przetestować działanie aplikacji, trzeba powiązać widok ``rejestruj()``
+z adresem URL ``/rejestruj``, co robimy w pliku :file:`urls.py`:
+
+
+
 
 Warto także zauważyć, jak tworzymy komunikaty zwrotne dla użytkownika.
 Wykorzystujemy wbudowany w Django system komunikatów: ``messages.success(request, "Zostałeś zarejestrowany.")``.
 Tak utworzone komunikaty możemy odczytać w każdym szablonie ze zmiennej
 ``messages`` (zob. niżej szablon :file:`index.html`).
 
-Tworzymy nowy szablon :file:`~/czat/czat/templates/czat/rejestruj.html`:
+Tworzymy nowy szablon
 
-.. raw:: html
 
-    <div class="code_no">Plik rejestruj.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: html
-.. literalinclude:: rejestruj_z3.html
-    :linenos:
-
-Wiążemy adres URL *rejestruj/* z utworzonym widokiem. Do pliku :file:`urls.py`
+Wiążemy adres URL *rejestruj/* z utworzonym widokiem. Do pliku
 dopisujemy:
 
 .. raw:: html

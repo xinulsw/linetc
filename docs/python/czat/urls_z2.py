@@ -8,5 +8,6 @@ from czat import views  # importujemy widoki z pliku views.py
 urlpatterns = patterns(
     '',
     url(r'^$', views.index, name='index'),
+
     url(r'^admin/', include(admin.site.urls)),
 )
