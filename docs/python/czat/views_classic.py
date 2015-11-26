@@ -1,19 +1,8 @@
-# -*- coding: utf-8 -*-
-# czat/czat/views.py
-
-#from django.http import HttpResponse
-from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
-
-def index(request):
-    """Strona główna aplikacji."""
-    # return HttpResponse("Witaj w aplikacji Czat!")
-    kontekst = {'user': request.user}
-    return render(request, 'czat/index.html', kontekst)
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def rejestruj(request):
@@ -56,3 +45,23 @@ def wyloguj(request):
     logout(request)
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('index'))
+
+@login_required(login_url='/loguj')
+def wiadomosci(request):
+    """Dodawanie i wyświetlanie wiadomości"""
+
+    if request.method == 'POST':
+        tekst = request.POST.get('tekst', '')
+        if not 0 < len(tekst) <= 250:
+            messages.error(request,
+                "Wiadomość nie może być pusta, może mieć maks. 250 znaków!")
+        else:
+            wiadomosc = Wiadomosc(tekst=tekst,
+                                  data_pub=timezone.now(),
+                                  autor=request.user)
+            wiadomosc.save()
+            return redirect(reverse('wiadomosci'))
+
+    wiadomosci = Wiadomosc.objects.all()
+    kontekst = {'user': request.user, 'wiadomosci': wiadomosci}
+    return render(request, 'czat/wiadomosci.html', kontekst)

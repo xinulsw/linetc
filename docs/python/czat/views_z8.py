@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 # czat/czat/views.py
 
-#from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.shortcuts import render
-
-def index(request):
-    """Strona główna aplikacji."""
-    #return HttpResponse("Witaj w aplikacji Czat!")
-    kontekst = {'user': request.user}
-    return render(request, 'czat/index.html', kontekst)
-
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.generic.edit import CreateView
+from czat.models import Wiadomosc
+from django.utils import timezone
+from django.views.generic.edit import UpdateView
+
+
+def index(request):
+    """Strona główna aplikacji."""
+    # return HttpResponse("Witaj w aplikacji Czat!")
+    kontekst = {'user': request.user}
+    return render(request, 'czat/index.html', kontekst)
+
 
 def rejestruj(request):
     """Rejestracja nowego użytkownika."""
@@ -34,6 +39,7 @@ def rejestruj(request):
     kontekst = {'form': UserCreationForm()}
     return render(request, 'czat/rejestruj.html', kontekst)
 
+
 def loguj(request):
     """Logowanie użytkownika"""
     from django.contrib.auth.forms import AuthenticationForm
@@ -48,16 +54,13 @@ def loguj(request):
     kontekst = {'form': AuthenticationForm()}
     return render(request, 'czat/loguj.html', kontekst)
 
+
 def wyloguj(request):
     """Wylogowanie użytkownika"""
     logout(request)
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('index'))
 
-
-from django.views.generic.edit import CreateView
-from czat.models import Wiadomosc
-from django.utils import timezone
 
 class UtworzWiadomosc(CreateView):
     model = Wiadomosc
@@ -81,8 +84,6 @@ class UtworzWiadomosc(CreateView):
         wiadomosc.save()
         return super(UtworzWiadomosc, self).form_valid(form)
 
-
-from django.views.generic.edit import UpdateView
 
 class AktualizujWiadomosc(UpdateView):
     model = Wiadomosc
