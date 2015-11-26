@@ -224,10 +224,17 @@ Zanim przetestujesz wyświetlanie wiadomości, dodaj link na stronie głównej!
 Dodawanie wiadomości
 ====================
 
-Zadanie to zrealizujemy wykorzystując widok ``CreateView``.
-Ponieważ nasz model wiadomości zawiera klucz obcy, mianowicie pole autor,
-tym razem dostosujemy klasę widoku w pliku :file:`views.py`. Dzięki temu
-będziemy mogli rozszerzyć funkcjonalność standardową.
+Zadanie to zrealizujemy wykorzystując widok ``CreateView``. Aby ułatwić
+dodawanie wiadomości **dostosujemy klasę widoku** tak, aby użytkownik
+nie musiał wprowadzać pola autor.
+
+Na początek dodajemy na początku :file:`views.py` importy:
+
+.. code-block:: python
+
+    from django.views.generic.edit import CreateView
+    from czat.models import Wiadomosc
+    from django.utils import timezone
 
 .. raw:: html
 
@@ -236,18 +243,23 @@ będziemy mogli rozszerzyć funkcjonalność standardową.
 .. highlight:: python
 .. literalinclude:: views.py
     :linenos:
-    :lineno-start: 58
-    :lines: 58-
+    :lineno-start: 18
+    :lines: 18-38
 
-Dostosowując widok ogólny tworzymy opartą na nim klasę ``UtworzWiadomosc``.
-Z nieomówionych dotąd ustawień widoku widzimy właściwość ``fields`` –
-pozwala ona określić w postaci listy pola, które mają znaleźć się na formularzu.
-Jak widać, pomijamy pole ``autor``.
+Dostosowując widok ogólny, tworzymy opartą na nim klasę ``UtworzWiadomosc``.
+Nieomówiona dotąd właściwość ``fields`` pozwala wskazać pola, które mają znaleźć
+się na formularzu. Jak widać, pomijamy pole ``autor``.
 
-Właśnie dlatego musimy nadpisać metodę ``form_valid()``, która sprawdza
-poprawność przesłanych danych i zapisuje je w bazie. Żądanie POST otrzymane od
+Pole to jest jednak wymagane. Aby je uzupełnić, napisujemy metodę
+``form_valid()``, która sprawdza poprawność przesłanych danych i zapisuje je w bazie:
+
+* ``wiadomosc = form.save(commit=False)`` – tworzymy obiekt wiadomości, ale go nie zapisujemy;
+* ``wiadomosc.autor = self.request.user`` – uzupełniamy dane autora;
+* ``wiadomosc.save()`` – zapisujemy obiekt.
+
+Żądanie POST otrzymane od
 użytkownika nie będzie zawierało danych autora. Musimy je uzupełnić.
-Polecenie ``wiadomosc = form.save(commit=False)`` tworzy obiekt wiadomości,
+Polecenie  tworzy obiekt wiadomości,
 ale go nie zapisuje. Dzięki temu w następnych instrukcjach możemy
 uzupełnić dane autora, po czym jeszcze raz zapisujemy wiadomość, tym razem w bazie.
 
