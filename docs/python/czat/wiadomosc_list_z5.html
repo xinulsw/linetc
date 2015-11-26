@@ -9,6 +9,9 @@
       <li>
         <strong>{{ wiadomosc.autor.username }}</strong> ({{ wiadomosc.data_pub }}):
         <br /> {{ wiadomosc.tekst }}
+        {% if wiadomosc.autor.username == user.username %}
+          <a href="{% url 'czat:edytuj' wiadomosc.id %}">Edytuj</a> &bull;
+        {% endif %}
       </li>
       {% endfor %}
     </ol>

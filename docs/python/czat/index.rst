@@ -1,4 +1,4 @@
-Czat (wersja rozszerzona)
+Czat (cz. 2)
 #########################
 
 Początek pracy z aplikacjami pisanymi z użyciem Django jest zazwyczaj podobny.
@@ -42,7 +42,7 @@ Następnie do listy ``paterns`` dopisujemy:
 
 .. raw:: html
 
-    <div class="code_no">Plik *urls.py*. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <i>urls.py</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
 .. literalinclude:: urls.py
@@ -62,7 +62,7 @@ Teraz tworzymy szablon formularza rejestracji, który zapisać należy w pliku :
 
 .. raw:: html
 
-    <div class="code_no">Plik *rejestruj.html*. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <i>rejestruj.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: rejestruj_z2.html
@@ -72,20 +72,17 @@ Na koniec wstawimy link na stronie głównej, a więc uzupełniamy plik :file:`i
 
 .. raw:: html
 
-    <div class="code_no">Plik *index.html*. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <i>index.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: index_z2.html
     :linenos:
 
-.. info::
+.. tip::
 
     Zwróć uwagę na sposób tworzenia linków w szablonie: ``{% url 'czat:loguj' %}``.
     Nazwe definiowaną w parametrze ``name`` w pliku :file:`urls.py` aplikacji
     poprzedzamy przestrzenią nazw zdefiniowaną w pliku adresów projektu (``namespace='czat'``).
-
-Ćwiczenie 1
-============
 
 Uruchom aplikację (``python manage.py runserver``) i przetestuj dodawanie użytkowników:
 spróbuj wysłać niepełne dane, np. bez hasła; spróbuj dodać dwa razy tego samego użytkownika.
@@ -103,7 +100,7 @@ Na początku pliku :file:`urls.py` aplikacji dopisujemy wymagany import:
 
 .. raw:: html
 
-    <div class="code_no">Plik *urls.py*. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <i>urls.py</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
 .. literalinclude:: urls.py
@@ -120,7 +117,7 @@ Logowanie wymaga szablonu :file:`loguj.html`, który tworzymy i zapisujemy w pod
 
 .. raw:: html
 
-    <div class="code_no">Plik *loguj.html*. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <div class="code_no">Plik <i>loguj.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
 .. literalinclude:: loguj_z3.html
@@ -222,13 +219,26 @@ Dostęp do właściwości obiketów umożliwia operator kropki, np.: ``{{ wiadom
 Zanim przetestujesz wyświetlanie wiadomości, dodaj link na stronie głównej!
 
 Dodawanie wiadomości
-====================
+********************
 
 Zadanie to zrealizujemy wykorzystując widok ``CreateView``. Aby ułatwić
 dodawanie wiadomości **dostosujemy klasę widoku** tak, aby użytkownik
 nie musiał wprowadzać pola autor.
 
-Na początek dodajemy na początku :file:`views.py` importy:
+Na początek dopiszemy w pliku :file:`urls.py` skojarzenie adresu URL
+*wiadomosc/* z wywołaniem klasy ``CreateView`` jako funkcji:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: urls.py
+    :linenos:
+    :lineno-start: 38
+    :lines: 38-41
+
+Dalej kodujemy w pliku :file:`views.py`. Na początku dodajemy importy:
 
 .. code-block:: python
 
@@ -257,71 +267,134 @@ Pole to jest jednak wymagane. Aby je uzupełnić, napisujemy metodę
 * ``wiadomosc.autor = self.request.user`` – uzupełniamy dane autora;
 * ``wiadomosc.save()`` – zapisujemy obiekt.
 
-Żądanie POST otrzymane od
-użytkownika nie będzie zawierało danych autora. Musimy je uzupełnić.
-Polecenie  tworzy obiekt wiadomości,
-ale go nie zapisuje. Dzięki temu w następnych instrukcjach możemy
-uzupełnić dane autora, po czym jeszcze raz zapisujemy wiadomość, tym razem w bazie.
-
-Metoda ``get_initail()`` pozwala ustawić domyślne wartości dla wybranych
-pól. Wykorzystujemy ją do zainicjowania pola ``data_pub`` aktualna datą.
+Metoda ``get_initial()`` pozwala ustawić domyślne wartości dla wybranych pól.
+Wykorzystujemy ją do zainicjowania pola ``data_pub`` aktualna datą (``initial['data_pub'] = timezone.now()``).
 
 Metoda ``get_context_data()`` z punktu widzenia dodawania wiadomości
-nie jest potrzebna, ale używamy jej po to, aby na jednej stronie
-obok formularza dodawania wiadomości wyświetlić ich listę. Inicjujemy
-ją poleceniem ``Wiadomosc.objects.filter(autor=self.request.user)``
-wybierającym wiadomości utworzone przez zalogowanego użytkownika.
-
-
-Ćwiczenie 5
-==============
-
-Podobnie jak wyżej potrzebujemy szablonu, który dla widoków dodawania domyślnie
-nazywają się *<nazwa modelu>_form*. Na podstawie szablonu ``wiadomosc_list.html``
-utwórz szablon  ``wiadomosc_form.html``>. Przed listą wiadomości umieść
-kod wyświetlający formularz:
+nie jest potrzebna. Pozwala natomiast przekazać do szablonu dodatkowe dane,
+w tym wypadku jest to lista wiadomości utworzonych przez zalogowanego
+użytkownika: ``Wiadomosc.objects.filter(autor=self.request.user)``.
+Będzie można wyświetlić je poniżej formularza dodawania nowej wiadomości.
 
 .. raw:: html
 
-    <div class="code_no">Plik wiadomosc_form.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+    <hr />
+
+Domyślny szablon dodawania danych nazywa się *<nazwa modelu>_form.html*. Możemy go utworzyć
+na podstawie szablonu :file:`wiadomosc_list.html`. Otwórz go i zapisz pod nazwą
+:file:`wiadomosc_form.html`. Przed listą wiadomości umieść kod wyświetlający formularz:
+
+.. raw:: html
+
+    <div class="code_no">Plik <i>wiadomosc_form.html</i>. Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: html
-.. literalinclude:: wiadomosc_form_z7.html
+.. literalinclude:: wiadomosc_form_z4.html
     :linenos:
-    :lineno-start: 14
-    :lines: 14-19
+    :lineno-start: 6
+    :lines: 6-11
+
+Zanim przetestujesz dodawanie wiadomości, dodaj odpowiedni link na stronie głównej!
 
 .. figure:: img/czat19wiadomosci.png
 
-Dodamy teraz dwa widoki przeznaczone do aktualizaowania i usuwania wpisów.
-Zakładamy, że adresy do tych operacji będą miały postać: */aktualizuj/id_wiadomości*
-oraz */usun/id_wiadomości*, gdzie *id_wiadomosci* jest identyfikatorem
-obiektu do zaktualizowania/usunięcia. Tym razem zaczniemy od zmian w pliku :file:`urls.py`:
+Edycja wiadomości
+*****************
+
+Widok pozwalający na edycję wiadomości i jej aktualizację dostępny będzie
+pod adresem */edytuj/id_wiadomości*, gdzie *id_wiadomosci* będzie identyfikatorem
+obiektu do zaktualizowania. Zaczniemy od uzupełnienia pliku :file:`urls.py`:
 
 .. raw:: html
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. highlight:: python
-.. literalinclude:: urls_z8.py
+.. literalinclude:: urls.py
     :linenos:
     :lineno-start: 42
-    :lines: 42-50
+    :lines: 42-45
 
 Nowością w powyższym kodzie są wyrażenia regularne definiujące adresy z dodatkowym
-parametrem, np. ``r'^aktualizuj/(?P<pk>\d+)/'``. Część ``/(?P<pk>\d+)`` oznacza,
-że oczekujemy liczby dziesiętnej, która zostanie zapisana do zmiennej o nazwie
-``pk`` – nazwa jest tu skrótem od ang. wyrażenia *primary key*, co znaczy
-"klucz główny". Zmienna ta oznaczać będzie identyfikator wiadomości i dostępna
-będzie w widokach.
+parametrem, np. ``r'^edytuj/(?P<pk>\d+)/'``. Część ``/(?P<pk>\d+)`` oznacza,
+że oczekujemy 1 lub więcej cyfr (``\d+``), które zostaną zapisane w zmiennej o nazwie
+``pk`` (``?P<pk>``) – nazwa jest tu skrótem od ang. wyrażenia *primary key*, co znaczy
+"klucz główny". Zmienna ta zawierać będzie identyfikator wiadomości i dostępna
+będzie w klasie ``EdytujWiadomosc``, która dziedziczy, czyli dostosowuje wbudowany
+widok ``UpdateView``.
+
+Na początku pliku :file:`views.py` importujemy więc potrzebny widok:
+
+.. code-block:: python
+
+    from django.views.generic.edit import UpdateView
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: views.py
+    :linenos:
+    :lineno-start: 41
+    :lines: 41-56
+
+Najważniejsza jest tu metoda ``get_object()``, która pobiera i zwraca wskazaną przez
+identyfikator w zmiennej *pk* wiadomość: ``wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])``.
+Omawianą metodę ``get_context_data()`` wykorzystujemy tak jak poprzednio, tzn. aby przekazać
+do szablonu listę wiadomości zalogowanego użytkownika (``Wiadomosc.objects.filter(autor=self.request.user)``).
+
+Właściwości ``model``, ``context_object_name``, ``template_name`` i ``success_url``
+wyjaśniliśmy wcześniej. Jak widać, do edycji wiadomości można wykorzystać ten sam szablon,
+którego użyliśmy podczas dodawania.
+
+Formularz jednak dostosujemy. Tym razem wykorzystamy właściwość ``form_class``,
+której przypisujemy utworzoną w nowym pliku :file:`forms.py` klasę zmieniającą
+domyślne ustawienia:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: forms_z5.py
+    :linenos:
+
+Klasa ``EdytujWiadomoscForm`` oparta jest na wbudowanej klasie ``ModelForm``.
+Właściwości formularza określamy w podklasie ``Meta``:
+
+* ``model`` – oznacza to samo co w widokach, czyli model, dla którego tworzony jest formularz;
+* ``fields`` – to samo co w widokach, lista pól do wyświetlenia;
+* ``exclude`` – opcjonalnie lista pól do pominięcia;
+* ``widgets`` – słownik, którego klucze oznaczają pola danych, a ich wartości
+  odpowiadające im w formularzach HTML typy pól i ich właściwości, np. rozmiar.
+
+Żeby przetestować aktualizowanie wiadomości, w szablonie :file:`wiadomosc_list.html`
+trzeba wygenerować linki *Edytuj* dla wiadomości utworzonych przez zalogowanego użytkownika.
+Wstaw w odpowiednie miejsce szablonu poniższy kod:
+
+.. raw:: html
+
+    <div class="code_no">Plik wiadomosc_lista.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: wiadomosc_list_z5.html
+    :linenos:
+    :lineno-start: 12
+    :lines: 12-14
+
+Dodaj również te same linki do listy wiadomości na stronach dodawania i aktualizowania.
+
+.. figure:: img/czat18wiadomosci.png
+
+Usuwanie wiadomości
+*******************
 
 **Usuwanie danych** realizujemy za pomocą widoku ``DeleteView``, który należy
 zaimportować w pliku :file:`urls.py`: ``from django.views.generic.edit import DeleteView``.
 Domyślny szablon dla tego widoku przyjmuje nazwę *<nazwa-modelu>_confirm_delete.html*,
 dlatego uproścliśmy jego nazwę we właściwości ``template_name``.
 
-Ćwiczenie 6
-==============
 
 Utwórz szablon :file:`wiadomosc_usun.html` wzorując sie na wcześniejszych
 szablonach. Zamiast instrukcji wyświetlającej formularz umieść kod:
@@ -338,69 +411,8 @@ szablonach. Zamiast instrukcji wyświetlającej formularz umieść kod:
 
 .. figure:: img/czat20wiadomosci.png
 
-Nieco więcej pracy wymaga **dostosowanie widoku aktualizacji**. W pliku
-:file:`views.py` utworzymy klasę ``AktualizujWiadomosc`` opartą na
-widoku ogólnym ``UpdateView``:
 
-.. raw:: html
 
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: views_z8.py
-    :linenos:
-    :lineno-start: 85
-    :lines: 85-102
-
-Formularz generowany przez Django dla danego widoku można dostosować.
-Odpowiada za to właściwość ``form_class``, której przypisujemy utworzoną
-w nowym pliku :file:`forms.py` klasę modyfikującą domyślne ustawienia:
-
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: python
-.. literalinclude:: forms_z8.py
-    :linenos:
-
-Klasa ``AktualizujWiadomoscForm`` oparta jest na wbudowanej klasie ``ModelForm``.
-Właściwości podklasy ``Meta`` pozwalają określić cechy formularza
-wyświetlanego przez widok, który go wykorzystuje:
-
-* ``model`` – oznacza to samo co w widokach, czyli model, dla którego tworzony jest formularz;
-* ``fields`` – to samo co w widokach, lista pól do wyświetlenia;
-* ``exclude`` – opcjonalnie lista pól do pominięcia;
-* ``widgets`` – słownik, którego klucze oznaczają pola danych, a ich wartości
-  odpowiadające im w formularza HTML typy pól i ich właściwości, np. rozmiar.
-
-Na wyjaśnienie zasługuje jeszcze metoda ``get_object()`` widoku aktualizacji.
-Jej zadanie to wybranie z bazy danych i zwrócenie do formularza wiadomości,
-której identyfikator został przekazany w adresie pod nazwą *pk*:
-``wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])``.
-
-Ćwiczenie 7
-==============
-
-Żeby przetestować aktualizowanie i usuwanie wiadomości, w szablonie
-:file:`wiadomosc_list.html` wygeneruj linki *Edytuj* i *Usuń* tylko
-dla wiadomości utworzonych przez zalogowanego użytkownika.
-
-Wstaw w odpowiednie miejsce szablonu poniższy kod:
-
-.. raw:: html
-
-    <div class="code_no">Plik wiadomosc_lista.html nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. highlight:: html
-.. literalinclude:: wiadomosc_list_z8.html
-    :linenos:
-    :lineno-start: 20
-    :lines: 20-23
-
-Dodaj również te same linki do listy wiadomości na stronach dodawania i aktualizowania.
-
-.. figure:: img/czat18wiadomosci.png
 
 Wiadomości jeszcze raz
 ************************

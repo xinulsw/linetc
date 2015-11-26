@@ -1,7 +1,14 @@
-<!-- czatpro/czat/templates/czat/wiadomosc_list.html -->
+<!-- czatpro/czat/templates/czat/wiadomosc_form.html -->
 <html>
   <body>
     <h1>Wiadomości</h1>
+
+    <h2>Dodaj wiadomość</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Zapisz</button>
+    </form>
 
     <h2>Lista wiadomości:</h2>
     <ol>

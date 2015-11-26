@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# czat/czat/urls.py
+# czatpro/czat/urls.py
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
@@ -37,16 +37,19 @@ urlpatterns = patterns[
         name='wiadomosci'),
     url(r'^wiadomosc/$', login_required(
         views.UtworzWiadomosc.as_view(),
-        login_url='/loguj'), name='wiadomosc'),
-    url(r'^aktualizuj/(?P<pk>\d+)/', login_required(
-        views.AktualizujWiadomosc.as_view(),
-        login_url='/loguj'), name='aktualizuj'),
+        login_url='/loguj'),
+        name='wiadomosc'),
+    url(r'^edytuj/(?P<pk>\d+)/', login_required(
+        views.EdytujWiadomosc.as_view(),
+        login_url='/loguj'),
+        name='edytuj'),
     url(r'^usun/(?P<pk>\d+)/', login_required(
         DeleteView.as_view(
             model=Wiadomosc,
             template_name='czat/wiadomosc_usun.html',
             success_url='/wiadomosci'),
-        login_url='/loguj'), name='usun'),
+        login_url='/loguj'),
+        name='usun'),
 
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# czat/czat/views.py
+# czatpro/czat/views.py
 
 # from django.http import HttpResponse
 from django.shortcuts import render
@@ -38,10 +38,10 @@ class UtworzWiadomosc(CreateView):
         return super(UtworzWiadomosc, self).form_valid(form)
 
 
-class AktualizujWiadomosc(UpdateView):
+class EdytujWiadomosc(UpdateView):
     model = Wiadomosc
-    from czat.forms import AktualizujWiadomoscForm
-    form_class = AktualizujWiadomoscForm
+    from czat.forms import EdytujWiadomoscForm
+    form_class = EdytujWiadomoscForm
     context_object_name = 'wiadomosci'
     template_name = 'czat/wiadomosc_form.html'
     success_url = '/wiadomosci'
@@ -49,7 +49,7 @@ class AktualizujWiadomosc(UpdateView):
     def get_context_data(self, **kwargs):
         kwargs['wiadomosci'] = Wiadomosc.objects.filter(
             autor=self.request.user)
-        return super(AktualizujWiadomosc, self).get_context_data(**kwargs)
+        return super(EdytujWiadomosc, self).get_context_data(**kwargs)
 
     def get_object(self, queryset=None):
         wiadomosc = Wiadomosc.objects.get(id=self.kwargs['pk'])
