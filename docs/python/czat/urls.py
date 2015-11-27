@@ -4,20 +4,17 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from czat import views  # importujemy zdefiniowane w pliku views.py widoki
-from django.contrib.auth.forms import UserCreationForm  # , AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView
 from czat.models import Wiadomosc
-
+from django.views.generic import DeleteView
 
 urlpatterns = patterns[
     '',
     url(r'^$', views.index, name='index'),
-    # url(r'^rejestruj/', views.rejestruj, name='rejestruj'),
-    # url(r'^loguj/', views.loguj, name='loguj'),
-    # url(r'^wyloguj/', views.wyloguj, name='wyloguj'),
     url(r'^rejestruj/', CreateView.as_view(
         template_name='czat/rejestruj.html',
         form_class=UserCreationForm,
