@@ -1,25 +1,11 @@
 Python
 ###################
 
-Poniżej przedstawiamy materiał "Toto Lotek" wprowadzający do programowania
-w języku Python, "Python kreśli" to krótkie wprowadzenie do biblioteki `matplotlib <http://en.wikipedia.org/wiki/Matplotlib>`_,
-w "Czacie" – realizujemy aplikację internetową w wersji rozszerzonej
-przy użyciu frameworka Django.
-
-.. toctree::
-    :maxdepth: 1
-
-    toto/index
-    pylab/index
-    czat/index
-    index5
-    gloss_python
-    gloss_system
-
-Propozycja scenariuszy warsztatów
-**********************************
-
-* :download:`python_warsztaty.pdf <python_warsztaty.pdf>`
+Wszystkie scenariusze prezentujące zastosowania języka Python,
+które przygotowywałem i zamieszczałem w tym repozytorium,
+znajdziesz w dokumentacji `Python101 <http://python101.readthedocs.org>`_,
+która towarzyszy projektowi `"Koduj z Klasą" <http://www.ceo.org.pl/pl/koduj>`_
+realizowanemu pod patronatem `Centrum Edukacji Obywatelskiej <http://www.ceo.org.pl/pl>`_.
 
 Metryka
 **********
