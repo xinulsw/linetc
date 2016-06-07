@@ -719,32 +719,68 @@ Jeżeli mamy kilka projektów, umieszczamy je w podkatalogach, np.
 
 .. _serwer2go-ins:
 
-Serwer2Go w Windows
+UwAmp w Windows
 ===================
 
 W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
-Proponujemy `Serwer2Go <http://www.server2go-web.de/download/download.html>`_, ściągamy
-wersję **exe** *Apache 1.3.35* + *PHP 5.3.2, SQLite*, czyli pierwszą dostępną.
+Proponujemy `UwAmp <http://www.uwamp.com/en/>`_, ściągamy
+plik wykonywalny spod linku o nazwie **Download Exe/Install**.
 Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
 wybranego dysku, *C:*, *D:* itp.:
 
-.. figure:: img/server2go01.jpg
+.. figure:: img/uwamp01.jpg
 
-.. figure:: img/server2go02.jpg
+.. figure:: img/uwamp02.jpg
 
-Po rozpakowaniu plików, wchodzimy do katalogu instalacyjnego, aby otworzyć
-w edytorze plik konfiguracyjny ``pms_config.ini``. M. in. dlatego, że Internet Explorer
-nie najlepiej współpracuje z serwerem, we wspomnianym pliku zmieniamy ustawienia:
+Po zainstalowaniu i uruchomieniu aplikacji *UwAmp* zapora systemowa może poprosić
+o odblokowanie portów serwera www i bazy danych. Godzimy się, wybierając opcję dla
+sieci prywatnych i domowych.
+
+Serwerami i narzędziami zarządzamy za pomocą wygodnego okna:
+
+.. figure:: img/uwamp03.jpg
+
+Serwery www (Apache2) i bazy danych (MySQL) startowane są automatycznie. Jeżeli nie korzystamy
+z serwera MySQL możemy go zatrzymać, klikając niebieską strzałkę obok przycisku "Stop" i wybierając
+go listy. Do obsługi baz SQLite dołączono bardzo wygodny interfejs graficzny *SQLite Browser*.
+
+Strony czy projekty umieszczamy w katalogu ``www`` folderu, w którym zainstalowaliśmy UwAmpa,
+np. w ``C:\\UwAmp\www``. W przeglądarce wpisujemy adres ``localhost`` lub ``localhost/podkatalog``,
+jeżeli strony umieściliśmy w jakimś podkatalogu.
+
+Baza SQLite
+************
+
+W wielu projektach nie ma potrzeby wykorzystywania dużych i skomplikowanych systemów zarządzania
+bazami danych takich jak MySQL, MariaDB czy PostgreSQL. Lepiej skorzystać
+z prostszej bazy `SQLite <https://www.sqlite.org/>`_ , która ma jednak duże możliwości.
+Do zarządzania bazami danych SQLite'a, które przechowywane są w pojednyczych plikach,
+wykorzystuje się interepreter działający w terminalu. W systemach Linux instalowany
+jest on poleceniami typu:
 
 .. code-block:: bash
 
-    ShowTrayIcon=1
-    StartLocal=1
-    BrowserType=FIREFOX
+    ~$ sudo apt-get install sqlite3
 
-Oprogramowanie uruchamiamy za pomocą pliku ``Server2Go``, który uruchomi serwer
-WWW pod adresem ``127.0.0.1:4001`` w Firefoksie. Swoje strony umieszczamy
-w podkatalogu ``htdocs`` katalogu instalacyjnego.
+    ~# pacman -S sqlite
+
+– i uruchamiany komendą ``sqlite``. Najlepszym narzędziem z interfejsem graficznym jest z kolei
+polski program `SQLiteStudio <http://sqlitestudio.pl/>`_. Po pobraniu archiwum z rozszerzeniem *tar.xz*
+rozpakowujemy go i tworzymy dowiązanie:
+
+.. code-block:: bash
+
+    ~$ sudo tar -xf sqlitestudio-3.0.7.tar.xz -C /opt
+    ~$ cd /usr/bin
+    ~$ sudo ln -sf /opt/SQLiteStudio/sqlitestudio .
+
+W systemach opartych na Arch Linuksie możemy użyć repozytorium AUR:
+
+.. code-block:: bash
+
+    ~# yaourt -S sqlitestudio
+
+Program uruchamiamy poleceniem ``sqlitestudio``.
 
 Materiały
 **************
