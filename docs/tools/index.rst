@@ -730,7 +730,7 @@ wybranego dysku, *C:*, *D:* itp.:
 
 .. figure:: img/uwamp01.jpg
 
-.. figure:: img/uwamp02.jpg
+.. figure:: img/uwamp03.jpg
 
 Po zainstalowaniu i uruchomieniu aplikacji *UwAmp* zapora systemowa może poprosić
 o odblokowanie portów serwera www i bazy danych. Godzimy się, wybierając opcję dla
@@ -738,7 +738,7 @@ sieci prywatnych i domowych.
 
 Serwerami i narzędziami zarządzamy za pomocą wygodnego okna:
 
-.. figure:: img/uwamp03.jpg
+.. figure:: img/uwamp05.jpg
 
 Serwery www (Apache2) i bazy danych (MySQL) startowane są automatycznie. Jeżeli nie korzystamy
 z serwera MySQL możemy go zatrzymać, klikając niebieską strzałkę obok przycisku "Stop" i wybierając
@@ -753,7 +753,7 @@ Baza SQLite
 
 W wielu projektach nie ma potrzeby wykorzystywania dużych i skomplikowanych systemów zarządzania
 bazami danych takich jak MySQL, MariaDB czy PostgreSQL. Lepiej skorzystać
-z prostszej bazy `SQLite <https://www.sqlite.org/>`_ , która ma jednak duże możliwości.
+z prostszej `bazy SQLite <https://www.sqlite.org/>`_, która ma jednak duże możliwości.
 Do zarządzania bazami danych SQLite'a, które przechowywane są w pojednyczych plikach,
 wykorzystuje się interepreter działający w terminalu. W systemach Linux instalowany
 jest on poleceniami typu:
@@ -774,13 +774,15 @@ rozpakowujemy go i tworzymy dowiązanie:
     ~$ cd /usr/bin
     ~$ sudo ln -sf /opt/SQLiteStudio/sqlitestudio .
 
-W systemach opartych na Arch Linuksie możemy użyć repozytorium AUR:
+W systemach opartych na Arch Linuksie możemy instalować z repozytorium AUR:
 
 .. code-block:: bash
 
     ~# yaourt -S sqlitestudio
 
 Program uruchamiamy poleceniem ``sqlitestudio``.
+
+.. figure:: img/sqlitestudio.png
 
 Materiały
 **************
