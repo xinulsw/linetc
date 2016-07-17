@@ -730,7 +730,7 @@ wybranego dysku, *C:*, *D:* itp.:
 
 .. figure:: img/uwamp01.jpg
 
-.. figure:: img/uwamp02.jpg
+.. figure:: img/uwamp03.jpg
 
 Po zainstalowaniu i uruchomieniu aplikacji *UwAmp* zapora systemowa może poprosić
 o odblokowanie portów serwera www i bazy danych. Godzimy się, wybierając opcję dla
@@ -738,7 +738,7 @@ sieci prywatnych i domowych.
 
 Serwerami i narzędziami zarządzamy za pomocą wygodnego okna:
 
-.. figure:: img/uwamp03.jpg
+.. figure:: img/uwamp05.jpg
 
 Serwery www (Apache2) i bazy danych (MySQL) startowane są automatycznie. Jeżeli nie korzystamy
 z serwera MySQL możemy go zatrzymać, klikając niebieską strzałkę obok przycisku "Stop" i wybierając
@@ -873,7 +873,7 @@ Słownik
 
     system bazodanowy
         system zarządzania bazą danych (ang. Database Management System, DBMS) – oprogramowanie
-        służące do zarządzania bazami danych, np. `SQLite`_, MariaDB, MySQL, PostgreSQL.
+        służące do zarządzania bazami danych, np. SQLite, MariaDB, MySQL, PostgreSQL.
 
     framework
         (ang. framework – struktura) – oprogramowanie będące zestawem narzędzi ułatwiających
@@ -890,7 +890,6 @@ Słownik
 .. _XFCE: http://www.xfce.org/
 .. _JavaScript: http://pl.wikipedia.org/wiki/JavaScript
 .. _PHP: http://pl.wikipedia.org/wiki/PHP
-.. _SQLite: http://pl.wikipedia.org/wiki/SQLite
 
 Metryka
 ========
