@@ -753,10 +753,11 @@ Baza SQLite
 
 W wielu projektach nie ma potrzeby wykorzystywania dużych i skomplikowanych systemów zarządzania
 bazami danych takich jak MySQL, MariaDB czy PostgreSQL. Lepiej skorzystać
-z prostszej bazy `SQLite <https://www.sqlite.org/>`_ , która ma jednak duże możliwości.
+z prostszej `bazy SQLite <https://www.sqlite.org/>`_, która ma jednak duże możliwości.
 Do zarządzania bazami danych SQLite'a, które przechowywane są w pojednyczych plikach,
-wykorzystuje się interepreter działający w terminalu. W systemach Linux instalowany
-jest on poleceniami typu:
+wykorzystuje się **interepreter** działający w terminalu.
+
+**W systemach Linux** instalowany jest on poleceniami typu:
 
 .. code-block:: bash
 
@@ -764,7 +765,18 @@ jest on poleceniami typu:
 
     ~# pacman -S sqlite
 
-– i uruchamiany komendą ``sqlite``. Najlepszym narzędziem z interfejsem graficznym jest z kolei
+– i uruchamiany komendą ``sqlite3``. Podstawowe polecenia:
+
+.. code-block:: bash
+
+    ~$ sqlite3 baza.db // otwarcie pliku z bazą
+    ~$ sqlite3 baza.db < schemat.sql // utworzenie bazy na podstawie pliku .sql
+    sqlite> .tables // lista tabel
+    sqlite> .help // lista poleceń interpretera
+    sqlite> .schema tabela // pokazuje klauzulę CREATE dla podanej tabeli
+    sqlite> .quit // wyjście z interpretera
+
+Najlepszym narzędziem z interfejsem graficznym jest z kolei
 polski program `SQLiteStudio <http://sqlitestudio.pl/>`_. Po pobraniu archiwum z rozszerzeniem *tar.xz*
 rozpakowujemy go i tworzymy dowiązanie:
 
@@ -774,13 +786,26 @@ rozpakowujemy go i tworzymy dowiązanie:
     ~$ cd /usr/bin
     ~$ sudo ln -sf /opt/SQLiteStudio/sqlitestudio .
 
-W systemach opartych na Arch Linuksie możemy użyć repozytorium AUR:
+W systemach opartych na Arch Linuksie możemy instalować z repozytorium AUR:
 
 .. code-block:: bash
 
     ~# yaourt -S sqlitestudio
 
 Program uruchamiamy poleceniem ``sqlitestudio``.
+
+.. figure:: img/sqlitestudio.png
+
+**W systemie Windows** ze strony `SQLite3 Download Page <https://www.sqlite.org/download.html>`_
+z sekcji *Precompiled Binaries for Windows* pobieramy archiwum *sqlite-tools-win32-(...).zip*.
+Następnie należy je rozpakować najlepiej do katalogu będącego w ścieżce systemowej.
+Interpreter uruchamiamy albo poleceniem ``sqlite3`` albo podwójnym kliknięciem.
+
+Graficzne narzędzia do baz SQLite3 pod Windowsem to wspomniane wyżej polskie *SQLiteStudio*
+w wersji `dla Windows <http://sqlitestudio.pl/?act=download>`_. Pobrane archiwum *.zip* rozpakowujemy
+i uruchamiamy program *SQLiteStudio.exe*. Drugi program to np. angielskojęzyczny *SQLite Browser*
+dołączony do opisanego wyżej środowiska *UwAmp*. Można go pobrać ze strony
+`DB Browser for SQLite <http://sqlitebrowser.org/>`_.
 
 Materiały
 **************
@@ -795,6 +820,7 @@ Materiały
 8. `Wprowadzenie do składni Sphinx reST`_
 9. `Docutils`_
 10. `Składnia reST & Sphinx`_
+11. `Interpreter SQLite3`_
 
 .. _Edytor Geany: http://www.geany.org/
 .. _MinGw: http://www.mingw.org/
@@ -806,6 +832,7 @@ Materiały
 .. _Wprowadzenie do składni Sphinx reST: http://sphinx-doc.org/rest.html
 .. _Docutils: http://docutils.sourceforge.net/
 .. _Składnia reST & Sphinx: http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html
+.. _Interpreter SQLite3: https://www.sqlite.org/cli.html
 
 Słownik
 ===========
