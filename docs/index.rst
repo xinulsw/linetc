@@ -21,10 +21,8 @@ Spis treści:
     tools/linux
     cppqt/index
     web/index
-    python/index
-    rg/index
-    mcpi/index
-    
+    inne/index
+
     galerie/index
 
 Indeks
