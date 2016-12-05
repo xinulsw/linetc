@@ -17,12 +17,10 @@ Spis treści:
     :numbered:
 
     Serwis eCG <http://ecg.vot.pl/>
-    tools/index
     tools/linux
     cppqt/index
     web/index
     inne/index
-
     galerie/index
 
 Indeks
