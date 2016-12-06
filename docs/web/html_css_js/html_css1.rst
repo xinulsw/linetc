@@ -11,10 +11,14 @@ HTML&CSS – ćwiczenie 1
 
 .. attention::
 
-	W katalogu z ćwiczeniem znajdziesz 3 pliki: szkielet pliku :file:`index.html`, podstawowy arkusz stylów CSS :file:`style.css` i obrazek :file:`norwid.jpg` (potrzebny w części rozszerzonej).
+	W katalogu :file:`html_css_cw1` znajdziesz 3 pliki:
+
+	- :file:`index.html` – szkielet strony HTML, tu wprowadzaj wszystkie zmiany;
+	- :file:`style.css` – podstawowy arkusz stylów CSS, tu dodawaj definicje stylów;
+	- :file:`norwid.jpg` – obrazek potrzebny tylko w części rozszerzonej.
 
 	**Uwaga**: Treść i obrazki, które masz umieścić w dokumencie ``index.html``,
-	skopiuj z odpowiednich stron Wikipedii.
+	skopiuj ze strony `Romantyzm <http://https://pl.wikipedia.org/wiki/Romantyzm>`_ Wikipedii.
 
 Część podstawowa
 ****************
