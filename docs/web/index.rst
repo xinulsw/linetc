@@ -13,7 +13,7 @@ Spis treści:
     :maxdepth: 2
     :numbered:
 
-    html_css_js/html_css1
+    html_css_js/index.rst
     getsimple
 
 Metryka
