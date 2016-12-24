@@ -25,7 +25,7 @@ Część podstawowa
 
 W pliku ``index.html`` dokonaj wymienionych zmian:
 
-#. Wstaw taki sam tytuł strony i nagłówek pierwszego stopnia.
+#. Wstaw taki sam tytuł strony i nagłówka pierwszego stopnia.
 #. Wstaw dwa odnośniki w menu.
 #. Wstaw dwa akapity, a w każdym wstaw obrazki.
 #. Wstaw akapit z tekstem "Źródło" i odnośnikiem do Wikipedii.
@@ -33,7 +33,7 @@ W pliku ``index.html`` dokonaj wymienionych zmian:
 #. Wstaw nagłówek stopnia drugiego.
 #. Wstaw listę wypunktowaną.
 #. Na końcu listy umieść odnośnik do konkretnej strony w Internecie.
-#. W stopce wstaw znacznik trzeciego poziomu.
+#. W stopce wstaw znacznik nagłówka trzeciego poziomu.
 #. Wstaw listę wypunktowaną zawierającą dwa odnośniki do stron w Internecie.
 #. Dołącz do dokumentu arkusz stylów CSS o nazwie :file:`style.css`.
 #. W pliku :file:`style.css` umieść:
