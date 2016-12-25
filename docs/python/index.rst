@@ -7,6 +7,12 @@ znajdziesz w dokumentacji `Python101 <http://python101.readthedocs.org>`_,
 która towarzyszy projektowi `"Koduj z Klasą" <http://www.ceo.org.pl/pl/koduj>`_
 realizowanemu pod patronatem `Centrum Edukacji Obywatelskiej <http://www.ceo.org.pl/pl>`_.
 
+.. toctree::
+    :maxdepth: 2
+    :numbered:
+
+    malybar/malybar.rst
+
 Metryka
 **********
 
