@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Pizza, Skladnik
 from .forms import PizzaForm, SkladnikiFormSet
@@ -9,11 +8,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms.models import modelformset_factory
 
 
-# Create your views here.
 def index(request):
     """Strona główna"""
-    # return HttpResponse("Witaj!")
-    return render(request, "pizza/index.html")
+    kontekst = {'komunikat': 'Witaj w aplikacji Pizza!'}
+    return render(request, 'pizza/index.html', kontekst)
 
 
 class PizzaCreate(CreateView):

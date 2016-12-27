@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Django settings for malybar project.
 
@@ -124,8 +123,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # django-registration
-REGISTRATION_OPEN = True  # If True, users can register
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window;
-REGISTRATION_AUTO_LOGIN = True  # If the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/pizza/'  # The page you want users to arrive at after they successful log in
-LOGIN_URL = '/konta/login/'  # The page users are directed to if they are not logged in,
+REGISTRATION_OPEN = True  # czy użytkownik może utworzyć konto
+ACCOUNT_ACTIVATION_DAYS = 7  # czas na aktywację konta
+REGISTRATION_AUTO_LOGIN = True  # czy użytkownik zostanie automatycznie zalogowany
+LOGIN_REDIRECT_URL = '/pizza/'  # strona docelowa po zalogowaniu użytkownika
+LOGIN_URL = '/konta/login/'  # strona logowania
