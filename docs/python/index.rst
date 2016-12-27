@@ -2,9 +2,7 @@ Python
 ###################
 
 Wszystkie dotychczasowe scenariusze prezentujące zastosowania języka Python,
-które przygotowywałem i zamieszczałem w tym repozytorium,
-znajdziesz w dokumentacji `Python101 <http://python101.readthedocs.org>`_,
-która towarzyszy projektowi `"Koduj z Klasą" <http://www.ceo.org.pl/pl/koduj>`_
+które zamieszczane były początkowo w tym repozytorium, znajdziesz w dokumentacji `Python101 <http://python101.readthedocs.org>`_, która towarzyszy projektowi `"Koduj z Klasą" <http://www.ceo.org.pl/pl/koduj>`_
 realizowanemu pod patronatem `Centrum Edukacji Obywatelskiej <http://www.ceo.org.pl/pl>`_.
 
 .. toctree::
