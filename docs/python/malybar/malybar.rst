@@ -184,6 +184,7 @@ aplikacji. W praktyce jest to nazwa katalogu, w którym znajduje się aplikacja,
 oraz domyślna nazwa pliku konfiguracyjnego :file:`urls.py` bez rozszerzenia.
 Wartość parametru ``namespace`` definiuje przestrzeń nazw, w której dostępne będą adresy używane w aplikacji.
 
+
 Widok domyślny
 ==============
 
@@ -232,7 +233,6 @@ zdefiniujemy w pliku :file:`pizza/views.py`:
 	Linia ``# -*- coding: utf-8 -*-`` to określenie kodowania znaków.
 	Należy umieszczać je w pierwszej linii każdego pliku, w którym zamierzamy używać polskich
 	znaków, czy to w komentarzach czy w kodzie.
-
 
 
 Nazwa funkcji – ``index()`` – jest umowna. Każdy widok otrzymuje szczegóły żądania wysłanego przez klienta
@@ -286,83 +286,115 @@ W przypadku błędów Django wyświetla obszerne informacje, które na pierwszy 
 są bardzo skomplikowane. Nie musisz studiować całości, żeby zrozumieć, co poszło nie tak.
 Skup się na początku komunikatu!
 
+
 Model danych
 ============
 
-Django jest wyposażone we własny system ORM (ang.), służący zarówno do definiowania,
-jak i zarządzania źródłami danych.
+Podstawą użytecznej aplikacji są dane. Django realizuje obiektowy wzorzec programowania,
+więc dane definiujemy jako klasy opisujące tzw. modele.
+**Model danych** – to kompletne źródło informacji o jakimś obiekcie, zawiera jego właściwości
+(pola) oraz metody działań na nich.
 
-W pliku :file:`moja_apl/models.py` definiujemy klasę(y) opisującą(e) źródła danych aplikacji.
-Odpowiadają one tabelom w bazie danych. Każda klasa zawiera pola opisujące przechowywane w nich
-informacje. Pola odpowiadają kolumnom w tabelach.
+W pliku :file:`pizza/models.py` definiujemy klasy opisujące źródła danych naszej aplikacji:
 
-Następnie tworzymy tzw. *migrację*, czyli informację o zmianie modelu naszej aplikacji.
+.. raw:: html
 
-.. code-block:: bash
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-    $ python manage.py make migrations moja_apl
-    $ python manage.py sqlmigrate moja_apl 0001
-    $ python manage.py migrate
+.. highlight:: python
+.. literalinclude:: pizza/models_01.py
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
 
-Drugie opcjonalne polecenie pozwala zobaczyć klauzule SQL-a, które zostaną użyte do wprowadzenia
-zdefiniowanych w modelu zmian do bazy. Ostatnie polecenie na podstawie migracji wszystkich
-zarejestrowanych aplikacji tworzy bazę danych, a w niej odpowiednie tabele.
+Nazwa każdego modelu (klasy) powinna zaczynać się dużą literą. Każdy model jest potomkiem
+klasy Models (dziedziczenie). Definicja każdej zmiennej (właściwości) zawiera wywołanie
+metody tworzącej pole wymaganego typu. Za pomocą nazwanych argumentów określamy dodatkowe cechy pól.
 
-Testowanie modelu
------------------
+.. note::
 
-Po zdefiniowaniu modelu możemy go od przetestować w konsoli, zanim wykorzystamy
-go w aplikacji.
+	Najpopularniejsze typy pól:
 
-.. code-block:: bash
+	- ``CharField`` – pole znakowe, przechowuje niezbyt długie napisy, np. nazwy;
+	- ``TextField`` – pole tekstowe, dla długich tekstów, np. opisów;
+	- ``DecimalField`` – pole dziesiętne, nadaje się do przechowywania liczb rzeczywistych, np. cen;
+	- ``Date(Time)Field`` – pole daty (i czasu);
+	- ``BooleanField`` – pole logiczne, przechowuje wartość ``True`` lub ``False``;
+	- ``ForeignKey`` – pole klucza obcego, czyli relacji; wymaga nazwy powiązanego modelu jako pierwszego argumentu.
 
-    $ python manage.py shell
+	Właściwości pól:
 
-Powyższe polecenie uruchamia konsolę Pythona (rozszerzoną, jeżeli jest dostępna) i tworzy
-środowisko testowe. Zobaczmy, jak za pomocą bazodanowego API zarządzać danymi.
-Na początku **tworzenie danych** (ang. *create*):
+	- ``verbose_name`` lub napis podany jako pierwszy argument – przyjazna nazwa pola;
+	- ``max_length`` – maksymalna długość pola znakowego;
+	- ``blank = True`` – pole może zawierać ciąg pusty;
+	- ``help_text`` – tekst podpowiedzi;
+	- ``max_digits``, ``decimal_places`` – określenie maksymalnej ilości cyfr i ilości miejsc po przecinku liczby rzeczywistej;
+	- ``auto_now_add = True`` – data (i czas) wstawione zostaną automatycznie;
+	- ``default`` – określenie wartości domyślnej pola;
+	- ``choices`` – wskazuje listę wartości dopuszczalnych dla danego pola.
 
-.. code-block:: bash
+W bazie chcemy przechowywać dane o pizzach. Każda z nich składać się może z wielu składników.
+Tak więc między modelami `Pizza` i `Skladnik` istnieje relacja jeden-do-wielu.
 
-	$ pytanie = Pytanie(tresc="Jak się nazywasz?")
-	$ pytanie.save()
-	$ print pytanie.id, pytanie.tresc, pytanie.data_pub
-
-[zrzut]
-
-.. code-block:: bash
-
-	$ from django.utils import timezone
-	$ pytanie = Pytanie(tresc="Gdzie mieszkasz??", data_pub=timezone.now())
-	$ pytanie.save()
-	$ print pytanie.id, pytanie.tresc, pytanie.data_pub
-
-Przećwiczmy też **wydobywanie danych** (ang. *read*) z bazy:
+Po dokonaniu zmian w bazie tworzymy tzw. *migrację*, w terminalu wydajemy polecenia:
 
 .. code-block:: bash
 
-	$ pytania = Pytanie.objects.all()
-	$ print pytania
-	$ print pytania[0].id, pytania[0].tresc, pytania[0].data_pub
-	$ pytanie = Pytanie.objects.get(pk=2)
-	$ print pytanie.tresc
-	$ Pytanie.objects.filter(data_pub__year=timezone.now().year)
-	$ Pytanie.objects.filter(tresc__startswith='Kiedy')
-	$ Pytanie.objects.count()
+  ~/dj_10_4/malybar$ python manage.py make migrations pizza
+  ~/dj_10_4/malybar$ python manage.py migrate
+
+**Migracja** – tworzona przez pierwsze polecenie, to informacje o zmianie w bazy danych zapisywana
+przez Django w języku SQL w katalogu :file:`pizza/migrations`.
+
+Drugie polecenie na podstawie migracji wszystkich zarejestrowanych aplikacji (w tym domyślnych)
+buduje lub aktualizuje bazę danych. Z nazw modeli Django utworzy odpowiednie tabele, w oparciu o zdefiniowane
+właściwości – odpowiednie kolumny.
+
+
+Zmiany modeli
+-------------
+
+1. Do modelu `Pizza` dodamy pole przechowujące użytkownika, który dodał ją do bazy.
+
+	- przed definicjami klas dodaj import ``from django.contrib.auth.models import User``
+	- dodaj klucz obcy o nazwie ``autor`` wskazujący na model ``User``
+
+2. Dodamy możliwość "autoprezentacji" modeli, czyli wyświetlania ich znakowej reprezentacji.
+
+	- do każdej klasy dodaj następującą metodę:
+
+.. code-block:: python
+
+      def __unicode__(self):
+        return u'%s' % (self.nazwa)
+
+3. W panelu administracyjnym przydatna jest forma liczby mnogiej służąca nazywaniu egzemplarzy danego modelu.
+
+	- w każdym modelu umieść dodatkową klasę `Meta` z odpowiednią formą liczby mnogiej, np.:
+
+.. code-block:: python
+
+      class Meta:
+        verbose_name_plural = 'pizze'
+
+4. Na koniec utwórz migrację aplikacji i zaktualizuj bazę danych!
+
 
 Strona administracyjna
 ======================
 
 Zarządzanie treściami czy użytkownikami wymaga panelu administracyjnego, Django dostarcza nam
-go automatycznie. Na początku tworzymy konto administratora:
+go automatycznie.
+
+Tworzymy konto administratora, wydając w terminalu polecenie:
 
 .. code-block:: bash
 
-    $ python manage.py createsuperuser
+  ~/dj_10_4/malybar$ python manage.py createsuperuser
 
-Django zapyta o nazwę, e-mail i hasło. Podajemy: “admin”, “” (pomijamy), “admin”.
-Jeżeli chcemy mieć możliwość dodawania treści, w pliku :file:`pizza/admin.py`
-importujemy nasz(e) model(e) i rejestrujemy go(je):
+Django zapyta o nazwę, e-mail i hasło. Podajemy: `admin`, `""` (pomijamy), `q1w2e3r4`.
+
+Aplikacja w panelu administratora: uzupełniamy plik :file:`pizza/admin.py`:
 
 .. highlight:: python
 .. literalinclude:: pizza/admin_01.py
@@ -370,12 +402,24 @@ importujemy nasz(e) model(e) i rejestrujemy go(je):
     :lineno-start: 1
     :lines: 1-
 
-**Ćwiczenie**
+Po zaimportowaniu modeli danych rejestrujemy je w panelu, dzięki temu będziemy mogli dodawać
+i modyfikować dane użytkowników i aplikacji.
 
-Uruchom serwer, a w przeglądarce wpisz adres: ``127.0.0.1:8000/admin``.
-Po zalogowaniu się dodaj dwa pytania. Następnie utwórz konto dla użytkownika "uczen"
-z hasłem "q1w2e3". Przydziel mu prawa do dodawania, modyfikowania i usuwania pytań.
-Przeloguj się na konto "uczen" i dodaj jeszcze dwa pytania.
+Zarządzanie danymi
+------------------
 
-[zrzut]
+1. Uruchom serwer i wywołaj w przeglądarce adres: ``127.0.0.1:8000/admin``.
+2. Zaloguj się jako administrator, dodaj dwie pizze i przynajmniej po jednym składniku do każdej.
+3. Utwórz konto dla użytkownika "uczen" z hasłem "q1w2e3r4". Przydziel mu prawa do dodawania, modyfikowania i usuwania pizz i składników. Uwaga: nie zapomnij zaznaczyć opcji "W zespole"!
+4. Zaloguj się na konto "uczen" i dodaj jeszcze jedną pizzę z co najmniej jednym składnikiem.
+
+.. note::
+
+	Obsługa panelu administracyjnego jest dobrą okazją, żeby zobaczyć jak wygląda komunikacja
+	między klientem a serwerem w aplikacjach sieciowych wykorzystujących protokół http.
+	Serwer testowy wyświetla pełen zapis sesji w oknie terminala.
+
+	[zrzut]
+
+
 
