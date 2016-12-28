@@ -1,4 +1,4 @@
-Django
+installeDjango
 #######
 
 `Django <https://www.djangoproject.com/>`_ to napisany w Pythonie framework
@@ -137,7 +137,7 @@ Otwieramy i edytujemy plik :file:`malybar/settings.py`.
 
 **Dostępne w projekcie aplikacje** znajdują się w liście ``INSTALLED_APPS``. Domyślnie Django udostępnia
 kilka obsługujących podstawowe funkcjonalności serwisu internetowego. Na początku tej listy
-dodamy konfigurację aplikacji `pizza`, a na końcu zainstalowanej wcześniej `django-registration`:
+dodamy konfigurację aplikacji `pizza`, na końcu zainstalowanej wcześniej `django-registration`:
 
 
 .. raw:: html
@@ -145,7 +145,7 @@ dodamy konfigurację aplikacji `pizza`, a na końcu zainstalowanej wcześniej `d
 	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
 
 .. highlight:: python
-.. literalinclude:: malybar/settings.py
+.. literalinclude:: malybar/settings_01.py
     :linenos:
     :lineno-start: 33
     :lines: 33-42
@@ -158,10 +158,10 @@ dodamy konfigurację aplikacji `pizza`, a na końcu zainstalowanej wcześniej `d
 	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
 
 .. highlight:: python
-.. literalinclude:: malybar/settings.py
+.. literalinclude:: malybar/settings_01.py
     :linenos:
-    :lineno-start: 108
-    :lines: 108-110
+    :lineno-start: 107
+    :lines: 107-109
 
 
 **Konfiguracja adresów URL projektu** zawarta jest w pliku :file:`malybar/urls.py`. Każda aplikacja definiuje
@@ -313,7 +313,7 @@ metody tworzącej pole wymaganego typu. Za pomocą nazwanych argumentów określ
 
 .. note::
 
-	Najpopularniejsze typy pól:
+	Najczęstsze typy pól:
 
 	- ``CharField`` – pole znakowe, przechowuje niezbyt długie napisy, np. nazwy;
 	- ``TextField`` – pole tekstowe, dla długich tekstów, np. opisów;
@@ -422,4 +422,82 @@ Zarządzanie danymi
 	[zrzut]
 
 
+Użytkownicy
+===========
 
+Do zarządzania użytkownikami użyjemy zainstalowanej na początku aplikacji `django-registration`.
+W pliku :file:`malybar/settings.py` dodaliśmy ją już do listy aplikacji ``INSTALLED_APPS``.
+Teraz na końcu tego pliku dodamy kilka ustawień:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/settings_02.py
+    :linenos:
+    :lineno-start: 124
+    :lines: 124-127
+
+
+Następnie włączamy konfigurację adresów URL aplikacji do pliku :file:`malybar/urls.py`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/urls_02.py
+    :linenos:
+    :lineno-start: 20
+    :lines: 20-25
+    :emphasize-lines: 4
+
+Teraz możemy zobaczyć, jakie adresy udostępnia aplikacja `django-registration`, wpisując w przeglądarce
+adres ``127.0.0.1:8000/konta/``:
+
+[zrzut]
+
+Szablony
+-----------
+
+Na początku utworzymy szablon służący do rejestracji w pliku
+:file:`pizza/templates/registration/registration_form.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/registration_form_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Potrzebujemy również szablonu logowania, który umieszczamy w pliku
+:file:`pizza/templates/registration/login.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/login_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Na koniec szablon wyświetlany po wylogowaniu, czyli plik
+:file:`pizza/templates/registration/logout.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/logout_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+[todo]
