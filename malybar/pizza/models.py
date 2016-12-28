@@ -43,7 +43,7 @@ class Skladnik(models.Model):
         return self.jarski
 
     def __unicode__(self):
-        return u'%s' % (u"składnik")
+        return u'%s' % (self.nazwa)
 
     class Meta:
         verbose_name = "składnik"
