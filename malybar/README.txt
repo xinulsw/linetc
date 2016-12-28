@@ -10,7 +10,7 @@ Przygotowanie środowiska wirtualnego:
 ~$ pip install django-registration
 
 W katalogu "dj_10_4" należy umieścić katalog projektu "malybar".
-Serwer uruchamiamy w aktywnym środowisku wirtualnym (po poleceniu:
+Serwer uruchamiamy po aktywowaniu środowiska wirtualnego (poleceniem:
 source ./bin/activate), w katalogu "malybar":
 
 ~/dj_10_4/malybar$ python manage.py runserver
