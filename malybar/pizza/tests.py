@@ -11,6 +11,7 @@ class IndexViewTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(200, response.status_code)
         self.assertEqual('pizza/index.html', response.template_name)
+        self.assertTrue('komunikat' in response.context_data)
 
 
 class AnonymousTests(TestCase):

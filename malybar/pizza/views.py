@@ -15,7 +15,7 @@ from . import forms
 def index(request):
     """Strona główna"""
     kontekst = {'komunikat': 'Witaj w aplikacji Pizza!'}
-    return render(request, "pizza/index.html", kontekst)
+    return TemplateResponse(request, "pizza/index.html", kontekst)
 
 
 @method_decorator(login_required, 'dispatch')
