@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
+from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms.models import modelformset_factory
 
@@ -18,6 +20,7 @@ def index(request):
     return TemplateResponse(request, "pizza/index.html")
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaCreate(CreateView):
     """Widok dodawania pizzy i skladników."""
 
