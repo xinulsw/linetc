@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-from django.contrib import admin
 
-# Register your models here.
-from .models import Pizza, Skladnik
+from django.contrib import admin
 from django.forms import Textarea
 from django.db import models
 
+from . import models
+
 
 class SkladnikInline(admin.TabularInline):
-    model = Skladnik
+    model = models.Skladnik
     max_num = 6
     extra = 3
     fields = ['nazwa', 'jarski']
 
 
+@admin.register(models.Pizza)
 class PizzaAdmin(admin.ModelAdmin):
     # fields = ['przedmiot', 'kategoria', 'typ', 'polecenie']
     exclude = ('autor',)
@@ -33,7 +34,3 @@ class PizzaAdmin(admin.ModelAdmin):
         if not change:
             obj.autor = request.user
         obj.save()
-
-
-# rejestrujemy model Pizza w panelu administracyjnym
-admin.site.register(Pizza, PizzaAdmin)
