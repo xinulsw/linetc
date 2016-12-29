@@ -19,7 +19,7 @@ from django.forms.models import inlineformset_factory
 
 SkladnikiFormSet = inlineformset_factory(
     parent_model=models.Pizza,
-    model=models.kladnik,
+    model=models.Skladnik,
     max_num=6,
     min_num=1,
     validate_max=True,

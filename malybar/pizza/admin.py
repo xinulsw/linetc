@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.forms import Textarea
-from django.db import models
+from django.db.models.fields import TextField
 
 from . import models
 
@@ -27,7 +27,7 @@ class PizzaAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 100})},
+        TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 100})},
     }
 
     def save_model(self, request, obj, form, change):
