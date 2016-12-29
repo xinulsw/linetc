@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from . import views
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
-from .models import Pizza
+from . import views
+from . import models
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -11,7 +11,7 @@ urlpatterns = [
         login_url='/konta/login'),
         name='dodaj'),
     url(r'^lista/', login_required(ListView.as_view(
-        model=Pizza,
+        model=models.Pizza,
         context_object_name='pizze',
         paginate_by=10),
         login_url='/konta/login'),

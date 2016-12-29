@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.forms import ModelForm, Textarea
-from .models import Pizza, Skladnik
+from . import models
 from django.forms.models import inlineformset_factory
 
 
@@ -18,8 +18,8 @@ from django.forms.models import inlineformset_factory
 
 
 SkladnikiFormSet = inlineformset_factory(
-    parent_model=Pizza,
-    model=Skladnik,
+    parent_model=models.Pizza,
+    model=models.kladnik,
     max_num=6,
     min_num=1,
     validate_max=True,
@@ -33,7 +33,7 @@ SkladnikiFormSet = inlineformset_factory(
 class PizzaForm(ModelForm):
 
     class Meta:
-        model = Pizza
+        model = models.Pizza
         fields = ('nazwa', 'opis', 'rozmiar', 'cena')
         exclude = ('data', 'autor')
         widgets = {'opis': Textarea(attrs={'rows': 2, 'cols': 80})}
@@ -42,7 +42,7 @@ class PizzaForm(ModelForm):
 class PizzaUpdateForm(ModelForm):
 
     class Meta:
-        model = Pizza
+        model = models.Pizza
         fields = ('nazwa', 'opis', 'rozmiar', 'cena')
         exclude = ('data', 'autor')
         widgets = {'opis': Textarea(attrs={'rows': 2, 'cols': 80})}
