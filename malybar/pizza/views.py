@@ -3,6 +3,7 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms.models import modelformset_factory
 
@@ -14,7 +15,7 @@ from . import forms
 def index(request):
     """Strona główna"""
     # return HttpResponse("Witaj!")
-    return render(request, "pizza/index.html")
+    return TemplateResponse(request, "pizza/index.html")
 
 
 class PizzaCreate(CreateView):
