@@ -23,3 +23,9 @@ W bazie są już konta użytkowników (login - hasło):
 1. admin – q1w2e3r4
 2. adam - q1w2e3r4
 3. ewa – q1w2e3r4
+
+# Testy
+
+Sprawdzenia poprawnego działania aplikacji dokonujemy uruchamiając testy:
+
+    ~/linetc/malybar$ python manage.py tests    
