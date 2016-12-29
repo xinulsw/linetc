@@ -7,9 +7,7 @@ from . import models
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^dodaj/$', login_required(views.PizzaCreate.as_view(),
-        login_url='/konta/login'),
-        name='dodaj'),
+    url(r'^dodaj/$', login_required(views.PizzaCreate.as_view()), name='dodaj'),
     url(r'^lista/', login_required(ListView.as_view(
         model=models.Pizza,
         context_object_name='pizze',
