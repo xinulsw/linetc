@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import resolve_url
 from django.test import TestCase
 
-
+from . import models, views, forms
 # Create your tests here.
 
 class IndexViewTests(TestCase):
@@ -14,8 +14,29 @@ class IndexViewTests(TestCase):
 
 
 class AnonymousTests(TestCase):
-    def test_get(self):
+    def test_pizza_create(self):
         url = resolve_url("pizza:dodaj")
+        response = self.client.get(url)
+        self.assertEqual(302, response.status_code)
+        url = resolve_url("auth_login") + "?next=" + url
+        self.assertRedirects(response, url)
+
+    def test_pizza_update(self):
+        url = resolve_url("pizza:aktualizuj", 1)
+        response = self.client.get(url)
+        self.assertEqual(302, response.status_code)
+        url = resolve_url("auth_login") + "?next=" + url
+        self.assertRedirects(response, url)
+
+    def test_pizza_delete(self):
+        url = resolve_url("pizza:usun", 1)
+        response = self.client.get(url)
+        self.assertEqual(302, response.status_code)
+        url = resolve_url("auth_login") + "?next=" + url
+        self.assertRedirects(response, url)
+
+    def test_pizza_list(self):
+        url = resolve_url("pizza:lista")
         response = self.client.get(url)
         self.assertEqual(302, response.status_code)
         url = resolve_url("auth_login") + "?next=" + url

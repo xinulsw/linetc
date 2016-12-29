@@ -66,6 +66,7 @@ class PizzaCreate(CreateView):
         )
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaUpdate(UpdateView):
     """Widok aktualizuacji"""
     model = models.Pizza
@@ -121,6 +122,7 @@ class PizzaUpdate(UpdateView):
             return pizza
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaDelete(DeleteView):
     model = models.Pizza
     template_name = 'pizza/pizza_usun.html'
