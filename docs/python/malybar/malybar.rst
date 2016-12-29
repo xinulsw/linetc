@@ -1,149 +1,503 @@
-Django cz. 1
-#############
+installeDjango
+#######
 
-Wstęp nt. czym jest Django
+`Django <https://www.djangoproject.com/>`_ to napisany w Pythonie framework
+przeznaczony do szybkiego tworzenia aplikacji internetowych.
+Został zaprojektowany przez zespół doświadczonych praktyków w taki sposób,
+żeby odciążyć programistę od wykonywania typowych, a jednocześnie uciążliwych czynności.
+Zalety Django to szybkość, bezpieczeństwo i skalowalność. Inne cechy wymienione są
+na polskiej stronie Wikipedii: `Django (framework) <https://pl.wikipedia.org/wiki/Django_(framework)>`_.
 
+Przygotowanie środowiska
+========================
 
-Strona i aplikacja
-==================
+Do pracy z Django potrzebny jest przede wszystkim **interpreter Pythona 2.7.x**.
+Jest on domyślnie obecny w systemach Linux. Natomiast w systemach Windows i Mac OS X
+należy wejść na stronę `Donwload Python <https://www.python.org/downloads/>`_,
+pobrać odpowiedni instalator (32- lub 64-bitowy) Pythona (**wersja 2.7.x**!)
+i zainstalować. Opis instalacji znajdziesz na stronie `Interpreter Pythona <http://python101.readthedocs.io/pl/latest/env/windows.html#inerpreter-pythona>`_.
 
-W wybranym katalogu, np. domowym, wydajemy polecenia:
+Poza Pythonem potrzebny jest również instalator pakietów Pythona `pip`.
+W systemach Linux wywodzących się z Debiana (Ubuntu, Linux Mint)
+wystarczy wydać w terminalu polecenie:
 
 .. code-block:: bash
 
-    $ django-admin stratproject moja_str
-    $ cd moja_strona
-    $ python manage.py runserver
+    ~$ sudo apt install python-pip
+
+W systemie Windows `pip` jest instalowany razem z interpreterem.
+Korzystając z omawianego narzędzia wydajemy w konsoli tekstowej polecenie:
+
+.. code-block:: bash
+
+    ~$ sudo pip install virtualenv
+
+Narzędzie `virtualenv` posłuży nam do przygotowania **wyizolowanego środowiska Pythona**,
+zawierającego wybraną wersję Django. W konsoli wydajemy polecenia:
+
+.. code-block:: bash
+
+		~$ virtualenv dj_10_4
+		~$ cd dj_10_4
+		~$ source ./bin/activate
+		~$ pip install Django==1.10.4
+		~$ pip install django-registration
+
+Pierwsze polecenie tworzy katalog zawierający najważniejsze komponenty Pythona.
+Nazwa :file:`dj_10_4` jest umowna, w założeniu ma być skrótem wskazującym wykorzystaną
+wersję Django. Aby skorzystać z przygotowanego środowiska, należy
+go zawsze na początku aktywować, wydając w utworzonym katalogu polecenie ``source ./bin/activate``.
+Opuszczenie środowiska umożliwia komenda ``deactivate``.
+
+Polecenia ``pip install ...`` instalują wskazaną wersję Django oraz dodatkową aplikację
+ułatwiającą zarządzanie użytkownikami. Tak zainstalowane moduły będą dostępne
+tylko w aktywowanym środowisku.
+
+Ćwiczenie
+---------
+
+Zgodnie z powyższym opisem przygotuj samodzielnie wirtualne środowisko do pracy z Django.
+
+.. tip::
+
+	Projektując aplikację będziemy często korzystać z poleceń wydawanych w katalogu
+	:file:`dj_10_4` w terminalu. Nie zamykaj więc okna terminala.
+
+Projekt
+========
+
+Otwórz terminal, przejdź do katalogu z utworzonym wcześniej wirtualnym środowiskiem
+:file:`dj_10_4` i aktywuj go. Utworzymy teraz projekt i uruchomimy serwer deweloperski.
+Wydajemy polecenia:
+
+.. code-block:: bash
+
+    ~/dj_10_4$ django-admin stratproject malybar
+    ~/dj_10_4$ cd malybar
+    ~/dj_10_4/malybar$ python manage.py runserver
 
 Tyle wystarczy, żeby utworzyć szkielet serwisu i uruchomić serwer deweloperski,
 który możemy wywołać wpisując w przeglądarce adres: ``127.0.0.1:8000``.
+Większość zmian w kodzie nie wymaga restartowania serwera. W razie potrzeby
+serwer zatrzymujemy naciskając w terminalu skrót :kbd:`CTRL+C`.
 
-[zrzut]
+.. image:: img/django01.jpg
 
-W ramach jednej strony (serwisu) może działać wiele aplikacji. Jedną utworzymy
-poleceniem:
+Poznajmy strukturę plików naszego projektu. W terminalu wydajemy jedno z poleceń:
 
 .. code-block:: bash
 
-	$ python manage.py startapp moja_apl
+  ~/dj_10_4/malybar$ tree
+	~/dj_10_4/malybar$ ls -R
 
-Następnie należy:
 
-- zmodyfikować plik :file:`moja_str/urls.py`  – włączyć :file:`moja_apl/urls.py`
-- wyjaśninie funkcji ``url()``, parametry obowiązkowe to `regex` i `view`, opcjonalne `kwargs` i `name`
-- w pliku :file:`moja_str/settings.py` wybieramy bazę danych (domyślnie SQLite3), ustawiamy ``TIME_ZONE = 'Europe/Warsaw'`` oraz ``LANGUAGE_CODE = 'pl'``
-- ponownie uruchomić serwer
+.. figure:: img/django03.jpg
 
-Dostęp do aplikacji możesz zweryfikować wpisując adres: ``127.0.0.1:8000/moja_apl``.
+Nazwa zewnętrznego katalogu :file:`malybar` nie ma znaczenia, można ją dowolnie zmieniać,
+to tylko pojemnik na projekt. Zawiera on:
 
-[zrzut]
+	- :file:`manage.py` – skrypt Pythona do zarządzania projektem;
+	- :file:`db.sqlite3` – bazę danych w domyślnym formacie SQLite3.
+
+**Katlog projektu** :file:`malybar/malybar` zawiera:
+
+	- :file:`settings.py` – konfiguracja projektu;
+	- :file:`urls.py` – swego rodzaju "menu" naszego projektu, a więc lista wpisów
+	  definiująca adresy URL, które będziemy obsługiwać;
+	- :file:`wsgi.py` – plik konfiguracyjny wykorzystywany przez serwery WWW.
+
+Plik :file:`__init__.py` obecny w danym katalogu wskazuje, że dany katalog jest modułem Pythona.
+
+
+Aplikacja
+=========
+
+W ramach jednego projektu (serwisu internetowego) może działać wiele aplikacji.
+Utworzymy teraz naszą aplikację `pizza` i zobaczymy strukturę plików:
+
+.. code-block:: bash
+
+	~/dj_10_4/malybar$ python manage.py startapp pizza
+	~/dj_10_4/malybar$ tree pizza
+	lub:
+	~/dj_10_4/malybar$ ls -R pizza
+
+**Katalog aplikacji** :file:`malybar/pizza` zawiera:
+
+	- :file:`apps.py` – ustawienia aplikacji;
+	- :file:`admin.py` – konfigurację panelu administracyjnego;
+	- :file:`models.py` – plik definiujący modele danych przechowywanych w bazie;
+	- :file:`views.py` – plik zawierający funkcje lub klasy definiujące tzw. *widoki* (ang. *views*), obsługujące żądania klienta przychodzące do serwera;
+
+
+Ustawienia projektu
+===================
+
+Otwieramy i edytujemy plik :file:`malybar/settings.py`.
+
+**Dostępne w projekcie aplikacje** znajdują się w liście ``INSTALLED_APPS``. Domyślnie Django udostępnia
+kilka obsługujących podstawowe funkcjonalności serwisu internetowego. Na początku tej listy
+dodamy konfigurację aplikacji `pizza`, na końcu zainstalowanej wcześniej `django-registration`:
+
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/settings_01.py
+    :linenos:
+    :lineno-start: 33
+    :lines: 33-42
+    :emphasize-lines: 2, 9
+
+**Lokalizacja projektu** obejmuje ustawienie języka i strefy czasowej:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/settings_01.py
+    :linenos:
+    :lineno-start: 107
+    :lines: 107-109
+
+
+**Konfiguracja adresów URL projektu** zawarta jest w pliku :file:`malybar/urls.py`. Każda aplikacja definiuje
+zazwyczaj swoją listę obsługiwanych adresów, którą należy dołączyć:
+
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/urls_01.py
+    :linenos:
+    :lineno-start: 16
+    :lines: 16-24
+    :emphasize-lines: 3, 6-7
+
+Funkcja ``include()`` jako pierwszy parametr przyjmuje ścieżkę dostępu do konfiguracji adresów danej
+aplikacji. W praktyce jest to nazwa katalogu, w którym znajduje się aplikacja, operator ``.`` (kropka)
+oraz domyślna nazwa pliku konfiguracyjnego :file:`urls.py` bez rozszerzenia.
+Wartość parametru ``namespace`` definiuje przestrzeń nazw, w której dostępne będą adresy używane w aplikacji.
+
+
+Widok domyślny
+==============
+
+**Mapowanie adresów URL aplikacji** tworzymy w nowym pliku :file:`pizza/urls.py`,
+który wypełniamy następującym kodem:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/urls_01.py
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+    :emphasize-lines: 2, 5
+
+
+Lista ``urlpatterns`` zawiera powiązania między adresami URL a obsługującymi je widokami
+zapisanymi w pliku :file:`views.py`, który importujemy w drugiej linii.
+
+Funkcja ``url()`` przyporządkowuje adresowi URL widok, który go obsługuje. Pierwszy parametr to wyrażenie
+regularne, do którego Django próbuje dopasować adres otrzymany w żądaniu od klienta. Drugi to nazwa widoku.
+Trzeci to unikalna nazwa, dzięki której można odwoływać się w aplikacji do zdefiniowanego adresu.
+
+**Widok** definiuje jakiś typ strony WWW, za pomocą którego użytkownik wykonuje w aplikacji
+jakieś operacje, np. wyświetla zestawienie danych. Technicznie widok zazwyczaj składa się
+z funkcji otrzymującej żądanie klienta i jakiegoś szablonu służącego prezentowaniu danych.
+
+Widok domyślny obsługujący żądania typu GET przychodzące na adres podstawowy serwera
+zdefiniujemy w pliku :file:`pizza/views.py`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/views_01.py
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+
+.. warning::
+
+	Linia ``# -*- coding: utf-8 -*-`` to określenie kodowania znaków.
+	Należy umieszczać je w pierwszej linii każdego pliku, w którym zamierzamy używać polskich
+	znaków, czy to w komentarzach czy w kodzie.
+
+
+Nazwa funkcji – ``index()`` – jest umowna. Każdy widok otrzymuje szczegóły żądania wysłanego przez klienta
+(obiekt typu ``HttpRequest``) i powinien zwrócić jakąś odpowiedź (``HttpResponse``).
+W tym wypadku zwracamy funkcję ``render()`` wywołującą wskazany jako drugi parametr szablon,
+który otrzymuje dane w postaci słownika ``kontekst`` (nazwa umowna).
+
+
+**Szablon** (ang. *template*) – to plik tekstowy, służący generowaniu najczęściej plików HTML.
+Oprócz tagów HTML-a, zawiera zmienne oraz tagi sterujące języka szablonów Django.
+
+.. note::
+
+	Szablony umieszczamy w katalogu: :file:`pizza/templates/pizza`!
+
+Zawartość szablonu :file:`index.html`:
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/pizza/index_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+
+Zobacz, jak w znaczniku ``<p>`` wstawiamy przekazaną do szablonu zmienną ``komunikat``,
+używamy podwójnych nawiasów sześciennych: ``{{ nazwa_zmiennej }}``.
+
+
+.. tip::
+
+	W tym miejscu warto usystematyzować dodawanie kolejnych funkcji do naszej aplikacji.
+	**Zazwyczaj** proces ten przebiega wg. schematu:
+
+	1) w pliku :file:`urls.py`: przyporządkowujemy adres widokowi;
+	2) w pliku :file:`views.py`: definiujemy widok, który najczęściej zwraca szablon połączony z przekazanymi do nego danymi;
+	3) w katalogu :file:`templates/nazwa_aplikacji`: tworzymy szablon, który łączy znaczniki HTML-a i dane.
+
+
+Test widok domyślnego
+---------------------
+
+W tym momencie powinieneś przetestować działanie aplikacji. Sprawdź, czy działa serwer. Jeżeli
+nie, uruchom go. W przeglądarce odśwież lub wpisz adres domyślny serwera testowego, tj.:
+``127.0.0.1:8000``. Powinieneś zobaczyć nazwę projektu i powitanie.
+
+W przypadku błędów Django wyświetla obszerne informacje, które na pierwszy rzut oka
+są bardzo skomplikowane. Nie musisz studiować całości, żeby zrozumieć, co poszło nie tak.
+Skup się na początku komunikatu!
+
 
 Model danych
 ============
 
-Django jest wyposażone we własny system ORM (ang.), służący zarówno do definiowania,
-jak i zarządzania źródłami danych.
+Podstawą użytecznej aplikacji są dane. Django realizuje obiektowy wzorzec programowania,
+więc dane definiujemy jako klasy opisujące tzw. modele.
+**Model danych** – to kompletne źródło informacji o jakimś obiekcie, zawiera jego właściwości
+(pola) oraz metody działań na nich.
 
-W pliku :file:`moja_apl/models.py` definiujemy klasę(y) opisującą(e) źródła danych aplikacji.
-Odpowiadają one tablom w bazie danych. Każda klasa zawiera pola opisujące przechowywane w nich
-informacje. Pola odpowiadają kolumnom w tabelach.
+W pliku :file:`pizza/models.py` definiujemy klasy opisujące źródła danych naszej aplikacji:
 
-Po zdefiniowaniu modelu danych należy go aktywować, co wymaga włączenia aplikacji do naszej strony. Uzupełniamy więc listę ``INSTALLED_APPS`` w pliku :file:`moja_str/settings.py`, która
-na początku zawiera już kilka domyślnie włączonych aplikacji. Dodajemy do niej ścieżkę do ustawień naszej:
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/models_01.py
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Nazwa każdego modelu (klasy) powinna zaczynać się dużą literą. Każdy model jest potomkiem
+klasy Models (dziedziczenie). Definicja każdej zmiennej (właściwości) zawiera wywołanie
+metody tworzącej pole wymaganego typu. Za pomocą nazwanych argumentów określamy dodatkowe cechy pól.
+
+.. note::
+
+	Najczęstsze typy pól:
+
+	- ``CharField`` – pole znakowe, przechowuje niezbyt długie napisy, np. nazwy;
+	- ``TextField`` – pole tekstowe, dla długich tekstów, np. opisów;
+	- ``DecimalField`` – pole dziesiętne, nadaje się do przechowywania liczb rzeczywistych, np. cen;
+	- ``Date(Time)Field`` – pole daty (i czasu);
+	- ``BooleanField`` – pole logiczne, przechowuje wartość ``True`` lub ``False``;
+	- ``ForeignKey`` – pole klucza obcego, czyli relacji; wymaga nazwy powiązanego modelu jako pierwszego argumentu.
+
+	Właściwości pól:
+
+	- ``verbose_name`` lub napis podany jako pierwszy argument – przyjazna nazwa pola;
+	- ``max_length`` – maksymalna długość pola znakowego;
+	- ``blank = True`` – pole może zawierać ciąg pusty;
+	- ``help_text`` – tekst podpowiedzi;
+	- ``max_digits``, ``decimal_places`` – określenie maksymalnej ilości cyfr i ilości miejsc po przecinku liczby rzeczywistej;
+	- ``auto_now_add = True`` – data (i czas) wstawione zostaną automatycznie;
+	- ``default`` – określenie wartości domyślnej pola;
+	- ``choices`` – wskazuje listę wartości dopuszczalnych dla danego pola.
+
+W bazie chcemy przechowywać dane o pizzach. Każda z nich składać się może z wielu składników.
+Tak więc między modelami `Pizza` i `Skladnik` istnieje relacja jeden-do-wielu.
+
+Po dokonaniu zmian w bazie tworzymy tzw. *migrację*, w terminalu wydajemy polecenia:
+
+.. code-block:: bash
+
+  ~/dj_10_4/malybar$ python manage.py make migrations pizza
+  ~/dj_10_4/malybar$ python manage.py migrate
+
+**Migracja** – tworzona przez pierwsze polecenie, to informacje o zmianie w bazy danych zapisywana
+przez Django w języku SQL w katalogu :file:`pizza/migrations`.
+
+Drugie polecenie na podstawie migracji wszystkich zarejestrowanych aplikacji (w tym domyślnych)
+buduje lub aktualizuje bazę danych. Z nazw modeli Django utworzy odpowiednie tabele, w oparciu o zdefiniowane
+właściwości – odpowiednie kolumny.
+
+
+Zmiany modeli
+-------------
+
+1. Do modelu `Pizza` dodamy pole przechowujące użytkownika, który dodał ją do bazy.
+
+	- przed definicjami klas dodaj import ``from django.contrib.auth.models import User``
+	- dodaj klucz obcy o nazwie ``autor`` wskazujący na model ``User``
+
+2. Dodamy możliwość "autoprezentacji" modeli, czyli wyświetlania ich znakowej reprezentacji.
+
+	- do każdej klasy dodaj następującą metodę:
 
 .. code-block:: python
 
-	INSTALLED_APPS = [
-			'moja_apl.apps.PollsConfig',  # podświetlenie
-	    'polls.apps.PollsConfig',
-	    'django.contrib.admin',
-	    'django.contrib.auth',
-	    'django.contrib.contenttypes',
-	    'django.contrib.sessions',
-	    'django.contrib.messages',
-	    'django.contrib.staticfiles',
-	]
+      def __unicode__(self):
+        return u'%s' % (self.nazwa)
 
-Następnie tworzymy tzw. *migrację*, czyli informację o zmianie modelu naszej aplikacji.
+3. W panelu administracyjnym przydatna jest forma liczby mnogiej służąca nazywaniu egzemplarzy danego modelu.
 
-.. code-block:: bash
+	- w każdym modelu umieść dodatkową klasę `Meta` z odpowiednią formą liczby mnogiej, np.:
 
-    $ python manage.py make migrations moja_apl
-    $ python manage.py sqlmigrate moja_apl 0001
-    $ python manage.py migrate
+.. code-block:: python
 
-Drugie opcjonalne polecenie pozwala zobaczyć klauzule SQL-a, które zostaną użyte do wprowadzenia
-zdefiniowanych w modelu zmian do bazy. Ostatnie polecenie na podstawie migracji wszystkich
-zarejestrowanych aplikacji tworzy bazę danych, a w niej odpowiednie tabele.
+      class Meta:
+        verbose_name_plural = 'pizze'
 
-Testowanie modelu
------------------
+4. Na koniec utwórz migrację aplikacji i zaktualizuj bazę danych!
 
-Po zdefiniowaniu modelu możemy go od przetestować w konsoli, zanim wykorzystamy
-go w aplikacji.
-
-.. code-block:: bash
-
-    $ python manage.py shell
-
-Powyższe polecenie uruchamia konsolę Pythona (rozszerzoną, jeżeli jest dostępna) i tworzy
-środowisko testowe. Zobaczmy, jak za pomocą bazodanowego API zarządzać danymi.
-Na początku **tworzenie danych** (ang. *create*):
-
-.. code-block:: bash
-
-	$ pytanie = Pytanie(tresc="Jak się nazywasz?")
-	$ pytanie.save()
-	$ print pytanie.id, pytanie.tresc, pytanie.data_pub
-
-[zrzut]
-
-.. code-block:: bash
-
-	$ from django.utils import timezone
-	$ pytanie = Pytanie(tresc="Gdzie mieszkasz??", data_pub=timezone.now())
-	$ pytanie.save()
-	$ print pytanie.id, pytanie.tresc, pytanie.data_pub
-
-Przećwiczmy też **wydobywanie danych** (ang. *read*) z bazy:
-
-.. code-block:: bash
-
-	$ pytania = Pytanie.objects.all()
-	$ print pytania
-	$ print pytania[0].id, pytania[0].tresc, pytania[0].data_pub
-	$ pytanie = Pytanie.objects.get(pk=2)
-	$ print pytanie.tresc
-	$ Pytanie.objects.filter(data_pub__year=timezone.now().year)
-	$ Pytanie.objects.filter(tresc__startswith='Kiedy')
-	$ Pytanie.objects.count()
 
 Strona administracyjna
 ======================
 
 Zarządzanie treściami czy użytkownikami wymaga panelu administracyjnego, Django dostarcza nam
-go automatycznie. Na początku tworzymy konto administratora:
+go automatycznie.
+
+Tworzymy konto administratora, wydając w terminalu polecenie:
 
 .. code-block:: bash
 
-    $ python manage.py createsuperuser
+  ~/dj_10_4/malybar$ python manage.py createsuperuser
 
-Django zapyta o nazwę, e-mail i hasło. Podajemy: “admin”, “” (pomijamy), “admin”.
-Jeżeli chcemy mieć możliwość dodawania treści, w pliku :file:`moja_apl/admin.py`
-importujemy nasz(e) model(e) i rejestrujemy go(je):
+Django zapyta o nazwę, e-mail i hasło. Podajemy: `admin`, `""` (pomijamy), `q1w2e3r4`.
+
+Aplikacja w panelu administratora: uzupełniamy plik :file:`pizza/admin.py`:
 
 .. highlight:: python
-.. literalinclude:: admin_01.py
+.. literalinclude:: pizza/admin_01.py
     :linenos:
     :lineno-start: 1
     :lines: 1-
 
-**Ćwiczenie**
+Po zaimportowaniu modeli danych rejestrujemy je w panelu, dzięki temu będziemy mogli dodawać
+i modyfikować dane użytkowników i aplikacji.
 
-Uruchom serwer, a w przeglądarce wpisz adres: ``127.0.0.1:8000/admin``.
-Po zalogowaniu się dodaj dwa pytania. Następnie utwórz konto dla użytkownika "uczen"
-z hasłem "q1w2e3". Przydziel mu prawa do dodawania, modyfikowania i usuwania pytań.
-Przeloguj się na konto "uczen" i dodaj jeszcze dwa pytania.
+Zarządzanie danymi
+------------------
+
+1. Uruchom serwer i wywołaj w przeglądarce adres: ``127.0.0.1:8000/admin``.
+2. Zaloguj się jako administrator, dodaj dwie pizze i przynajmniej po jednym składniku do każdej.
+3. Utwórz konto dla użytkownika "uczen" z hasłem "q1w2e3r4". Przydziel mu prawa do dodawania, modyfikowania i usuwania pizz i składników. Uwaga: nie zapomnij zaznaczyć opcji "W zespole"!
+4. Zaloguj się na konto "uczen" i dodaj jeszcze jedną pizzę z co najmniej jednym składnikiem.
+
+.. note::
+
+	Obsługa panelu administracyjnego jest dobrą okazją, żeby zobaczyć jak wygląda komunikacja
+	między klientem a serwerem w aplikacjach sieciowych wykorzystujących protokół http.
+	Serwer testowy wyświetla pełen zapis sesji w oknie terminala.
+
+	[zrzut]
+
+
+Użytkownicy
+===========
+
+Do zarządzania użytkownikami użyjemy zainstalowanej na początku aplikacji `django-registration`.
+W pliku :file:`malybar/settings.py` dodaliśmy ją już do listy aplikacji ``INSTALLED_APPS``.
+Teraz na końcu tego pliku dodamy kilka ustawień:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script>: <i>malybar/settings.py</i></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/settings_02.py
+    :linenos:
+    :lineno-start: 124
+    :lines: 124-127
+
+
+Następnie włączamy konfigurację adresów URL aplikacji do pliku :file:`malybar/urls.py`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: malybar/urls_02.py
+    :linenos:
+    :lineno-start: 20
+    :lines: 20-25
+    :emphasize-lines: 4
+
+Teraz możemy zobaczyć, jakie adresy udostępnia aplikacja `django-registration`, wpisując w przeglądarce
+adres ``127.0.0.1:8000/konta/``:
 
 [zrzut]
 
+Szablony
+-----------
+
+Na początku utworzymy szablon służący do rejestracji w pliku
+:file:`pizza/templates/registration/registration_form.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/registration_form_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Potrzebujemy również szablonu logowania, który umieszczamy w pliku
+:file:`pizza/templates/registration/login.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/login_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Na koniec szablon wyświetlany po wylogowaniu, czyli plik
+:file:`pizza/templates/registration/logout.html`:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/templates/registration/logout_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+[todo]

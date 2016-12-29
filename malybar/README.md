@@ -13,8 +13,8 @@ i zainstalować w nim wymagane biblioteki
     ~$ source .pve/bin/activate
     ~$ pip install -r requirements.txt
 
-Serwer uruchamiamy w aktywnym środowisku wirtualnym (po poleceniu:
-`source .pve/bin/activate`), w katalogu `malybar`:
+Serwer uruchamiamy po aktywowaniu środowiska wirtualnego 
+(poleceniem: `source .pve/bin/activate`), w katalogu `malybar`:
 
     ~/linetc/malybar$ python manage.py runserver
 

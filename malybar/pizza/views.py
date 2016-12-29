@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -13,11 +12,10 @@ from . import models
 from . import forms
 
 
-# Create your views here.
 def index(request):
     """Strona główna"""
-    # return HttpResponse("Witaj!")
-    return TemplateResponse(request, "pizza/index.html")
+    kontekst = {'komunikat': 'Witaj w aplikacji Pizza!'}
+    return render(request, "pizza/index.html", kontekst)
 
 
 @method_decorator(login_required, 'dispatch')
