@@ -1,31 +1,36 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .models import Pizza, Skladnik
-from .forms import PizzaForm, SkladnikiFormSet
 from django.http import HttpResponseRedirect
+from django.template.response import TemplateResponse
+from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms.models import modelformset_factory
+
+from . import models
+from . import forms
 
 
 def index(request):
     """Strona główna"""
     kontekst = {'komunikat': 'Witaj w aplikacji Pizza!'}
-    return render(request, 'pizza/index.html', kontekst)
+    return TemplateResponse(request, "pizza/index.html", kontekst)
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaCreate(CreateView):
     """Widok dodawania pizzy i skladników."""
 
-    model = Pizza
-    form_class = PizzaForm
+    model = models.Pizza
+    form_class = forms.PizzaForm
     success_url = '/pizza/lista'
 
     def get(self, request, *args, **kargs):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        skladniki = SkladnikiFormSet()
+        skladniki = forms.SkladnikiFormSet()
         return self.render_to_response(
             self.get_context_data(form=form, skladniki=skladniki)
         )
@@ -34,7 +39,7 @@ class PizzaCreate(CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        skladniki = SkladnikiFormSet(self.request.POST)
+        skladniki = forms.SkladnikiFormSet(self.request.POST)
         if form.is_valid() and skladniki.is_valid():
             return self.form_valid(form, skladniki)
         else:
@@ -52,17 +57,18 @@ class PizzaCreate(CreateView):
     def form_invalid(self, form, skladniki):
         errors = skladniki.non_form_errors()
         if skladniki.total_form_count() == 0:
-            skladniki = SkladnikiFormSet()
+            skladniki = forms.SkladnikiFormSet()
             skladniki._non_form_errors = errors
         return self.render_to_response(
             self.get_context_data(form=form, skladniki=skladniki)
         )
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaUpdate(UpdateView):
     """Widok aktualizuacji"""
-    model = Pizza
-    form_class = PizzaForm
+    model = models.Pizza
+    form_class = forms.PizzaForm
     context_object_name = 'pizze'
     template_name = 'pizza/pizza_form.html'
     success_url = '/pizza/lista'
@@ -70,22 +76,22 @@ class PizzaUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(PizzaUpdate, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['pizze'] = PizzaForm(
+            context['pizze'] = forms.PizzaForm(
                 self.request.POST,
                 instance=self.object)
-            context['skladniki'] = SkladnikiFormSet(
+            context['skladniki'] = forms.SkladnikiFormSet(
                 self.request.POST,
                 instance=self.object)
         else:
-            context['pizza'] = PizzaForm(instance=self.object)
-            context['skladniki'] = SkladnikiFormSet(instance=self.object)
+            context['pizza'] = forms.PizzaForm(instance=self.object)
+            context['skladniki'] = forms.SkladnikiFormSet(instance=self.object)
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        skladniki = SkladnikiFormSet(self.request.POST)
+        skladniki = forms.SkladnikiFormSet(self.request.POST)
         if form.is_valid() and skladniki.is_valid():
             return self.form_valid(form, skladniki)
         else:
@@ -103,7 +109,7 @@ class PizzaUpdate(UpdateView):
     def form_invalid(self, form, skladniki):
         errors = skladniki.non_form_errors()
         if skladniki.total_form_count() == 0:
-            skladniki = SkladnikiFormSet()
+            skladniki = forms.SkladnikiFormSet()
             skladniki._non_form_errors = errors
         return self.render_to_response(
             self.get_context_data(form=form, skladniki=skladniki)
@@ -114,17 +120,18 @@ class PizzaUpdate(UpdateView):
             return pizza
 
 
+@method_decorator(login_required, 'dispatch')
 class PizzaDelete(DeleteView):
-    model = Pizza
+    model = models.Pizza
     template_name = 'pizza/pizza_usun.html'
     success_url = '/lista'
 
     def get_context_data(self, **kwargs):
         context = super(PizzaDelete, self).get_context_data(**kwargs)
-        pizza = Pizza.objects.get(pk=self.object.id)
+        pizza = models.Pizza.objects.get(pk=self.object.id)
         SkladnikFormSet = modelformset_factory(
-            Skladnik,
+            models.Skladnik,
             fields=('nazwa',))
         context['skladniki'] = SkladnikFormSet(
-            queryset=Skladnik.objects.filter(nazwa=pizza))
+            queryset=models.Skladnik.objects.filter(nazwa=pizza))
         return context
