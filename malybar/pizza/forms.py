@@ -18,7 +18,8 @@ from django.forms.models import inlineformset_factory
 
 
 SkladnikiFormSet = inlineformset_factory(
-    Pizza, Skladnik,
+    parent_model=Pizza,
+    model=Skladnik,
     max_num=6,
     min_num=1,
     validate_max=True,
