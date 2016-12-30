@@ -1,4 +1,4 @@
-installeDjango
+Django
 #######
 
 `Django <https://www.djangoproject.com/>`_ to napisany w Pythonie framework
@@ -228,11 +228,12 @@ zdefiniujemy w pliku :file:`pizza/views.py`:
     :lines: 1-
 
 
-.. warning::
+.. attention::
 
-	Linia ``# -*- coding: utf-8 -*-`` to określenie kodowania znaków.
-	Należy umieszczać je w pierwszej linii każdego pliku, w którym zamierzamy używać polskich
-	znaków, czy to w komentarzach czy w kodzie.
+	**Zapamiętaj:**
+
+	- linia ``# -*- coding: utf-8 -*-`` to określenie kodowania znaków. Należy umieszczać je w pierwszej linii każdego pliku, w którym zamierzamy używać polskich znaków, czy to w komentarzach czy w kodzie.
+	- napisy zawierające polskie znaki poprzedzamy literą `u`, np. ``u'składnik'``.
 
 
 Nazwa funkcji – ``index()`` – jest umowna. Każdy widok otrzymuje szczegóły żądania wysłanego przez klienta
@@ -254,7 +255,7 @@ Zawartość szablonu :file:`index.html`:
 
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
+.. highlight:: html
 .. literalinclude:: pizza/templates/pizza/index_01.html
     :linenos:
     :lineno-start: 1
@@ -386,7 +387,7 @@ Strona administracyjna
 Zarządzanie treściami czy użytkownikami wymaga panelu administracyjnego, Django dostarcza nam
 go automatycznie.
 
-Tworzymy konto administratora, wydając w terminalu polecenie:
+**Konto administratora** tworzymy, wydając w terminalu polecenie:
 
 .. code-block:: bash
 
@@ -453,10 +454,16 @@ Następnie włączamy konfigurację adresów URL aplikacji do pliku :file:`malyb
     :lines: 20-25
     :emphasize-lines: 4
 
-Teraz możemy zobaczyć, jakie adresy udostępnia aplikacja `django-registration`, wpisując w przeglądarce
-adres ``127.0.0.1:8000/konta/``:
+Teraz możemy zobaczyć, jakie adresy udostępnia aplikacja `django-registration`,
+wpisując w przeglądarce adres ``127.0.0.1:8000/konta/``:
 
 [zrzut]
+
+Jak widać, mamy do dyspozycji m.in następujące adresy:
+
+	- ``/konta/register`` o nazwie ``registration_register`` – do tworzenia konta;
+	- ``/konta/login`` o nazwie ``auth_login`` – do logowania;
+	- ``/konta/logout`` o nazwie ``auth_logout`` – do wylogowywania.
 
 Szablony
 -----------
@@ -468,11 +475,18 @@ Na początku utworzymy szablon służący do rejestracji w pliku
 
 	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
+.. highlight:: html
 .. literalinclude:: pizza/templates/registration/registration_form_01.html
     :linenos:
     :lineno-start: 1
     :lines: 1-
+
+W powyższym kodzie widać, w jaki sposób używamy przygotowanych wcześniej formularzy
+w szablonach. Znacznik HTML-a ``<form>`` i przycisk typu ``submit`` musimy wstawić sami,
+resztę może za nas zrobić Django:
+
+	- ``{% csrf_token %}`` – ten tag dodaje ukryte pole zabezpieczające formularz przed atakami typu `CSRF <https://pl.wikipedia.org/wiki/Cross-site_request_forgery>`_;
+	- ``{{ form.as_p }}`` – metoda ``as_p`` renderuje przekazany do szablonu w zmiennej ``form`` formularz przy użyciu znaczników akapitów ``<p>``.
 
 Potrzebujemy również szablonu logowania, który umieszczamy w pliku
 :file:`pizza/templates/registration/login.html`:
@@ -481,11 +495,20 @@ Potrzebujemy również szablonu logowania, który umieszczamy w pliku
 
 	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
+.. highlight:: html
 .. literalinclude:: pizza/templates/registration/login_01.html
     :linenos:
     :lineno-start: 1
     :lines: 1-
+
+Adresy URL wstawiamy w szablonach za pomocą tagu ``url``, który jako pierwszy obowiązkowy argument
+przyjmuje nazwę adresu zdefiniowaną w argumencie ``name`` w plikach :file:`urls.py`.
+
+.. attention::
+
+	**Zapamiętaj**: nawiasy ``{{ zmienna }}`` służą do wstawiania wartości zmiennych,
+	nawiasów ``{% tag %}`` używamy do tagów języka szablonów.
+
 
 Na koniec szablon wyświetlany po wylogowaniu, czyli plik
 :file:`pizza/templates/registration/logout.html`:
@@ -494,10 +517,157 @@ Na koniec szablon wyświetlany po wylogowaniu, czyli plik
 
 	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
-.. highlight:: python
+.. highlight:: html
 .. literalinclude:: pizza/templates/registration/logout_01.html
     :linenos:
     :lineno-start: 1
     :lines: 1-
 
-[todo]
+
+Testowanie
+----------
+
+Po dodaniu szablonów można już przetestować tworzenie konta, logowanie i komunikat po wylogowaniu
+wpisując w przeglądarce po nazwie serwera ``127.0.0.1:8000`` adresy:
+
+	- ``/register`` – tworzenie nowego konta; utwórz konto `ewa` z hasłem `q1w2e3r4`;
+	- ``/login`` – logowanie; zaloguj się na utworzone wcześniej konto `uczen`;
+	- ``/logut`` – potwierdzenie wylogowania;
+
+Spróbuj wstawić do szablonu :file:`pizza/index.html` odnośniki do powyższych adresów.
+Na końcu pliku umieść kod:
+
+.. code-block:: html
+
+  <ul>
+	{% if not user.is_authenticated %}
+	  <li><a href="{% url 'nazwa_adresu' %}">Zaloguj się</a></li>
+	  <li><a href="{% url 'nazwa_adresu' %}">Utwórz konto</a></li>
+	{% else %}
+	  <li><a href="{% url 'nazwa_adresu' %}">Wyloguj się</a></li>
+	{% endif %}
+	</ul>
+
+– i zamień tekst `nazwa_adresu` na właściwe nazwy adresów URL.
+
+.. attention::
+
+	**Zapamiętaj**: w szablonach dostępne są konstrukcje warunkowe wstawiane za pomocą tagów
+	``{% if warunek %} ... {% else %} ... {% endif %}``.
+	W szablonach dostępny jest obiekt ``user`` zawierający informacje o użytkowniku.
+	Metoda ``is_authenticated`` zwraca prawdę, jeżeli użytkownik został zalogowany.
+
+
+Widok ListView
+==============
+
+Praktycznie w każdym serwisie występują strony zawierające zestawienie danych.
+Utworzymy więc widok prezentujący listę pizz.
+
+**Definicja adresu** – w pliku :file:`urls.py` dodajemy importy:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/urls_02.py
+    :linenos:
+    :lineno-start: 3
+    :lines: 3-5
+
+Następnie przyporządkowujemy adres ``lista/`` o nazwie ``lista`` widokowi `ListView`, dodając kod:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: python
+.. literalinclude:: pizza/urls_02.py
+    :linenos:
+    :lineno-start: 7
+    :lines: 7-14
+    :emphasize-lines: 3-7
+
+Widoki generyczne (ang. *generic views*) to udostępniane przez Django widoki służące przygotowywaniu typowych
+stron WWW. `ListView` – jak wskazuje nazwa – tworzy stronę z listą obiektów. Argumenty widoku:
+
+ - ``model`` – wskazuje model obiektów, które mają być wyświetlane;
+ - ``context_object_name`` – określa nazwę, pod którą lista obiektów będzie dostępna w szablonie (domyślnie ``objects``);
+ - ``paginate_by`` – określa maksymalną liczbę obiektów wyświetlanych na stronie.
+
+
+.. note::
+
+	Widoki generyczne są klasami. Jeżeli używamy ich w pliku :file:`urls.py`,
+	musimy użyć ich metody ``as_view()``, aby potraktowane zostały jak funkcje.
+
+
+Jeżeli chcemy, aby jakiś adres dostępny był tylko dla zalogowanych użytkowników,
+wywołanie widoku umieszczamy w funkcji ``login_required()``.
+
+Widok `ListaView` wymaga szablonu o schematycznej nazwie `nazwa_modelu_list.html`.
+Tworzymy więc plik :file:`templates/pizza/pizza_list.html` o zawartości:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: pizza/templates/pizza/pizza_list_01.html
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Konstrukcję ``for p in pizze`` należy rozumieć następująco:
+`dla każdego obiektu pobranego z listy pizze do zmiennej p wykonaj:`.
+W pętli wyświetlamy kolejne zmienne: numer iteracji (``forloop.counter``),
+nazwę, autora i datę dodania pizzy. Jeżeli zalogowany użytkownik dodał daną pizzę,
+wyświetlamy odnośniki umożliwiające edycję i usuwanie obiektów.
+
+.. attention::
+
+	Zapamiętaj: tagów ``{% for zmienna in lista %} ... {% endfor %}`` używamy w szablonach,
+	jeżeli potrzebujemy pętli.
+
+
+Na koniec dodaj do szablonu :file:`index.html` odnośnik do listy. Użyj kodu:
+
+.. code-block:: html
+
+    {% url 'pizza:lista' %}
+
+Zwróć uwagę, że nazwa URL-a poprzedzona została nazwą przestrzeni nazw, którą zdefiniowaliśmy
+w parametrze ``namespace`` podczas włączania listy adresów naszej aplikacji do listy projektu.
+
+[zrzut]
+
+Create View
+===========
+
+Zajmiemy się teraz możliwością dodawania danych, czyli pizz i składników.
+Na początku utworzymy nowy plik :file:`pizza/forms.py`, z następującą zawartością:
+
+.. raw:: html
+
+	<div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. highlight:: html
+.. literalinclude:: pizza/forms_01.py
+    :linenos:
+    :lineno-start: 1
+    :lines: 1-
+
+Pliki o nazwie :file:`forms.py` służą do definiowania formularzy. Klasa `PizzaForm`
+pozwala dostosować cechy formularza, który posłuży do dodawania i edytowania pizz.
+W podklasie `Meta` definiujemy:
+
+	- ``model`` – model, dla którego dostosowujemy formularz;
+	- ``fields`` – tupla zawierająca listę pól modelu, które znajdą się w formularzu;
+	- ``exclude`` – tupla z polami, które wykluczamy z formularza;
+	- ``widgets`` – opcjonalny słownik, w którym ustalamy właściwości widżetów HTML.
+
+Jeżeli tworzymy formularz w na podstawie modelu, Django potrafi wygenerować widżety HTML
+odpowiadających typom pól. Np. pola ``CharField`` reprezentowane są przez tagi ``<input>``,
+a pola ``TextField`` przez ``<textarea>``. W powyższym przykładzie określiliśmy,
+że pole opis będzie reprezentowane przez ... [todo]

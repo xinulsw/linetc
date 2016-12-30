@@ -125,6 +125,6 @@ STATIC_URL = '/static/'
 # django-registration
 REGISTRATION_OPEN = True  # czy użytkownik może utworzyć konto
 ACCOUNT_ACTIVATION_DAYS = 7  # czas na aktywację konta
-REGISTRATION_AUTO_LOGIN = True  # czy użytkownik zostanie automatycznie zalogowany
-LOGIN_REDIRECT_URL = '/pizza/'  # strona docelowa po zalogowaniu użytkownika
+REGISTRATION_AUTO_LOGIN = True  # automatyczne logowanie po rejestracji
+LOGIN_REDIRECT_URL = '/pizza/'  # strona docelowa po zalogowaniu
 LOGIN_URL = '/konta/login/'  # strona logowania

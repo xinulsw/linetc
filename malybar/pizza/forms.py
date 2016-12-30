@@ -5,16 +5,13 @@ from .models import Pizza, Skladnik
 from django.forms.models import inlineformset_factory
 
 
-# class QuizdAuthForm(AuthenticationForm):
+class PizzaForm(ModelForm):
 
-#     def __init__(self, *args, **kwargs):
-#         super(QuizdAuthForm, self).__init__(*args, **kwargs)
-
-#         self.base_fields['username'].widget.attrs['class'] = 'form-control'
-#         self.base_fields['username'].widget.attrs['placeholder'] = 'Login'
-
-#         self.base_fields['password'].widget.attrs['class'] = 'form-control'
-#         self.base_fields['password'].widget.attrs['placeholder'] = 'Hasło'
+    class Meta:
+        model = Pizza
+        fields = ('nazwa', 'opis', 'rozmiar', 'cena')
+        exclude = ('data', 'autor')
+        widgets = {'opis': Textarea(attrs={'rows': 2, 'cols': 80})}
 
 
 SkladnikiFormSet = inlineformset_factory(
@@ -29,15 +26,6 @@ SkladnikiFormSet = inlineformset_factory(
 )
 
 
-class PizzaForm(ModelForm):
-
-    class Meta:
-        model = Pizza
-        fields = ('nazwa', 'opis', 'rozmiar', 'cena')
-        exclude = ('data', 'autor')
-        widgets = {'opis': Textarea(attrs={'rows': 2, 'cols': 80})}
-
-
 class PizzaUpdateForm(ModelForm):
 
     class Meta:
@@ -45,3 +33,15 @@ class PizzaUpdateForm(ModelForm):
         fields = ('nazwa', 'opis', 'rozmiar', 'cena')
         exclude = ('data', 'autor')
         widgets = {'opis': Textarea(attrs={'rows': 2, 'cols': 80})}
+
+
+# class QuizdAuthForm(AuthenticationForm):
+
+#     def __init__(self, *args, **kwargs):
+#         super(QuizdAuthForm, self).__init__(*args, **kwargs)
+
+#         self.base_fields['username'].widget.attrs['class'] = 'form-control'
+#         self.base_fields['username'].widget.attrs['placeholder'] = 'Login'
+
+#         self.base_fields['password'].widget.attrs['class'] = 'form-control'
+#         self.base_fields['password'].widget.attrs['placeholder'] = 'Hasło'
