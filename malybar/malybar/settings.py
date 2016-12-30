@@ -76,12 +76,29 @@ WSGI_APPLICATION = 'malybar.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if "DATABASE_URL" in os.environ:
+    # Do not read it here, it would be visible in debug
+    # find HIDDEN_SETTINGS to see what is cleansed by default
+    # DATABASE_URL = os.environ['DATABASE_URL']
+    import dj_database_url
+
+    DATABASES = {
+        "default": dj_database_url.config()
     }
-}
+    # Make sure we use GIS enabled engine
+    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+    DATABASES['default']['TEST'] = {'NAME': os.environ.get("DATABASE_TEST_NAME", None)}
+    DATABASES['default']['OPTIONS'] = {
+        'options': '-c search_path=gis,public,pg_catalog'
+    }
+else:
+    # Use local sqlite3 database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
