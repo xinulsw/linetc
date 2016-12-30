@@ -9,7 +9,6 @@ realizowanemu pod patronatem `Centrum Edukacji Obywatelskiej <http://www.ceo.org
     :maxdepth: 2
     :numbered:
 
-    malybar/malybar.rst
 
 Metryka
 **********
