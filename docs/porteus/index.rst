@@ -9,6 +9,11 @@ tj. konfiguracji, oprogramowania czy dokumentów użytkownika. Oparty jest na na
 dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
 
 
+.. figure:: img/porteus322.png
+
+   Porteus 3.2.2 XFCE 64-bit
+
+
 .. contents:: Spis treści
     :backlinks: none
 
@@ -65,7 +70,7 @@ Pobieranie i nagrywanie
 Budowa
 ======
 
-Porteus ma budowę modularną, słada się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
+Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
 
 * :file:`base` – moduły systemu bazowego,
 * :file:`modules` – tu umieszczamy moduły ładowane automatycznie podczas startu,
@@ -75,14 +80,14 @@ Dodatkowe moduły
 ----------------
 
 Przygotowaliśmy dodatkowe moduły, które przekształcają Poreusa w gotowe do pracy środowisko
-programnistyczne (Python, C++, biblioteki Qt5). Lista pakietów, które proponujemy umieścić w katalogu :file:`modules`:
+programistyczne (Python, C++, biblioteki Qt5). Lista pakietów, które proponujemy umieścić w katalogu :file:`modules`:
 
 1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia, obowiązkowy;
 2. :file:`02-pl-locales.xzm` – spolszczenie;
 3. :file:`03-fonts-ms-ubu.xzm` – zestaw dodatkowych czcionek, zalecane;
 4. :file:`04-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory), zalecane;
 5. :file:`05-python2.7.11_stuff.xzm` – Python 2.7.11, IPython, QtConsole, Terminator, Matplotlib, PyGame;
-6. :file:`08-qt5-5.6.1-x86_64-1ponce.xzm` – biblioteki Qt (+QtDesigner) i PyQt w wersji 5.6;
+6. :file:`08-pyqt5.6.xzm` – biblioteki Qt (+QtDesigner) i PyQt w wersji 5.6;
 7. :file:`10-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
 8. :file:`11-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
 9. :file:`12-git-2.9.0-x86_64-1.xzm` – narzędzia do obsługi systemu kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
@@ -104,6 +109,8 @@ Paczki do katalogu :file:`optional`:
 
     Można również użyć narzędzia *Menedżer modułów*.
 
+.. figure:: img/menedzer_modulow.png
+
 
 Pierwsze uruchomienie
 =====================
@@ -112,24 +119,30 @@ Po pierwszym uruchomieniu, należy stworzyć specjalny plik, w którym zapisywan
 
 1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor") i klikamy ikonę dyskietki.
 
-.. figure:: path
+.. figure:: img/psc01.png
+
+.. figure:: img/psc02.png
 
 
-2. Klikamy ikonę *Porteus Save Changes* i wybieramy opcję "I want to create a new save file" przycieskiem *Create*.
+2. Klikamy ikonę *Porteus Save Changes* i wybieramy opcję "I want to create a new save file" przyciskiem *Create*.
 
-.. figure:: path
+.. figure:: img/savefile_01.png
 
 
 3. W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB. W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wątpliwości, możemy uruchomić *Start/System/Porteus system info*, kliknąć *Porteus/Boot_info* i sprawdzić wpis "# Booting device".
 
+.. figure:: img/psi.png
+
+
 4. W polu "Savefile name" wpisujemy nazwę pliku, np. "porteussave.dat", rozmiar zostawiamy domyślny lub podajemy większy, np. 768 lub 1024 MB. Na koniec klikamy "OK".
 
-.. figure:: path
+.. figure:: img/savefile_02.png
 
 
 5. Po zapisaniu pliku powracamy do okna "Porteus Settings Centre", w którym wybieramy *Edit porteus.cfg*. Plik ten znajduje się w katalogu :file:`/boot/syslinux` na pendrajwie i definiuje opcje startowe systemu. Odszukujemy pierwszy wpis "changes=/porteus" i zmieniamy na ``changes=/porteussave.dat`` zgodnie z podaną wcześniej nazwą pliku zapisu.
 
-.. figure:: path
+.. figure:: img/porteus_cfg.png
+
 
 Po ponownym uruchomieniu systemu wszystkie zmiany będą zapisywane.
 
@@ -147,16 +160,15 @@ Wskazówki
 W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększyć jego rozmiar wybierając:
 
 * start systemu w trybie "Always Fresh mode";
-* następnie *Start/System/Porteus Settings Centre/Porteus changes*, opcję "Porteus Save Changes",
-    później "I want to resize a save file":
+* następnie *Start/System/Porteus save file manager* i "I want to resize a save file":
 
-.. figure:: path
+.. figure:: img/resf.png
 
 
 .. warning::
 
     Uwaga: tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany.
-    Nowym plikiem trzeba nadpisać dotychczasowy!.
+    Nowym plikiem trzeba nadpisać dotychczasowy!
 
 
 Metryka
