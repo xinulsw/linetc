@@ -79,8 +79,10 @@ Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie
 Dodatkowe moduły
 ----------------
 
-Przygotowaliśmy dodatkowe moduły, które przekształcają Poreusa w gotowe do pracy środowisko
-programistyczne (Python, C++, biblioteki Qt5). Lista pakietów, które proponujemy umieścić w katalogu :file:`modules`:
+Przygotowaliśmy dodatkowe moduły, które przekształcają Porteusa w gotowe do pracy środowisko
+programistyczne (Python, C++, biblioteki Qt5). Moduły można pobrać `tu <https://drive.google.com/open?id=0B1zG9cfNyT7WX0lNNFMwdEo2ems>`_ (z katalogu :file:`3.2.2`).
+
+Lista pakietów, które proponujemy umieścić w katalogu :file:`modules`:
 
 1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia, obowiązkowy;
 2. :file:`02-pl-locales.xzm` – spolszczenie;
