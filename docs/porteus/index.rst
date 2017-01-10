@@ -4,8 +4,10 @@ Porteus
 ###################
 
 Porteus jest odmianą Linuksa typu *live* zoptymalizowaną do uruchamiania z nośników wymiennych,
-np. kluczy USB. Efekty pracy potrafi zapisywać w specjalnym pliku lub na wskazanej partycji.
-Oparty jest na najstarszej dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
+np. kluczy USB. System błyskawicznie się uruchamia i pozwala na zachowanie wprowadzanych zmian,
+tj. konfiguracji, oprogramowania czy dokumentów użytkownika. Oparty jest na najstarszej
+dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
+
 
 .. contents:: Spis treści
     :backlinks: none
@@ -63,62 +65,102 @@ Pobieranie i nagrywanie
 Budowa
 ======
 
-Porteus ma budowę modularną, słada się z paczek zawierających system plików SquashFS. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
+Porteus ma budowę modularną, słada się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
 
 * :file:`base` – moduły systemu bazowego,
 * :file:`modules` – tu umieszczamy moduły ładowane automatycznie podczas startu,
 * :file:`optional` – oprogramowanie dodatkowe, ładowane na żądanie.
 
-[todo]
+Dodatkowe moduły
+----------------
 
-Dodatkowe moduły, które udostępniamy, umieszczamy w katalogu modules, jeśli mają być ładowane automatycznie, lub w katalogu optional, jeśli chcemy je ładować w miarę potrzeb. Wtedy wykorzystujemy program "Aktywuj moduł opcjonalny".
+Przygotowaliśmy dodatkowe moduły, które przekształcają Poreusa w gotowe do pracy środowisko
+programnistyczne (Python, C++, biblioteki Qt5). Lista pakietów, które proponujemy umieścić w katalogu :file:`modules`:
+
+1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia, obowiązkowy;
+2. :file:`02-pl-locales.xzm` – spolszczenie;
+3. :file:`03-fonts-ms-ubu.xzm` – zestaw dodatkowych czcionek, zalecane;
+4. :file:`04-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory), zalecane;
+5. :file:`05-python2.7.11_stuff.xzm` – Python 2.7.11, IPython, QtConsole, Terminator, Matplotlib, PyGame;
+6. :file:`08-qt5-5.6.1-x86_64-1ponce.xzm` – biblioteki Qt (+QtDesigner) i PyQt w wersji 5.6;
+7. :file:`10-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
+8. :file:`11-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
+9. :file:`12-git-2.9.0-x86_64-1.xzm` – narzędzia do obsługi systemu kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
+10. :file:`15-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
+11. :file:`50-infinality-fonts.xzm` – poprawione wyświetlanie czcionek, zalecane;
+12. :file:`99-home-guest.xzm` – pakiet prekonfigurujący środowisko XFCE, zalecany.
+
+Paczki do katalogu :file:`optional`:
+
+* :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
+* :file:`sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
+* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite.
+
+.. tip::
+
+    Aby aktywować paczki z katalogu :file:`optional`, należy kliknąć wybrany pakiet
+    prawym klawiszem w menedżerze plików i wybrać polecenie `Activate`. Pakiet można
+    też usunąć z systemu, wybierając z menu podręcznego polecenie `Deactivate`.
+
+    Można również użyć narzędzia *Menedżer modułów*.
+
+
 Pierwsze uruchomienie
+=====================
 
-System błyskawicznie się uruchamia i pozwala na zachowanie wprowadzanych zmian, tj. konfiguracji, oprogramowania czy dokumentów użytkownika. W tym celu należy utworzyć specjalny plik zapisu.
+Po pierwszym uruchomieniu, należy stworzyć specjalny plik, w którym zapisywane będą zmiany w systemie.
 
-Wybieramy Start/System/Porteus Setings Centre, podajemy hasło roota (administratora), czyli toor, i klikamy ikonę dyskietki.
+1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor") i klikamy ikonę dyskietki.
 
-Porteus Settings Center
+.. figure:: path
 
-Klikamy ikonę Porteus Save Changes i wybieramy opcję "I want to create a new save file" przycieskiem Create.
 
-W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB. W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wątpliwości, możemy uruchomić Start/System/Porteus system info, kliknąć Porteus/Boot_info i sprawdzić wpis "# Booting device".
+2. Klikamy ikonę *Porteus Save Changes* i wybieramy opcję "I want to create a new save file" przycieskiem *Create*.
 
-Wybór napędu sdb1
+.. figure:: path
 
-W polu "Savefile name" wpisujemy nazwę pliku, np. "porteussave.dat", rozmiar zostawiamy domyślny. Na koniec klikamy "OK".
 
-Savefile manager
+3. W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB. W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wątpliwości, możemy uruchomić *Start/System/Porteus system info*, kliknąć *Porteus/Boot_info* i sprawdzić wpis "# Booting device".
 
-Po zapisaniu pliku powracamy do okna "Porteus Settings Centre", w którym wybieramy Edit porteus.cfg. Plik ten znajduje się w katalogu /boot/syslinux i definiuje opcje startowe systemu. Odszukujemy pierwszy wpis "changes=/porteus" i zmieniamy na changes=/porteussave.dat zgodnie z podaną wcześniej nazwą pliku zapisu.
+4. W polu "Savefile name" wpisujemy nazwę pliku, np. "porteussave.dat", rozmiar zostawiamy domyślny lub podajemy większy, np. 768 lub 1024 MB. Na koniec klikamy "OK".
 
-porteus.cfg
+.. figure:: path
 
-Po ponownym uruchomieniu systemu wszystkie zmiany będą zapisywane. Jeżeli tworzymy lub ściągamy i zapisujemy wiele plików, warto sprawdzać ilość dostępnego miejsca w pliku zapisu:
 
-    du -sh /mnt/live/memory/changes - poda ilość zajętego miejsca;
-    df -h /mnt/live/memory/changes - poda ilość wolnego miejsca.
+5. Po zapisaniu pliku powracamy do okna "Porteus Settings Centre", w którym wybieramy *Edit porteus.cfg*. Plik ten znajduje się w katalogu :file:`/boot/syslinux` na pendrajwie i definiuje opcje startowe systemu. Odszukujemy pierwszy wpis "changes=/porteus" i zmieniamy na ``changes=/porteussave.dat`` zgodnie z podaną wcześniej nazwą pliku zapisu.
+
+.. figure:: path
+
+Po ponownym uruchomieniu systemu wszystkie zmiany będą zapisywane.
+
+
+Wskazówki
+=========
+
+ Jeżeli tworzymy lub ściągamy i zapisujemy wiele plików, warto sprawdzać ilość dostępnego miejsca w pliku zapisu:
+
+.. code-block:: bash
+
+    ~$ du -sh /mnt/live/memory/changes (poda ilość zajętego miejsca)
+    ~$ df -h /mnt/live/memory/changes (poda ilość wolnego miejsca)
 
 W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększyć jego rozmiar wybierając:
 
-    start systemu w trybie "Always Fresh mode",
-    następnie Start/System/Porteus Settings Centre/Porteus changes i opcję "Porteus Save Changes",
+* start systemu w trybie "Always Fresh mode";
+* następnie *Start/System/Porteus Settings Centre/Porteus changes*, opcję "Porteus Save Changes",
     później "I want to resize a save file":
 
-Resize existing file
+.. figure:: path
 
-Uwaga: tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany. Jeżeli zaznaczymy usunięcie dotychczasowego pliku, nowy trzeba przenieść w dotychczasowe miejsce lub zmienić ścieżkę w pliku "porteus.cfg".
-Moduły
 
-    Moduły można (de)aktywować dwukrotnym kliknięciem.
-    Domyślną przeglądarką jest Palemoon, zawarta w module /porteus/base/04-palemoon.xzm. Jeżeli chcesz Firefoksa, pobierz moduł 04-firefox.xzm stworzony przez twórców Porteusa i zastąp nim Palemoona.
-    Niektóre moduły wymagają innych, zobacz niżej.
-    Dodaliśmy moduły pycharm-2016.1.xzm i wymagane środowisko Javy jdk-8u66.xzm. Oba moduły można pobrać, wgrać do katalogu /porteus/optional i przetestować. Uwaga: aktywuj moduły dwukrotnym kliknięciem i nie ładuj Javy w wersji 7 z modułu openjre-7u95.xzm.
+.. warning::
 
+    Uwaga: tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany.
+    Nowym plikiem trzeba nadpisać dotychczasowy!.
 
 
 Metryka
-========
+-------
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 
