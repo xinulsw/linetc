@@ -23,6 +23,12 @@ Pobieranie i nagrywanie
 
 1. Pobieramy obraz iso 64-bitowej wersji ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_: `Porteus-XFCE-v3.2.2-x86_64.iso <http://dl.porteus.org/x86_64/Porteus-v3.2.2/Porteus-XFCE-v3.2.2-x86_64.iso>`_.
 
+
+.. tip::
+
+    Można pobrać również przygotowany przez nasz obraz `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WcDdVTnF2c3FEMWs>`_, który **zawiera wszystkie opisane niżej moduły**.
+
+
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
 
