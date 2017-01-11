@@ -13,7 +13,6 @@ Wersja HTML dostępna jest pod adresami:
 
 - http://linetc.readthedocs.org/
 - http://linetc.rtfd.org
-- http://ecg.vot.pl/linetc
 
 Pobieranie tego repozytorium
 ================================
