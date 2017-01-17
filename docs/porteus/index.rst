@@ -28,6 +28,7 @@ Pobieranie i nagrywanie
 **W systemie Windows**:
 
 3. Do nagrania Porteusa na pendrajwa polecamy program `Rufus <https://rufus.akeo.ie/?locale=pl_PL>`_.
+   Pobierz, uruchom, wskaż plik *iso* i nagraj.
 
 4. Jeżeli Rufus nie zadziała, rozpakowujemy zawartość obrazu na pendrajwa, np. za pomocą menedżera archiwów `7zip <http://www.7-zip.org/>`_.
 
@@ -66,50 +67,6 @@ Pobieranie i nagrywanie
 .. figure:: img/porteus_usb_install_linux.jpg
 
 
-Budowa
-======
-
-Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
-
-* :file:`base` – moduły systemu bazowego,
-* :file:`modules` – tu umieszczamy moduły ładowane automatycznie podczas startu,
-* :file:`optional` – oprogramowanie dodatkowe, ładowane na żądanie.
-
-Dodatkowe moduły
-----------------
-
-Przygotowany obraz iso zawiera dodatkowe moduły (w katalogu :file:`potrteus/modules`),
-które przekształcają Porteusa w gotowe do pracy środowisko programistyczne (Python, C++, biblioteki Qt5):
-
-1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia;
-2. :file:`02-pl-locales.xzm` – spolszczenie;
-3. :file:`03-fonts-ms-ubu.xzm` – zestaw dodatkowych czcionek;
-4. :file:`04-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory);
-5. :file:`05-python2.7.11_stuff.xzm` – Python 2.7.11, IPython, QtConsole, Terminator, Matplotlib, PyGame;
-6. :file:`08-pyqt5.6.xzm` – biblioteki Qt (+QtDesigner) i PyQt w wersji 5.6;
-7. :file:`10-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
-8. :file:`11-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
-9. :file:`12-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
-10. :file:`15-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
-11. :file:`50-infinality-fonts.xzm` – poprawione wyświetlanie czcionek;
-12. :file:`99-home-guest.xzm` – prekonfiguracja środowiska XFCE.
-
-Przygotowaliśmy również `moduły opcjonalne <https://drive.google.com/open?id=0B1zG9cfNyT7WX0lNNFMwdEo2ems>`_:
-
-* :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
-* :file:`sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
-* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite.
-
-
-**Zarządzanie modułami**
-
-Moduły z katalogu :file:`optional` mogą być (de)aktywowane na żądanie.
-Służy do tego *Menedżer modułów*. W menu podręcznym modułów (po kliknięciu
-ich prawym klawiszem) znajdziesz również polecenia "Activate" i "Deactivate".
-
-.. figure:: img/menedzer_modulow.png
-
-
 Pierwsze uruchomienie
 =====================
 
@@ -144,6 +101,55 @@ W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wą
 
 
 Na koniec **ponownie uruchomiamy system**.
+
+
+Budowa
+======
+
+Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
+
+* :file:`base` – moduły systemu bazowego,
+* :file:`modules` – tu umieszczamy moduły ładowane automatycznie podczas startu,
+* :file:`optional` – oprogramowanie dodatkowe, ładowane na żądanie.
+
+Dodatkowe moduły
+----------------
+
+Przygotowany obraz iso w katalogu :file:`potrteus/modules` zawiera moduły,
+które przekształcają Porteusa w gotowe do pracy środowisko programistyczne (Python 2/3, C++, Qt5):
+
+1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia;
+2. :file:`02-pl-locales.xzm` – spolszczenie;
+3. :file:`03-fonts-ms-ubu.xzm` – zestaw dodatkowych czcionek;
+4. :file:`04-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory);
+5. :file:`05-qt5-5.6.1-x86_64-1ponce.xzm` – biblioteka Qt 5.6;
+6. :file:`06-python2.7.11-stuff.xzm` – Python 2.7.11, IPython, QtConsole, Matplotlib, PyGame, Terminator, Turtle, PyQt 5.6;
+7. :file:`10-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
+8. :file:`11-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
+9. :file:`12-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
+10. :file:`15-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
+11. :file:`50-infinality-fonts.xzm` – poprawione wyświetlanie czcionek;
+12. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami) i ``xmag``;
+13. :file:`95-sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
+14. :file:`99-home-guest.xzm` – prekonfiguracja środowiska XFCE.
+
+W katalogu :file:`porteus/optional` znajdziesz:
+
+* :file:`python3.5.2-stuff.xzm` – Python 3.5, IPython, QtConsole, Matplotlib, PyGame, Turtle, PyQt 5.6 ();
+
+`Moduły opcjonalne <https://drive.google.com/open?id=0B1zG9cfNyT7WX0lNNFMwdEo2ems>`_ do pobrania:
+
+* :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
+* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite.
+
+
+**Zarządzanie modułami**
+
+Moduły z katalogu :file:`optional` mogą być (de)aktywowane na żądanie.
+Służy do tego *Menedżer modułów*. W menu podręcznym modułów (po kliknięciu
+ich prawym klawiszem) znajdziesz również polecenia "Activate" i "Deactivate".
+
+.. figure:: img/menedzer_modulow.png
 
 
 Wskazówki
