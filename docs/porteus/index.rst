@@ -7,6 +7,7 @@ Porteus jest odmianą Linuksa typu *live* zoptymalizowaną do uruchamiania z no�
 np. kluczy USB. System błyskawicznie się uruchamia i pozwala na zachowanie wprowadzanych zmian,
 tj. konfiguracji, oprogramowania czy dokumentów użytkownika. Oparty jest na najstarszej
 dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
+Przygotowaliśmy 64-bitową spolszczoną wersję ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_, która bardzo dobrze nadaje się m. in. do nauki programowania.
 
 
 .. figure:: img/porteus322.png
@@ -18,17 +19,21 @@ dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware
     :backlinks: none
 
 
-Pobieranie i nagrywanie
-=======================
+Klucz USB
+=========
 
-1. Pobieramy specjalnie przygotowany obraz iso 64-bitowej wersji ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WcDdVTnF2c3FEMWs>`_.
+Przygotowanie pendrajwa z systemem jest bardzo proste:
+
+1. Pobieramy obraz *iso* systemu: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WcDdVTnF2c3FEMWs>`_.
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
 **W systemie Windows**:
 
-3. Do nagrania Porteusa na pendrajwa polecamy program `Rufus <https://rufus.akeo.ie/?locale=pl_PL>`_.
-   Pobierz, uruchom, wskaż plik *iso* i nagraj.
+3. Do nagrania Porteusa na pendrajwa polecamy program `Rufus <https://rufus.akeo.ie/?locale=pl_PL>`_. Pobierz, uruchom, wskaż plik *iso* i nagraj.
+
+.. figure:: img/rufus_porteus01.jpg
+
 
 4. Jeżeli Rufus nie zadziała, rozpakowujemy zawartość obrazu na pendrajwa, np. za pomocą menedżera archiwów `7zip <http://www.7-zip.org/>`_.
 
@@ -48,13 +53,11 @@ Pobieranie i nagrywanie
 
 4. Wkładamy klucz USB, który powinien zostać wykryty jako partycja :file:`/dev/sdb1` lub :file:`/dev/sdc1` i zamontowany w katalogu :file:`/media/nazwa_użytkownika/etykieta_klucza`. Sprawdzimy to poleceniem ``mount|grep "sdb"`` lub otwierając menedżer plików.
 
-5. Kopiujemy zawartość zamontowanego obrazu na pendrajwa:
+5. Kopiujemy zawartość zamontowanego obrazu na pendrajwa za pomocą polecenia (lub menedżera plików):
 
 .. code-block:: bash
 
     ~$ cp -r /mnt/loop/* /media/nazwa_użytkownika/etykieta_klucza
-
-– lub za pomocą menedżera plików.
 
 6. Wchodzimy do katalogu :file:`boot` na pendrajwie(!) i wydajemy polecenie z uprawnieniami roota:
 
@@ -69,6 +72,11 @@ Pobieranie i nagrywanie
 
 Pierwsze uruchomienie
 =====================
+
+Po włożeniu pendrajwa do gniazda USB podczas uruchamiania systemu należy nacisnąć klawisz
+wywołujący *Boot menu*. Zazwyczaj jest to któryś z klawiszy funkcyjnych, np.: :kbd:`F12`.
+Czasem trzeba wywołać BIOS i dopiero wtedy wybrać wpis typu *USB Device* oznaczający
+naszego pendrajwa.
 
 Po pierwszym uruchomieniu, **należy stworzyć plik zapisu**, w którym przechowywane będą wszystkie zmiany.
 
