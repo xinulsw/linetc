@@ -24,7 +24,7 @@ Klucz USB
 
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
-1. Pobieramy obraz *iso* systemu: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WcDdVTnF2c3FEMWs>`_.
+1. Pobieramy obraz *iso* systemu: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WWHl0OUp1bVlQMUU>`_ [17.01.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
@@ -108,11 +108,11 @@ W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wą
 .. figure:: img/porteus_cfg.png
 
 
-Na koniec **ponownie uruchomiamy system**.
+Na koniec **ponownie uruchomiamy system**!
 
 
-Budowa
-======
+Moduły
+=======
 
 Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie *xzm*, zawierających system plików `SquashFS <https://pl.wikipedia.org/wiki/SquashFS>`_. Na kluczu USB (płycie CD) znajduje się katalog :file:`porteus` zawierający wszystkie moduły w podkatalogach:
 
@@ -120,11 +120,16 @@ Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie
 * :file:`modules` – tu umieszczamy moduły ładowane automatycznie podczas startu,
 * :file:`optional` – oprogramowanie dodatkowe, ładowane na żądanie.
 
-Dodatkowe moduły
-----------------
 
-Przygotowany obraz iso w katalogu :file:`potrteus/modules` zawiera moduły,
-które przekształcają Porteusa w gotowe do pracy środowisko programistyczne (Python 2/3, C++, Qt5):
+.. attention::
+
+    Moduły są aktualizowane, aby usunąć ewentualne błędy lub dodać funkcjonalności:
+
+    * `Lista zmian <https://drive.google.com/open?id=0B1zG9cfNyT7WUms4TnNkX3ZOa2s>`_ »»»
+    * `Pobierz moduły <https://drive.google.com/open?id=0B1zG9cfNyT7WSTlWWWdTdzRBQnc>`_ »»»
+
+
+Obraz iso, katalog :file:`potrteus/modules`, zawiera:
 
 1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia;
 2. :file:`02-pl-locales.xzm` – spolszczenie;
@@ -137,21 +142,27 @@ które przekształcają Porteusa w gotowe do pracy środowisko programistyczne (
 9. :file:`12-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
 10. :file:`15-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
 11. :file:`50-infinality-fonts.xzm` – poprawione wyświetlanie czcionek;
-12. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami) i ``xmag``;
+12. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami) i ``xmag`` [**Atualizacja 21.01.2017**];
 13. :file:`95-sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
-14. :file:`99-home-guest.xzm` – prekonfiguracja środowiska XFCE.
+14. :file:`99-home-guest.xzm` – prekonfiguracja środowiska XFCE [**Atualizacja 21.01.2017**].
 
-W katalogu :file:`porteus/optional` znajdziesz:
+W katalogu :file:`porteus/optional`:
 
 * :file:`python3.5.2-stuff.xzm` – Python 3.5, IPython, QtConsole, Matplotlib, PyGame, Turtle, PyQt 5.6 ();
 
-`Moduły opcjonalne <https://drive.google.com/open?id=0B1zG9cfNyT7WX0lNNFMwdEo2ems>`_ do pobrania:
+
+Dodatkowe moduły
+----------------
+
+`Moduły opcjonalne <https://drive.google.com/open?id=0B1zG9cfNyT7WbzRYa2NiM0tZNUU>`_ do pobrania:
 
 * :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
-* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite.
+* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite;
+* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami;
 
 
-**Zarządzanie modułami**
+Zarządzanie modułami
+--------------------
 
 Moduły z katalogu :file:`optional` mogą być (de)aktywowane na żądanie.
 Służy do tego *Menedżer modułów*. W menu podręcznym modułów (po kliknięciu
@@ -178,9 +189,9 @@ W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększy�
 .. figure:: img/resf.png
 
 
-.. warning::
+.. attention::
 
-    Uwaga: tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany.
+    Tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany.
     Nowym plikiem trzeba nadpisać dotychczasowy!
 
 
