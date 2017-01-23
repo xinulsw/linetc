@@ -158,7 +158,9 @@ Dodatkowe moduły
 
 * :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
 * :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite;
-* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami;
+* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami,
+  polecenia: ``sudo /etc/rc.d/rc.etherpad-lite start``, ``sudo /etc/rc.d/rc.etherpad-lite stop``;
+* :file:`vsftpd-3.0.3.xzm` – serwer FTP, polecenia: ``sudo rc.ftp start``, ``sudo rc.ftp stop``
 * :file:`gimp-2.8.18.xzm` – zaawansowany edytor graficzny;
 * :file:`ghostscript-9.19.xzm` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
 * :file:`sylpheed-3.5.1.xzm` – klient pocztowy z filtrem spamu;
