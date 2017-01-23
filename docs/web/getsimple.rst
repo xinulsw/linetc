@@ -205,8 +205,10 @@ Słownik
         (ang. framework – struktura) – oprogramowanie będące zestawem narzędzi ułatwiających
         i przyśpieszających tworzenie aplikacji.
 
-Metryka
-========
+
+.. raw:: html
+
+  <hr>
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

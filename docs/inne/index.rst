@@ -1,16 +1,7 @@
 Inne
 #####
 
-Wszystkie dotychczasowe scenariusze, które przygotowywałem i zamieszczałem w tym repozytorium,
-znajdziesz w dokumentacji `Python101 <http://python101.readthedocs.org>`_,
-która towarzyszy projektowi `"Koduj z Klasą" <http://www.ceo.org.pl/pl/koduj>`_
-realizowanemu pod patronatem `Centrum Edukacji Obywatelskiej <http://www.ceo.org.pl/pl>`_.
-Zobacz:
-
-* `Język Python <http://python101.readthedocs.io/pl/latest/>`_,
-* `Gra robotów <http://python101.readthedocs.io/pl/latest/rg/index.html>`_,
-* `Minecraft Pi <http://python101.readthedocs.io/pl/latest/mcpi/index.html>`_.
-
+[todo]
 
 Metryka
 **********

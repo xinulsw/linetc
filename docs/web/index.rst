@@ -16,8 +16,11 @@ Spis treści:
     html_css_js/index.rst
     getsimple
 
-Metryka
-========
+
+.. raw:: html
+
+  <hr>
+
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

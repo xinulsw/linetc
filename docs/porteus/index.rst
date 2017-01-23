@@ -196,8 +196,9 @@ W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększy�
     Nowym plikiem trzeba nadpisać dotychczasowy!
 
 
-Metryka
--------
+.. raw:: html
+
+  <hr>
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

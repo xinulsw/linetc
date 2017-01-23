@@ -64,8 +64,10 @@ Pojęcia
 
 .. include:: ../glossary.rst
 
-Metryka
----------------
+.. raw:: html
+
+  <hr>
+
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

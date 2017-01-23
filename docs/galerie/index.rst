@@ -28,8 +28,9 @@ Instalacja
         <li><a href="../_static/images/gsimple/getsimple14.jpg" rel="prettyPhoto[getsimple]"><img src="../_static/images/gsimple/getsimple14.jpg" width="60" height="60" alt="Domyślna demonstracyjna strona główna w GS" /></a></li>
     </ul>
 
-Metryka
-*************
+.. raw:: html
+
+  <hr>
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

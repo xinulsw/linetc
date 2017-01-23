@@ -20,7 +20,7 @@ Spis treści:
     cppqt/index
     web/index
     porteus/index
-    inne/index
+    python/index
     inne/linki
     galerie/index
     Serwis eCG <http://ecg.vot.pl/>
@@ -29,3 +29,7 @@ Indeks
 ==================
 
 * :ref:`genindex`
+
+.. raw:: html
+
+  <hr>

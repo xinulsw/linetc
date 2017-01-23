@@ -9,8 +9,10 @@ Poniżej przedstawiamy realizację przykładowej aplikacji w Qt 5.
     adresy/index
     zadania/index
 
-Metryka
-*********
+.. raw:: html
+
+  <hr>
+
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 

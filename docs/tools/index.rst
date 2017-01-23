@@ -918,8 +918,10 @@ Słownik
 .. _JavaScript: http://pl.wikipedia.org/wiki/JavaScript
 .. _PHP: http://pl.wikipedia.org/wiki/PHP
 
-Metryka
-========
+.. raw:: html
+
+  <hr>
+
 
 :Autor: Robert Bednarz (ecg@ecg.vot.pl)
 
