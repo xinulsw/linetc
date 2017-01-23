@@ -161,6 +161,8 @@ Dodatkowe moduły
 * :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami;
 * :file:`gimp-2.8.18.xzm` – zaawansowany edytor graficzny;
 * :file:`ghostscript-9.19.xzm` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
+* :file:`sylpheed-3.5.1.xzm` – klient pocztowy z filtrem spamu;
+* :file:`xnview-0.8.4.xzm` – wielofunkcyjny menedżer plików graficznych.
 
 Zarządzanie modułami
 --------------------
