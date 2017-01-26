@@ -24,7 +24,7 @@ Klucz USB
 
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
-1. Pobieramy obraz *iso* systemu: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WWHl0OUp1bVlQMUU>`_ [17.01.2017].
+1. Pobieramy obraz *iso* systemu: `porteus322.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WWHl0OUp1bVlQMUU>`_ [26.01.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
@@ -133,16 +133,16 @@ Obraz iso, katalog :file:`potrteus/modules`, zawiera:
 
 1. :file:`01-glibc-i18n-x86_64-1jay.xzm` – podstawa spolszczenia;
 2. :file:`02-pl-locales.xzm` – spolszczenie;
-3. :file:`03-fonts-ms-ubu.xzm` – zestaw dodatkowych czcionek;
+3. :file:`03-fonts-msubuinf.xzm` – zestaw dodatkowych czcionek;
 4. :file:`04-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory);
-5. :file:`05-qt5-5.6.1-x86_64-1ponce.xzm` – biblioteka Qt 5.6;
-6. :file:`06-python2.7.11-stuff.xzm` – Python 2.7.11, IPython, QtConsole, Matplotlib, PyGame, Terminator, Turtle, PyQt 5.6;
-7. :file:`10-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
-8. :file:`11-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
-9. :file:`12-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
-10. :file:`15-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
-11. :file:`50-infinality-fonts.xzm` – poprawione wyświetlanie czcionek;
-12. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami) i ``xmag`` [**Atualizacja 21.01.2017**];
+5. :file:`05-python2.7.11.xzm` – Python 2.7.11, IPython, QtConsole, Matplotlib, PyGame, Terminator, Turtle, PyQt 5.6;
+6. :file:`10-qt5-5.6.1-x86_64-1ponce.xzm` – biblioteka Qt 5.6;
+7. :file:`12-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x
+8. :file:`15-flashplayer-plugin-24.0.0.194.xzm` – wtyczka Flash Player;
+9. :file:`20-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
+10. :file:`25-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
+11. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami) i ``xmag`` [**Atualizacja 21.01.2017**];
+11. :file:`91-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
 13. :file:`95-sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
 14. :file:`99-home-guest.xzm` – prekonfiguracja środowiska XFCE [**Atualizacja 21.01.2017**].
 
@@ -164,7 +164,11 @@ Dodatkowe moduły
 * :file:`gimp-2.8.18.xzm` – zaawansowany edytor graficzny;
 * :file:`ghostscript-9.19.xzm` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
 * :file:`sylpheed-3.5.1.xzm` – klient pocztowy z filtrem spamu;
-* :file:`xnview-0.8.4.xzm` – wielofunkcyjny menedżer plików graficznych.
+* :file:`xnview-0.8.4.xzm` – wielofunkcyjny menedżer plików graficznych;
+* :file:`faenza-icon-1.3.xzm` – zestaw ikon Faenza;
+* :file:`firefox-52.0b1.xzm` – przeglądarka WWW Firefox;
+* :file:`qt-creator-4.2.0.xzm` – lekkie środowisko programistyczne dla biblioteki Qt5.
+
 
 Zarządzanie modułami
 --------------------
