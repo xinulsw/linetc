@@ -80,35 +80,26 @@ naszego pendrajwa.
 
 Po pierwszym uruchomieniu, **należy stworzyć plik zapisu**, w którym przechowywane będą wszystkie zmiany.
 
-1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor") i klikamy ikonę dyskietki.
+1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor") i klikamy ikonę dyskietki (1).
 
-.. figure:: img/psc01.png
+2. Klikamy ikonę *Porteus Save Changes* (2) i wybieramy opcję "I want to create a new save file" przyciskiem *Create*.
 
 .. figure:: img/psc02.png
 
+3. W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB, zazwyczaj "sdb1" lub "sdc1".
+   (Po wybraniu nazwy napędu powinniśmy widzieć na nim katalog :file:`porteus`).
 
-2. Klikamy ikonę *Porteus Save Changes* i wybieramy opcję "I want to create a new save file" przyciskiem *Create*.
-
-.. figure:: img/savefile_01.png
-
-
-3. W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB.
-W komputerach z jednym dyskiem twardym będzie to nazwa "sdb1". Jeżeli mamy wątpliwości, możemy uruchomić *Start/System/Porteus system info*, kliknąć *Porteus/Boot_info* i sprawdzić wpis "# Booting device".
-
-.. figure:: img/psi.png
-
-
-4. W polu "Savefile name" wpisujemy nazwę pliku: ``porteussave.dat``. Rozmiar zostawiamy domyślny lub podajemy większy, np. 768 lub 1024 MB. Na koniec klikamy "OK".
+4. W polu "Savefile name" wpisujemy nazwę pliku: ``porteussave.dat``. Rozmiar zostawiamy domyślny lub podajemy większy, np. 768 lub 1024 MB. Na koniec klikamy "OK" i czekamy na utworzenie pliku.
 
 .. figure:: img/savefile_02.png
 
 
-5. Po zapisaniu pliku powracamy do okna "Porteus Settings Centre", w którym wybieramy *Edit porteus.cfg*. Plik ten znajduje się w katalogu :file:`/boot/syslinux` na pendrajwie i definiuje opcje startowe systemu. Odszukujemy pierwszy wpis ``changes=/porteus`` i zmieniamy na ``changes=/porteussave.dat`` zgodnie z podaną wcześniej nazwą pliku zapisu.
+5. Nastęþnie w oknie "Porteus Settings Centre" wybieramy *Edit porteus.cfg* (3). Zamieniamy pierwszy wpis ``changes=/porteus`` na ``changes=/porteussave.dat`` (zgodnie z nazwą utworzonego pliku zapisu).
 
 .. figure:: img/porteus_cfg.png
 
 
-Na koniec **ponownie uruchomiamy system**!
+6. Na koniec **ponownie uruchomiamy system**!
 
 
 Moduły
@@ -183,14 +174,20 @@ ich prawym klawiszem) znajdziesz również polecenia "Activate" i "Deactivate".
 Wskazówki
 =========
 
- Jeżeli tworzymy lub ściągamy i zapisujemy wiele plików, warto sprawdzać ilość dostępnego miejsca w pliku zapisu:
+1. Jeżeli tworzymy lub ściągamy i zapisujemy wiele plików, warto sprawdzać ilość dostępnego miejsca w pliku zapisu:
 
 .. code-block:: bash
 
     ~$ du -sh /mnt/live/memory/changes (poda ilość zajętego miejsca)
     ~$ df -h /mnt/live/memory/changes (poda ilość wolnego miejsca)
 
-W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększyć jego rozmiar wybierając:
+2. Narzędzie *Start/System/Porteus system info* gromadzi w jednym miejscu informacje nt. komputera,
+   w tym również o miejscu instalacji: *Porteus/Boot_info*.
+
+.. figure:: img/psi.png
+
+
+3. W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększyć jego rozmiar wybierając:
 
 * start systemu w trybie "Always Fresh mode";
 * następnie *Start/System/Porteus save file manager* i "I want to resize a save file":
@@ -202,6 +199,14 @@ W przypadku wyczerpywania się wolnego miejsca w pliku zapisu możemy zwiększy�
 
     Tworzony jest nowy plik zapisu w podanej lokalizacji zawierający dotychczasowe zmiany.
     Nowym plikiem trzeba nadpisać dotychczasowy!
+
+
+4. Plik zapisu można przenosić między różnymi pendrajwami. Można go archiwizować i przeglądać w dowolnym
+   systemie opartym na Linuksie. W tym celu montujemy plik z uprawnieniami roota np. do katalogu :file:`/mnt`:
+
+.. code-block:: bash
+
+    ~$ sudo mount -o loop ścieżka_do_pliku/porteussave.dat /mnt
 
 
 .. raw:: html
