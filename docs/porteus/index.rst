@@ -209,6 +209,13 @@ Wskazówki
     ~$ sudo mount -o loop ścieżka_do_pliku/porteussave.dat /mnt
 
 
+5. Jeżeli masz problem z ustawieniem jasności ekranu laptopa, spróbuj polecenia z opcjonalnym argumentem:
+
+.. code-block:: bash
+
+    ~$ setbright.sh 190
+
+
 .. raw:: html
 
   <hr>
