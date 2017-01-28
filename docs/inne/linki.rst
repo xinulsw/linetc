@@ -15,22 +15,3 @@ System linux
 * `Poradnik-systemd-cz.-3 <http://www.dobreprogramy.pl/mariushko/Poradnik-systemd-cz.-3,68067.html>`_
 * `LxPup : a Puppy with LXDE as its desktop environment <http://www.murga-linux.com/puppy/viewtopic.php?t=89270&start=690&sid=435b2a9732449069870a278a2601f5a1>`_
 
-.. raw:: html
-
-    <hr />
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
-
-.. raw:: html
-
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>
-
-

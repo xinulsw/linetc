@@ -30,6 +30,3 @@ Indeks
 
 * :ref:`genindex`
 
-.. raw:: html
-
-  <hr>

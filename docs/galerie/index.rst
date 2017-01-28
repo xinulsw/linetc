@@ -28,20 +28,3 @@ Instalacja
         <li><a href="../_static/images/gsimple/getsimple14.jpg" rel="prettyPhoto[getsimple]"><img src="../_static/images/gsimple/getsimple14.jpg" width="60" height="60" alt="Domyślna demonstracyjna strona główna w GS" /></a></li>
     </ul>
 
-.. raw:: html
-
-  <hr>
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
-
-.. raw:: html
-
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>

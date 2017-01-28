@@ -16,9 +16,7 @@ Pobranie archwium
 
     GetSimple wymaga działającego serwera WWW, przy czym serwery bazodanowe
     typu MySQL itp. nie są koniecznie, ponieważ GS przechowuje pliki w formacie
-    ``XML``. W rozdziale :ref:`narzędzia <tools>` omówiono instalację instalację
-    środowiska :ref:`LAMP <lamp-ins>` (dla Linuksa) i :ref:`WAMP <serwer2go-ins>`
-    (Serwer2Go dla Windowsa).
+    ``XML``. Zob. materiał :ref:`Serwer deweloperski WWW <lwamp>`.
 
 Najnowszą wersję GS pobieramy ze strony `Download GetSimple CMS <http://get-simple.info/download>`_.
 Ściągnięte archiwum ``zip`` umieszczamy w podkatalogu ``public_html`` katalogu domowego
@@ -205,21 +203,3 @@ Słownik
         (ang. framework – struktura) – oprogramowanie będące zestawem narzędzi ułatwiających
         i przyśpieszających tworzenie aplikacji.
 
-
-.. raw:: html
-
-  <hr>
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
-
-.. raw:: html
-
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>

@@ -3,8 +3,7 @@ Narzędzia
 
 .. _tools:
 
-Poniżej przedstawiamy zestaw przykładowych narzędzi do programowania, tworzenia
-skryptów i dokumentacji, stron WWW itp. zadań.
+Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
 
 .. contents:: Spis treści
     :backlinks: none
@@ -30,15 +29,10 @@ Geany
 
 `Geany <http://www.geany.org/>`_ to proste i lekkie środowisko IDE dostępne na licencji
 `GNU General Public Licence <http://pl.wikipedia.org/wiki/GNU_General_Public_License>`_.
-Geany oferuje kolorowanie składni dla najpopularniejszych języków,
-m.in. C, C++, C#, Java, PHP, HTML, Python, Perl i Pascal,
-wsparcie dla kodowania w ponad 50 standardach, dopełnianie poleceń, mechanizmy automatycznego zamykanie tagów dla HTML\XML,
-auto-wcięć, pracy na kartach i wiele, wiele więcej. Podczas pisania kodu przydatny okazuje się brudnopis,
-pozwalający tworzyć dowolne notatki, a także możliwość kompilacji plików źródłowych
-bezpośrednio z poziomu programu.
+Geany oferuje kolorowanie składni, wsparcie dla kodowania, dopełnianie poleceń, mechanizmy automatycznego zamykanie tagów, auto-wcięć, pracy na kartach i inne udogodnienia.
+Np. brudnopis czy możliwość uruchamiania plików źródłowych bezpośrednio z poziomu programu.
 
-Instalacja
-===============
+**Instalacja**
 
 W systemie **Linux** korzystamy z dedykowanego menedżera pakietów, np. w Xubuntu
 (i innych debianopochodnych) lub Archu wystarczy wpisać w terminalu:
@@ -55,7 +49,7 @@ zmienić katalog docelowy, np. na ``C:\Geany``.
 
 .. figure:: img/geany1.jpg
 
-Zanim rozpoczniemy pracę w edytorze, warto dostosować kilka ustawień.
+**Koniguracja**
 
 W menu `Narzędzia/Menedżer wtyczek` zaznaczamy pozycję "Addons" (dostępna
 po zainstalowaniu wtyczek), a następnie "Przeglądarka plików".
@@ -87,13 +81,13 @@ programów pisanych w różnych językach. Wymagane narzędzia musimy doinstalow
 Kompilator C/C++
 *********************
 
-W systemie **Linux** wystarczy zazwyczaj wydać jedno polecenie wykorzystujące
-używany w danej dystrybucji menedżer pakietów, np.:
+W systemie **Linux** potrzebne narzędzia są zazwyczaj obecne, ale w razie potrzeby wystarczy
+doinstalować pakiet ``gcc`` odpowiednim menedżerem pakietów, np.:
 
 .. code-block:: bash
 
     ~$ sudo apt-get install gcc
-    ~# pacman -S gcc
+
 
 W **MS Windows** instalujemy minimalistyczne środowisko deweloperskie
 dostarczające wolne narzędzia :term:`GNU Compiler Collection`, czyli `MinGw`_. W tym
@@ -132,48 +126,6 @@ zrzutem:
     dzięki czemu wszyscy użytkownicy będą mogli wywoływać narzędzia bez
     podawania pełnej ich lokalizacji.
 
-Biblioteka Qt
-******************
-
-:term:`Qt` to zestaw bibliotek przeznaczonych dla języka C++, QML i Java,
-który znakomicie ułatwia tworzenie graficznego interfejsu użytkownika.
-Zawiera również klasy udostępniające obsługę m.in. multimediów , sieci
-czy baz danych.
-
-System i środowisko IDE
-========================
-
-Bilioteka :term:`Qt` jest przenośna z założenia, więc programować z jej wykorzystaniem
-można w wielu systemach i środowiskach. Proponujemy system Linux,
-np. dystrybucję :term:`Debian` (v. Jessie) lub :term:`Xubuntu 14.04`.
-Instalacja wymaganych narzędzi sprowadza się do wydania prostych poleceń
-w terminalu:
-
-.. code-block:: bash
-
-    ~$ sudo apt-get update
-    ~$ sudo apt-get install qtcreator qt5-qmake qt5-default qt4-qtconfig
-
-Pierwsze polecenie zaktualizuje repoytoria, czyli wersje dostępnego oprogramowania;
-drugie zainstaluje dedykowane :term:`środowisko IDE`, które pozwala projektować
-interfejs graficzny, bardzo ułatwia edycję kodu, pozwala budować, uruchamiać
-i debugować różne wersje tworzonych aplikacji.
-
-Qt5 w systemie Windows
-========================
-
-Instalacja jest bardzo prosta. Pobieramy `Qt Online Installer for Windows <https://www.qt.io/download-open-source/>`_
-i uruchamiamy. Następnie przeprowadzamy standardową instalację z domyślnymi
-ustawieniami, podając w razie potrzeby hasło administratora.
-
-.. figure:: img/qtwin01.jpg
-
-.. figure:: img/qtwin02.jpg
-
-Wygląd i działanie aplikacji :term:`Qt Creator` w systemie Linux i Windows są
-takie same.
-
-.. figure:: img/qtcreator.png
 
 Interpreter Pythona
 *********************
@@ -235,6 +187,51 @@ w konsoli:
 .. code-block:: bat
 
     set PATH=%PATH%;c:\Python27\;c:\Python27\Scripts\
+
+
+Biblioteka Qt
+******************
+
+:term:`Qt` to zestaw bibliotek przeznaczonych dla języka C++, QML i Java,
+który znakomicie ułatwia tworzenie graficznego interfejsu użytkownika.
+Zawiera również klasy udostępniające obsługę m.in. multimediów , sieci
+czy baz danych.
+
+System i środowisko IDE
+========================
+
+Bilioteka :term:`Qt` jest przenośna z założenia, więc programować z jej wykorzystaniem
+można w wielu systemach i środowiskach. Proponujemy system Linux,
+np. dystrybucję :term:`Debian` (v. Jessie) lub :term:`Xubuntu 14.04`.
+Instalacja wymaganych narzędzi sprowadza się do wydania prostych poleceń
+w terminalu:
+
+.. code-block:: bash
+
+    ~$ sudo apt-get update
+    ~$ sudo apt-get install qtcreator qt5-qmake qt5-default qt4-qtconfig
+
+Pierwsze polecenie zaktualizuje repoytoria, czyli wersje dostępnego oprogramowania;
+drugie zainstaluje dedykowane :term:`środowisko IDE`, które pozwala projektować
+interfejs graficzny, bardzo ułatwia edycję kodu, pozwala budować, uruchamiać
+i debugować różne wersje tworzonych aplikacji.
+
+Qt5 w systemie Windows
+========================
+
+Instalacja jest bardzo prosta. Pobieramy `Qt Online Installer for Windows <https://www.qt.io/download-open-source/>`_
+i uruchamiamy. Następnie przeprowadzamy standardową instalację z domyślnymi
+ustawieniami, podając w razie potrzeby hasło administratora.
+
+.. figure:: img/qtwin01.jpg
+
+.. figure:: img/qtwin02.jpg
+
+Wygląd i działanie aplikacji :term:`Qt Creator` w systemie Linux i Windows są
+takie same.
+
+.. figure:: img/qtcreator.png
+
 
 Git
 **********************
@@ -650,104 +647,6 @@ zakładki *Downloads* i linku *latest PDF*.
 
 .. figure:: img/rtfd.jpg
 
-Serwer deweloperski WWW
-************************
-
-Jeżeli chcemy tworzyć i testować aplikacje sieciowe wykorzystujące bazy danych
-za pomocą języków skryptowych, np. PHP czy Python, potrzebujemy środowiska testowego,
-na które składa się :term:`serwer WWW`, :term:`interpreter` języka skryptowego i :term:`system bazodanowy`.
-Zestawy takiego oprogramowania określa się skrótami `WAMP <http://pl.wikipedia.org/wiki/WAMP>`_ lub `LAMP <http://pl.wikipedia.org/wiki/LAMP>`_ w zależności
-od wykorzystywanego systemu operacyjnego: W – Windows, L – Linux.
-Pozostałe litery rozwija się najczęściej jako:
-
-* A – `Apache <http://pl.wikipedia.org/wiki/Apache_%28serwer%29>`_;
-* M – `MySQL <http://pl.wikipedia.org/wiki/MySQL>`_, w linuksach raczej `MariaDB <http://pl.wikipedia.org/wiki/MariaDB>`_;
-* P – `PHP <http://pl.wikipedia.org/wiki/PHP>`_, `Perl <http://pl.wikipedia.org/wiki/Perl>`_ lub `Python <http://pl.wikipedia.org/wiki/Python>`_.
-
-Wymienionego oprogramowanie to najpopularniejsze, ale nie jedyne rozwiązania.
-Dostępnych jest wiele innych, równie dobrych serwerów czy baz danych.
-Warto też wiedzieć, że instalacja i konfiguracja kompletu wymienionych programów nie jest zazwyczaj
-konieczna. Np. jeżeli tworzymy aplikacje sieciowe w Pythonie wystarcza dedykowana
-biblioteka (np. Flask) lub :term:`framework` (np. Django), które zapewniają
-serwer HTTP i obsługę wbudowanej bazy SQLite.
-
-.. _lamp-ins:
-
-Linux
-===================
-
-W systemach opartych na Debianie (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
-można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
-menedżerów pakietów, czyli odpowiednio:
-
-.. code-block:: bash
-
-    ~$ sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl libapache2-mod-php5
-    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php5
-
-Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
-
-.. code-block:: bash
-
-    ~$ sudo a2enmod userdir rewrite
-    ~$ sudo service apache2 restart
-
-    ~# a2enmod userdir rewrite
-    ~# systemctl restart httpd
-
-– i odblokowania możliwości wykopnywania skryptów w katalogach domowych
-użytkowników poprzez zakomentowanie następujących linii z pliku
-``/etc/apache2/mods-available/php5.conf`` (Debian) lub ``/etc/httpd/mods-available/php5.conf``
-(Arch):
-
-.. code-block:: bash
-
-    # To re-enable PHP in user directories comment the following lines
-    # (from <IfModule ...> to </IfModule>.) Do NOT set it to On as it
-    # prevents .htaccess files from disabling it.
-    #<IfModule mod_userdir.c>
-    #    <Directory /home/*/public_html>
-    #        php_admin_flag engine Off
-    #    </Directory>
-    #</IfModule>
-
-Tworzone strony umieszczamy w podkatalogu ``public_html`` katalogu domowego.
-Wywołujemy je wpisując w przeglądarce adres: ``127.0.0.1/~użytkownik`` –
-powinny zostać zwrócone pliki ``index.php`` lub ``index.html``, o ile istnieją.
-Jeżeli mamy kilka projektów, umieszczamy je w podkatalogach, np.
-``public_html/projekt1`` i wywołujemy: ``127.0.0.1/~użytkownik/projekt1``.
-
-.. _serwer2go-ins:
-
-UwAmp w Windows
-===================
-
-W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
-Proponujemy `UwAmp <http://www.uwamp.com/en/>`_, ściągamy
-plik wykonywalny spod linku o nazwie **Download Exe/Install**.
-Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
-wybranego dysku, *C:*, *D:* itp.:
-
-.. figure:: img/uwamp01.jpg
-
-.. figure:: img/uwamp03.jpg
-
-Po zainstalowaniu i uruchomieniu aplikacji *UwAmp* zapora systemowa może poprosić
-o odblokowanie portów serwera www i bazy danych. Godzimy się, wybierając opcję dla
-sieci prywatnych i domowych.
-
-Serwerami i narzędziami zarządzamy za pomocą wygodnego okna:
-
-.. figure:: img/uwamp05.jpg
-
-Serwery www (Apache2) i bazy danych (MySQL) startowane są automatycznie. Jeżeli nie korzystamy
-z serwera MySQL możemy go zatrzymać, klikając niebieską strzałkę obok przycisku "Stop" i wybierając
-go listy. Do obsługi baz SQLite dołączono bardzo wygodny interfejs graficzny *SQLite Browser*.
-
-Strony czy projekty umieszczamy w katalogu ``www`` folderu, w którym zainstalowaliśmy UwAmpa,
-np. w ``C:\\UwAmp\www``. W przeglądarce wpisujemy adres ``localhost`` lub ``localhost/podkatalog``,
-jeżeli strony umieściliśmy w jakimś podkatalogu.
-
 Baza SQLite
 ************
 
@@ -806,6 +705,14 @@ w wersji `dla Windows <http://sqlitestudio.pl/?act=download>`_. Pobrane archiwum
 i uruchamiamy program *SQLiteStudio.exe*. Drugi program to np. angielskojęzyczny *SQLite Browser*
 dołączony do opisanego wyżej środowiska *UwAmp*. Można go pobrać ze strony
 `DB Browser for SQLite <http://sqlitebrowser.org/>`_.
+
+
+L(W)amp
+********
+
+Zobacz: :ref:`Serwer deweloperski WWW <lwamp>` »»»
+
+
 
 Materiały
 **************
@@ -917,22 +824,3 @@ Słownik
 .. _XFCE: http://www.xfce.org/
 .. _JavaScript: http://pl.wikipedia.org/wiki/JavaScript
 .. _PHP: http://pl.wikipedia.org/wiki/PHP
-
-.. raw:: html
-
-  <hr>
-
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
-
-.. raw:: html
-
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>

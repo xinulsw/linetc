@@ -149,8 +149,7 @@ Dodatkowe moduły
 
 * :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
 * :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite;
-* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami,
-  polecenia: ``sudo /etc/rc.d/rc.etherpad-lite start``, ``sudo /etc/rc.d/rc.etherpad-lite stop``;
+* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami, polecenia: ``sudo /etc/rc.d/rc.etherpad-lite start``, ``sudo /etc/rc.d/rc.etherpad-lite stop``;
 * :file:`vsftpd-3.0.3.xzm` – serwer FTP, polecenia: ``sudo rc.ftp start``, ``sudo rc.ftp stop``
 * :file:`gimp-2.8.18.xzm` – zaawansowany edytor graficzny;
 * :file:`ghostscript-9.19.xzm` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
@@ -215,21 +214,3 @@ Wskazówki
 
     ~$ setbright.sh 190
 
-
-.. raw:: html
-
-  <hr>
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
-
-.. raw:: html
-
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>

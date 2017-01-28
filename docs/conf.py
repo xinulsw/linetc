@@ -38,6 +38,11 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+# the path to the latex executable
+pngmath_latex = "/usr/bin/latex"
+# the path to the dvipng executable
+pngmath_dvipng = "/usr/bin/dvipng"
+
 # The suffix of source filenames.
 source_suffix = '.rst'
 
@@ -49,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Materiały eCG IT'
-copyright = u'2016, Robert Bednarz'
+copyright = u'2016, Robert Bednarz (ecg@ecg.vot.pl)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -65,7 +70,7 @@ release = '1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'pl'
+#language = 'pl'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -198,7 +203,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = u'Materiały CG IT'
+htmlhelp_basename = u'Materiały eCG IT'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -220,8 +225,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'MateriayeCGIT.tex', u'Materiały eCG IT Documentation',
-   u'Robert Bednarz', 'manual'),
+    ('index', 'eCG-IT.tex', u'Materiały eCG IT',
+     u'Robert Bednarz', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -250,7 +255,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'materialyecgit', u'Materiały eCG IT Documentation',
+    ('index', 'ecg-it', u'Materiały eCG IT',
      [u'Robert Bednarz'], 1)
 ]
 
@@ -264,9 +269,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'MaterialyeCGIT', u'Materiały eCG IT Documentation',
-   u'Robert Bednarz', 'MaterialyeCGIT', 'One line description of project.',
-   'Miscellaneous'),
+    ('index', 'eCG-IT', u'Materiały eCG IT',
+     u'Robert Bednarz', 'eCG-IT', 'Materiały do nauki IT.',
+     'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -281,6 +286,8 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
+import sphinx
+
 rst_prolog = u"""
 .. raw:: html
 
@@ -294,6 +301,19 @@ rst_prolog = u"""
 
 """
 
+rst_epilog = u"""
+.. raw:: html
+
+    <hr>
+
+.. |date| date::
+.. |time| date:: %H:%M
+.. |sphinx_version| replace:: {}
+
+:Utworzony: |date| o |time| w Sphinx |sphinx_version|
+
+""".format(sphinx.__version__)
+
 try:
     import sphinx_rtd_theme
     html_theme = "sphinx_rtd_theme"
@@ -301,6 +321,7 @@ try:
     html_style = 'css/custom.css'
 except:
     pass
+
 
 def setup(app):
     app.add_javascript('custom.js')
