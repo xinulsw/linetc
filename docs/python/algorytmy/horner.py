@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  horner.py
-#
 # Program oblicza wartość wielomianu 3 stopnia przy użyciu schematu Hornera.
-#
+# <eCG>
 
 
 def horner(tabwsp, x, stopien):

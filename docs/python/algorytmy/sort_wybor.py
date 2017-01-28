@@ -1,14 +1,11 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Sortowanie przez wybór
+# <eCG>
+
 
 from random import randint
-
-
-def zamien(lista, i, k):
-    tmp = lista[i]
-    lista[i] = lista[k]
-    lista[k] = tmp
-    return lista
 
 
 def sort_wybor(lista):
@@ -18,10 +15,9 @@ def sort_wybor(lista):
         for j in range(i + 1, n):
             if lista[j] < lista[k]:
                 k = j
-        # print k, "=>", i
-        tmp = lista[i]
-        lista[i] = lista[k]
-        lista[k] = tmp
+        # pythonowy składnia dla zamiany wartości
+        lista[i], lista[k] = lista[k], lista[i]
+
     return lista
 
 

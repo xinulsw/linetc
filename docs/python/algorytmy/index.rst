@@ -26,6 +26,18 @@ Wersja iteracyjna i rekurencyjna.
 .. literalinclude:: silnia.py
     :linenos:
 
+
+Algorytm Euklidesa
+==================
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: euklides.py
+    :linenos:
+
+
 Ciąg Fibonacciego
 =================
 
@@ -36,18 +48,6 @@ Wersja iteracyjna i rekurencyjna.
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. literalinclude:: fibonacci.py
-    :linenos:
-
-Szyfr Cezara
-============
-
-Wersja ze stałym kluczem.
-
-.. raw:: html
-
-    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
-
-.. literalinclude:: szyfr_cezara.py
     :linenos:
 
 Sortowanie
@@ -64,20 +64,25 @@ Przez wybór
     :linenos:
 
 
-.. raw:: html
-
-  <hr>
-
-:Autor: Robert Bednarz (ecg@ecg.vot.pl)
-
-:Utworzony: |date| o |time|
-
-.. |date| date::
-.. |time| date:: %H:%M
+Konwersja liczby dziesiętnej
+============================
 
 .. raw:: html
 
-    <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
-        div.highlight, div.highlight-python { margin-top: 0px; }
-    </style>
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: konwersja.py
+    :linenos:
+
+
+Szyfr Cezara
+============
+
+Wersja ze stałym kluczem.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: szyfr_cezara.py
+    :linenos:

@@ -1,5 +1,8 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Ciąg Fibonacciego
+# <eCG>
 
 
 def fib_iter1(n):  # definicja funkcji

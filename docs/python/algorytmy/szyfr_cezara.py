@@ -1,7 +1,8 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
-# ~/python/07_2_szyfr_cezara.py
+#
+# Implementacja klasycznego szyfru Cezara
+# <eCG>
 
 """
     ZADANIE

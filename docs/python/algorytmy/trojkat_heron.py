@@ -1,5 +1,9 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Badanie możliwości zbudowania trójkąta i obliczanie jego pola
+# za pomocą wzoru Herona
+# <eCG>
 
 import math  # dołączamy bibliotekę matematyczną
 

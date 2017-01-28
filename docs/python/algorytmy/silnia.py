@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Obliczanie silni metodą iteracyjną i rekurencyjną
+# <eCG>
 
 
 def sil_rek(n):
