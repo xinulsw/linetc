@@ -158,6 +158,7 @@ Dodatkowe moduły
 * :file:`faenza-icon-1.3.xzm` – zestaw ikon Faenza;
 * :file:`firefox-52.0b1.xzm` – przeglądarka WWW Firefox;
 * :file:`qt-creator-4.2.0.xzm` – lekkie środowisko programistyczne dla biblioteki Qt5.
+* :file:`kivy-1.9.1.xzm` – międzyplatformowy framework do projektowania aplikacji wykorzystujących naturalny interfejs użytkownika, w tym aplikacji mobilnych.
 
 
 Zarządzanie modułami
