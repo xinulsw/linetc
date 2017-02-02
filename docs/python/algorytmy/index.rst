@@ -64,8 +64,8 @@ Przez wybór
     :linenos:
 
 
-Konwersja liczby dziesiętnej
-============================
+Konwersja liczby
+================
 
 .. raw:: html
 
@@ -85,4 +85,31 @@ Wersja ze stałym kluczem.
     <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
 
 .. literalinclude:: szyfr_cezara.py
+    :linenos:
+
+
+Pierwiastek kwadratowy
+======================
+
+Użycie metody Herona.
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: heron.py
+    :linenos:
+
+
+Pole obszaru
+============
+
+Całka nieoznaczona Riemanna.
+[Sprawdzić poprawność obliczeń.]
+
+.. raw:: html
+
+    <div class="code_no">Kod nr <script>var code_no = code_no || 1; document.write(code_no++);</script></div>
+
+.. literalinclude:: pole.py
     :linenos:
