@@ -244,6 +244,8 @@ Wskazówki
   * :kbd:`Super+E` – edytor Geany;
   * :kbd:`Super+S` – edytor Sublime Text;
   * :kbd:`Super+W` – przeglądarka, np. Palemoon;
+  * :kbd:`Super+R` – Lxrandr (zarządzanie ekranami);
+  * :kbd:`Super+K` – Keepassx (menedżer haseł).
 
 
 Problemy
