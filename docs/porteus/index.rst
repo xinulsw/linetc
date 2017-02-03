@@ -10,14 +10,16 @@ dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware
 Przygotowaliśmy 64-bitowe spolszczone wersje ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_ lub `Cinnamon <https://pl.wikipedia.org/wiki/Cinnamon>`_ , które bardzo dobrze nadają się m. in. do nauki programowania.
 
 
-.. figure:: img/porteus322X.jpg
+.. raw:: html
 
-   Porteus 3.2.2 XFCE 64-bit
-
-
-.. figure:: img/porteus322C.jpg
-
-   Porteus 3.2.2 Cinnamon 64-bit
+    <div class="figure">
+    <a href="../_images/porteus322X.jpg"><img alt="../_images/porteus322X.jpg" src="../_images/porteus322X.jpg" /></a>
+    <p class="caption"><span class="caption-text">Porteus 3.2.2 XFCE 64-bit</span></p>
+    </div>
+    <div class="figure">
+    <a href="../_images/porteus322C.jpg"><img alt="../_images/porteus322C.jpg" src="../_images/porteus322C.jpg" /></a>
+    <p class="caption"><span class="caption-text">Porteus 3.2.2 Cinnamon 64-bit</span></p>
+    </div>
 
 
 .. contents:: Spis treści
@@ -29,37 +31,38 @@ Klucz USB
 
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
-1. Pobieramy obraz *iso* systemu: `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WTV9ENUgtVXhtclk>`_ [środowisko XFCE, 02.02.2017] lub
-`porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_
-[środowisko Cinnamon, 02.02.2017].
+1. Pobieramy obraz *iso* systemu:
+   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WTV9ENUgtVXhtclk>`_ [środowisko XFCE, 02.02.2017] lub
+   `porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_ [środowisko Cinnamon, 02.02.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
 **W systemie Windows**:
 
-3. Do nagrania Porteusa na pendrajwa polecamy program `Rufus <https://rufus.akeo.ie/?locale=pl_PL>`_. Pobierz, uruchom, wskaż plik *iso* i nagraj.
+3. Do nagrania Porteusa na pendrajwa polecamy program `Rufus <https://rufus.akeo.ie/?locale=pl_PL>`_.
+   Pobierz, uruchom, wskaż plik *iso* i nagraj.
 
 .. figure:: img/rufus_porteus01.jpg
 
 
 **W systemie Linux**:
 
-1. Montujemy pobrany obraz z uprawnieniami administratora (roota) do katalogu :file:`/mnt/loop`:
+3. Montujemy pobrany obraz z uprawnieniami administratora (roota) do katalogu :file:`/mnt/loop`:
 
 .. code-block:: bash
 
     ~$ sudo mkdir /mnt/loop
     ~S sudo mount -o loop /path/to/Porteus-XFCE-v3.2.2-x86_64.iso /mnt/loop
 
-2. Wkładamy klucz USB, który powinien zostać wykryty jako partycja :file:`/dev/sdb1` lub :file:`/dev/sdc1` i zamontowany w katalogu :file:`/media/nazwa_użytkownika/etykieta_klucza`. Sprawdzimy to poleceniem ``mount|grep "sdb"`` lub otwierając menedżer plików.
+4. Wkładamy klucz USB, który powinien zostać wykryty jako partycja :file:`/dev/sdb1` lub :file:`/dev/sdc1` i zamontowany w katalogu :file:`/media/nazwa_użytkownika/etykieta_klucza`. Sprawdzimy to poleceniem ``mount|grep "sdb"`` lub otwierając menedżer plików.
 
-3. Kopiujemy zawartość zamontowanego obrazu na pendrajwa za pomocą polecenia (lub menedżera plików):
+5. Kopiujemy zawartość zamontowanego obrazu na pendrajwa za pomocą polecenia (lub menedżera plików):
 
 .. code-block:: bash
 
     ~$ cp -r /mnt/loop/* /media/nazwa_użytkownika/etykieta_klucza
 
-4. Wchodzimy do katalogu :file:`boot` na pendrajwie(!) i wydajemy polecenie z uprawnieniami roota:
+6. Wchodzimy do katalogu :file:`boot` na pendrajwie(!) i wydajemy polecenie z uprawnieniami roota:
 
 .. code-block:: bash
 
@@ -81,32 +84,32 @@ naszego pendrajwa.
 Podczas pierwszego uruchamianie zobaczymy komunikat "couldn't find /porteus.dat" informujący,
 że system nie może znaleźć pliku zapisu. Naciskamy :kbd:`Enter`.
 
-Po uruchomieniu **należy stworzyć plik zapisu**, w którym przechowywane będą wszystkie zmiany.
+Po uruchomieniu **tworzymy plik zapisu**, w którym przechowywane będą wszystkie zmiany.
 
-1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor") i klikamy ikonę dyskietki (1).
-
-2. Klikamy ikonę *Porteus Save Changes* (2) i wybieramy opcję "I want to create a new save file" przyciskiem *Create*.
+1. Wybieramy *Start/System/Porteus Setings Centre*, podajemy hasło roota (tj. "toor"),
+   klikamy ikonę dyskietki (1), następnie ikonę *Porteus Save Changes* (2),
+   a w następnym oknie wybieramy przycisk *Create*.
 
 .. figure:: img/psc02.png
 
-3. W polu "Location" kilkamy ikonę folderu i wskazujemy napęd USB, zazwyczaj "sdb1" lub "sdc1".
-   (Po wybraniu nazwy napędu powinniśmy widzieć na nim katalog :file:`porteus`).
-
-4. W polu "Savefile name" wpisujemy nazwę pliku, np.: ``porteus.dat``. Rozmiar zostawiamy domyślny lub podajemy większy, np. 768 lub 1024 MB. Klikamy "OK" i czekamy na utworzenie pliku.
+2. W polu **Location** kilkamy ikonę folderu i wskazujemy napęd USB, zazwyczaj "sdb1" lub "sdc1".
+   (Po wybraniu nazwy napędu powinniśmy widzieć na nim katalog :file:`porteus`). W polu **Savefile name**
+   wpisujemy nazwę pliku, np.: ``porteus.dat``. Rozmiar zostawiamy domyślny lub podajemy większy,
+   np. 768 lub 1024 MB. Klikamy "OK" i czekamy na utworzenie pliku.
 
 .. figure:: img/savefile_02a.png
 
 
-5. Na koniec **ponownie uruchomiamy system**!
+3. Na koniec **ponownie uruchomiamy system**!
 
 
 .. attention::
 
   Domyślna nazwa pliku zapisu, :file:`porteus.dat`, wpisana jest w pliku :file:`boot/syslinux/porteus.cfg`.
   Jeżeli jednak utworzyliśmy plik o innej nazwie, np. ``porteussave.dat``, i chcielibyśmy go użyć, należy
-  otworzyć wspomniany plik, np. klikając *Edit porteus.cfg* (3) w oknie
-  "Porteus Settings Centre" i uzupełnić wpis ``changes=`` zgodnie z nazwą pliku zapisu,
-  który chcemy wykorzystać.
+  otworzyć wspomniany plik, np. klikając przycisk *Edit porteus.cfg* (3) w oknie
+  "Porteus Settings Centre" i uzupełnić wpis ``changes=/`` zgodnie z nazwą pliku zapisu,
+  który chcemy wykorzystać. Uwaga: ``/`` oznacza główny katalog pendrajwa!
 
 .. figure:: img/porteus_cfg0.png
 
@@ -189,27 +192,31 @@ ich prawym klawiszem) znajdziesz również polecenia "Activate" i "Deactivate".
 Wskazówki
 =========
 
-1. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu, umieść go w katalogu :file:`porteus/modules`.
+1. Domyślne konta i hasła: **root** (administratora) => *toor*, **guest** => *guest*. Konto **guest** skonfugurowano
+   do wykonywania poleceń z prawami roota za pomocą polecenia ``sudo``. Jeżeli po podaniu hasła roota jakaś operacja
+   nie chce się wykonać, podaj hasło *guest*.
 
-2. Ilość dostępnego miejsca w pliku zapisu sprawdzimy za pomocą poleceń:
+#. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu, umieść go w katalogu :file:`porteus/modules`.
+
+#. Ilość dostępnego miejsca w pliku zapisu sprawdzimy za pomocą poleceń:
 
 .. code-block:: bash
 
     ~$ du -sh /mnt/live/memory/changes (poda ilość zajętego miejsca)
     ~$ df -h /mnt/live/memory/changes (poda ilość wolnego miejsca)
 
-3. Przejrzyj informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
+#. Przejrzyj informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
 
 .. figure:: img/psi.png
 
 
-4. Możesz korzystać z wielu plików zapisu umieszczonych na pendrawie. Nazwę aktualnego wpisujesz w pliku
+#. Możesz korzystać z wielu plików zapisu umieszczonych na pendrawie. Nazwę aktualnego wpisujesz w pliku
    :file:`boot/syslinux/porteus.cfg`:
 
 .. figure:: img/porteus_cfg1.png
 
 
-5. Plik zapisu możesz powiększyć:
+#. Plik zapisu możesz powiększyć:
 
 * start systemu w trybie "Always Fresh mode";
 * następnie *Start/System/Porteus save file manager* i "I want to resize a save file":
@@ -223,7 +230,7 @@ Wskazówki
     Nowym plikiem trzeba nadpisać dotychczasowy!
 
 
-6. Plik zapisu można przenosić między różnymi pendrajwami. Można go archiwizować i przeglądać w dowolnym
+#. Plik zapisu można przenosić między różnymi pendrajwami. Można go archiwizować i przeglądać w dowolnym
    systemie opartym na Linuksie. W tym celu montujemy plik z uprawnieniami roota np. do katalogu :file:`/mnt`:
 
 .. code-block:: bash
@@ -231,13 +238,13 @@ Wskazówki
     ~$ sudo mount -o loop ścieżka_do_pliku/porteussave.dat /mnt
 
 
-7. Jeżeli masz problem z ustawieniem jasności ekranu laptopa, spróbuj polecenia z opcjonalnym argumentem:
+#. Jeżeli masz problem z ustawieniem jasności ekranu laptopa, spróbuj polecenia z opcjonalnym argumentem:
 
 .. code-block:: bash
 
     ~$ setbright.sh 190
 
-8. Skróty klawiszowe (``Super`` oznacza klawisz Windows):
+#. Skróty klawiszowe (``Super`` oznacza klawisz Windows):
 
   * :kbd:`Super+T` lub :kbd:`CTRL+AL+T` – terminal, np. Terminator;
   * :kbd:`Super+F` – menedżer plików;
@@ -256,7 +263,7 @@ Problemy
 
 .. figure:: img/porteus_usb_install_windows.jpg
 
-2. Nie każdy komputer da się uruchomić z pendrajwa. Możliwe przyczyny:
+#. Nie każdy komputer da się uruchomić z pendrajwa. Możliwe przyczyny:
 
   * BIOS komputera nie obsługuje bootowania z urządzeń USB – to dotyczy starych maszyn (>10 lat?);
   * BIOS nie obsługuje konkretnego pendrajwa – to zdarza się z pendrajwami *noname*;
