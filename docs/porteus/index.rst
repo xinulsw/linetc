@@ -194,27 +194,27 @@ Wskazówki
    do wykonywania poleceń z prawami roota za pomocą polecenia ``sudo``. Jeżeli po podaniu hasła roota jakaś operacja
    nie chce się wykonać, podaj hasło *guest*.
 
-#. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu, umieść go w katalogu :file:`porteus/modules`.
+2. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu, umieść go w katalogu :file:`porteus/modules`.
 
-#. Ilość dostępnego miejsca w pliku zapisu sprawdzimy za pomocą poleceń:
+3. Ilość dostępnego miejsca w pliku zapisu sprawdzimy za pomocą poleceń:
 
 .. code-block:: bash
 
     ~$ du -sh /mnt/live/memory/changes (poda ilość zajętego miejsca)
     ~$ df -h /mnt/live/memory/changes (poda ilość wolnego miejsca)
 
-#. Przejrzyj informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
+4. Przejrzyj informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
 
 .. figure:: img/psi.png
 
 
-#. Możesz korzystać z wielu plików zapisu umieszczonych na pendrawie. Nazwę aktualnego wpisujesz w pliku
+5. Możesz korzystać z wielu plików zapisu umieszczonych na pendrawie. Nazwę aktualnego wpisujesz w pliku
    :file:`boot/syslinux/porteus.cfg`:
 
 .. figure:: img/porteus_cfg1.png
 
 
-#. Plik zapisu możesz powiększyć:
+6. Plik zapisu możesz powiększyć:
 
 * start systemu w trybie "Always Fresh mode";
 * następnie *Start/System/Porteus save file manager* i "I want to resize a save file":
@@ -228,7 +228,7 @@ Wskazówki
     Nowym plikiem trzeba nadpisać dotychczasowy!
 
 
-#. Plik zapisu można przenosić między różnymi pendrajwami. Można go archiwizować i przeglądać w dowolnym
+7. Plik zapisu można przenosić między różnymi pendrajwami. Można go archiwizować i przeglądać w dowolnym
    systemie opartym na Linuksie. W tym celu montujemy plik z uprawnieniami roota np. do katalogu :file:`/mnt`:
 
 .. code-block:: bash
@@ -236,13 +236,13 @@ Wskazówki
     ~$ sudo mount -o loop ścieżka_do_pliku/porteussave.dat /mnt
 
 
-#. Jeżeli masz problem z ustawieniem jasności ekranu laptopa, spróbuj polecenia z opcjonalnym argumentem:
+8. Jeżeli masz problem z ustawieniem jasności ekranu laptopa, spróbuj polecenia z opcjonalnym argumentem:
 
 .. code-block:: bash
 
     ~$ setbright.sh 190
 
-#. Skróty klawiszowe (``Super`` oznacza klawisz Windows):
+9. Skróty klawiszowe (``Super`` oznacza klawisz Windows):
 
   * :kbd:`Super+T` lub :kbd:`CTRL+AL+T` – terminal, np. Terminator;
   * :kbd:`Super+F` – menedżer plików;
@@ -261,10 +261,13 @@ Problemy
 
 .. figure:: img/porteus_usb_install_windows.jpg
 
-#. Nie każdy komputer da się uruchomić z pendrajwa. Możliwe przyczyny:
+2. Nie każdy komputer da się uruchomić z pendrajwa. Możliwe przyczyny:
 
   * BIOS komputera nie obsługuje bootowania z urządzeń USB – to dotyczy starych maszyn (>10 lat?);
   * BIOS nie obsługuje konkretnego pendrajwa – to zdarza się z pendrajwami *noname*;
   * BIOS wymaga zapisania pendrajwa na liście dysków – trzeba wejśc do BIOSU i ustawić pendrajwa
     jako pierwsze urządzenie statowe na liście dysków twardych;
   * BIOS UEFI – na początku spróbujmy trybu *generic*, później dopiero *UEFI*.
+
+3. Jeżeli polecenie "Otwórz Terminal tutaj" otwiera ciągle ten sam katalog,
+   kliknij prawym klawiszem okno Terminatora, wybierz "Preferencje" i odznacz opcję "SerwerDbus".
