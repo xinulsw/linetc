@@ -10,16 +10,14 @@ dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware
 Przygotowaliśmy 64-bitowe spolszczone wersje ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_ lub `Cinnamon <https://pl.wikipedia.org/wiki/Cinnamon>`_ , które bardzo dobrze nadają się m. in. do nauki programowania.
 
 
-.. raw:: html
+.. figure:: img/porteus322X.jpg
 
-    <div class="figure">
-    <a href="../_images/porteus322X.jpg"><img alt="../_images/porteus322X.jpg" src="../_images/porteus322X.jpg" /></a>
-    <p class="caption"><span class="caption-text">Porteus 3.2.2 XFCE 64-bit</span></p>
-    </div>
-    <div class="figure">
-    <a href="../_images/porteus322C.jpg"><img alt="../_images/porteus322C.jpg" src="../_images/porteus322C.jpg" /></a>
-    <p class="caption"><span class="caption-text">Porteus 3.2.2 Cinnamon 64-bit</span></p>
-    </div>
+   Porteus 3.2.2 XFCE 64-bit
+
+
+.. figure:: img/porteus322C.jpg
+
+   Porteus 3.2.2 Cinnamon 64-bit
 
 
 .. contents:: Spis treści
