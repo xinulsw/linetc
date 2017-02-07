@@ -174,8 +174,10 @@ można wgrać do katalogu :file:`potrteus/optional`:
 * :file:`firefox-52.0b1.xzm` – przeglądarka WWW Firefox;
 * :file:`qt-creator-4.2.0.xzm` – lekkie środowisko programistyczne dla biblioteki Qt5.
 * :file:`kivy-1.9.1.xzm` – międzyplatformowy framework do projektowania aplikacji wykorzystujących naturalny interfejs użytkownika, w tym aplikacji mobilnych;
-* :file:`pycharm-2016.3-prof.xzm` – profesjonalne zaawansowane środowisko IDE dla Pythona w wersji Professional Trial.
-
+* :file:`pycharm-2016.3-prof.xzm` – profesjonalne zaawansowane środowisko IDE dla Pythona w wersji Professional Trial;
+* :file:`django-1.10.5.xzm` – wirtualne środowisko .pve z frameworkiem Django i biblioteką django-registration;
+* :file:`mcpi.xzm` – biblioteki do konstruowania świata w `Minecraft Pi Edition <http://python101.readthedocs.io/pl/latest/mcpi/index.html>`_;
+* :file:`robobt-game.xzm` – wirtualne środowisko env z bibliotekami do `Robot Game <http://python101.readthedocs.io/pl/latest/rg/index.html>`_.
 
 Zarządzanie modułami
 --------------------
