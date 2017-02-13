@@ -266,6 +266,7 @@ Wskazówki
   * :kbd:`Super+F` – menedżer plików;
   * :kbd:`Super+E` – edytor Geany;
   * :kbd:`Super+S` – edytor Sublime Text;
+  * :kbd:`Super+Y` – IDE PyCharm Professional (moduł opcjonalny);
   * :kbd:`Super+W` – przeglądarka, np. Palemoon;
   * :kbd:`Super+R` – Lxrandr (zarządzanie ekranami);
   * :kbd:`Super+K` – Keepassx (menedżer haseł).
