@@ -4,12 +4,15 @@ Porteus
 ###################
 
 `Porteus <http://porteus.org/>`_ jest odmianą Linuksa typu *live* zoptymalizowaną
-do uruchamiania z nośników wymiennych, np. kluczy USB. System błyskawicznie startuje
-i pozwala na zachowanie wprowadzanych zmian, tj. konfiguracji, oprogramowania
-czy dokumentów użytkownika w pliku zapisu.
+do uruchamiania z nośników wymiennych, np. kluczy USB. Oparty jest na najstarszej
+dystrybucji Linuksa – `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
+System błyskawicznie startuje i pozwala na zachowanie wprowadzanych zmian,
+tj. konfiguracji, oprogramowania czy dokumentów użytkownika w pliku zapisu.
 
-Oparty jest na najstarszej dystrybucji Linuksa – `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
-Przygotowaliśmy 64-bitowe spolszczone wersje ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_ lub `Cinnamon <https://pl.wikipedia.org/wiki/Cinnamon>`_ , które bardzo dobrze nadają się m. in. do nauki programowania.
+Przygotowaliśmy 64-bitowe spolszczone wersje ze środowiskiem graficznym
+`XFCE <https://pl.wikipedia.org/wiki/Xfce>`_ lub `Cinnamon <https://pl.wikipedia.org/wiki/Cinnamon>`_,
+które bardzo dobrze nadają się m. in. do nauki programowania i realizacji materiałów
+`Python101 <http://python101.rtfd.org>`_.
 
 
 .. figure:: img/porteus322X.jpg
@@ -32,8 +35,8 @@ Klucz USB
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
 1. Pobieramy obraz *iso* systemu:
-   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WTV9ENUgtVXhtclk>`_ [środowisko XFCE, 02.02.2017] lub
-   `porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_ [środowisko Cinnamon, 02.02.2017].
+   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WTV9ENUgtVXhtclk>`_ [środowisko XFCE, 13.02.2017] lub
+   `porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_ [środowisko Cinnamon, 13.02.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
 
@@ -153,6 +156,11 @@ Obraz iso, katalog :file:`potrteus/modules`, zawiera:
 14. :file:`95-sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
 15. :file:`99-home-guest-x(c).xzm` – prekonfiguracja środowiska XFCE.
 
+W katalogu :file:`potrteus/optional` znajdziesz:
+
+* :file:`biblioteki-py2.xzm` – zawiera biblioteki potrzebne do realizacji scenariuszy
+  `Python101 <http://python101.rtfd.org>`_: Django, Django registration, Flask, Peewee,
+  Sqlalchemy, flask-sqlalchemy, /home/guest/robot, /home/guest/mcpi-sim.
 
 .. note::
 
@@ -182,7 +190,8 @@ można wgrać do katalogu :file:`potrteus/optional`:
 * :file:`pycharm-2016.3-prof.xzm` – profesjonalne zaawansowane środowisko IDE dla Pythona w wersji Professional Trial;
 * :file:`django-1.10.5.xzm` – wirtualne środowisko .pve z frameworkiem Django i biblioteką django-registration;
 * :file:`mcpi.xzm` – biblioteki do konstruowania świata w `Minecraft Pi Edition <http://python101.readthedocs.io/pl/latest/mcpi/index.html>`_;
-* :file:`robobt-game.xzm` – wirtualne środowisko env z bibliotekami do `Robot Game <http://python101.readthedocs.io/pl/latest/rg/index.html>`_.
+* :file:`robobt-game.xzm` – wirtualne środowisko env z bibliotekami do `Robot Game <http://python101.readthedocs.io/pl/latest/rg/index.html>`_;
+* :file:`biblioteki-py2.xzm` – zob. wyżej.
 
 Zarządzanie modułami
 --------------------
