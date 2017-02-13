@@ -3,10 +3,12 @@
 Porteus
 ###################
 
-Porteus jest odmianą Linuksa typu *live* zoptymalizowaną do uruchamiania z nośników wymiennych,
-np. kluczy USB. System błyskawicznie się uruchamia i pozwala na zachowanie wprowadzanych zmian,
-tj. konfiguracji, oprogramowania czy dokumentów użytkownika. Oparty jest na najstarszej
-dystrybucji Linuksa o nazwie `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
+`Porteus <http://porteus.org/>`_ jest odmianą Linuksa typu *live* zoptymalizowaną
+do uruchamiania z nośników wymiennych, np. kluczy USB. System błyskawicznie startuje
+i pozwala na zachowanie wprowadzanych zmian, tj. konfiguracji, oprogramowania
+czy dokumentów użytkownika w pliku zapisu.
+
+Oparty jest na najstarszej dystrybucji Linuksa – `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
 Przygotowaliśmy 64-bitowe spolszczone wersje ze środowiskiem graficznym `XFCE <https://pl.wikipedia.org/wiki/Xfce>`_ lub `Cinnamon <https://pl.wikipedia.org/wiki/Cinnamon>`_ , które bardzo dobrze nadają się m. in. do nauki programowania.
 
 
@@ -45,7 +47,7 @@ Przygotowanie pendrajwa z systemem jest bardzo proste:
 
 **W systemie Linux**:
 
-3. Montujemy pobrany obraz z uprawnieniami administratora (roota) do katalogu :file:`/mnt/loop`:
+3. Montujemy pobrany obraz z uprawnieniami administratora (roota) w katalogu :file:`/mnt/loop`:
 
 .. code-block:: bash
 
@@ -74,13 +76,13 @@ Przygotowanie pendrajwa z systemem jest bardzo proste:
 Pierwsze uruchomienie
 =====================
 
-Po włożeniu pendrajwa do gniazda USB po włączeniu komputera należy nacisnąć klawisz
+Po włożeniu pendrajwa do gniazda USB i włączeniu komputera należy nacisnąć klawisz
 wywołujący *Boot menu*. Zazwyczaj jest to któryś z klawiszy funkcyjnych, np.: :kbd:`F12`.
 Czasem trzeba wywołać BIOS i dopiero wtedy wybrać wpis typu *USB Device* oznaczający
 naszego pendrajwa.
 
-Podczas pierwszego uruchamianie zobaczymy komunikat "couldn't find /porteus.dat" informujący,
-że system nie może znaleźć pliku zapisu. Naciskamy :kbd:`Enter`.
+Podczas pierwszego uruchomienia zobaczymy komunikat "couldn't find /porteus.dat" informujący,
+że system nie może znaleźć pliku zapisu. Tak ma być, naciskamy :kbd:`Enter`.
 
 Po uruchomieniu **tworzymy plik zapisu**, w którym przechowywane będą wszystkie zmiany.
 
@@ -90,9 +92,12 @@ Po uruchomieniu **tworzymy plik zapisu**, w którym przechowywane będą wszystk
 
 .. figure:: img/psc02.png
 
-2. W polu **Location** kilkamy ikonę folderu i wskazujemy napęd USB, zazwyczaj "sdb1" lub "sdc1".
-   (Po wybraniu nazwy napędu powinniśmy widzieć na nim katalog :file:`porteus`). W polu **Savefile name**
-   wpisujemy nazwę pliku, np.: ``porteus.dat``. Rozmiar zostawiamy domyślny lub podajemy większy,
+2. **W polu "Savefile name" wpisujemy nazwę pliku**: ``porteus.dat``.
+
+   W polu **Location** klikamy ikonę folderu i wskazujemy napęd USB, zazwyczaj "sdb1" lub "sdc1".
+   (Po wybraniu nazwy napędu powinniśmy widzieć na nim katalog :file:`porteus`).
+
+   Rozmiar zostawiamy domyślny lub podajemy większy,
    np. 768 lub 1024 MB. Klikamy "OK" i czekamy na utworzenie pliku.
 
 .. figure:: img/savefile_02a.png
@@ -104,10 +109,10 @@ Po uruchomieniu **tworzymy plik zapisu**, w którym przechowywane będą wszystk
 .. attention::
 
   Domyślna nazwa pliku zapisu, :file:`porteus.dat`, wpisana jest w pliku :file:`boot/syslinux/porteus.cfg`.
-  Jeżeli jednak utworzyliśmy plik o innej nazwie, np. ``porteussave.dat``, i chcielibyśmy go użyć, należy
+  Jeżeli zapis nie działa albo utworzyliśmy plik o innej nazwie i chcielibyśmy go użyć, należy
   otworzyć wspomniany plik, np. klikając przycisk *Edit porteus.cfg* (3) w oknie
-  "Porteus Settings Centre" i uzupełnić wpis ``changes=/`` zgodnie z nazwą pliku zapisu,
-  który chcemy wykorzystać. Uwaga: ``/`` oznacza główny katalog pendrajwa!
+  "Porteus Settings Centre" i wpisać właściwą ścieżkę do pliku zapisu: ``changes=/nazwa_pliku_zapisu.dat``.
+  Uwaga: ``/`` oznacza główny katalog pendrajwa!
 
 .. figure:: img/porteus_cfg0.png
 
@@ -192,11 +197,13 @@ ich prawym klawiszem) znajdziesz również polecenia "Activate" i "Deactivate".
 Wskazówki
 =========
 
-1. Domyślne konta i hasła: **root** (administratora) => *toor*, **guest** => *guest*. Konto **guest** skonfugurowano
-   do wykonywania poleceń z prawami roota za pomocą polecenia ``sudo``. Jeżeli po podaniu hasła roota jakaś operacja
-   nie chce się wykonać, podaj hasło *guest*.
+1. Domyślne konta i hasła: **root** (administratora) => *toor*, **guest** => *guest*.
+   Konto **guest** skonfigurowano do wykonywania poleceń z prawami roota za pomocą komendy ``sudo``.
+   Jeżeli po podaniu hasła roota jakaś operacja nie chce się wykonać, podaj hasło *guest*.
 
-2. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu, umieść go w katalogu :file:`porteus/modules`.
+2. Jeżeli chcesz, aby jakiś moduł był wczytywany podczas startu systemu,
+   umieść go w katalogu :file:`porteus/modules`. Z kolei moduł usunięty z tego katalogu
+   nie będzie domyślnie dostępny.
 
 3. Ilość dostępnego miejsca w pliku zapisu sprawdzimy za pomocą poleceń:
 
@@ -205,12 +212,12 @@ Wskazówki
     ~$ du -sh /mnt/live/memory/changes (poda ilość zajętego miejsca)
     ~$ df -h /mnt/live/memory/changes (poda ilość wolnego miejsca)
 
-4. Przejrzyj informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
+4. Informacje o komputerze: *Start/System/Porteus system info*, np. o miejscu instalacji: *Porteus/Boot_info*.
 
 .. figure:: img/psi.png
 
 
-5. Możesz korzystać z wielu plików zapisu umieszczonych na pendrawie. Nazwę aktualnego wpisujesz w pliku
+5. Możesz korzystać z wielu plików zapisu umieszczonych na pendrajwie. Nazwę aktualnego wpisujesz w pliku
    :file:`boot/syslinux/porteus.cfg`:
 
 .. figure:: img/porteus_cfg1.png
@@ -268,7 +275,7 @@ Problemy
   * BIOS komputera nie obsługuje bootowania z urządzeń USB – to dotyczy starych maszyn (>10 lat?);
   * BIOS nie obsługuje konkretnego pendrajwa – to zdarza się z pendrajwami *noname*;
   * BIOS wymaga zapisania pendrajwa na liście dysków – trzeba wejśc do BIOSU i ustawić pendrajwa
-    jako pierwsze urządzenie statowe na liście dysków twardych;
+    jako pierwsze urządzenie startowe na liście dysków twardych;
   * BIOS UEFI – na początku spróbujmy trybu *generic*, później dopiero *UEFI*.
 
 3. Jeżeli polecenie "Otwórz Terminal tutaj" otwiera ciągle ten sam katalog,
