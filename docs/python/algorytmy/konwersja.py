@@ -22,7 +22,6 @@ def konwertuj(liczba, podst):
     if podst > 10:  # zamiana cyfr większych od 9
         reszty = [cyfry[x] if x > 9 else x for x in reszty]
     return reszty
-    print "".join(str(x) for x in reszty)
 
 
 def main(args):
