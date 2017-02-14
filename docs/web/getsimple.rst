@@ -18,96 +18,98 @@ Pobranie archwium
     typu MySQL itp. nie są koniecznie, ponieważ GS przechowuje pliki w formacie
     ``XML``. Zob. materiał :ref:`Serwer deweloperski WWW <lwamp>`.
 
-Najnowszą wersję GS pobieramy ze strony `Download GetSimple CMS <http://get-simple.info/download>`_.
+Najnowszą wersję GS pobieramy ze strony `Download GetSimple CMS <http://get-simple.info/download>`_
+lub z :download:`od nas <gs/GetSimpleCMS-3.3.13.zip>`.
 Ściągnięte archiwum ``zip`` umieszczamy w podkatalogu ``public_html`` katalogu domowego
-użytkownika Linuksa lub w podkatalogu ``htdocs`` folderu instalacyjnego ``Serwer2Go``.
+użytkownika Linuksa lub w podkatalogu ``www`` folderu instalacyjnego ``UwAmp``.
 Rozpakowujemy je, a następnie nazwę utworzonego katalogu zmieniamy na ``gs``.
-
-.. figure:: img/getsimple02.jpg
 
 .. note::
 
     W środowisku Linux folderowi ``gs`` musimy nadać uprawnienia do zapisu
     i odczytu nie tylko dla właściciela, ale i dla grupy oraz innych.
-    Można to zrobić z poziomu menedżera plików po kliknięciu prawym klawiszem
+    Robimy to z poziomu menedżera plików po kliknięciu prawym klawiszem
     myszy nazwy katalogu i wybraniu "Właściwości/Uprawnienia" (zob. zrzut poniżej).
     Uwaga: na pytanie typu "Zastosować rekursywnie" odpowiadamy twierdząco.
     Można też w katalogu ``public_html`` wydać polecenie w terminalu ``chmod -R 777 gs``.
 
-.. figure:: img/gs_chmod.png
+.. figure:: gs/gs01.jpg
 
-Następnie przechodzimy do przeglądarki (w Windows ``Serwer2Go`` musi być uruchomiony!)
+Następnie przechodzimy do przeglądarki (w Windows ``UwAmp`` musi być uruchomiony!)
 i rozpoczynamy instalację wpisując w polu adresu: ``http://127.0.0.1/~nazwa_użytkownika/gs/admin``
-(Linux) lub ``http://127.0.0.1:4001/gs/admin`` (Windows).
+(Linux) lub ``http://127.0.0.1/gs/admin`` (Windows). Klikamy "Continue with Setup".
 
-.. figure:: img/getsimple03.jpg
+.. figure:: gs/gs02.jpg
 
 .. note::
 
     W środowisku Linux ewentualne błędy ``chmod`` ignorujemy.
 
-Spolszczenie
-============
-
-Jak widać, domyślnie dostępny jest język angielski. Można to łatwo zmienić już
-podczas instalacji (później również). W nowej karcie przeglądarki otwieramy
-link ``Download Languages``, a na otwartej stronie wchodzimy do sekcji ``Extend``.
-W polu wyszukiwania wpisujemy ``polish``, po wyświetleniu znalezionych zasobów
-klikamy link ``Polish language (spolszczenie) 1.3.7``. Ściągamy spakowane archiwum
-na dysk. Przenosimy je do folderu ``gs/admin/lang`` i tam rozpakowujemy.
-
-.. figure:: img/getsimple06.jpg
-
-.. figure:: img/getsimple07.jpg
-
 Instalacja
 **********
 
-Wracamy do przęglądarki, odświeżamy stronę instalacyjną, np. klawiszem :kbd:`F5`,
-i wybieramy polską wersję językową. Po kliknięciu przycisku "Kontynuuj instalację"
-na następnej stronie wpisujemy nazwę strony, login i hasło administratora.
+Na następnej stronie wpisujemy nazwę strony, login i email administratora.
 
-.. figure:: img/getsimple09.jpg
+.. figure:: gs/gs03.jpg
 
-Po naciśnięciu "Instaluj!" może zostać wyświetlona strona z błędem (pod Windowsem)
-ze względu na brak możliwości wysłania wiadomości e-mail z danymi logowania. Jest to
-normalne. Wyświetlone hasło możemy ewentualnie zapisać, po czym kilkamy link "Logowanie".
-Zobaczymy panel administracyjny, w którym będziemy mogli zmienić hasło
-klikając po prawej stronie "Ustawienia", a następnie "Profil użytkownika".
+Po naciśnięciu "Install Now!" może zostać wyświetlona strona z błędem ze względu
+na brak możliwości wysłania wiadomości e-mail z danymi logowania. To normalne.
+Wyświetlone hasło możemy ewentualnie skopiować, po czym kilkamy link "login here".
 
-Domyślnie dodana zostanie demonstracyjna strona główna widoczna w panelu "Strony",
-którą wyświetlimy w przeglądarce, jeżeli klikniemy nazwę serwisu w panelu administracyjnym
-lub wpiszemy ``http://127.0.0.1/~nazwa_użytkownika/gs/`` (Linux) lub ``http://127.0.0.1:4001/gs/`` (Windows)
-w polu adresu.
+.. figure:: gs/gs04.jpg
 
-.. figure:: img/getsimple14.jpg
+Spolszczenie i konfiguracja
+***************************
 
-Zobacz galerię :ref:`Instalacja GetSimple CMS <gsimple-gal>`.
+Plik spolszczenia pobieramy ze strony `Extend <http://get-simple.info/extend/>`_,
+na której wyszukujemy w polu "Serach Repository" hasło "polish" i wybieramy link
+do ostatniej wersji:
+
+.. figure:: gs/gs05.jpg
+
+
+Spolszczenie możemy również pobrać :download:`od nas <gs/polish-language-spolszczenie-gs-3.3.zip>`.
+Ściągnięte archiwum przenosimy do folderu ``gs/admin/lang`` i tam rozpakowujemy.
+
+.. figure:: gs/gs06.jpg
+
+
+Wracamy do panelu administracyjnego w przeglądarce (``http://127.0.0.1/~nazwa_użytkownika/gs/admin``),
+w razie potrzeby odświeżamy stronę naciskając :kbd:`F5` i wybieramy w prawym górnym rogu "Settings".
+Ustawiamy: strefę czasową ("Local Timezone"), język interfejsu admina ("Language") oraz
+nowe hasło ("New Password") – i klikamy "Save settings".
+
+.. figure:: gs/gs07.jpg
+
 
 Wtyczki
 *******
 
 Jak większość CMS-ów, GetSimple oferuje mechanizm wtyczek, pozwalający rozszerzać
-w miarę potrzeb funkcjonalność zarówno od strony użytkownika, jak i administratora
-serwisu. Instalacja wtyczek polega na pobraniu ich ze strony `Extend Repository <http://get-simple.info/extend/>`,
+w miarę potrzeb funkcjonalność zarówno od strony użytkownika, jak i administratora.
+Instalacja wtyczek polega na pobraniu ich ze strony `Extend Repository <http://get-simple.info/extend/>`_,
 a następnie rozpakowaniu archiwum ``zip`` w podfolderze ``gs/plugins``.
-Wtyczkami zarządzamy w sekcji "Wtyczki" panelu administracyjnego. Tam można
-je m. in. włączać lub wyłączać.
 
-Przykładowe wtyczki
-===================
+Pakiet przykładowych wtyczek można pobrać :download:`od nas <gs/plugins.zip>` lub pojedynczo:
 
-- `I18N <http://get-simple.info/extend/plugin/i18n/69/>`_ – dodaje wsparcie
+* `I18N <http://get-simple.info/extend/plugin/i18n/69/>`_ – dodaje wsparcie
   dla stron w różnych językach oraz bardzo użyteczne hierarchiczne menu;
-- `I18N Gallery <http://get-simple.info/extend/plugin/i18n-gallery/160/>`_
+* `I18N Gallery <http://get-simple.info/extend/plugin/i18n-gallery/160/>`_
   – dodaje możliwość wygodnego tworzenia galerii zdjęć i umieszczania ich
   na stronach;
-- `I18N Search <http://get-simple.info/extend/plugin/i18n-search/82/>`_ –
-  umożliwia m. in. wyszukiwanie tekstu na stronach serwisu, ale również
-  tworzenie list zasobów oznaczonych tymi samymi tagami.
-- `I18N Special Pages <http://get-simple.info/extend/plugin/i18n-special-pages/319/>`_
+* `DynPages <http://get-simple.info/extend/plugin/dynpages/81/>`_  – możliwość umieszczania
+  na stronach kodu generowanego przez komponenty php;
+* `I18N Search <http://get-simple.info/extend/plugin/i18n-search/82/>`_
+  – umożliwia m. in. wyszukiwanie tekstu na stronach serwisu, ale również
+  tworzenie list zasobów oznaczonych tymi samymi tagami;
+* `I18N Special Pages <http://get-simple.info/extend/plugin/i18n-special-pages/319/>`_
   – pozwala tworzyć strony specjalne typu newsy, artykuły, karty produktów
   itp.
+
+Zawartość przykładowego folderu ``plugins`` powinna wyglądać następująco:
+
+.. figure:: gs/gs08.jpg
+
 
 .. note::
 
@@ -115,13 +117,27 @@ Przykładowe wtyczki
     wygodnie je rozpakujesz wydając w terminalu polecenie typu:
     ``unzip nazwa_archiwum.zip``.
 
-    Uwaga: użycie polecenia "Rozpakuj tutaj" w menedżerze
-    plików umieści pliki w dodatkowym i niepotrzebnym podfolderze (o nazwie wtyczki),
-    z którego trzeba je będzie przenieść do folderu nadrzędnego (``plugins``).
+    Użycie polecenia "Rozpakuj tutaj" w menedżerze plików może umieścić pliki
+    w dodatkowym i niepotrzebnym podfolderze, z którego trzeba je będzie przenieść
+    do folderu nadrzędnego (``plugins``).
 
-Zawartość przykładowego folderu ``plugins`` powinna wyglądać następująco:
 
-.. figure:: img/gs_plugins.png
+Wtyczkami zarządzamy w sekcji "Wtyczki" panelu administracyjnego. Tam można
+je m. in. włączać lub wyłączać.
+
+.. figure:: gs/gs09.jpg
+
+
+Strona główna
+*************
+
+Domyślnie dodana zostanie demonstracyjna strona główna widoczna w panelu "Strony",
+którą wyświetlimy w przeglądarce, jeżeli klikniemy nazwę serwisu w panelu administracyjnym
+lub wpiszemy ``http://127.0.0.1/~nazwa_użytkownika/gs/`` (Linux) lub ``http://127.0.0.1/gs/`` (Windows)
+w polu adresu.
+
+.. figure:: gs/gs10.jpg
+
 
 Materiały
 **************
@@ -162,9 +178,7 @@ Słownik
         służący m. in. do generowania po stronie serwera dynamicznych stron internetowych.
 
     Python
-        `obiektowy język programowania <http://pl.wikipedia.org/wiki/Python>`_ wysokiego poziomu służący m. in. do tworzenia
-        aplikacji internetowych, oferuje przyjazną składnię, czytelność i klarowność
-        kodu.
+        `obiektowy język programowania <http://pl.wikipedia.org/wiki/Python>`_ wysokiego poziomu służący m. in. do tworzenia aplikacji internetowych, oferuje przyjazną składnię, czytelność i klarowność kodu.
 
     CSS
         (ang. *Cascading Style Sheets*, CSS) – `kaskadowe arkusze stylów <http://pl.wikipedia.org/wiki/Kaskadowe_arkusze_styl%C3%B3w>`_,

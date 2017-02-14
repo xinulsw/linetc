@@ -3,7 +3,7 @@
 Porteus
 ###################
 
-`Porteus <http://porteus.org/>`_ jest odmianą Linuksa typu *live* zoptymalizowaną
+`Porteus <http://porteus.org/>`__ jest odmianą Linuksa typu *live* zoptymalizowaną
 do uruchamiania z nośników wymiennych, np. kluczy USB. Oparty jest na najstarszej
 dystrybucji Linuksa – `Slackware <https://pl.wikipedia.org/wiki/Slackware>`_.
 System błyskawicznie startuje i pozwala na zachowanie wprowadzanych zmian,
