@@ -189,6 +189,16 @@ w konsoli:
     set PATH=%PATH%;c:\Python27\;c:\Python27\Scripts\
 
 
+.. _st3-opis:
+
+Sublime Text 3
+**************
+
+Sublime Text 3 to profesjonalny edytor dla programistów, który właściwie skonfigurowany
+bardzo dobrze nadaje się do pisania programów w wielu językach, m.in. w Pythonie.
+Zobacz: `instalacja i konfiguracja ST3 <http://python101.readthedocs.io/pl/latest/env/index.html#sublime-text-3>`_.
+
+
 Biblioteka Qt
 ******************
 
@@ -278,9 +288,9 @@ sprowadza się do użycia odpowiedniego menedżera pakietów:
 W systemach **Windows** tego samego klienta tekstowego pobieramy ze strony `<http://git-scm.com/download/win>`_
 i instalujemy wybierając domyślne opcje.
 
-Po opanowaniu podstaw obsługi Gita można oczywiście zainstalować programy
-z graficznym interfejsem użytkownika, jednak w większości przypadków
-nie jest to konieczne.
+Po opanowaniu podstaw Gita można oczywiście zainstalować programy
+z graficznym interfejsem użytkownika np.: `SmartGit <http://www.syntevo.com/smartgit/>`_
+lub obsługiwać repozytorium z poziomu edytora kodu, np. Sublime Text 3 czy PyCharm.
 
 Lokalne repozytorium
 ====================
