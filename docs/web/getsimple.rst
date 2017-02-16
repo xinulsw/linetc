@@ -24,7 +24,7 @@ lub z :download:`od nas <gs/GetSimpleCMS-3.3.13.zip>`.
 użytkownika Linuksa lub w podkatalogu ``www`` folderu instalacyjnego ``UwAmp``.
 Rozpakowujemy je, a następnie nazwę utworzonego katalogu zmieniamy na ``gs``.
 
-.. note::
+.. warning::
 
     W środowisku Linux folderowi ``gs`` musimy nadać uprawnienia do zapisu
     i odczytu nie tylko dla właściciela, ale i dla grupy oraz innych.
@@ -35,9 +35,12 @@ Rozpakowujemy je, a następnie nazwę utworzonego katalogu zmieniamy na ``gs``.
 
 .. figure:: gs/gs01.jpg
 
-Następnie przechodzimy do przeglądarki (w Windows ``UwAmp`` musi być uruchomiony!)
-i rozpoczynamy instalację wpisując w polu adresu: ``http://127.0.0.1/~nazwa_użytkownika/gs/admin``
-(Linux) lub ``http://127.0.0.1/gs/admin`` (Windows). Klikamy "Continue with Setup".
+Następnie przechodzimy do przeglądarki i rozpoczynamy instalację wpisując w polu adresu:
+``http://localhost/~nazwa_użytkownika/gs/admin`` (Linux)
+lub ``http://localhost/gs/admin`` (Windows).
+Jeżeli skorzystałeś z udostępnionego przez nas archiwum GetSimple,
+na stronie instalacyjnej możesz od razu wybrać język polski. Później
+klikamy "Continue with Setup" ("Kontynuuj instalację").
 
 .. figure:: gs/gs02.jpg
 
@@ -52,7 +55,7 @@ Na następnej stronie wpisujemy nazwę strony, login i email administratora.
 
 .. figure:: gs/gs03.jpg
 
-Po naciśnięciu "Install Now!" może zostać wyświetlona strona z błędem ze względu
+Po naciśnięciu "Install Now!" ("Instaluj") może zostać wyświetlona strona z błędem ze względu
 na brak możliwości wysłania wiadomości e-mail z danymi logowania. To normalne.
 Wyświetlone hasło możemy ewentualnie skopiować, po czym kilkamy link "login here".
 
@@ -61,9 +64,9 @@ Wyświetlone hasło możemy ewentualnie skopiować, po czym kilkamy link "login 
 Spolszczenie i konfiguracja
 ***************************
 
-Plik spolszczenia pobieramy ze strony `Extend <http://get-simple.info/extend/>`_,
-na której wyszukujemy w polu "Serach Repository" hasło "polish" i wybieramy link
-do ostatniej wersji:
+Jeżeli jest taka potrzeba, plik spolszczenia pobieramy ze strony
+`Extend <http://get-simple.info/extend/>`_, na której wyszukujemy w polu
+"Serach Repository" hasło "polish" i wybieramy link do ostatniej wersji:
 
 .. figure:: gs/gs05.jpg
 
@@ -74,7 +77,7 @@ Spolszczenie możemy również pobrać :download:`od nas <gs/polish-language-spo
 .. figure:: gs/gs06.jpg
 
 
-Wracamy do panelu administracyjnego w przeglądarce (``http://127.0.0.1/~nazwa_użytkownika/gs/admin``),
+Wracamy do panelu administracyjnego w przeglądarce (``http://localhost/~nazwa_użytkownika/gs/admin``),
 w razie potrzeby odświeżamy stronę naciskając :kbd:`F5` i wybieramy w prawym górnym rogu "Settings".
 Ustawiamy: strefę czasową ("Local Timezone"), język interfejsu admina ("Language") oraz
 nowe hasło ("New Password") – i klikamy "Save settings".
@@ -133,7 +136,7 @@ Strona główna
 
 Domyślnie dodana zostanie demonstracyjna strona główna widoczna w panelu "Strony",
 którą wyświetlimy w przeglądarce, jeżeli klikniemy nazwę serwisu w panelu administracyjnym
-lub wpiszemy ``http://127.0.0.1/~nazwa_użytkownika/gs/`` (Linux) lub ``http://127.0.0.1/gs/`` (Windows)
+lub wpiszemy ``http://localhost/~nazwa_użytkownika/gs/`` (Linux) lub ``http://localhost/gs/`` (Windows)
 w polu adresu.
 
 .. figure:: gs/gs10.jpg
