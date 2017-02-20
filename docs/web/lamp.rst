@@ -1,7 +1,7 @@
 .. _lwamp:
 
-Serwer deweloperski WWW
-#######################
+Serwer WWW
+###########
 
 Jeżeli chcemy tworzyć i testować aplikacje sieciowe wykorzystujące bazy danych
 za pomocą języków skryptowych, np. PHP czy Python, potrzebujemy środowiska testowego,

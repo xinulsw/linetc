@@ -15,4 +15,5 @@ Spis treści:
 
     html_css_js/index.rst
     lamp
-    getsimple
+    gs/index.rst
+    glosary_www.rst
