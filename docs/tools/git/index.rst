@@ -71,7 +71,7 @@ Najważniejszy jest argument `Git URL`, czyli schematyczny adres repozytorium,
 który możemy pobrać na stronie repozytorium klikając przycisk "Clone or download":
 
 
-.. figure:: img/git_clone.jpg
+.. figure:: git_clone.jpg
 
 
 W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
@@ -94,7 +94,7 @@ Wydajemy polecenia:
     ~/mojprojekt$ git commit -m "Dodanie opisu projektu"
 
 
-.. figure:: img/git_init.jpg
+.. figure:: git_init.jpg
 
 
 - na początku tworzymy katalog dla projektu i wchodzimy do niego;
@@ -445,3 +445,17 @@ Wersję PDF ściągniemy po zalogowaniu, wejściu na stronę projektu, wybraniu
 zakładki *Downloads* i linku *latest PDF*.
 
 .. figure:: img/rtfd.jpg
+
+Materiały
+
+1. `Strona projektu Git`_
+2. `First Steps with Sphinx`_
+3. `Wprowadzenie do składni Sphinx reST`_
+4. `Docutils`_
+5. `Składnia reST & Sphinx`_
+
+.. _Strona projektu Git: http://git-scm.com/
+.. _First Steps with Sphinx: http://sphinx-doc.org/tutorial.html
+.. _Wprowadzenie do składni Sphinx reST: http://sphinx-doc.org/rest.html
+.. _Docutils: http://docutils.sourceforge.net/
+.. _Składnia reST & Sphinx: http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html
