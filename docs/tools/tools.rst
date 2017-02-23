@@ -1,7 +1,7 @@
 .. _geany-opis:
 
 Geany
-*************
+######
 
 `Geany <http://www.geany.org/>`_ to proste i lekkie środowisko IDE dostępne na licencji
 `GNU General Public Licence <http://pl.wikipedia.org/wiki/GNU_General_Public_License>`_.
@@ -55,7 +55,7 @@ Jeżeli chcemy wciąć od razu cały blok kodu, zaznaczamy go i również używa
 programów pisanych w różnych językach. Wymagane narzędzia musimy doinstalować osobno.
 
 Kompilator C/C++
-*********************
+################
 
 W systemie **Linux** potrzebne narzędzia są zazwyczaj obecne, ale w razie potrzeby wystarczy
 doinstalować pakiet ``gcc`` odpowiednim menedżerem pakietów, np.:
@@ -102,9 +102,10 @@ zrzutem:
     dzięki czemu wszyscy użytkownicy będą mogli wywoływać narzędzia bez
     podawania pełnej ich lokalizacji.
 
+.. _interpreter-pythona:
 
 Interpreter Pythona
-*********************
+###################
 
 W systemach **Linux** Python jest szeroko stosowany i dostępny jest w ramach
 standardowej instalacji większości dystrybucji i to zarówno w wersji 2.x,
@@ -141,10 +142,9 @@ dostępnej w wersjach *Professional* (oznaczoną niebieską ikoną i niebieskiem
     (new-object System.Net.WebClient).DownloadFile("https://raw.github.com/pypa/pip/master/contrib/get-pip.py", "$pwd\get-pip.py")
     C:\Python27\python.exe get-pip.py virtualenv
 
-Jeżeli w naszej wersji Windows nie ma PowerShella, ściągamy `interpreter Pythona`_
+Jeżeli w naszej wersji Windows nie ma PowerShella, ściągamy `interpreter Pythona <https://www.python.org/downloads/>`_
 i instalujemy ręcznie, pamiętając o zaznaczeniu opcji "Add Python.exe to Path".
 
-.. _interpreter Pythona: https://www.python.org/downloads/
 
 .. figure:: img/python01.jpg
 
@@ -168,7 +168,7 @@ w konsoli:
 .. _st3-opis:
 
 Sublime Text 3
-**************
+##############
 
 Sublime Text 3 to profesjonalny edytor dla programistów, który właściwie skonfigurowany
 bardzo dobrze nadaje się do pisania programów w wielu językach, m.in. w Pythonie.
@@ -176,7 +176,7 @@ Zobacz: `instalacja i konfiguracja ST3 <http://python101.readthedocs.io/pl/lates
 
 
 Biblioteka Qt
-******************
+#############
 
 :term:`Qt` to zestaw bibliotek przeznaczonych dla języka C++, QML i Java,
 który znakomicie ułatwia tworzenie graficznego interfejsu użytkownika.
@@ -184,7 +184,7 @@ Zawiera również klasy udostępniające obsługę m.in. multimediów , sieci
 czy baz danych.
 
 System i środowisko IDE
-========================
+=======================
 
 Bilioteka :term:`Qt` jest przenośna z założenia, więc programować z jej wykorzystaniem
 można w wielu systemach i środowiskach. Proponujemy system Linux,
@@ -220,7 +220,7 @@ takie same.
 
 
 Baza SQLite
-************
+###########
 
 W wielu projektach nie ma potrzeby wykorzystywania dużych i skomplikowanych systemów zarządzania
 bazami danych takich jak MySQL, MariaDB czy PostgreSQL. Lepiej skorzystać
@@ -280,14 +280,14 @@ dołączony do opisanego wyżej środowiska *UwAmp*. Można go pobrać ze strony
 
 
 L(W)amp
-********
+=======
 
 Zobacz: :ref:`Serwer deweloperski WWW <lwamp>` »»»
 
 
 
 Materiały
-**************
+=========
 
 1. `Edytor Geany`_
 2. `MinGw`_

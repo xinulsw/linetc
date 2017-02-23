@@ -29,3 +29,4 @@ Spis treści:
 
     tools.rst
     git/index
+    sphinxrst.rst
