@@ -1,7 +1,7 @@
 Materiały eCG IT
 ######################
 
-Materiały zawarte w tym repozytorium zawierają ćwiczenia, poradniki
+Materiały w tym repozytorium zawierają ćwiczenia, poradniki
 oraz dokumentację związaną z zagadnieniami technologii informacyjnej
 i informatyki.
 
@@ -21,8 +21,7 @@ Repozytorium można skolonować lokanie:
 
     $ git clone https://github.com/xinulsw/linetc/
 
-Wszystkie kody źródłowe można też pobrać jako archiwum ZIP bezpośrednio z tego repozytorium
-bez wykorzystania narzędzia GIT.
+Wszystkie kody źródłowe można też pobrać jako archiwum ZIP:
 
     https://github.com/xinulsw/linetc/archive/master.zip
 
