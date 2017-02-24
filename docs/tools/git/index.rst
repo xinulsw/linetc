@@ -9,11 +9,12 @@ Skrót SCM bywa również rozwijany jako *software configuration management*,
 co oznacza "zarządzanie konfiguracją oprogramowania". Gita można używać
 do rozwijania zarówno małych, jak i dużych projektów (np. Arch Linux, GIMP, jQuery).
 
-Konto
-=======
+Konto i repozytorium
+====================
 
-Przede wszystkim wchodzimy na stronę  `<https://github.com/>`_. Następnie zakładamy konto podając:
-nazwę użytkownika, email i hasło. Możemy też postępować wg poniższych instrukcji:
+Przede wszystkim wchodzimy na stronę  `<https://github.com/>`_ i zakładamy konto podając:
+nazwę użytkownika, email i hasło. Następnie dodajemy pierwsze puste repozytorium.
+Możemy postępować wg poniższych instrukcji:
 
 *   Krok 1 – `założenie konta <https://help.github.com/articles/signing-up-for-a-new-github-account/>`_;
     podajemy nazwę użytkownika, adres email i hasło, jako typ konta wybieramy *free*.
@@ -21,60 +22,52 @@ nazwę użytkownika, email i hasło. Możemy też postępować wg poniższych in
 *   Krok 3 – `zakładamy repozytorium <https://help.github.com/articles/create-a-repo/>`_ dla projektu,
     wybieramy typ *Public* (publiczne)
 
+.. figure:: img/git_repo01.jpg
 
-.. tip::
+.. figure:: img/git_repo02.jpg
 
-    Podczas tworzenia repozytorium można zaznaczyć opcję *Initialize this repository with a README*
-    (utwórz początkowy plik README), o ile nie utworzylismy wcześniej repozytorium lokalnego (zob. poniżej),
-    które zamierzamy połaczyć ze zdalnym.
+.. figure:: img/git_repo03.jpg
 
-Klient Gita
-================
 
-Treść projektu można dodawać do repozytorium centralnego w serwisie *github.com*
+Klient i konfiguracja
+=====================
+
+Treściami projektu można zarządzać bezpośrednio w serwisie *GitHub*
 za pomocą przeglądarki. Częściej jednak pracujemy w repozytorium lokalnym,
-obsługiwanym za pomocą jakiegoś programu.
+obsługiwanym za pomocą jakiegoś programu. Podstawowym jest klient tekstowy
+obsługiwany w termianlu.
 
-Ze względu na szybkość działania polecamy środowisko **Linux**. Instalacja
-podstawowego klienta tekstowego w systemach opartych na Debianie (Ubuntu, Linux Mint itd.)
-i opartych na Arch Linuksie (np. Manjaro, Antergos) sprowadza się
-do użycia odpowiedniego menedżera pakietów:
+W **Linuksie** instalacja sprowadza się do użycia odpowiedniego menedżera pakietów:
 
 .. code-block:: bash
 
+    w Debianie (Ubuntu, Mint):
     ~$ sudo apt-get install git
-    lub w Archu:
+    w Archu (Manjaro, Antergos):
     ~# pacman -S git
 
-W systemach **Windows** tego samego klienta tekstowego pobieramy ze strony `<http://git-scm.com/download/win>`_
-i instalujemy wybierając domyślne opcje.
-
-Po opanowaniu podstaw Gita można oczywiście zainstalować programy
-z graficznym interfejsem użytkownika np.: `SmartGit <http://www.syntevo.com/smartgit/>`_
-lub obsługiwać repozytorium z poziomu edytora kodu, np. Sublime Text 3 czy PyCharm.
+W **Windows** tego samego klienta tekstowego pobieramy ze strony
+`<http://git-scm.com/download/win>`_ i instalujemy wybierając domyślne opcje.
 
 
-Klonowanie repozytorium
-=======================
+.. note::
 
-Pierwszym sposobem utworzenia lokalnego repozytorium jest klonowanie.
-Możemy klonować założone przez siebie repozytoria lub istniejące (wtedy tworzymy tzw. forki).
-Czynność sprowadza się do wydania polecenia w terminalu:
+    Po zrozumieniu podstaw Gita można oczywiście zainstalować programy
+    z interfejsem graficznym, np.: `SmartGit <http://www.syntevo.com/smartgit/>`_,
+    lub obsługiwać repozytorium z poziomu edytora kodu,
+    np. Sublime Text 3 czy PyCharm.
+
+
+**Podstawowa konfiguracja**: w terminalu wydajemy polecenia:
 
 .. code-block:: bash
 
-    ~$ git clone https://github.com/nazwa_użytkownika/nazwa_repozytorium.git [nazwa_katalogu]
+    ~$ git config --global user.name "nazwa_użytkownika";
+    ~$ git config --global user.email email_użytkownika;
+    ~$ git config --list
 
-Najważniejszy jest argument `Git URL`, czyli schematyczny adres repozytorium,
-który możemy pobrać na stronie repozytorium klikając przycisk "Clone or download":
-
-
-.. figure:: img/git_clone.jpg
-
-
-W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
-lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
-
+Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
+w projekcie zmian.
 
 Nowe repozytorium
 =================
@@ -96,23 +89,105 @@ Wydajemy polecenia:
 
 
 - na początku tworzymy katalog dla projektu i wchodzimy do niego;
-- ``git init`` tworzy repozytorium w ukrytym katalogu :file:`.git`;
-- ``echo`` tworzy plik :file:`README.md` zawierający opis projektu (oczywiście można to zrobić w dowolnym edytorze);
+- ``git init`` inicjuje repozytorium w ukrytym katalogu :file:`.git`;
+- ``echo`` tworzy plik :file:`README.md` z opisem projektu
+  (można to zrobić w dowolnym edytorze);
 - ``git status`` – pokazuje status plików;
 - ``git add nazwa_pliku`` – przenosi plik do "poczekalni";
-- ``git commit -m "komentarz"`` – zatwierdza zaminy w repozytorium.
+- ``git commit -m "komentarz"`` – zatwierdza zmiany w repozytorium, tworząc tzw. migawkę.
 
-Tak utworzone repozytorium można połączyć i zsynchronizować ze zdalnym, które jednak musi zostać
-wcześniej utworzone w serwisie GitHub.
+Pliki (katalogi) projektu mogą znajdować się w trzech przestrzeniach
+określanych jako:
 
-Podstawy Gita
+* katalog roboczy (ang. *working directory*);
+* poczekalnia (ang. staging area);
+* repozytorium (katalog .git).
+
+.. figure:: img/areas.png
+
+
+Podczas pracy nad projektem stan pliku zależy od przestrzeni, w której się znajduje,
+i określany jest jako:
+
+* nieśledzony (ang. *untracked*) – nowe pliki w katalogu roboczym;
+  polecenie ``git add`` rozpoczyna ich śledzenie;
+* śledzony (ang. *tracked*):
+  * niezmieniony (ang. *unmodified*) w katalogu roboczym;
+  * zmieniony (ang. *modified*) w katalogu roboczym;
+  * czekający na zatwierdzenie (ang. *staged*) – dodane do poczekalni poleceniem ``git add``;
+
+.. figure:: img/lifecycle.png
+
+Polecenie ``git commit`` zatwierdza aktualną zawartość poczekalni w migawce
+(ang. *snapshot*), która trafia do repozytorium.
+
+
+Master i origin
+===============
+
+Repozytorium lokalne można połączyć i zsynchronizować ze zdalnym. Podczas tworzenia
+pustego repozytorium w serwisie GitHub podane są polecenia, które należy skopiować
+i wykonać w terminalu:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git remote add origin https://github.com/nazwa_konta/mojprojekt.git
+    ~/mojprojekt$ git push -u origin master
+
+* ``git remote`` – dodaje zdalne repozytorium określone przez *Git URL* do lokalnego;
+* ``git push`` – synchronizuje zawartość aktualnej lokalnej gałęzi ``master`` z repozytorium zdalnym o domyślnej nazwie ``origin``.
+
+
+.. figure:: img/git_remote.jpg
+
+
+W wyniku powyższych operacji lokalna gałąź *master* zaczyna śledzić zdalną
+o takiej samej nazwie.
+
+**Sprawdź** klikając w przeglądarce nazwę repozytorium, czy jego zawartość
+odpowiada lokalnemu.
+
+
+Klonowanie repozytorium
+=======================
+
+.. warning::
+
+    Jeżeli wykonujesz scenariusz od początku i sprawdziłeś, że zawartość zdalnego
+    repozytorium na GitHubie odpowiada lokalnemu, usuń teraz lokalny katalog
+    :file:`mojprojekt`, np. za pomocą poleceń:
+
+    .. code-block:: language
+
+        ~$ rm -rf ~/mojprojekt
+
+Repozytorium lokalne utworzymy również przez sklonowanie istniejącego zdalnego.
+Możemy klonować założone przez siebie na GitHubie repozytoria lub istniejące publiczne
+(wtedy tworzymy tzw. forki).
+
+Czynność sprowadza się do wydania polecenia w terminalu:
+
+.. code-block:: bash
+
+    ~$ git clone https://github.com/nazwa_użytkownika/nazwa_repozytorium.git [nazwa_katalogu]
+
+Najważniejszy jest argument `Git URL`, czyli schematyczny adres repozytorium,
+który możemy pobrać na stronie repozytorium klikając przycisk "Clone or download":
+
+
+.. figure:: img/git_clone.jpg
+
+
+W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
+lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
+
+
+Praca z repozytorium
 =====================
 
 .. note::
 
     Wszystkie poniższe polecenia wydajemy w głównym katalogu projektu.
-    Warto poczytać polską wersję 1 `podręcznika Git SCM <http://git-scm.com/book/pl/v1/>`_.
-    Dostępna jest również `wersja 2 podręcznika Git <http://git-scm.com/book/en/v2/>`_, ale tylko w j. angielskim.
 
 Codzienną pracę projektem warto rozpocząć od zsynchronizowania wersji lokalnej
 z ewentualnymi zmiananami zapisanymi na serwerze:
@@ -184,6 +259,14 @@ Powyższy porządek komend jest typowy dla sesji z gitem.
 
 Materiały
 =========
+
+.. tip::
+
+    Jeżeli zaznaczymy opcję *Initialize this repository with a README*, utworzony
+    zostanie plik, w którym umieszcza się opis projektu. Na potrzeby tego scenariusza
+    pomijamy
+
+     o ile nie utworzylismy wcześniej repozytorium lokalnego z takim plikiem, które zamierzamy połaczyć ze zdalnym.
 
 1. `Strona projektu Git`_
 
