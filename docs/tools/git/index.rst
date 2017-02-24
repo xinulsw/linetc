@@ -82,6 +82,7 @@ Wydajemy polecenia:
     ~/mojprojekt$ echo "Moje pierwsze repozytorium" > README.md
     ~/mojprojekt$ git status
     ~/mojprojekt$ git add README.md
+    ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -m "Dodanie opisu projektu"
 
 
@@ -161,11 +162,9 @@ Klonowanie repozytorium
 
         ~$ rm -rf ~/mojprojekt
 
-Repozytorium lokalne utworzymy również przez sklonowanie istniejącego zdalnego.
-Możemy klonować założone przez siebie na GitHubie repozytoria lub istniejące publiczne
-(wtedy tworzymy tzw. forki).
-
-Czynność sprowadza się do wydania polecenia w terminalu:
+Repozytorium lokalne utworzymy również przez klonowanie. Możemy klonować założone
+przez siebie na GitHubie repozytoria lub istniejące publiczne (wtedy tworzymy tzw. forki).
+Sprowadza się to do wydania polecenia w terminalu:
 
 .. code-block:: bash
 
@@ -173,7 +172,6 @@ Czynność sprowadza się do wydania polecenia w terminalu:
 
 Najważniejszy jest argument `Git URL`, czyli schematyczny adres repozytorium,
 który możemy pobrać na stronie repozytorium klikając przycisk "Clone or download":
-
 
 .. figure:: img/git_clone.jpg
 
@@ -185,47 +183,58 @@ lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
 Praca z repozytorium
 =====================
 
-.. note::
+**Zmiany w repozytorium zdalnym**
 
-    Wszystkie poniższe polecenia wydajemy w głównym katalogu projektu.
+Jak zostało powiedziane wcześniej, zmiany można wprowadzać za pomocą interfejsu
+serwisu GitHub. Spróbujmy tak zrobić.
 
-Codzienną pracę z projektem warto rozpoczynać od zsynchronizowania wersji lokalnej
+* Zmień treść zawartą w pliku :file:`README.md`: kliknij jego nazwę, a następnie ikonę
+  edycji w prawym górnym rogu obok przycisku "History". Dopisz coś, przewiń w dół,
+  wpisz opis zmiany i zatwierdź klikając "Commit changes".
+
+* Utwórz nowy plik :file:`pierwszy.txt` klikając przycisk "Create new file" w głównym
+  widoku repozytorium. Wpisz coś i zatwierdź zmiany.
+
+
+**Pobranie zmian z repozytorium zdalnego**
+
+Ponieważ dokonaliśmy zmian w repozytorium zdalnym, repozytorium lokalne jest nieaktualne.
+Sytuacja taka może być częsta, zwłaszcza gdy projekt rozwijany jest zespołowo.
+Dlatego codzienną pracę warto rozpoczynać od zsynchronizowania wersji lokalnej
 z ewentualnymi zmiananami zapisanymi na serwerze:
 
 .. code-block:: bash
 
-    ~$ git pull
+    ~$ git pull [origin] [master]
 
-Komunikat "Already up-to-date." oznacza brak zmian na serwerze zdalnym.
-Możemy więc rozpocząć dalszą pracę.
+Opcjonalne argumenty określają nazwy repozytorium zdalnego i lokalnej gałęzi.
+Ewentualny komunikat "Already up-to-date." oznacza brak zmian na serwerze zdalnym.
 
+**Zmiany lokalne**
 
-Stan plików Bardzo często będziemy korzystać z polecenia:
-
-.. code-block:: bash
-
-    ~$ git status
-
-– które informuje nas o tym, jakie pliki zostały dodane do poczekalni, ale są nieśledzone
-(ang. *Untracked files*), jakie zostały zmienione, ale nie zostały zatwierdzone
-(ang. *Changes not staged for commit*), a jakie czekają na zatwierdzenie
-(ang. *Changes to be committed*). Komunikat *On branch master* informuje,
-że pracujemy na głównej gałęzi (ang. master branch) projektu.
-
-Zarówno nieśledzone, jak i niezatwierdzone pliki, które chcemy umieścić w projekcie,
-dodajemy poleceniem:
+Praca w repozytorium lokalnym jest najwygodniejsza. Zmieńmy więc treść pliku :file:`README.md`,
+dodajmy katalog :file:`doc`, a w nim pliki :file:`index.rst` i :file:`slownik.txt` z dowolną
+treścią:
 
 .. code-block:: bash
 
-    ~$ git add ścieżka/nazwa_pliku
+    ~/mojprojekt$ echo "Zmiana lokalna" >> README.md
+    ~/mojprojekt$ mkdir doc
+    ~/mojprojekt$ echo "Dokumenty" >> doc/index.rst
+    ~/mojprojekt$ echo "Słownik" >> doc/slownik.txt
+    ~/mojprojekt$ git diff
+    ~/mojprojekt$ git add --all
+    ~/mojprojekt$ git diff -staged
 
-Można używać znaków specjalnych, np. ``git add *.jpg``. Jeżeli mamy rozbudowaną
-strukturę katalogów w projekcie, przydatne jest polecenie dodające
-nowe zmiany hurtowo i rekursywnie:
+* ``git diff`` – pokazuje różnice między katalogiem roboczym a poczekalnią, ale bez plików nieśledzonych;
+* ``git add --all`` – dodaje do poczekalni wszystkie zmiany z katalogu roboczego;
+* ``git diff --staged`` – pokaże zmiany między poczekalnią a ostatnią migawką projektu.
 
-.. code-block:: bash
+.. tip::
 
-    ~$ find . -name "*.rst" -exec git add {} \;
+    Podczas dodawania plików do poczekalni można używać symboli wieloznaczych i nazw katalogów,
+    np. ``git add '*.txt'`` lub ``git add doc``. Można też korzystać z poleceń powłoki, np.:
+    ``find . -name "*.rst" -exec git add {} \;``
 
 Po dodaniu wszystkich nowych plików i zmian do poczekalni, trzeba je zatwierdzić:
 
