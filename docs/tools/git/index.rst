@@ -189,14 +189,18 @@ Praca z repozytorium
 
     Wszystkie poniższe polecenia wydajemy w głównym katalogu projektu.
 
-Codzienną pracę projektem warto rozpocząć od zsynchronizowania wersji lokalnej
+Codzienną pracę z projektem warto rozpoczynać od zsynchronizowania wersji lokalnej
 z ewentualnymi zmiananami zapisanymi na serwerze:
 
 .. code-block:: bash
 
     ~$ git pull
 
-Bardzo często będziemy korzystać z polecenia:
+Komunikat "Already up-to-date." oznacza brak zmian na serwerze zdalnym.
+Możemy więc rozpocząć dalszą pracę.
+
+
+Stan plików Bardzo często będziemy korzystać z polecenia:
 
 .. code-block:: bash
 
