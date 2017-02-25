@@ -1,4 +1,4 @@
-.. _getsimple:
+.. _gs:
 
 GetSimple CMS
 #############
