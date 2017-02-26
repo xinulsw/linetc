@@ -34,6 +34,38 @@ Możemy postępować wg poniższych instrukcji:
     Nie zamykaj powyższej strony! Będzie potrzebna za chwilę.
 
 
+Linux i Windows
+===============
+
+Poniższy scenariusz napisano przy założeniu pracy w systemie Linux, który dla Gita
+jest środowiskiem naturalnym. Przyjęto następujące założenia:
+
+* polecenia mogą być wydawane w dowolnym terminalu;
+* ``~$`` – oznacza katalog domowy użytkownika, czyli ścieżkę :file:`/home/nazwa_użytkownika`;
+* ``~/mojprojekt$`` – to podkatalog projektu utworzony w katalogu domowym.
+
+W systemie Windows należy pamiętać o następujących różnicach:
+
+* używamy standardowej konsoli uruchamianej poleceniem ``cmd``;
+* katalog domowy nie jest najlepszym miejscem na pracę z projektem, proponujemy utworzyć
+  go na pulpicie lub lepiej na innej partycji, a następnie przejść do utworzonego
+  katalogu w konsoli;
+* separatorem w ścieżkach jest znak backslash ``\``, w wyrażeniach wieloznacznych używamy podwójnych
+  cudzysłowów, np. ``"*.txt"``;
+* polecenia konsoli są inne:
+
+  - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
+  - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
+  - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
+
+
+.. note::
+
+    W obydwu systemach tworzenie katalogów i plików oraz ich edycja mogą być
+    wykonywane przy użyciu narzędzi z interfejsem graficznym, czyli menedżera
+    plików i edytora tekstu.
+
+
 Klient i konfiguracja
 =====================
 
@@ -52,7 +84,11 @@ W **Linuksie** instalacja sprowadza się do użycia odpowiedniego menedżera pak
     ~# pacman -S git
 
 W **Windows** tego samego klienta tekstowego pobieramy ze strony
-`<http://git-scm.com/download/win>`_ i instalujemy wybierając domyślne opcje.
+`<http://git-scm.com/download/win>`_ i instalujemy z konta zwykłego użytkownika
+zaznaczając wskazane na poniższym zrzucie opcje:
+
+
+.. figure:: img/git_shell_install.jpg
 
 
 .. note::
@@ -73,6 +109,7 @@ W **Windows** tego samego klienta tekstowego pobieramy ze strony
 
 Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
 w projekcie zmian.
+
 
 Nowe repozytorium
 =================
@@ -217,10 +254,10 @@ Wprowadźmy kilka przykładowych zmian w projekcie za pomocą interfejsu serwisu
 Pobranie i scalenie
 -------------------
 
-Ponieważ dokonaliśmy zmian w repozytorium zdalnym, repozytorium lokalne jest nieaktualne.
+Ponieważ dokonaliśmy zmian w repozytorium zdalnym (*origin*), repozytorium lokalne jest nieaktualne.
 Sytuacja taka może być częsta, zwłaszcza gdy projekt rozwijany jest zespołowo.
-Dlatego codzienną pracę warto rozpoczynać od zsynchronizowania wersji lokalnej
-ze zdalną:
+Dlatego codzienną pracę warto rozpoczynać od ściagnięcia (ang. *fetch*) zmian zdalnych i
+scalenia (ang. *merge*) z wersją lokalną:
 
 .. code-block:: bash
 
@@ -382,25 +419,37 @@ Do zarządzania plikami używamy następujących poleceń:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ git rm '*.txt'
+    ~/mojprojekt$ git rm --cached "*.txt"
     ~/mojprojekt$ git mv doc/katalog.rst doc/index.rst
+    ~/mojprojekt$ git status
+    ~/mojprojekt$ git commit -a -m "Porządki  w projekcie"
+    ~/mojprojekt$ git reset --soft HEAD~1
+    ~/mojprojekt$ git rm -f "*.txt"
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -a -m "Porządki  w projekcie"
     ~/mojprojekt$ git push
 
-* ``git rm`` – służy do usuwania plików śledzonych;
-* ``git mv`` – pozwala przenieść lub zmienić nazwę pliku.
+* ``git rm --cached`` – usuwa pliki śledzone z poczekalni, ale nie zdysku;
+* jeżeli mają być usunięte również z dysku, używamy tylko ``git rm``;
+* ``git mv`` – pozwala przenieść lub zmienić nazwę pliku;
+* ``git reset --soft HEAD~1`` – anuluje ostatnie zatwierdzenie;
+* ``git rm "*.txt"`` – usuwa pliki z poczekalni i z dysku, wymaga przełącznika ``-f``,
+  jeżeli usuwany plik ma niezatwierdzone zmiany.
 
-[todo: anulowanie ostatniego zatwierdzenia, rozwiązywanie konfliktów]
+
+
+[todo: ``.gitignore``]
 
 Materiały
 =========
 
 .. tip::
 
-    Jeżeli podczas tworzenia repozytorium na GitHubie zaznaczymy opcję
-    *Initialize this repository with a README*, utworzony zostanie plik,
-    w którym umieszcza się opis projektu.
+    * Jeżeli podczas tworzenia repozytorium na GitHubie zaznaczymy opcję
+      *Initialize this repository with a README*, utworzony zostanie plik,
+      w którym umieszcza się opis projektu.
+    * Do wygodnej pracy w systemie Windows można skonfigurować
+      `Git w powłoce PowerShell <https://git-scm.com/book/be/v2/Git-in-Other-Environments-Git-in-Powershell>`_
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
