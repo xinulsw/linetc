@@ -450,15 +450,17 @@ Materiały
 
 .. _cmdexe:
 
-Uwagi dla użytkowników powłoki ``cmd.exe`` w Windows:
+.. note::
 
-* separatorem w ścieżkach jest znak backslash ``\``, w wyrażeniach wieloznacznych używamy podwójnych
-  cudzysłowów, np. ``"*.txt"``;
-* polecenia konsoli są inne:
+    Uwagi dla użytkowników powłoki ``cmd.exe`` w Windows:
 
-  - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
-  - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
-  - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
+    * separatorem w ścieżkach jest znak backslash ``\``, w wyrażeniach wieloznacznych używamy podwójnych
+      cudzysłowów, np. ``"*.txt"``;
+    * polecenia konsoli są inne:
+
+      - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
+      - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
+      - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
 
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
