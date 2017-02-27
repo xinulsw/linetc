@@ -44,20 +44,13 @@ jest środowiskiem naturalnym. Przyjęto następujące założenia:
 * ``~$`` – oznacza katalog domowy użytkownika, czyli ścieżkę :file:`/home/nazwa_użytkownika`;
 * ``~/mojprojekt$`` – to podkatalog projektu utworzony w katalogu domowym.
 
-W systemie Windows należy pamiętać o następujących różnicach:
+W systemie Windows:
 
-* używamy standardowej konsoli uruchamianej poleceniem ``cmd``;
-* katalog domowy nie jest najlepszym miejscem na pracę z projektem, proponujemy utworzyć
-  go na pulpicie lub lepiej na innej partycji, a następnie przejść do utworzonego
-  katalogu w konsoli;
-* separatorem w ścieżkach jest znak backslash ``\``, w wyrażeniach wieloznacznych używamy podwójnych
-  cudzysłowów, np. ``"*.txt"``;
-* polecenia konsoli są inne:
-
-  - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
-  - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
-  - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
-
+* używamy konsoli ``Git Bash`` (skrót znajdziesz na pulpicie po zainstalowaniu klienta (zob. niżej));
+* katalog domowy (:file:`C:\Users\nazwa_użytkownika`) nie jest najlepszym miejscem na pracę z projektem,
+  katalog projektu proponujemy utworzyć na pulpicie lub lepiej na innej partycji (zob. zrzut w nast. sekcji);
+* jeżeli ``Git Bash`` nie działa, używamy standardowej konsoli ``cmd``,
+  ale wtedy musimy pamiętać o :ref:`kilku różnicach <cmdexe>`.
 
 .. note::
 
@@ -109,6 +102,10 @@ zaznaczając wskazane na poniższym zrzucie opcje:
 
 Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
 w projekcie zmian.
+
+.. figure:: img/git_bash.jpg
+
+   Początek pracy z Gitem w Git-Bash pod Windows
 
 
 Nowe repozytorium
@@ -450,6 +447,19 @@ Materiały
       w którym umieszcza się opis projektu.
     * Do wygodnej pracy w systemie Windows można skonfigurować
       `Git w powłoce PowerShell <https://git-scm.com/book/be/v2/Git-in-Other-Environments-Git-in-Powershell>`_
+
+.. _cmdexe:
+
+Uwagi dla użytkowników powłoki ``cmd.exe`` w Windows:
+
+* separatorem w ścieżkach jest znak backslash ``\``, w wyrażeniach wieloznacznych używamy podwójnych
+  cudzysłowów, np. ``"*.txt"``;
+* polecenia konsoli są inne:
+
+  - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
+  - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
+  - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
+
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
