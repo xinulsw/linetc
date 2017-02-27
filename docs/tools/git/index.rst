@@ -205,11 +205,12 @@ Klonowanie repozytorium
 
     Jeżeli wykonujesz scenariusz od początku i sprawdziłeś, że zawartość zdalnego
     repozytorium na GitHubie odpowiada lokalnemu, usuń teraz lokalny katalog
-    :file:`mojprojekt`, za pomocą menedżera plików lub polecenia:
+    :file:`mojprojekt` za pomocą menedżera plików lub polecenia:
 
-    .. code-block:: language
+    .. code-block:: bash
 
         ~$ rm -rf ~/mojprojekt
+
 
 Repozytorium lokalne utworzymy również przez klonowanie. Możemy klonować założone
 przez siebie na GitHubie repozytoria lub istniejące publiczne (wtedy tworzymy tzw. forki).
@@ -331,7 +332,7 @@ ostatnią migawką (``HEAD``) a śledzonymi plikami.
 Zmiany można też zatwierdzać bez dodawania ich do poczekalni, ale
 operacja ta działa tylko dla plików śledzonych.:
 
-.. code-block:: language
+.. code-block:: bash
 
     ~/mojprojekt$ git commit -a -m "Druga zmiana README.md"
     ~/mojprojekt$ git status
@@ -349,7 +350,7 @@ Cofanie zmian
 Utworzymy teraz katalog :file:`doc`, a w nim pliki :file:`index.rst` i :file:`slownik.txt`
 z przykładową treścią.
 
-.. code-block:: language
+.. code-block:: bash
 
     ~/mojprojekt$ mkdir doc
     ~/mojprojekt$ echo "Dokumenty" >> doc/index.rst
@@ -434,8 +435,11 @@ Do zarządzania plikami używamy następujących poleceń:
   jeżeli usuwany plik ma niezatwierdzone zmiany.
 
 
+Rozwiązywanie konfliktów
+------------------------
 
-[todo: ``.gitignore``]
+[todo]
+
 
 Materiały
 =========
@@ -462,6 +466,19 @@ Materiały
       - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
       - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
 
+Pomijanie plików
+----------------
+
+Nie wszystkie typy plików powinny być synchronizowane między repozytorium lokalnym i zdalnym.
+Np. pliki pośrednie tworzone przez kompilatory i interpretery, pliki tymczasowe, wirtualne
+środowiska itp. zapychałyby nam niepotrzebnie repozytorium zdalne. Git pozwala zdefiniować
+listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukrytym pliku
+(rozpoczyna się kropką!) :file:`.gitignore`, który umieszczamy w głównym katalogu projektu.
+Pobierz i przejrzyj :download:`przykładową zawartość <gitignore.txt>`.
+Inne przykładowe wzorce plików znajdziesz w repozytorium `gitignore <https://github.com/github/gitignore>`_.
+
+Odwiedź
+-------
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
