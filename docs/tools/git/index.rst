@@ -334,7 +334,7 @@ operacja ta działa tylko dla plików śledzonych.:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ git commit -a -m "Druga zmiana README.md"
+    ~/mojprojekt$ git commit -am "Druga zmiana README.md"
     ~/mojprojekt$ git status
 
 .. figure:: img/git_status3.jpg
@@ -387,19 +387,39 @@ niedodane do poczekalni:
 
     Użycie ``git checkout -- nazwa_pliku`` usuwa wprowadzone zmiany bezpowrotnie.
 
-Synchronizacja
+
+Historia zmian
 --------------
 
-Pozostaje nam zatwierdzenie pozostałych zmian, przeglądnięcie ich historii
-i przesłanie do repozytorium zdalnego:
+Zatwierdzimy dotychczasowe zmiany, przejrzymy listę i sprawdzimy,
+jak wyglądała pierwsza wersja pliku :file:`README.md`:
 
 .. code-block:: bash
 
     ~/mojprojekt$ git commit -m "Dodanie katalogu doc"
     ~/mojprojekt$ git log
+    ~/mojprojekt$ git checkout 75468
+    ~/mojprojekt$ cat README.md
+    ~/mojprojekt$ git checkout master
+    ~/mojprojekt$ cat README.md
+
+
+.. figure:: img/git_log.jpg
+
+* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 75468...``; wypróbuj: ``git log --pretty=format:"%h - %s"``;
+* ``git checkout 75468`` – przełącza nas do migawki oznaczonej podanym początkiem skrótu;
+* ``git checkout master`` – powracamy do stanu aktualnego.
+
+Synchronizacja
+--------------
+
+Pozostaje przesłanie zmian do repozytorium zdalnego:
+
+.. code-block:: bash
+
     ~/mojprojekt$ git push
 
-* ``git log`` – pokaże listę zatwierdzeń, wypróbuj: ``git log --pretty=format:"%h - %s"``;
+* ``git log`` – pokaże listę zatwierdzeń, ;
 * ``git push`` – przesyła zmiany lokalne do repozytorium zdalnego; prosi o podanie nazwy użytkownika
   i hasła do konta na GitHubie.
 
@@ -418,7 +438,7 @@ Do zarządzania plikami używamy następujących poleceń:
 .. code-block:: bash
 
     ~/mojprojekt$ git rm --cached "*.txt"
-    ~/mojprojekt$ git mv doc/katalog.rst doc/index.rst
+    ~/mojprojekt$ git mv doc/katalog.rst doc/projekt.rst
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -a -m "Porządki  w projekcie"
     ~/mojprojekt$ git reset --soft HEAD~1
@@ -482,4 +502,6 @@ Odwiedź
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
-3. `Pro Git v. 2 <https://git-scm.com/book/en/v2>`_ – wersja angielska.
+3. `Python 101 – Git <http://python101.readthedocs.io/pl/latest/git/index.html>`_ (materiał w j. polskim)
+4. :download:`Git Cheat Sheet <https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf>`
+5. `Pro Git v. 2 <https://git-scm.com/book/en/v2>`_ – wersja angielska.
