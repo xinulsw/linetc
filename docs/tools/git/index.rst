@@ -98,10 +98,12 @@ zaznaczając wskazane na poniższym zrzucie opcje:
 
     ~$ git config --global user.name "nazwa_użytkownika"
     ~$ git config --global user.email email_użytkownika
+    ~$ git config --global push.default simple
     ~$ git config --list
 
 Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
 w projekcie zmian.
+
 
 .. figure:: img/git_bash.jpg
 
