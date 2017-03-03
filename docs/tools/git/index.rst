@@ -59,8 +59,8 @@ W systemie Windows:
     plików i edytora tekstu.
 
 
-Klient i konfiguracja
-=====================
+Klient
+======
 
 Treściami projektu można zarządzać bezpośrednio w serwisie *GitHub*
 za pomocą przeglądarki. Częściej jednak pracujemy w repozytorium lokalnym,
@@ -91,6 +91,9 @@ zaznaczając wskazane na poniższym zrzucie opcje:
     lub obsługiwać repozytorium z poziomu edytora kodu,
     np. Sublime Text 3 czy PyCharm.
 
+
+Konfiguracja
+============
 
 **Podstawowa konfiguracja**: w terminalu wydajemy polecenia:
 
