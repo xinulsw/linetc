@@ -101,10 +101,12 @@ Konfiguracja
 
     ~$ git config --global user.name "nazwa_użytkownika"
     ~$ git config --global user.email email_użytkownika
+    ~$ git config --global push.default simple
     ~$ git config --list
 
 Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
 w projekcie zmian.
+
 
 .. figure:: img/git_bash.jpg
 
@@ -153,7 +155,7 @@ Git wyróżnia **trzy przestrzenie**:
 
 * katalog roboczy (ang. *working directory*);
 * poczekalnia (ang. staging area);
-* repozytorium (katalog .git).
+* repozytorium (katalog :file:`.git`).
 
 .. figure:: img/areas.png
 
@@ -337,7 +339,7 @@ operacja ta działa tylko dla plików śledzonych.:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ git commit -a -m "Druga zmiana README.md"
+    ~/mojprojekt$ git commit -am "Druga zmiana README.md"
     ~/mojprojekt$ git status
 
 .. figure:: img/git_status3.jpg
@@ -390,19 +392,39 @@ niedodane do poczekalni:
 
     Użycie ``git checkout -- nazwa_pliku`` usuwa wprowadzone zmiany bezpowrotnie.
 
-Synchronizacja
+
+Historia zmian
 --------------
 
-Pozostaje nam zatwierdzenie pozostałych zmian, przeglądnięcie ich historii
-i przesłanie do repozytorium zdalnego:
+Zatwierdzimy dotychczasowe zmiany, przejrzymy listę i sprawdzimy,
+jak wyglądała pierwsza wersja pliku :file:`README.md`:
 
 .. code-block:: bash
 
     ~/mojprojekt$ git commit -m "Dodanie katalogu doc"
     ~/mojprojekt$ git log
+    ~/mojprojekt$ git checkout 75468
+    ~/mojprojekt$ cat README.md
+    ~/mojprojekt$ git checkout master
+    ~/mojprojekt$ cat README.md
+
+
+.. figure:: img/git_log.jpg
+
+* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 75468...``; wypróbuj: ``git log --pretty=format:"%h - %s"``;
+* ``git checkout 75468`` – przełącza nas do migawki oznaczonej podanym początkiem skrótu;
+* ``git checkout master`` – powracamy do stanu aktualnego.
+
+Synchronizacja
+--------------
+
+Pozostaje przesłanie zmian do repozytorium zdalnego:
+
+.. code-block:: bash
+
     ~/mojprojekt$ git push
 
-* ``git log`` – pokaże listę zatwierdzeń, wypróbuj: ``git log --pretty=format:"%h - %s"``;
+* ``git log`` – pokaże listę zatwierdzeń, ;
 * ``git push`` – przesyła zmiany lokalne do repozytorium zdalnego; prosi o podanie nazwy użytkownika
   i hasła do konta na GitHubie.
 
@@ -420,15 +442,15 @@ Do zarządzania plikami używamy następujących poleceń:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ git rm --cached "*.txt"
-    ~/mojprojekt$ git mv doc/katalog.rst doc/index.rst
+    ~/mojprojekt$ git rm --cached "pierwszy.txt"
+    ~/mojprojekt$ git mv doc/katalog.rst doc/projekt.rst
     ~/mojprojekt$ git status
-    ~/mojprojekt$ git commit -a -m "Porządki  w projekcie"
+    ~/mojprojekt$ git commit -am "Porządki  w projekcie"
     ~/mojprojekt$ git reset --soft HEAD~1
+    ~/mojprojekt$ git status
     ~/mojprojekt$ git rm -f "*.txt"
     ~/mojprojekt$ git status
-    ~/mojprojekt$ git commit -a -m "Porządki  w projekcie"
-    ~/mojprojekt$ git push
+    ~/mojprojekt$ git commit -am "Porządki  w projekcie"
 
 * ``git rm --cached`` – usuwa pliki śledzone z poczekalni, ale nie zdysku;
 * jeżeli mają być usunięte również z dysku, używamy tylko ``git rm``;
@@ -438,11 +460,80 @@ Do zarządzania plikami używamy następujących poleceń:
   jeżeli usuwany plik ma niezatwierdzone zmiany.
 
 
-Rozwiązywanie konfliktów
-------------------------
+Konflikty wersji
+----------------
 
-[todo]
+W czasie pracy nad projektem zdarzyć się może, że jakiś plik został
+zmieniony zarówno w repozytorium zdalnym, np. przez współpracownika,
+jak i lokalnie przez nas. Jeżeli nie ściągnęliśmy ostatniej zdalnej
+wersji pliku, próba wysłania naszych zmian na serwer wywoła komunikat
+o konflikcie. Przećwiczmy taką możliwość.
 
+**Na początku w repozytorium zdalnym zmieniamy plik :file:`pierwszy.txt`.**
+
+Następnie lokalnie dodajemy usunięty wcześniej z projektu
+plik :file:`pierwszy.txt`, wprowadzamy zmiany, zatwierdzamy i próbujemy
+wgrać je na serwer:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git add .
+    ~/mojprojekt$ echo "Zmiana lokalna w pierwszym" >> pierwszy.txt
+    ~/mojprojekt$ git commit -am "Zmiana w pierwszym"
+    ~/mojprojekt$ git push
+    Username for 'https://github.com': lo1cgsan
+    Password for 'https://lo1cgsan@github.com':
+    To https://github.com/lo1cgsan/mojprojekt.git
+     ! [rejected]        master -> master (fetch first)
+    error: failed to push some refs to 'https://github.com/lo1cgsan/mojprojekt.git'
+    hint: Updates were rejected because the remote contains work that you do
+    hint: not have locally. This is usually caused by another repository pushing
+    hint: to the same ref. You may want to first integrate the remote changes
+    hint: (e.g., 'git pull ...') before pushing again.
+    hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+Powyższy komunikat zawiera sugestię, co zrobić. Zastosujemy się do niej
+i pobierzemy zmiany z serwera:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git pull
+    remote: Counting objects: 3, done.
+    remote: Compressing objects: 100% (3/3), done.
+    remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+    Unpacking objects: 100% (3/3), done.
+    From https://github.com/lo1cgsan/mojprojekt
+       0dbc52a..1bd4122  master     -> origin/master
+    Auto-merging pierwszy.txt
+    CONFLICT (content): Merge conflict in pierwszy.txt
+    Automatic merge failed; fix conflicts and then commit the result.
+
+Konflikt dotyczy pliku :file:`pierwszy.txt`. Zawartość pobrana z serwera
+nie zgadza się z lokalną. Zgodnie z podpowiedzią:
+``fix conflicts and then commit the result`` – musimy naprawić konflikt
+i dopiero wtedy zatwierdzić zmiany. W dowolnym edytorze otwieramy zatem plik:
+
+.. figure:: img/git_edit.jpg
+
+
+Git używa znaczników, aby wskazać różnice:
+
+* ``<<<<<<< HEAD`` – początek różnic;
+* ``=======`` – separator zmian lokalnych i zdalnych;
+* ``>>>>>>> skrót`` – znacznik końca bloku różnic.
+
+Usuwamy znaczniki, ustalamy ostateczną wersję pliku,
+zatwierdzamy i wysyłamy zmiany na serwer:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ cat pierwszy.txt
+    Dodanie pliku na github.com
+    Zmiana lokalna w pierwszym
+    i
+    Zmiany w pierwszym zdalne.
+    ~/mojprojekt$ git commit -am "Rozwiązanie konfliktu w pierwszy.txt"
+    ~/mojprojekt$ git push
 
 Materiały
 =========
@@ -485,4 +576,6 @@ Odwiedź
 
 1. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
-3. `Pro Git v. 2 <https://git-scm.com/book/en/v2>`_ – wersja angielska.
+3. `Python 101 – Git <http://python101.readthedocs.io/pl/latest/git/index.html>`_ (materiał w j. polskim)
+4. `Git Cheat Sheet <https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf>`_
+5. `Pro Git v. 2 <https://git-scm.com/book/en/v2>`_ – wersja angielska.
