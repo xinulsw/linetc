@@ -578,6 +578,10 @@ Wrócimy teraz do gałęzi *master* i scalimy je:
     ~/mojprojekt$ git checkout master
     ~/mojprojekt$ ls
     ~/mojprojekt$ git merge testy
+    ~/mojprojekt$ git branch -d testy
+
+* ``git merge nazwa_gałęzi`` – scala zmiany z podanej gałęzi z aktualną;
+* ``git branch -d nazawa_gałęzi`` – usuwa gałąź (jeśli jest już niepotrzebna).
 
 .. figure:: img/git_merge.jpg
 
@@ -585,8 +589,8 @@ Wrócimy teraz do gałęzi *master* i scalimy je:
 .. note::
 
     Zmiana aktywnej gałęzi przywraca katalog roboczy do stanu z ostatniej migawki
-    w danej gałęzi. W naszym przykładzie zwróć uwagę, że z katalogu "zniknął"
-    plik :file:`text.txt`.
+    w danej gałęzi. W naszym przykładzie zwróć uwagę, że po przełączeniu się do gałęzi *master*
+    z gałęzi *testy* "zniknął" plik :file:`text.txt`.
 
 
 Materiały
