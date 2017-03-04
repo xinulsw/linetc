@@ -569,13 +569,18 @@ wprowadzimy kilka zmian i zatwierdzimy je:
 .. figure:: img/git_branch.jpg
 
 
-Wrócimy teraz do gałęzi *master* i zmienimy kilka plików:
+Załóżmy, że w gałęzi testy wprowadziliśmy wszystkie zaplanowane zmiany.
+Wrócimy teraz do gałęzi *master* i scalimy je:
 
 
 .. code-block:: bash
 
     ~/mojprojekt$ git checkout master
     ~/mojprojekt$ ls
+    ~/mojprojekt$ git merge testy
+
+.. figure:: img/git_merge.jpg
+
 
 .. note::
 
@@ -583,8 +588,6 @@ Wrócimy teraz do gałęzi *master* i zmienimy kilka plików:
     w danej gałęzi. W naszym przykładzie zwróć uwagę, że z katalogu "zniknął"
     plik :file:`text.txt`.
 
-
-[todo]
 
 Materiały
 =========
