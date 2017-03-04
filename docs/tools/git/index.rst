@@ -34,40 +34,15 @@ Możemy postępować wg poniższych instrukcji:
     Nie zamykaj powyższej strony! Będzie potrzebna za chwilę.
 
 
-Linux i Windows
-===============
-
-Poniższy scenariusz napisano przy założeniu pracy w systemie Linux, który dla Gita
-jest środowiskiem naturalnym. Przyjęto następujące założenia:
-
-* polecenia mogą być wydawane w dowolnym terminalu;
-* ``~$`` – oznacza katalog domowy użytkownika, czyli ścieżkę :file:`/home/nazwa_użytkownika`;
-* ``~/mojprojekt$`` – to podkatalog projektu utworzony w katalogu domowym.
-
-W systemie Windows:
-
-* używamy konsoli ``Git Bash`` (skrót znajdziesz na pulpicie po zainstalowaniu klienta (zob. niżej));
-* katalog domowy (:file:`C:\Users\nazwa_użytkownika`) nie jest najlepszym miejscem na pracę z projektem,
-  katalog projektu proponujemy utworzyć na pulpicie lub lepiej na innej partycji (zob. zrzut w nast. sekcji);
-* jeżeli ``Git Bash`` nie działa, używamy standardowej konsoli ``cmd``,
-  ale wtedy musimy pamiętać o :ref:`kilku różnicach <cmdexe>`.
-
-.. note::
-
-    W obydwu systemach tworzenie katalogów i plików oraz ich edycja mogą być
-    wykonywane przy użyciu narzędzi z interfejsem graficznym, czyli menedżera
-    plików i edytora tekstu.
-
-
-Klient
-======
+Klient Linux i Windows
+======================
 
 Treściami projektu można zarządzać bezpośrednio w serwisie *GitHub*
 za pomocą przeglądarki. Częściej jednak pracujemy w repozytorium lokalnym,
 obsługiwanym za pomocą jakiegoś programu. Do nauki Gita najlepszy jest podstawowy
 klient tekstowy działający w terminalu.
 
-W **Linuksie** instalacja sprowadza się do użycia odpowiedniego menedżera pakietów:
+W systemie **Linux** instalacja sprowadza się do użycia odpowiedniego menedżera pakietów:
 
 .. code-block:: bash
 
@@ -76,26 +51,46 @@ W **Linuksie** instalacja sprowadza się do użycia odpowiedniego menedżera pak
     w Archu (Manjaro, Antergos):
     ~# pacman -S git
 
-W **Windows** tego samego klienta tekstowego pobieramy ze strony
+
+Podczas pracy w Linuksie:
+
+* polecenia mogą być wydawane w dowolnym terminalu;
+* ``~$`` – oznacza katalog domowy użytkownika, czyli ścieżkę :file:`/home/nazwa_użytkownika`;
+* ``~/mojprojekt$`` – to podkatalog projektu utworzony w katalogu domowym.
+
+W systemie **Windows** tego samego klienta tekstowego pobieramy ze strony
 `<http://git-scm.com/download/win>`_ i instalujemy z konta zwykłego użytkownika
 zaznaczając wskazane na poniższym zrzucie opcje:
-
 
 .. figure:: img/git_shell_install.jpg
 
 
+Podczas pracy w Windows:
+
+* używamy konsoli ``Git Bash`` (dostępna po zainstalowaniu klienta);
+* katalog projektu proponujemy utworzyć na partycji innej niż systemowa (zob. zrzut w nast. sekcji);
+* jeżeli ``Git Bash`` nie działa, używamy standardowej konsoli ``cmd``,
+  ale wtedy musimy pamiętać o :ref:`kilku różnicach <cmdexe>`.
+
 .. note::
 
-    Po zrozumieniu podstaw Gita można oczywiście zainstalować programy
-    z interfejsem graficznym, np.: `SmartGit <http://www.syntevo.com/smartgit/>`_,
-    lub obsługiwać repozytorium z poziomu edytora kodu,
-    np. Sublime Text 3 czy PyCharm.
+    * Poniższy scenariusz napisano w oparciu o system Linux, który dla Gita
+      jest środowiskiem naturalnym. Nie ma jednak problemów z jego realizacją w Windows.
+
+    * W obydwu systemach tworzenie katalogów i plików oraz ich edycja mogą być
+      wykonywane przy użyciu narzędzi z interfejsem graficznym, czyli menedżera
+      plików i edytora tekstu.
+
+    * Po zrozumieniu podstaw Gita można oczywiście zainstalować programy
+      z interfejsem graficznym, np.: `SmartGit <http://www.syntevo.com/smartgit/>`_,
+      lub obsługiwać repozytorium z poziomu edytora kodu,
+      np. Sublime Text 3 czy PyCharm.
 
 
 Konfiguracja
 ============
 
-**Podstawowa konfiguracja**: w terminalu wydajemy polecenia:
+W terminalu wydajemy polecenia:
 
 .. code-block:: bash
 
@@ -105,8 +100,8 @@ Konfiguracja
     ~$ git config --list
 
 Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
-w projekcie zmian.
-
+w projekcie zmian. Ustawienie ``push.default simple`` określa sposób synchronizowania
+repozytorium lokalnego ze zdalnym.
 
 .. figure:: img/git_bash.jpg
 
@@ -260,7 +255,7 @@ Pobranie i scalenie
 Ponieważ dokonaliśmy zmian w repozytorium zdalnym (*origin*), repozytorium lokalne jest nieaktualne.
 Sytuacja taka może być częsta, zwłaszcza gdy projekt rozwijany jest zespołowo.
 Dlatego codzienną pracę warto rozpoczynać od ściagnięcia (ang. *fetch*) zmian zdalnych i
-scalenia (ang. *merge*) z wersją lokalną:
+scalenia (ang. *merge*) ich z wersją lokalną:
 
 .. code-block:: bash
 
@@ -411,7 +406,7 @@ jak wyglądała pierwsza wersja pliku :file:`README.md`:
 
 .. figure:: img/git_log.jpg
 
-* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 75468...``; wypróbuj: ``git log --pretty=format:"%h - %s"``;
+* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 75468...``; wypróbuj: ``git log --pretty=format:"%h - %s"`` oraz ``git log --pretty=oneline --decorate``;
 * ``git checkout 75468`` – przełącza nas do migawki oznaczonej podanym początkiem skrótu;
 * ``git checkout master`` – powracamy do stanu aktualnego.
 
@@ -534,6 +529,62 @@ zatwierdzamy i wysyłamy zmiany na serwer:
     Zmiany w pierwszym zdalne.
     ~/mojprojekt$ git commit -am "Rozwiązanie konfliktu w pierwszy.txt"
     ~/mojprojekt$ git push
+
+Gałęzie
+=======
+
+Gałąź (ang. *branch*) formalnie jest wskaźnikiem, czyli nazwą odsyłającą do któregoś z zestawu zmian
+(migawki) zachowanych w repozytorium. Domyślna gałąź nazywa się *master* i tworzona jest przez polecenie
+``git init``. Podczas zatwierdzania zmian wskaźnik *master* przesuwany jest tak, aby wskazywał
+na ostatnią migawkę.
+
+Ponieważ chcemy przetestować nowy kod, utworzymy teraz nową gałąź, przełączymy się do niej,
+wprowadzimy kilka zmian i zatwierdzimy je:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git branch testy
+    ~/mojprojekt$ git checkout testy
+    ~/mojprojekt$ git branch -vv
+    ~/mojprojekt$ git status
+    ~/mojprojekt$ echo "Zmiany testowe" > test.txt
+    ~/mojprojekt$ echo "Eksperyment" >> pierwszy.txt
+    ~/mojprojekt$ git add .
+    ~/mojprojekt$ git commit -m "Test nowych funkcji"
+    ~/mojprojekt$ ls
+
+* ``git branch nazwa_gałęzi`` – tworzy gałąź o podanej nazwie;
+* ``git checkout nazwa_gałęzi`` – przełącza na podaną gałąź;
+* ``git checkout -b testy`` – tworzy gałąź i przełącza do niej (zastępuje dwa poprzednie polecenia);
+* ``git branch -vv`` – wyświetla informacje o gałęziach;
+* ``git log --pretty=oneline --decorate`` – oprócz historii zmian pokazuje, która gałąź jest aktywna.
+
+.. note::
+
+    Git używa specjalnego wskaźnika ``HEAD`` wskazującego aktualną gałąź.
+    Użyj ``git log --pretty=oneline --decorate``, aby zobaczyć,
+    na którą gałąź wskazuje.
+
+
+.. figure:: img/git_branch.jpg
+
+
+Wrócimy teraz do gałęzi *master* i zmienimy kilka plików:
+
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git checkout master
+    ~/mojprojekt$ ls
+
+.. note::
+
+    Zmiana aktywnej gałęzi przywraca katalog roboczy do stanu z ostatniej migawki
+    w danej gałęzi. W naszym przykładzie zwróć uwagę, że z katalogu "zniknął"
+    plik :file:`text.txt`.
+
+
+[todo]
 
 Materiały
 =========
