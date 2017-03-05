@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
   szyfruj(tekst, klucz);
   cout << "Szyfrogram:" << endl << tekst << endl;
   deszyfruj(tekst, klucz);
-  cout << "DEszyfr:" << endl << tekst << endl;
+  cout << "Deszyfr:" << endl << tekst << endl;
   // getchar();
   return 0;
 }

@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1488713935 source:/home/smaster/github/linetc/cpp/lista-stos/lista.cpp
+	<iostream>
+	"lista.h"
+
+1488713978 /home/smaster/github/linetc/cpp/lista-stos/lista.h
+
+1488714123 source:/home/smaster/github/linetc/cpp/lista-stos/main.cpp
+	<iostream>
+	"stos.h"
+
+1488711573 /home/smaster/github/linetc/cpp/lista-stos/stos.h
+	"lista.h"
+
+1488711484 source:/home/smaster/github/linetc/cpp/lista-stos/stos.cpp
+	"stos.h"
+
