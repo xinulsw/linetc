@@ -42,7 +42,7 @@ void nowytyp() {
     // Opróżnianie bufora wejścia
     //cin.clear(); cin.sync();
     //cin.ignore(INT_MAX,'\n');
-    cin.ignore( std::numeric_limits < std::streamsize >::max(), '\n');
+    cin.ignore(std::numeric_limits < std::streamsize >::max(), '\n');
 }
 
 void pLiczba() {
@@ -83,7 +83,6 @@ void typwylicz() {
 }
 
 int main() {
-
-    pLiczba();
+    nowytyp();
     return 0;
 }
