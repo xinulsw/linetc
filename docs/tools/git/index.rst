@@ -9,7 +9,7 @@ Skrót SCM bywa również rozwijany jako *software configuration management*,
 co oznacza "zarządzanie konfiguracją oprogramowania". Gita można używać
 do rozwijania zarówno małych, jak i dużych projektów (np. Arch Linux, GIMP, jQuery).
 
-Konto i repozytorium
+Repozytorium zdalne
 ====================
 
 Przede wszystkim wchodzimy na stronę  `<https://github.com/>`_ i zakładamy konto podając:
@@ -34,8 +34,8 @@ Możemy postępować wg poniższych instrukcji:
     Nie zamykaj powyższej strony! Będzie potrzebna za chwilę.
 
 
-Klient Linux i Windows
-======================
+Klient Gita
+===========
 
 Treściami projektu można zarządzać bezpośrednio w serwisie *GitHub*
 za pomocą przeglądarki. Częściej jednak pracujemy w repozytorium lokalnym,
@@ -99,19 +99,20 @@ W terminalu wydajemy polecenia:
     ~$ git config --global push.default simple
     ~$ git config --list
 
-Podana nazwa użytkownika i email będą wykorzystywane do podpisywania wprowadzanych
-w projekcie zmian. Ustawienie ``push.default simple`` określa sposób synchronizowania
-repozytorium lokalnego ze zdalnym.
+W powyższych poleceniach ustawiamy nazwę użytkownika i email, które będą wykorzystywane
+do podpisywania wprowadzanych w projekcie zmian. Ustawienie ``push.default simple``
+określa sposób synchronizowania repozytorium lokalnego ze zdalnym.
 
 .. figure:: img/git_bash.jpg
 
    Początek pracy z Gitem w Git-Bash pod Windows
 
 
-Nowe repozytorium
-=================
+Repozytorium lokalne
+====================
 
-Repozytorium lokalne możemy utworzyć od podstaw, a później dopiero połączyć go ze zdalnym.
+Repozytorium lokalne można utworzyć poprzez sklonowanie zdalnego lub od podstaw.
+Przećwiczymy ten drugi sposób, a później nowo utworzone repozytorium połączymy ze zdalnym.
 Wydajemy polecenia:
 
 .. code-block:: bash
@@ -122,7 +123,7 @@ Wydajemy polecenia:
     ~/mojprojekt$ git status
     ~/mojprojekt$ git add README.md
     ~/mojprojekt$ git status
-    ~/mojprojekt$ git commit -m "Dodanie opisu projektu"
+    ~/mojprojekt$ git commit -m "Opis projektu"
 
 
 .. figure:: img/git_init.jpg
@@ -130,16 +131,16 @@ Wydajemy polecenia:
 
 - na początku tworzymy katalog dla projektu i wchodzimy do niego;
 - ``git init`` inicjuje repozytorium w ukrytym katalogu :file:`.git`;
-- ``echo`` tworzy plik :file:`README.md` z opisem projektu
-  (można to zrobić w dowolnym edytorze);
+- ``echo`` tworzy plik :file:`README.md` z opisem projektu (można to zrobić w dowolnym edytorze);
 - ``git status`` – pokazuje status plików;
 - ``git add nazwa_pliku`` – przenosi plik do "poczekalni";
-- ``git commit -m "komentarz"`` – zatwierdza zmiany w repozytorium, tworząc tzw. migawkę.
+- ``git commit -m "komentarz"`` – zatwierdza zmiany w repozytorium, tworząc tzw. migawkę,
+  po przełączniku ``-m`` podajemy opis zmian.
 
 .. note::
 
-    Jeżeli pominiemy w ``git commit`` przełącznik ``-m`` otwarty zostanie domyślny edytor,
-    w którym należy opisać dokonywane zmiany.
+    Jeżeli pominiemy opcję ``-m`` otwarty zostanie domyślny edytor,
+    w którym należy opisać zatwierdzane zmiany.
 
 
 Stany plików
@@ -157,7 +158,6 @@ Git wyróżnia **trzy przestrzenie**:
 Możliwe stany plików to:
 
 * **nieśledzony** (ang. *untracked*) – nowe pliki w katalogu roboczym;
-  polecenie ``git add`` rozpoczyna ich śledzenie;
 * **śledzony** (ang. *tracked*):
 
   * niezmieniony (ang. *unmodified*) w katalogu roboczym;
@@ -166,23 +166,25 @@ Możliwe stany plików to:
 
 .. figure:: img/lifecycle.png
 
-Polecenie ``git commit`` zatwierdza aktualną zawartość poczekalni w migawce
-(ang. *snapshot*) tworzonej w repozytorium.
+Polecenia:
+
+* ``git add`` – rozpoczyna śledzenie nowych plików oraz przenosi do poczekalni pliki śledzone i zmodyfikowane;
+* ``git commit`` – zatwierdza aktualną zawartość poczekalni w migawce (ang. *snapshot*) tworzonej w repozytorium.
 
 
 Master i origin
 ===============
 
-Repozytorium lokalne można połączyć i zsynchronizować ze zdalnym. Wystarczy użyć poleceń,
-które sugeruje GitHub po utworzeniu pustego repozytorium. Wracamy do przeglądarki,
-kopiujemy i wykonujemy w terminalu polecenia:
+Repozytorium lokalne połączymy i zsynchronizujemy ze zdalnym, które utworzyliśmy wcześniej.
+Wracamy do przeglądarki, na stronę nowo utworzonego repozytorium zdalnego.
+Kopiujemy, wklejamy i wykonujemy w terminalu polecenia sugerowane przez Gita:
 
 .. code-block:: bash
 
     ~/mojprojekt$ git remote add origin https://github.com/nazwa_konta/mojprojekt.git
     ~/mojprojekt$ git push -u origin master
 
-* ``git remote`` – dodaje zdalne repozytorium określone przez *Git URL* do lokalnego;
+* ``git remote add`` – dodaje zdalne repozytorium określone przez *Git URL* do lokalnego;
 * ``git push`` – synchronizuje zawartość aktualnej lokalnej gałęzi ``master``
   z repozytorium zdalnym o domyślnej nazwie ``origin``.
 
@@ -203,18 +205,18 @@ Klonowanie repozytorium
 
 .. warning::
 
-    Jeżeli wykonujesz scenariusz od początku i sprawdziłeś, że zawartość zdalnego
-    repozytorium na GitHubie odpowiada lokalnemu, usuń teraz lokalny katalog
-    :file:`mojprojekt` za pomocą menedżera plików lub polecenia:
+    Jeżeli sprawdziłeś, że zawartość zdalnego repozytorium na GitHubie
+    odpowiada lokalnemu, usuń teraz katalog :file:`mojprojekt`
+    za pomocą menedżera plików lub polecenia:
 
     .. code-block:: bash
 
         ~$ rm -rf ~/mojprojekt
 
 
-Repozytorium lokalne utworzymy również przez klonowanie. Możemy klonować założone
+Repozytorium lokalne powstaje również poprzez sklonowanie zdalnego. Możemy klonować założone
 przez siebie na GitHubie repozytoria lub istniejące publiczne (wtedy tworzymy tzw. forki).
-Sprowadza się to do wydania polecenia w terminalu:
+Wystarczy polecenie w terminalu:
 
 .. code-block:: bash
 
@@ -231,11 +233,8 @@ W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytor
 lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
 
 
-Praca z repozytorium
-=====================
-
 Zmiany zdalne
--------------
+=============
 
 Wprowadźmy kilka przykładowych zmian w projekcie za pomocą interfejsu serwisu GitHub:
 
@@ -250,11 +249,11 @@ Wprowadźmy kilka przykładowych zmian w projekcie za pomocą interfejsu serwisu
 
 
 Pobranie i scalenie
--------------------
+===================
 
 Ponieważ dokonaliśmy zmian w repozytorium zdalnym (*origin*), repozytorium lokalne jest nieaktualne.
 Sytuacja taka może być częsta, zwłaszcza gdy projekt rozwijany jest zespołowo.
-Dlatego codzienną pracę warto rozpoczynać od ściagnięcia (ang. *fetch*) zmian zdalnych i
+Dlatego codzienną pracę warto rozpoczynać od ściągnięcia (ang. *fetch*) zmian zdalnych i
 scalenia (ang. *merge*) ich z wersją lokalną:
 
 .. code-block:: bash
@@ -268,14 +267,14 @@ Ewentualny komunikat "Already up-to-date." oznacza brak zmian na serwerze.
 
 
 Zmiany lokalne
---------------
+==============
 
 Praca w repozytorium lokalnym jest najwygodniejsza. Przećwiczmy typowe operacje.
 Zmienimy treść pliku :file:`README.md` i utworzymy plik :file:`drugi.txt`:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ echo "Zmiana lokalna" >> README.md
+    ~/mojprojekt$ echo "Pierwsza zmiana lokalna" >> README.md
     ~/mojprojekt$ echo "Drugi plik" > drugi.txt
     ~/mojprojekt$ git status
     ~/mojprojekt$ git diff
@@ -329,15 +328,15 @@ o czym upewnia nas polecenie ``git diff HEAD``. Pokazuje ono wszystkie różnice
 ostatnią migawką (``HEAD``) a śledzonymi plikami.
 
 
-Zmiany można też zatwierdzać bez dodawania ich do poczekalni, ale
-operacja ta działa tylko dla plików śledzonych.:
+Zmiany można też zatwierdzać z pominięciem poczekalni, ale
+operacja ta działa tylko dla plików śledzonych:
 
 .. code-block:: bash
 
     ~/mojprojekt$ git commit -am "Druga zmiana README.md"
     ~/mojprojekt$ git status
 
-.. figure:: img/git_status3.jpg
+.. figure:: img/git_commit_am.jpg
 
 
 Warto w tym miejscu zwrócić uwagę na komunikat statusu: *Your branch is ahead of 'origin/master' by 2 commits.*
@@ -345,38 +344,56 @@ Warto w tym miejscu zwrócić uwagę na komunikat statusu: *Your branch is ahead
 Na razie zostawmy to, zajmiemy się tym później.
 
 Cofanie zmian
--------------
+=============
 
-Utworzymy teraz katalog :file:`doc`, a w nim pliki :file:`index.rst` i :file:`slownik.txt`
-z przykładową treścią.
+**Wycofanie z poczekalni**: utworzymy teraz katalog :file:`doc`,
+a w nim pliki :file:`index.rst` i :file:`slownik.txt` z przykładową treścią.
 
 .. code-block:: bash
 
     ~/mojprojekt$ mkdir doc
-    ~/mojprojekt$ echo "Dokumenty" >> doc/index.rst
-    ~/mojprojekt$ echo "Słownik" >> doc/slownik.txt
+    ~/mojprojekt$ echo "Dokumenty" > doc/index.rst
+    ~/mojprojekt$ echo "Słownik" > doc/slownik.txt
     ~/mojprojekt$ git add .
     ~/mojprojekt$ git status
     ~/mojprojekt$ git reset HEAD doc/slownik.txt
     ~/mojprojekt$ git status
 
 * ``git add .`` – dodaje nowe pliki do poczekalni (i rozpoczyna ich śledzenie);
-* ``git reset HEAD nazwa_pliku`` – pozwala wycofanie pliku z poczekalni, w tym wypadku
+* ``git reset HEAD nazwa_pliku`` – usuwa plik z poczekalni, w tym wypadku
   plik wraca do stanu "nieśledzony".
 
 .. figure:: img/git_reset.jpg
 
-Wykonajmy teraz następujące polecenia, aby zobaczyć, jak cofać zmiany
-niedodane do poczekalni:
+**Zmiana i wycofanie zatwierdzenia** – załóżmy, że po zatwierdzeniu zmian dokonaliśmy poprawek
+i uznaliśmy, że powinny zostać uwzględnione w ostatniej migawce:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git commit -m "Początek dokumentacji"
+    ~/mojprojekt$ echo "Spis treści" >> doc/index.rst
+    ~/mojprojekt$ git add .
+    ~/mojprojekt$ git commit --amend -m "Początek dokumentacji poprawiony"
+    ~/mojprojekt$ git reset --soft HEAD~1
+
+
+* ``git commit --amend`` – poprawia (ang. *amend*) poprzednie zatwierdzenie, tj. dodaje zmiany z poczekalni
+  i ewentualnie zmienia komentarz;
+* ``git reset --soft HEAD~1`` – wycofuje ostatnią migawkę.
+
+.. figure:: img/git_reset2.jpg
+
+**Wycofanie zmian z katalogu roboczego**: wykonamy teraz kolejne polecenia,
+aby zobaczyć, jak cofać zmiany niedodane do poczekalni:
 
 .. code-block:: bash
 
     ~/mojprojekt$ git add doc
-    ~/mojprojekt$ echo "Katalog projektu" >> doc/katalog.rst
-    ~/mojprojekt$ echo "Słownik" >> doc/slownik.rst
+    ~/mojprojekt$ echo "Katalog projektu" > doc/katalog.rst
+    ~/mojprojekt$ echo "Słownik" > doc/slownik.rst
     ~/mojprojekt$ git add .
     ~/mojprojekt$ echo "Dokumentacja projektu" >> doc/katalog.rst
-    ~/mojprojekt$ cat doc/katalog.rst
+    ~/mojprojekt$ git diff
     ~/mojprojekt$ git checkout -- doc/katalog.rst
     ~/mojprojekt$ cat doc/katalog.rst
 
@@ -389,7 +406,7 @@ niedodane do poczekalni:
 
 
 Historia zmian
---------------
+==============
 
 Zatwierdzimy dotychczasowe zmiany, przejrzymy listę i sprawdzimy,
 jak wyglądała pierwsza wersja pliku :file:`README.md`:
@@ -398,7 +415,7 @@ jak wyglądała pierwsza wersja pliku :file:`README.md`:
 
     ~/mojprojekt$ git commit -m "Dodanie katalogu doc"
     ~/mojprojekt$ git log
-    ~/mojprojekt$ git checkout 75468
+    ~/mojprojekt$ git checkout 869d7
     ~/mojprojekt$ cat README.md
     ~/mojprojekt$ git checkout master
     ~/mojprojekt$ cat README.md
@@ -406,25 +423,29 @@ jak wyglądała pierwsza wersja pliku :file:`README.md`:
 
 .. figure:: img/git_log.jpg
 
-* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 75468...``; wypróbuj: ``git log --pretty=format:"%h - %s"`` oraz ``git log --pretty=oneline --decorate``;
-* ``git checkout 75468`` – przełącza nas do migawki oznaczonej podanym początkiem skrótu;
+
+* ``git log`` – pokazuje historię zmian, każda zmiana oznaczona jest unikalnym skrótem typu ``commit 869d7...``; wypróbuj: ``git log --pretty=oneline --decorate`` oraz ``git log --pretty=format:"%h - %s"``;
+* ``git checkout 869d7`` – przełącza nas do migawki oznaczonej podanym początkiem skrótu;
 * ``git checkout master`` – powracamy do stanu aktualnego.
 
 Synchronizacja
---------------
+==============
 
-Pozostaje przesłanie zmian do repozytorium zdalnego:
+Pozostaje przesłanie zatwierdzonych zmian do repozytorium zdalnego:
 
 .. code-block:: bash
 
+    ~/mojprojekt$ git status
     ~/mojprojekt$ git push
 
-* ``git log`` – pokaże listę zatwierdzeń, ;
-* ``git push`` – przesyła zmiany lokalne do repozytorium zdalnego; prosi o podanie nazwy użytkownika
+* ``git push`` – przesyła zmiany lokalne do repozytorium zdalnego; wymaga podania nazwy użytkownika
   i hasła do konta na GitHubie.
 
+.. figure:: img/git_push.jpg
+
+
 Operacje na plikach
--------------------
+===================
 
 .. tip::
 
@@ -433,11 +454,11 @@ Operacje na plikach
     Git nie będzie nic o tym wiedział i zasypie nas wieloma komunikatami
     podczas sesji.
 
-Do zarządzania plikami używamy następujących poleceń:
+**Usuwanie plików i zmiany nazw** realizujemy za pomocą następujących poleceń:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ git rm --cached "pierwszy.txt"
+    ~/mojprojekt$ git rm --cached pierwszy.txt
     ~/mojprojekt$ git mv doc/katalog.rst doc/projekt.rst
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -am "Porządki  w projekcie"
@@ -447,16 +468,19 @@ Do zarządzania plikami używamy następujących poleceń:
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -am "Porządki  w projekcie"
 
-* ``git rm --cached`` – usuwa pliki śledzone z poczekalni, ale nie zdysku;
+* ``git rm --cached`` – usuwa pliki śledzone z poczekalni, ale nie z dysku;
 * jeżeli mają być usunięte również z dysku, używamy tylko ``git rm``;
 * ``git mv`` – pozwala przenieść lub zmienić nazwę pliku;
 * ``git reset --soft HEAD~1`` – anuluje ostatnie zatwierdzenie;
-* ``git rm "*.txt"`` – usuwa pliki z poczekalni i z dysku, wymaga przełącznika ``-f``,
+* ``git rm -f`` – usuwa śledzone pliki z poczekalni i z dysku, wymaga przełącznika ``-f``,
   jeżeli usuwany plik ma niezatwierdzone zmiany.
 
 
+.. figure:: img/git_rm_mv.jpg
+
+
 Konflikty wersji
-----------------
+================
 
 W czasie pracy nad projektem zdarzyć się może, że jakiś plik został
 zmieniony zarówno w repozytorium zdalnym, np. przez współpracownika,
@@ -464,28 +488,20 @@ jak i lokalnie przez nas. Jeżeli nie ściągnęliśmy ostatniej zdalnej
 wersji pliku, próba wysłania naszych zmian na serwer wywoła komunikat
 o konflikcie. Przećwiczmy taką możliwość.
 
-**Na początku w repozytorium zdalnym zmieniamy plik :file:`pierwszy.txt`.**
-
-Następnie lokalnie dodajemy usunięty wcześniej z projektu
-plik :file:`pierwszy.txt`, wprowadzamy zmiany, zatwierdzamy i próbujemy
-wgrać je na serwer:
+* **W repozytorium zdalnym zmieniamy plik** :file:`pierwszy.txt`,
+* lokalnie dodajemy usunięty wcześniej plik :file:`pierwszy.txt` i wprowadzamy zmiany,
+* zatwierdzamy zmiany i próbujemy wgrać je na serwer:
 
 .. code-block:: bash
 
+    ~/mojprojekt$ git status
     ~/mojprojekt$ git add .
     ~/mojprojekt$ echo "Zmiana lokalna w pierwszym" >> pierwszy.txt
     ~/mojprojekt$ git commit -am "Zmiana w pierwszym"
     ~/mojprojekt$ git push
-    Username for 'https://github.com': lo1cgsan
-    Password for 'https://lo1cgsan@github.com':
-    To https://github.com/lo1cgsan/mojprojekt.git
-     ! [rejected]        master -> master (fetch first)
-    error: failed to push some refs to 'https://github.com/lo1cgsan/mojprojekt.git'
-    hint: Updates were rejected because the remote contains work that you do
-    hint: not have locally. This is usually caused by another repository pushing
-    hint: to the same ref. You may want to first integrate the remote changes
-    hint: (e.g., 'git pull ...') before pushing again.
-    hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+.. figure:: img/git_push2.jpg
+
 
 Powyższy komunikat zawiera sugestię, co zrobić. Zastosujemy się do niej
 i pobierzemy zmiany z serwera:
@@ -493,20 +509,14 @@ i pobierzemy zmiany z serwera:
 .. code-block:: bash
 
     ~/mojprojekt$ git pull
-    remote: Counting objects: 3, done.
-    remote: Compressing objects: 100% (3/3), done.
-    remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
-    Unpacking objects: 100% (3/3), done.
-    From https://github.com/lo1cgsan/mojprojekt
-       0dbc52a..1bd4122  master     -> origin/master
-    Auto-merging pierwszy.txt
-    CONFLICT (content): Merge conflict in pierwszy.txt
-    Automatic merge failed; fix conflicts and then commit the result.
+
+.. figure:: img/git_pull2.jpg
+
 
 Konflikt dotyczy pliku :file:`pierwszy.txt`. Zawartość pobrana z serwera
 nie zgadza się z lokalną. Zgodnie z podpowiedzią:
-``fix conflicts and then commit the result`` – musimy naprawić konflikt
-i dopiero wtedy zatwierdzić zmiany. W dowolnym edytorze otwieramy zatem plik:
+``fix conflicts and then commit the result`` – rozwiążemy konflikty
+i zatwierdzimy rezultat. W dowolnym edytorze otwieramy zatem plik:
 
 .. figure:: img/git_edit.jpg
 
@@ -517,29 +527,29 @@ Git używa znaczników, aby wskazać różnice:
 * ``=======`` – separator zmian lokalnych i zdalnych;
 * ``>>>>>>> skrót`` – znacznik końca bloku różnic.
 
-Usuwamy znaczniki, ustalamy ostateczną wersję pliku,
-zatwierdzamy i wysyłamy zmiany na serwer:
+Usuwamy znaczniki, zapisujemy ostateczną wersję pliku,
+następnie zatwierdzamy i wysyłamy zmiany na serwer:
 
 .. code-block:: bash
 
     ~/mojprojekt$ cat pierwszy.txt
-    Dodanie pliku na github.com
-    Zmiana lokalna w pierwszym
-    i
-    Zmiany w pierwszym zdalne.
     ~/mojprojekt$ git commit -am "Rozwiązanie konfliktu w pierwszy.txt"
     ~/mojprojekt$ git push
 
 Gałęzie
 =======
 
-Gałąź (ang. *branch*) formalnie jest wskaźnikiem, czyli nazwą odsyłającą do któregoś z zestawu zmian
-(migawki) zachowanych w repozytorium. Domyślna gałąź nazywa się *master* i tworzona jest przez polecenie
-``git init``. Podczas zatwierdzania zmian wskaźnik *master* przesuwany jest tak, aby wskazywał
-na ostatnią migawkę.
+Gałąź (ang. *branch*) służą testowaniu nowego kodu. Można utworzyć wiele gałęzi,
+rozwijać kod w każdej z nich niezależnie, a następnie scalać wybrane zmiany.
 
-Ponieważ chcemy przetestować nowy kod, utworzymy teraz nową gałąź, przełączymy się do niej,
-wprowadzimy kilka zmian i zatwierdzimy je:
+.. note::
+
+    Formalnie gałąź jest wskaźnikiem, czyli nazwą odsyłającą do któregoś z zestawu zmian
+    zachowanych w repozytorium. Domyślna gałąź nazywa się *master* i tworzona jest przez
+    polecenie ``git init``. Podczas zatwierdzania zmian wskaźnik *master* przesuwany jest tak,
+    aby wskazywał na ostatnią migawkę.
+
+Utworzymy teraz nową gałąź, przełączymy się do niej, wprowadzimy kilka zmian i zatwierdzimy je:
 
 .. code-block:: bash
 
@@ -556,21 +566,18 @@ wprowadzimy kilka zmian i zatwierdzimy je:
 * ``git branch nazwa_gałęzi`` – tworzy gałąź o podanej nazwie;
 * ``git checkout nazwa_gałęzi`` – przełącza na podaną gałąź;
 * ``git checkout -b testy`` – tworzy gałąź i przełącza do niej (zastępuje dwa poprzednie polecenia);
-* ``git branch -vv`` – wyświetla informacje o gałęziach;
-* ``git log --pretty=oneline --decorate`` – oprócz historii zmian pokazuje, która gałąź jest aktywna.
-
-.. note::
-
-    Git używa specjalnego wskaźnika ``HEAD`` wskazującego aktualną gałąź.
-    Użyj ``git log --pretty=oneline --decorate``, aby zobaczyć,
-    na którą gałąź wskazuje.
-
+* ``git branch -vv`` – wyświetla informacje o gałęziach.
 
 .. figure:: img/git_branch.jpg
 
 
-Załóżmy, że w gałęzi testy wprowadziliśmy wszystkie zaplanowane zmiany.
-Wrócimy teraz do gałęzi *master* i scalimy je:
+.. note::
+
+    Git używa specjalnego wskaźnika ``HEAD`` wskazującego aktualną gałąź.
+    Użyj ``git log --pretty=oneline --decorate``, aby zobaczyć, na którą gałąź wskazuje.
+
+
+Wrócimy teraz do gałęzi *master* i scalimy z nią zmiany z gałęzi *testy*:
 
 
 .. code-block:: bash
@@ -591,6 +598,18 @@ Wrócimy teraz do gałęzi *master* i scalimy je:
     Zmiana aktywnej gałęzi przywraca katalog roboczy do stanu z ostatniej migawki
     w danej gałęzi. W naszym przykładzie zwróć uwagę, że po przełączeniu się do gałęzi *master*
     z gałęzi *testy* "zniknął" plik :file:`text.txt`.
+
+Pomijanie plików
+================
+
+Nie wszystkie typy plików powinny być synchronizowane między repozytorium lokalnym i zdalnym.
+Np. pliki pośrednie tworzone przez kompilatory i interpretery, pliki tymczasowe, wirtualne
+środowiska itp. zapychałyby nam niepotrzebnie repozytorium zdalne. Git pozwala zdefiniować
+listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukrytym pliku
+(rozpoczyna się kropką!) :file:`.gitignore`, który umieszczamy w głównym katalogu projektu.
+
+* :download:`Przykładowa zawartość <gitignore.txt>` pliku :file:`.gitignore`.
+* `Wzorce dla różnych języków programownaia <https://github.com/github/gitignore>`_.
 
 
 Materiały
@@ -617,17 +636,6 @@ Materiały
       - ``md mojprojekt`` – utworzy katalog projektu (odpowiednik ``mkdir``);
       - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
       - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
-
-Pomijanie plików
-----------------
-
-Nie wszystkie typy plików powinny być synchronizowane między repozytorium lokalnym i zdalnym.
-Np. pliki pośrednie tworzone przez kompilatory i interpretery, pliki tymczasowe, wirtualne
-środowiska itp. zapychałyby nam niepotrzebnie repozytorium zdalne. Git pozwala zdefiniować
-listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukrytym pliku
-(rozpoczyna się kropką!) :file:`.gitignore`, który umieszczamy w głównym katalogu projektu.
-Pobierz i przejrzyj :download:`przykładową zawartość <gitignore.txt>`.
-Inne przykładowe wzorce plików znajdziesz w repozytorium `gitignore <https://github.com/github/gitignore>`_.
 
 Odwiedź
 -------
