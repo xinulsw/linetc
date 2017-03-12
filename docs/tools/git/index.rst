@@ -258,7 +258,8 @@ scalenia (ang. *merge*) ich z wersją lokalną:
 
 .. code-block:: bash
 
-    ~$ git pull [origin] [master]
+    ~$ cd mojprojekt
+    ~/mojprojekt$ git pull [origin] [master]
 
 Opcjonalne argumenty określają nazwy repozytorium zdalnego i lokalnej gałęzi.
 Ewentualny komunikat "Already up-to-date." oznacza brak zmian na serwerze.
@@ -298,7 +299,7 @@ Zauważmy, że po dodaniu zmian do poczekalni polecenie ``git diff`` nie pokazuj
       * ``git add .`` – dodanie plików nowych i zmienionych, ale nie usuniętych;
       * ``git add -u`` – dodanie zmienionych i usuniętych, ale nie nowych.
 
-Zróbmy teraz kolejną zmianę w pliku :file:`README.md` i sprawdżmy status:
+Zróbmy teraz kolejną zmianę w pliku :file:`README.md` i sprawdźmy status:
 
 .. code-block:: bash
 
@@ -324,9 +325,9 @@ należałoby ją ponownie dodać poleceniem ``git add``. Zrobimy inaczej, zatwie
 .. figure:: img/git_status2.jpg
 
 Która wersja pliku :file:`README.md` trafiła do migawki? Oczywiście ta z poczekalni,
-o czym upewnia nas polecenie ``git diff HEAD``. Pokazuje ono wszystkie różnice między
-ostatnią migawką (``HEAD``) a śledzonymi plikami.
+o czym upewnia nas ostatnie polecenie:
 
+* ``git diff HEAD`` – pokazuje wszystkie różnice między ostatnią migawką (``HEAD``) a śledzonymi plikami.
 
 Zmiany można też zatwierdzać z pominięciem poczekalni, ale
 operacja ta działa tylko dla plików śledzonych:
@@ -609,7 +610,38 @@ listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukr
 (rozpoczyna się kropką!) :file:`.gitignore`, który umieszczamy w głównym katalogu projektu.
 
 * :download:`Przykładowa zawartość <gitignore.txt>` pliku :file:`.gitignore`.
-* `Wzorce dla różnych języków programownaia <https://github.com/github/gitignore>`_.
+* `Wzorce dla różnych języków programowania <https://github.com/github/gitignore>`_.
+
+
+Cheat Sheet
+===========
+
+* ``git config --global`` – konfiguruje ustawienia ``user.name``, ``user.email``, ``push.default``;
+* ``git init`` – inicjuje repozytorium Gita;
+* ``git status`` – pokazuje stan repozytorium;
+* ``git add`` – rozpoczyna śledzenie plików, dodaje zmiany do poczekalni, częste opcje:
+  ``-all``, ``.``;
+* ``git commit -m "opis zmiany"`` – tworzy migawkę ze zmian znajdujących się w poczekalni, opcje:
+  ``-am "opis zmiany"`` – pomija poczekalnię;
+* ``git commit --amend -m "opis zmiany"`` – uzupełnia i aktualizuje ostatnią migawkę;
+* ``git remote add origin GitURL`` – dodaje repozytorium zdalne do lokalnego;
+* ``git clone GitURL [katalog]`` – klonuje repozytorium zdalne do katalogu lokalnego;
+* ``git push [-u] [origin] [master]`` – wysyła zmiany lokalne do repozytorium zdalnego;
+* ``git diff`` – pokazuje zmiany w katalogu roboczym;
+* ``git diff --staged`` – pokazuje zmiany pomiędzy katalogiem roboczym a poczekalnią;
+* ``git diff HEAD`` – pokazuje zmiany w porównaniu do ostatniej migawki;
+* ``git reset HEAD plik`` – wycofuje zmianę pliku z poczekalni;
+* ``git reset --soft HEAD~1`` – wycofuje ostatnią migawkę;
+* ``git checkout -- plik`` – cofa zmianę pliku w katalogu roboczym;
+* ``git checkout skrót/tag/gałąź`` – pozwala przejść do stanu wskazanego przez skrót migawki,
+  tag lub nazwę gałęzi, np. *master*;
+* ``git checkout -b gałąź`` – tworzy podaną *gałąź* i przełącza do niej;
+* ``git log`` – wyświetla historię zmian, opcja: ``--pretty=oneline --decorate``;
+* ``git rm --cached plik`` – usuwa plik z poczekalni, ale nie z katalogu roboczego;
+* ``git rm -f plik`` – usuwa plik z poczekalni i katalogu roboczego;
+* ``git mv stara nowa`` – zmienia *starą* nazwę na *nową*;
+* ``git branch gałąź`` – tworzy *gałąź*, opcje: ``-vv`` – informacje o gałęziach, ``-d gałąź`` – usuwa gałąź;
+* ``git merge gałąź`` – scala zmiany z podanej *gałęzi* do aktualnej.
 
 
 Materiały
