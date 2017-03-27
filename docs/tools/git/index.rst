@@ -224,7 +224,7 @@ Wystarczy polecenie w terminalu:
 
 
 Najważniejszy jest argument *Git URL*, czyli schematyczny adres repozytorium,
-który możemy pobrać na stronie głównej repozytorium klikając przycisk "Clone or download":
+który możemy pobrać na stronie głównej repozytorium po kliknięciu w przycisk "Clone or download":
 
 .. figure:: img/git_clone.jpg
 
@@ -289,16 +289,6 @@ Zmienimy treść pliku :file:`README.md` i utworzymy plik :file:`drugi.txt`:
 
 Zauważmy, że po dodaniu zmian do poczekalni polecenie ``git diff`` nie pokazuje żadnych różnic.
 
-.. tip::
-
-    Podczas dodawania plików do poczekalni można używać symboli wieloznacznych i nazw katalogów,
-    np. ``git add '*.txt'`` lub ``git add doc``. Można też korzystać z poleceń powłoki, np.:
-    ``find . -name "*.rst" -exec git add {} \;``. Inne warianty to:
-
-      * ``git add -A`` – dodanie wszystkich zmian;
-      * ``git add .`` – dodanie plików nowych i zmienionych, ale nie usuniętych;
-      * ``git add -u`` – dodanie zmienionych i usuniętych, ale nie nowych.
-
 Zróbmy teraz kolejną zmianę w pliku :file:`README.md` i sprawdźmy status:
 
 .. code-block:: bash
@@ -319,7 +309,7 @@ należałoby ją ponownie dodać poleceniem ``git add``. Zrobimy inaczej, zatwie
 .. code-block:: bash
 
     ~/mojprojekt$ git commit -m "Zmiana pliku README i inne"
-    ~/mojprojekt$ git status
+    ~/mojprojekt$ git status -vv
     ~/mojprojekt$ git diff HEAD
 
 .. figure:: img/git_status2.jpg
@@ -327,7 +317,8 @@ należałoby ją ponownie dodać poleceniem ``git add``. Zrobimy inaczej, zatwie
 Która wersja pliku :file:`README.md` trafiła do migawki? Oczywiście ta z poczekalni,
 o czym upewnia nas ostatnie polecenie:
 
-* ``git diff HEAD`` – pokazuje wszystkie różnice między ostatnią migawką (``HEAD``) a śledzonymi plikami.
+* ``git status -vv`` – pokazuje stan repozytorium oraz wszystkie zmiany;
+* ``git diff HEAD`` – pokazuje wszystkie różnice między ostatnią migawką a śledzonymi plikami.
 
 Zmiany można też zatwierdzać z pominięciem poczekalni, ale
 operacja ta działa tylko dla plików śledzonych:
@@ -462,9 +453,6 @@ Operacje na plikach
     ~/mojprojekt$ git rm --cached pierwszy.txt
     ~/mojprojekt$ git mv doc/katalog.rst doc/projekt.rst
     ~/mojprojekt$ git status
-    ~/mojprojekt$ git commit -am "Porządki  w projekcie"
-    ~/mojprojekt$ git reset --soft HEAD~1
-    ~/mojprojekt$ git status
     ~/mojprojekt$ git rm -f "*.txt"
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -am "Porządki  w projekcie"
@@ -472,7 +460,6 @@ Operacje na plikach
 * ``git rm --cached`` – usuwa pliki śledzone z poczekalni, ale nie z dysku;
 * jeżeli mają być usunięte również z dysku, używamy tylko ``git rm``;
 * ``git mv`` – pozwala przenieść lub zmienić nazwę pliku;
-* ``git reset --soft HEAD~1`` – anuluje ostatnie zatwierdzenie;
 * ``git rm -f`` – usuwa śledzone pliki z poczekalni i z dysku, wymaga przełącznika ``-f``,
   jeżeli usuwany plik ma niezatwierdzone zmiany.
 
@@ -612,17 +599,20 @@ listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukr
 * :download:`Przykładowa zawartość <gitignore.txt>` pliku :file:`.gitignore`.
 * `Wzorce dla różnych języków programowania <https://github.com/github/gitignore>`_.
 
-
 Cheat Sheet
 ===========
 
 * ``git config --global`` – konfiguruje ustawienia ``user.name``, ``user.email``, ``push.default``;
 * ``git init`` – inicjuje repozytorium Gita;
 * ``git status`` – pokazuje stan repozytorium;
-* ``git add`` – rozpoczyna śledzenie plików, dodaje zmiany do poczekalni, częste opcje:
-  ``-all``, ``.``;
-* ``git commit -m "opis zmiany"`` – tworzy migawkę ze zmian znajdujących się w poczekalni, opcje:
-  ``-am "opis zmiany"`` – pomija poczekalnię;
+* ``git status -vv`` – pokazuje stan repozytorium oraz zmiany;
+* ``git add nazwa_pliku/katalogu`` – rozpoczyna śledzenie pliku/katalogu, dodaje zmiany do poczekalni;
+* ``git -all`` lub ``-A`` – dodanie wszystkich zmian do poczekalni;
+* ``git add '*.txt'`` – dodanie do poczekalni wszystkich plików tekstowych;
+* ``git add .`` – dodanie plików nowych i zmienionych, ale nie usuniętych;
+* ``git -u`` – dodanie zmienionych i usuniętych, ale nie nowych;
+* ``git commit -m "opis zmiany"`` – tworzy migawkę ze zmian znajdujących się w poczekalni;
+* ``git -am "opis zmiany"`` – tworzy migawkę z wszystkich zmian pomijając poczekalnię;
 * ``git commit --amend -m "opis zmiany"`` – uzupełnia i aktualizuje ostatnią migawkę;
 * ``git remote add origin GitURL`` – dodaje repozytorium zdalne do lokalnego;
 * ``git clone GitURL [katalog]`` – klonuje repozytorium zdalne do katalogu lokalnego;
@@ -654,6 +644,8 @@ Materiały
       w którym umieszcza się opis projektu.
     * Do wygodnej pracy w systemie Windows można skonfigurować
       `Git w powłoce PowerShell <https://git-scm.com/book/be/v2/Git-in-Other-Environments-Git-in-Powershell>`_
+    * Użytkownicy Windows mogą skonfigurować klienta Gita tak, aby nie wyświetlał ostrzeżeń o konwersji znaków
+      końca lini (*LF will be replaced by CRLF*) wydając polecenie: ``git config --global core.autocrlf true``.
 
 .. _cmdexe:
 
