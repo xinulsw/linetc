@@ -315,9 +315,9 @@ należałoby ją ponownie dodać poleceniem ``git add``. Zrobimy inaczej, zatwie
 .. figure:: img/git_status2.jpg
 
 Która wersja pliku :file:`README.md` trafiła do migawki? Oczywiście ta z poczekalni,
-o czym upewnia nas ostatnie polecenie:
+o czym upewniają nas ostatnie polecenia:
 
-* ``git status -vv`` – pokazuje stan repozytorium oraz wszystkie zmiany;
+* ``git status -vv`` – pokazuje stan repozytorium oraz wszystkie zmiany w śledzonych plikach;
 * ``git diff HEAD`` – pokazuje wszystkie różnice między ostatnią migawką a śledzonymi plikami.
 
 Zmiany można też zatwierdzać z pominięciem poczekalni, ale
@@ -606,6 +606,7 @@ Cheat Sheet
 * ``git init`` – inicjuje repozytorium Gita;
 * ``git status`` – pokazuje stan repozytorium;
 * ``git status -vv`` – pokazuje stan repozytorium oraz zmiany;
+* ``git status -sb`` – pokazuje stan repozytorium oraz zmiany w skrócie;
 * ``git add nazwa_pliku/katalogu`` – rozpoczyna śledzenie pliku/katalogu, dodaje zmiany do poczekalni;
 * ``git -all`` lub ``-A`` – dodanie wszystkich zmian do poczekalni;
 * ``git add '*.txt'`` – dodanie do poczekalni wszystkich plików tekstowych;
@@ -626,7 +627,7 @@ Cheat Sheet
 * ``git checkout skrót/tag/gałąź`` – pozwala przejść do stanu wskazanego przez skrót migawki,
   tag lub nazwę gałęzi, np. *master*;
 * ``git checkout -b gałąź`` – tworzy podaną *gałąź* i przełącza do niej;
-* ``git log`` – wyświetla historię zmian, opcja: ``--pretty=oneline --decorate``;
+* ``git log`` – wyświetla historię zmian, opcja: ``--pretty=oneline --decorate``, ``-p`` – historia zawartości zmian, ``--stat`` – lista zmienianych plików;
 * ``git rm --cached plik`` – usuwa plik z poczekalni, ale nie z katalogu roboczego;
 * ``git rm -f plik`` – usuwa plik z poczekalni i katalogu roboczego;
 * ``git mv stara nowa`` – zmienia *starą* nazwę na *nową*;
