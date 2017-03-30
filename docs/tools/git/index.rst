@@ -169,8 +169,8 @@ Przećwiczymy to wydając polecenia:
 .. note::
 
     Każda migawka powinna być opatrzona informacją o dokonanych zmianach. Umożliwia to
-    opcja ``-m``, jeżeli ją pominiemy, Git otworzy domyślny edytor,
-    w którym należy opisać zatwierdzane zmiany.
+    opcja ``-m``. Jeżeli ją pominiemy, Git otworzy domyślny edytor,
+    w którym należy zmiany opisać.
 
 
 .. figure:: img/git_init.jpg
@@ -194,11 +194,15 @@ Kopiujemy, wklejamy i wykonujemy w terminalu polecenia sugerowane przez Gita:
 
 .. figure:: img/git_remote.jpg
 
-Nazwa **master** jest domyślną gałęzią Gita. Technicznie jest to wskaźnik odnoszący się do
-ostatniej zatwierdzonej migawki. Po synchronizacji repozytoriów lokalna gałąź *master*
-zaczyna śledzić zdalną o takiej samej nazwie.
 
-Nazwa **origin** to domyślne określenie repozytorium zdalnego.
+.. note::
+
+    Nazwa **master** jest domyślną gałęzią Gita tworzoną podczas inicjacji repozytorium.
+    Technicznie jest to wskaźnik odnoszący się do ostatniej zatwierdzonej migawki.
+    Po synchronizacji repozytoriów lokalna gałąź *master* zaczyna śledzić zdalną o takiej samej nazwie.
+
+    Nazwa **origin** to domyślne określenie repozytorium zdalnego.
+
 
 Klonowanie repozytorium
 =======================
@@ -270,7 +274,7 @@ Ewentualny komunikat "Already up-to-date." oznacza brak zmian na serwerze.
 Zmiany lokalne
 ==============
 
-Praca w repozytorium lokalnym jest najwygodniejsza. Przećwiczmy typowe operacje.
+Praca w repozytorium lokalnym jest najwygodniejsza. Przećwiczmy typowe sytuacje.
 Zmienimy treść pliku :file:`README.md` i utworzymy plik :file:`drugi.txt`:
 
 .. code-block:: bash
@@ -320,7 +324,7 @@ o czym upewniają nas ostatnie polecenia:
 * ``git status -vv`` – pokazuje stan repozytorium oraz wszystkie zmiany w śledzonych plikach;
 * ``git diff HEAD`` – pokazuje wszystkie różnice między ostatnią migawką a śledzonymi plikami.
 
-Zmiany można też zatwierdzać z pominięciem poczekalni:
+**Zatwierdzanie z pominięciem poczekalni** można zrobić tak:
 
 .. code-block:: bash
 
