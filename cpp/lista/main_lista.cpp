@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Lista.h"
+#include "lista.h"
 
 int main(){
   Lista lista;
@@ -11,5 +11,5 @@ int main(){
   lista.Wyswietl();
   lista.Usun(2);
   lista.Wyswietl();
-  return EXIT_SUCCESS;
+  return 0;
 }

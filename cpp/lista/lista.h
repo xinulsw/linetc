@@ -1,7 +1,9 @@
+#ifndef LISTA_H
+#define LISTA_H
 
 typedef struct ELEMENT{
-  int value;
-  ELEMENT* next;  
+  int wartosc;
+  ELEMENT* nast;
 }ELEMENT;
 
 typedef struct HEADER{
@@ -14,11 +16,13 @@ class Lista
   private:
     HEADER header;
   public:
-    Lista();
-    ~Lista();
-    void Dodaj(int value);
-    bool Wstaw(int value, int position);
+    Lista(); //konstruktor
+    ~Lista(); //dekonstruktor
+    void Dodaj(int);
+    bool Wstaw(int, int);
     bool Usun();
     bool Usun(int);
     void Wyswietl();
 };
+
+#endif
