@@ -35,7 +35,7 @@ Klucz USB
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
 1. Pobieramy obraz *iso* systemu:
-   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WTV9ENUgtVXhtclk>`_ [środowisko XFCE, 13.02.2017] lub
+   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WakRQN1BWUEV4UFk>`_ [środowisko XFCE, 09.05.2017] lub
    `porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_ [środowisko Cinnamon, 13.02.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
@@ -138,25 +138,25 @@ Porteus ma budowę modularną, składa się ze skompresowanych paczek w formacie
     * `Pobierz moduły <https://drive.google.com/open?id=0B1zG9cfNyT7WSTlWWWdTdzRBQnc>`_ »»»
 
 
-Obraz iso, katalog :file:`potrteus/modules`, zawiera:
+Obraz iso, katalog :file:`potrteus/modules`, zawiera :
 
-1. :file:`01-devel.xzm` – podstawowe narzędzia deweloperskie (kompilatory);
-2. :file:`02-pl-locales.xzm` – spolszczenie ze słownikami;
-3. :file:`02-tcltk-8.6.5.xzm` – biblioteki Tcl/Tk wymagane przez Pythona;
-4. :file:`04-python2.7.11-pyqt5.6-x(c).xzm` – Python 2.7.11;
-5. :file:`05-python3.5.2-pyqt5.6-x(c).xzm` – Python 3.5.2;
-6. :file:`06-qt5-5.6.1.xzm` – biblioteka Qt 5.6;
-7. :file:`09-fonts-msubuinf.xzm` – zestaw dodatkowych czcionek;
-8. :file:`10-palemoon-27.0.3-x86_64-1.xzm` – przeglądarka Palemoon 27.x;
-9. :file:`15-flashplayer-plugin-24.0.0.194.xzm` – wtyczka Flash Player;
-10. :file:`50-git-2.9.0-x86_64-1.xzm` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_;
-11. :file:`55-keepassx-2.0.3-x86_64-1alien.xzm` – menedżer haseł;
-12. :file:`90-tools.xzm` – narzędzia ``lxrandr`` (zarządzanie ekranami), ``xmag``, ``tree``;
-13. :file:`91-geany-1.28-x86_64-1gv.xzm` – Geany, programistyczne IDE;
-14. :file:`95-sublime_text_3.xzm` – zaawansowany edytor programistyczny SublimeText 3;
-15. :file:`99-home-guest-x(c).xzm` – prekonfiguracja środowiska XFCE.
+1. :file:`01-devel` – podstawowe narzędzia deweloperskie (kompilatory);
+2. :file:`02-pl-locales` – spolszczenie ze słownikami;
+3. :file:`02-tcltk` – biblioteki Tcl/Tk wymagane przez Pythona;
+4. :file:`04-python2` – Python 2.7.13 (XFCE) lub 2.7.11 (Cinnamon) + PyQt5;
+5. :file:`05-python3` – Python 3.6.1 (XFCE) lub 3.5.2 (Cinnamon) + PyQt5;
+6. :file:`06-qt5` – biblioteka Qt 5.7 (XFCE) lub 5.6 (Cinnamon);
+7. :file:`09-fonts-msubuinf` – dodatkowe czcionki;
+8. :file:`10-palemoon` – przeglądarka Palemoon 27.3.1;
+9. :file:`15-flashplayer-plugin` – wtyczka Flash Player 25.0.0.148;
+10. :file:`50-git` – system kontroli wersji `Git <https://pl.wikipedia.org/wiki/Git_(oprogramowanie)>`_ 2.9;
+11. :file:`55-keepassx` – menedżer haseł KeePassX 2.0.3;
+12. :file:`90-tools` – narzędzia ``lxrandr`` (zarządzanie ekranami), ``xmag``, ``tree``;
+13. :file:`91-geany` – Geany 1.29, programistyczne IDE;
+14. :file:`95-sublime_text_3` – zaawansowany edytor programistyczny Sublime-Text 3 (3126);
+15. :file:`99-home-guest` – prekonfiguracja środowiska XFCE lub Cinnamon.
 
-W katalogu :file:`potrteus/optional` znajdziesz:
+W katalogu :file:`porteus/optional` znajdziesz:
 
 * :file:`biblioteki-py2.xzm` – zawiera biblioteki potrzebne do realizacji scenariuszy
   `Python101 <http://python101.rtfd.org>`_: Django, Django registration, Flask, Peewee,
@@ -165,7 +165,7 @@ W katalogu :file:`potrteus/optional` znajdziesz:
 .. note::
 
   Pakiety Pythona 2 i 3 zawierają:
-  *IPython (+QtConsole), Matplotlib, PyGame, Turtle, PyQt 5.6, Terminator, Guake*.
+  *IPython (+QtConsole), Matplotlib, PyGame, Turtle, PyQt*.
   Przyrostki ``-x`` i ``-c`` odróżniają wersje dla XFCE i Cinnamona.
 
 

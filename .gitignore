@@ -102,3 +102,7 @@ $RECYCLE.BIN/
 
 .pve/
 .pve3/
+
+/linetc.sublime-project
+
+/linetc.sublime-workspace
