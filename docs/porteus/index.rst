@@ -158,7 +158,7 @@ Obraz iso, katalog :file:`potrteus/modules`, zawiera :
 
 W katalogu :file:`porteus/optional` znajdziesz:
 
-* :file:`biblioteki-py2.xzm` – zawiera biblioteki potrzebne do realizacji scenariuszy
+* :file:`biblioteki-py2.xzm` – biblioteki potrzebne do realizacji scenariuszy
   `Python101 <http://python101.rtfd.org>`_: Django, Django registration, Flask, Peewee,
   Sqlalchemy, flask-sqlalchemy, /home/guest/robot, /home/guest/mcpi-sim.
 
@@ -175,23 +175,24 @@ Dodatkowe moduły
 `Moduły opcjonalne <https://drive.google.com/open?id=0B1zG9cfNyT7WbzRYa2NiM0tZNUU>`_ po pobraniu
 można wgrać do katalogu :file:`potrteus/optional`:
 
-* :file:`libreoffice-5.2.3.3-x86_64.xzm` – spolszczony pakiet biurowy LibreOffice;
-* :file:`sqlitestudio3.1.1.xzm` – menedżer baz danych SQLite;
-* :file:`etherpad-lite-1.5.7.xzm` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami, polecenia: ``sudo /etc/rc.d/rc.etherpad-lite start``, ``sudo /etc/rc.d/rc.etherpad-lite stop``;
-* :file:`vsftpd-3.0.3.xzm` – serwer FTP, polecenia: ``sudo rc.ftp start``, ``sudo rc.ftp stop``
-* :file:`gimp-2.8.18.xzm` – zaawansowany edytor graficzny;
-* :file:`ghostscript-9.19.xzm` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
-* :file:`sylpheed-3.5.1.xzm` – klient pocztowy z filtrem spamu;
-* :file:`xnview-0.8.4.xzm` – wielofunkcyjny menedżer plików graficznych;
-* :file:`faenza-icon-1.3.xzm` – zestaw ikon Faenza;
-* :file:`firefox-52.0b1.xzm` – przeglądarka WWW Firefox;
-* :file:`qt-creator-4.2.0.xzm` – lekkie środowisko programistyczne dla biblioteki Qt5.
-* :file:`kivy-1.9.1.xzm` – międzyplatformowy framework do projektowania aplikacji wykorzystujących naturalny interfejs użytkownika, w tym aplikacji mobilnych;
-* :file:`pycharm-2016.3-prof.xzm` – profesjonalne zaawansowane środowisko IDE dla Pythona w wersji Professional Trial;
-* :file:`django-1.10.5.xzm` – wirtualne środowisko .pve z frameworkiem Django i biblioteką django-registration;
-* :file:`mcpi.xzm` – biblioteki do konstruowania świata w `Minecraft Pi Edition <http://python101.readthedocs.io/pl/latest/mcpi/index.html>`_;
-* :file:`robobt-game.xzm` – wirtualne środowisko env z bibliotekami do `Robot Game <http://python101.readthedocs.io/pl/latest/rg/index.html>`_;
-* :file:`biblioteki-py2.xzm` – zob. wyżej.
+* :file:`libreoffice-5.2.3.3` – spolszczony pakiet biurowy LibreOffice;
+* :file:`sqlitestudio3.1.1` – menedżer baz danych SQLite;
+* :file:`etherpad-lite-1.5.7` – notatnik uruchamiany w przeglądarce umożliwiający współpracę nad dokumentami, polecenia: ``sudo /etc/rc.d/rc.etherpad-lite start``, ``sudo /etc/rc.d/rc.etherpad-lite stop``;
+* :file:`vsftpd-3.0.3` – serwer FTP, polecenia: ``sudo rc.ftp start``, ``sudo rc.ftp stop``;
+* :file:`php-5.6.23-hiawatha-10.5` – serwer WWW Hiawatha + PHP, polecenia: ``sudo lamp.sh start``, ``sudo lamp.sh stop``;
+* :file:`gimp-2.8.18` – zaawansowany edytor graficzny;
+* :file:`ghostscript-9.19` – narzędzia do przetwarzania języka PostScript i fomatu PDF;
+* :file:`sylpheed-3.5.1` – klient pocztowy z filtrem spamu;
+* :file:`xnview-0.8.4` – wielofunkcyjny menedżer plików graficznych;
+* :file:`faenza-icon-1.3` – zestaw ikon Faenza;
+* :file:`firefox-52.0b1` – przeglądarka WWW Firefox;
+* :file:`qt-creator-4.2.0` – lekkie środowisko programistyczne dla biblioteki Qt5.
+* :file:`kivy-1.9.1` – międzyplatformowy framework do projektowania aplikacji wykorzystujących naturalny interfejs użytkownika, w tym aplikacji mobilnych;
+* :file:`pycharm-2016.3-prof` – profesjonalne zaawansowane środowisko IDE dla Pythona w wersji Professional Trial;
+* :file:`django-1.10.5` – wirtualne środowisko .pve z frameworkiem Django i biblioteką django-registration;
+* :file:`mcpi` – biblioteki do konstruowania świata w `Minecraft Pi Edition <http://python101.readthedocs.io/pl/latest/mcpi/index.html>`_;
+* :file:`robobt-game` – wirtualne środowisko env z bibliotekami do `Robot Game <http://python101.readthedocs.io/pl/latest/rg/index.html>`_;
+* :file:`biblioteki-py2` – zob. wyżej.
 
 Zarządzanie modułami
 --------------------
