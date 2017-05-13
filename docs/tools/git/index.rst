@@ -645,8 +645,9 @@ Cheat Sheet
 * ``git rm -f plik`` – usuwa plik z poczekalni i katalogu roboczego;
 * ``git mv stara nowa`` – zmienia *starą* nazwę na *nową*;
 * ``git branch gałąź`` – tworzy *gałąź*, opcje: ``-vv`` – informacje o gałęziach, ``-d gałąź`` – usuwa gałąź;
-* ``git merge gałąź`` – scala zmiany z podanej *gałęzi* do aktualnej.
-
+* ``git merge gałąź`` – scala zmiany z podanej *gałęzi* do aktualnej;
+* ``git remote -v`` – lista zdalnych repozytoriów połączonych z lokalnym;
+* ``git remote add nazwa GitURL`` – dodanie zdalnego repozytorium jako *nazwa* do lokalnego.
 
 Materiały
 =========
