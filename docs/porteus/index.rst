@@ -35,7 +35,7 @@ Klucz USB
 Przygotowanie pendrajwa z systemem jest bardzo proste:
 
 1. Pobieramy obraz *iso* systemu:
-   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WakRQN1BWUEV4UFk>`_ [środowisko XFCE, 09.05.2017] lub
+   `porteus322XFCE.iso <https://drive.google.com/open?id=0B1zG9cfNyT7Wa0psMC1iVzAzSUk>`_ [środowisko XFCE, 17.06.2017] lub
    `porteus322Cinnamon.iso <https://drive.google.com/open?id=0B1zG9cfNyT7WZHlLNl9WYzBjdGs>`_ [środowisko Cinnamon, 13.02.2017].
 
 2. Przygotowujemy pustego pendrajwa o pojemności min. 2GB. Im szybszy, tym lepszy!
