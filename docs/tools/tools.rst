@@ -3,56 +3,7 @@
 Geany
 ######
 
-`Geany <http://www.geany.org/>`_ to proste i lekkie środowisko IDE dostępne na licencji
-`GNU General Public Licence <http://pl.wikipedia.org/wiki/GNU_General_Public_License>`_.
-Geany oferuje kolorowanie składni, wsparcie dla kodowania, dopełnianie poleceń, mechanizmy automatycznego zamykanie tagów, auto-wcięć, pracy na kartach i inne udogodnienia.
-Np. brudnopis czy możliwość uruchamiania plików źródłowych bezpośrednio z poziomu programu.
-
-**Instalacja**
-
-W systemie **Linux** korzystamy z dedykowanego menedżera pakietów, np. w Xubuntu
-(i innych debianopochodnych) lub Archu wystarczy wpisać w terminalu:
-
-.. code-block:: bash
-
-    ~$ sudo apt-get install geany geany-plugins
-    ~# pacman -S geany geany-plugins
-
-W **MS Windows** ściągamy i instalujemy `pełną wersję binarną Geany <http://www.geany.org/Download/Releases>`_
-przeznaczoną dla tych systemów. *Pełna* oznacza tutaj, ze zawiera biblioteki
-GTK wykorzystywane przez program. Podczas standardowej instalacji można
-zmienić katalog docelowy, np. na ``C:\Geany``.
-
-.. figure:: img/geany1.jpg
-
-**Koniguracja**
-
-W menu `Narzędzia/Menedżer wtyczek` zaznaczamy pozycję "Addons" (dostępna
-po zainstalowaniu wtyczek), a następnie "Przeglądarka plików".
-Zanim wyjdziemy z okna naciskamy przycisk "Preferencje" i na zakładce
-"Przeglądarka plików" zaznaczamy opcję "Podążanie za ścieżką do bieżącego pliku".
-Dzięki temu w panelu bocznym w zakładce "Pliki" zobaczymy listę katalogów i plików,
-które łatwo możemy otwierać.
-
-.. figure:: img/geany2.jpg
-.. figure:: img/geany3.jpg
-
-W menu `Edycja/Preferencje` :kbd:`CTRL+ALT+P` w zakładce `Edytor/Wcięcia` jako
-"Typ" wcięć wybieramy opcję "spacje".
-
-.. figure:: img/geany4.jpg
-
-Warto zapamiętać i stosować kilka użytecznych skrótów. Jeśli kodujemy w C/C++: :kbd:`F8` – uruchamia
-linker, :kbd:`F9` – buduje plik wykonawczy. Klawisz :kbd:`F5` uruchamia
-z kolei pliki wykonywalne, skrypty Pythona lub otwiera strony HTML w przeglądarce.
-Wcięcia wstawiają się automatycznie lub poprzez naciśnięcie klawisza :kbd:`TAB`.
-Jeżeli chcemy wciąć od razu cały blok kodu, zaznaczamy go i również używamy
-:kbd:`TAB` lub :kbd:`CTRL+I`, zmniejszenie wcięcia uzyskamy naciskając :kbd:`CTRL+U`.
-
-.. figure:: img/geany5.jpg
-
-Środowisko Geany nie zawiera narzędzi potrzebnych do kompilowania czy wykonywania
-programów pisanych w różnych językach. Wymagane narzędzia musimy doinstalować osobno.
+`Instrukcja instalacji Geany <http://python101.readthedocs.io/pl/latest/env/ide.html#geany>`_
 
 Kompilator C/C++
 ################
@@ -131,38 +82,7 @@ Polecić natomiast można doinstalowanie dodatkowych narzędzi, w tym rozszerzon
     ~$ sudo apt-get install ipython2 ipython3
     ~# pacman -S python-pip ipython python2-pip ipython2
 
-W **MS Windows** najprościej zainstalować Pythona przy użyciu skryptu konsoli PowerShell
-dostępnej w wersjach *Professional* (oznaczoną niebieską ikoną i niebieskiem tłem):
-
-.. code-block:: posh
-
-    (new-object System.Net.WebClient).DownloadFile("https://www.python.org/ftp/python/2.7.8/python-2.7.8.msi", "$pwd\python-2.7.8.msi")
-    msiexec /i python-2.7.8.msi TARGETDIR=C:\Python27
-    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Python27\;C:\Python27\Scripts\", "User")
-    (new-object System.Net.WebClient).DownloadFile("https://raw.github.com/pypa/pip/master/contrib/get-pip.py", "$pwd\get-pip.py")
-    C:\Python27\python.exe get-pip.py virtualenv
-
-Jeżeli w naszej wersji Windows nie ma PowerShella, ściągamy `interpreter Pythona <https://www.python.org/downloads/>`_
-i instalujemy ręcznie, pamiętając o zaznaczeniu opcji "Add Python.exe to Path".
-
-
-.. figure:: img/python01.jpg
-
-Następnie instalujemy program ``pip`` do zarządzania dodatkowymi bibliotekami za pomocą polecenia:
-
-.. code-block:: bash
-
-    python -c "exec('try: from urllib2 import urlopen \nexcept: from urllib.request import urlopen');f=urlopen('https://raw.github.com/pypa/pip/master/contrib/get-pip.py').read();exec(f)"
-
-Aby uruchamiać skrypty bezpośrednio z poziomu Geany lub konsoli tekstowej bez
-podawania pełnej ścieżki warto ją dodać do zmiennej użytkownika lub systemu
-o nazwie ``PATH``, tak jak pokazano wyżej dla narzędzi *MinGw*.
-Na potrzeby pojedynczej sesji odpowiedni efekt osiągniemy wydając polecenie
-w konsoli:
-
-.. code-block:: bat
-
-    set PATH=%PATH%;c:\Python27\;c:\Python27\Scripts\
+W **MS Windows** postępuj zgodnie z `instrukcją na Python101 <http://python101.readthedocs.io/pl/latest/env/windows.html>`_.
 
 
 .. _st3-opis:
