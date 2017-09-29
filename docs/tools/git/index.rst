@@ -26,8 +26,6 @@ Możemy postępować wg poniższych instrukcji:
 
 .. figure:: img/git_repo02.jpg
 
-.. figure:: img/git_repo03.jpg
-
 W ten sposób założyliśmy repozytorium zdalne.
 
 Klient Gita
@@ -113,7 +111,7 @@ Klonowanie repozytorium
 =======================
 
 Repozytorium lokalne można tworzyć od podstaw (zob. dalej),
-ale jeżeli utworzyliśmy repozytorium w zdalne w serwisie GitHub
+ale jeżeli utworzyliśmy repozytorium zdalne w serwisie GitHub
 najprościej jest je sklonować.
 
 W terminalu wydajemy polecenie:
@@ -124,6 +122,8 @@ W terminalu wydajemy polecenie:
 
 Najważniejszy jest argument *Git URL*, czyli schematyczny adres repozytorium,
 który kopiujemy ze strony głównej repozytorium po kliknięciu w przycisk "Clone or download":
+
+.. figure:: img/git_repo03.jpg
 
 .. figure:: img/git_clone.jpg
 
