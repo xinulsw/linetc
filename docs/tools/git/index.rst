@@ -13,14 +13,14 @@ Repozytorium zdalne
 ====================
 
 Przede wszystkim wchodzimy na stronę  `<https://github.com/>`_ i zakładamy konto podając:
-nazwę użytkownika, email i hasło. Następnie dodajemy pierwsze puste repozytorium.
+nazwę użytkownika, email i hasło. Następnie tworzymy nowe repozytorium.
 Możemy postępować wg poniższych instrukcji:
 
 *   Krok 1 – `założenie konta <https://help.github.com/articles/signing-up-for-a-new-github-account/>`_;
     podajemy nazwę użytkownika, adres email i hasło, jako typ konta wybieramy *free*.
 *   Krok 2 – `weryfikacja adresu e-mail <https://help.github.com/articles/verifying-your-email-address/>`_
 *   Krok 3 – `zakładamy repozytorium <https://help.github.com/articles/create-a-repo/>`_ dla projektu,
-    wybieramy typ *Public* (publiczne)
+    wybieramy typ *Public* (publiczne) i zaznaczamy "Initialize this repository with a README"
 
 .. figure:: img/git_repo01.jpg
 
@@ -28,11 +28,7 @@ Możemy postępować wg poniższych instrukcji:
 
 .. figure:: img/git_repo03.jpg
 
-
-.. tip::
-
-    Nie zamykaj powyższej strony! Będzie potrzebna za chwilę.
-
+W ten sposób założyliśmy repozytorium zdalne.
 
 Klient Gita
 ===========
@@ -103,7 +99,8 @@ określa sposób synchronizowania repozytorium lokalnego ze zdalnym.
 
 .. tip::
 
-    W Windows warto ustawić jeszcze jedną opcję: ``git config --global core.autocrlf true``.
+    W Windows można ustawić opcję: ``git config --global core.autocrlf true``,
+    jeśli nie wyświetliła się w podglądzie konfiguracji.
     Dzięki temu Git będzie automatycznie konwertował znaki końca linii, o czym informują
     komunikaty typu *LF will be replaced by CRLF*.
 
@@ -112,19 +109,29 @@ określa sposób synchronizowania repozytorium lokalnego ze zdalnym.
    Początek pracy z Gitem w Git-Bash pod Windows
 
 
-Repozytorium lokalne
-====================
+Klonowanie repozytorium
+=======================
 
-Repozytorium lokalne utworzymy od podstaw, a później połączymy go ze zdalnym.
-Na początku tworzymy katalog projektu i wchodzimy do niego:
+Repozytorium lokalne można tworzyć od podstaw (zob. dalej),
+ale jeżeli utworzyliśmy repozytorium w zdalne w serwisie GitHub
+najprościej jest je sklonować.
+
+W terminalu wydajemy polecenie:
 
 .. code-block:: bash
 
-    ~$ mkdir mojprojekt; cd mojprojekt
-    ~/mojprojekt$ git init
+    ~$ git clone https://github.com/nazwa_użytkownika/nazwa_repozytorium.git [nazwa_katalogu]
 
-Polecenie ``git init`` tworzy repozytorium w ukrytym katalogu :file:`.git`.
-Położenie i nazwa katalogu, w którym tworzymy repozytorium są dowolne.
+Najważniejszy jest argument *Git URL*, czyli schematyczny adres repozytorium,
+który kopiujemy ze strony głównej repozytorium po kliknięciu w przycisk "Clone or download":
+
+.. figure:: img/git_clone.jpg
+
+
+W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
+lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
+
+W ten sposób utworzyliśmy **repozytorium lokalne**.
 
 Stany plików
 ============
@@ -160,9 +167,9 @@ Przećwiczymy to wydając polecenia:
 
 .. code-block:: bash
 
-    ~/mojprojekt$ echo "Moje pierwsze repozytorium" > README.md
+    ~/mojprojekt$ echo "Moje pierwsze repozytorium" > repo.txt
     ~/mojprojekt$ git status
-    ~/mojprojekt$ git add README.md
+    ~/mojprojekt$ git add repo.txt
     ~/mojprojekt$ git status
     ~/mojprojekt$ git commit -m "Opis projektu"
 
@@ -172,70 +179,7 @@ Przećwiczymy to wydając polecenia:
     opcja ``-m``. Jeżeli ją pominiemy, Git otworzy domyślny edytor,
     w którym należy zmiany opisać.
 
-
 .. figure:: img/git_init.jpg
-
-
-Master i origin
-===============
-
-Repozytorium lokalne połączymy i zsynchronizujemy ze zdalnym, które utworzyliśmy wcześniej.
-Wracamy do przeglądarki, na stronę nowo utworzonego repozytorium zdalnego.
-Kopiujemy, wklejamy i wykonujemy w terminalu polecenia sugerowane przez Gita:
-
-.. code-block:: bash
-
-    ~/mojprojekt$ git remote add origin https://github.com/nazwa_konta/mojprojekt.git
-    ~/mojprojekt$ git push -u origin master
-
-* ``git remote add`` – dodaje zdalne repozytorium określone przez *Git URL* do lokalnego;
-* ``git push`` – synchronizuje zawartość lokalnego repozytorium ze zdalnym. o domyślnej nazwie ``origin``.
-
-
-.. figure:: img/git_remote.jpg
-
-
-.. note::
-
-    Nazwa **master** jest domyślną gałęzią Gita tworzoną podczas inicjacji repozytorium.
-    Technicznie jest to wskaźnik odnoszący się do ostatniej zatwierdzonej migawki.
-    Po synchronizacji repozytoriów lokalna gałąź *master* zaczyna śledzić zdalną o takiej samej nazwie.
-
-    Nazwa **origin** to domyślne określenie repozytorium zdalnego.
-
-
-Klonowanie repozytorium
-=======================
-
-Dotychczasowe repozytorium lokalne usuniemy, aby utworzyć je ponownie
-za pomocą klonowania.
-
-.. warning::
-
-    **Sprawdź** w przeglądarce, czy zawartość repozytorium zdalnego odpowiada lokalnemu.
-    Jeżeli tak, usuń katalog :file:`mojprojekt` za pomocą menedżera plików lub poleceń:
-
-    .. code-block:: bash
-
-        ~/mojprojekt$ cd ..
-        ~$ rm -rf ~/mojprojekt
-
-
-W terminalu wydajemy polecenie:
-
-.. code-block:: bash
-
-    ~$ git clone https://github.com/nazwa_użytkownika/nazwa_repozytorium.git [nazwa_katalogu]
-
-Najważniejszy jest argument *Git URL*, czyli schematyczny adres repozytorium,
-który możemy pobrać na stronie głównej repozytorium po kliknięciu w przycisk "Clone or download":
-
-.. figure:: img/git_clone.jpg
-
-
-W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
-lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
-
 
 Zmiany zdalne
 =============
@@ -275,7 +219,7 @@ Zmiany lokalne
 ==============
 
 Praca w repozytorium lokalnym jest najwygodniejsza. Przećwiczmy typowe sytuacje.
-Zmienimy treść pliku :file:`README.md` i utworzymy plik :file:`drugi.txt`:
+Zmienimy treść pliku :file:`README.md` i utworzymy plik :file:`drugi.txt`.
 
 .. code-block:: bash
 
@@ -611,6 +555,42 @@ listę ignorowanych plików za pomocą wyrażeń wieloznacznych zapisanych w ukr
 
 * :download:`Przykładowa zawartość <gitignore.txt>` pliku :file:`.gitignore`.
 * `Wzorce dla różnych języków programowania <https://github.com/github/gitignore>`_.
+
+Informacje dodatkowe
+====================
+
+Możliwe jest utworzenie repozytorium lokalnego nie przez klonowanie,
+ale od podstaw. Na początku tworzymy katalog projektu i wchodzimy do niego:
+
+.. code-block:: bash
+
+    ~$ mkdir mojprojekt; cd mojprojekt
+    ~/mojprojekt$ git init
+
+- ``git init`` – polecenie tworzy ukryty katalog :file:`.git`, czyli repozytorium.
+
+Położenie i nazwa katalogu, w którym tworzymy repozytorium są dowolne.
+
+Repozytorium lokalne należy połączyć i zsynchronizować ze zdalnym,
+które musi być utworzone w serwisie GitHub. W terminalu wydajemy polecenia:
+
+.. code-block:: bash
+
+    ~/mojprojekt$ git remote add origin https://github.com/nazwa_konta/mojprojekt.git
+    ~/mojprojekt$ git push -u origin master
+
+* ``git remote add`` – dodaje zdalne repozytorium określone przez *Git URL* do lokalnego;
+* ``git push`` – synchronizuje zawartość lokalnego repozytorium ze zdalnym. o domyślnej nazwie ``origin``.
+
+.. figure:: img/git_remote.jpg
+
+.. note::
+
+    Nazwa **master** jest domyślną gałęzią Gita tworzoną podczas inicjacji repozytorium.
+    Technicznie jest to wskaźnik odnoszący się do ostatniej zatwierdzonej migawki.
+    Po synchronizacji repozytoriów lokalna gałąź *master* zaczyna śledzić zdalną o takiej samej nazwie.
+
+    Nazwa **origin** to domyślne określenie repozytorium zdalnego.
 
 Cheat Sheet
 ===========
