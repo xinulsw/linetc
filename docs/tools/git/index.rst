@@ -72,7 +72,7 @@ Podczas pracy w Windows:
       jest środowiskiem naturalnym. Nie ma jednak problemów z jego realizacją w Windows.
 
     * Na potrzeby scenariusza katalogi i pliki tworzone będą za pomocą poleceń konsoli,
-      w normalnej pracy użyjemy oczywiście menedżera plików i edytora tekstu.
+      w codziennej pracy użyjemy oczywiście menedżera plików i edytora tekstu.
 
     * Po zrozumieniu podstaw Gita repozytoria można obsługiwać za pomocą dedykowanych
       programów, np. `SmartGit <http://www.syntevo.com/smartgit/>`_,
@@ -102,17 +102,11 @@ określa sposób synchronizowania repozytorium lokalnego ze zdalnym.
     Dzięki temu Git będzie automatycznie konwertował znaki końca linii, o czym informują
     komunikaty typu *LF will be replaced by CRLF*.
 
-.. figure:: img/git_bash.jpg
-
-   Początek pracy z Gitem w Git-Bash pod Windows
-
-
 Klonowanie repozytorium
 =======================
 
 Repozytorium lokalne można tworzyć od podstaw (zob. dalej),
-ale jeżeli utworzyliśmy repozytorium zdalne w serwisie GitHub
-najprościej jest je sklonować.
+ale prościej jest sklonować repozytorium zdalne utworzone wcześniej w serwisie GitHub.
 
 W terminalu wydajemy polecenie:
 
@@ -125,8 +119,9 @@ który kopiujemy ze strony głównej repozytorium po kliknięciu w przycisk "Clo
 
 .. figure:: img/git_repo03.jpg
 
-.. figure:: img/git_clone.jpg
+.. figure:: img/git_bash_win.jpg
 
+   Początek pracy z Gitem i klonowanie repozytorium w Git-Bash pod Windows
 
 W rezultacie w bieżącym katalogu utworzony zostanie katalog o nazwie repozytorium
 lub o nazwie podanej w opcjonalnym argumencie `[nazwa_katalogu]`.
