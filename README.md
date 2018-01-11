@@ -1,4 +1,4 @@
-** Materiały LinEtc
+# Materiały LinEtc
 
 
 Materiały w tym repozytorium zawierają ćwiczenia, poradniki
