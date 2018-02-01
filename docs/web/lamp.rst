@@ -25,14 +25,19 @@ serwer HTTP i obsługę wbudowanej bazy SQLite.
 Linux
 ===================
 
-W systemach opartych na Debianie (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
+W systemie Debian i pochodnych (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
 można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
 menedżerów pakietów, czyli odpowiednio:
 
 .. code-block:: bash
 
-    ~$ sudo apt-get install apache2 php5 php5-gd php5-sqlite php5-curl libapache2-mod-php5
-    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php5
+    ~$ sudo apt-get install apache2 php7.0 php7.0-gd php7.0-sqlite3 php7.0-curl libapache2-mod-php7.0
+    ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php7
+
+.. caution::
+  Nazwy pakietów dla Debiana i sytrybujcji pochodnych mogą różnić się od podanych
+  w zalezności od wersji interpretera PHP. Właściwe nazwy można sprawdzić wydając
+  w terminalu polecenie: ``apt-get search php | grep php``
 
 Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
 
@@ -71,8 +76,18 @@ UwAmp w Windows
 ===================
 
 W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
-Proponujemy `UwAmp <http://www.uwamp.com/en/>`_, ściągamy
-plik wykonywalny spod linku o nazwie **Download Exe/Install**.
+Proponujemy `UwAmp <http://www.uwamp.com/en/>`_. Po wejściu na stronę klikamy *Download*,
+a następnie link o nazwie **Download Exe/Install**.
+
+.. caution::
+  Do poprawnego działania Apache'a wymagana jest biblioteka Microsoftu Visual
+  `C++ 2012 Redistributable (VC++ 11.0) <https://www.microsoft.com/en-us/download/details.aspx?id=30679>`,
+  do PHP 7 musimy zainstalować `Visual C++ 2015 Redistributable <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`.
+
+Po pobraniu pliku instalacyjnego UwAmpa, pobieramy więc wymienione wyżej biblioteki
+i instalujemy je na początku.
+
+
 Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
 wybranego dysku, *C:*, *D:* itp.:
 
