@@ -13,7 +13,6 @@ i informatyki.
 Spis treści:
 
 .. toctree::
-    :maxdepth: 2
     :numbered:
 
     tools/index

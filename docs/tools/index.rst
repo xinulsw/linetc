@@ -13,7 +13,7 @@ Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
     Przykłady poleceń wydawanych w terminalu będziemy podawali dla systemu Debian
     i pochodnych (np. (X)Ubuntu, Mint) oraz menedżera pakietów ``apt-get``,
     poprzedzamy je symbolami ``~$``; a także dla system Arch Linux i pochodnych
-    (np. Bridge, Manjaro) korzystających z menedżera ``pacman``, poprzedzamy je
+    (np. Manjaro) korzystających z menedżera ``pacman``, poprzedzamy je
     symbolami ``~#``.
 
     Instalacja pakietów **wymaga uprawnień roota**. W wielu systemach używa się
@@ -25,8 +25,9 @@ Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
 Spis treści:
 
 .. toctree::
-    :numbered:
+    :maxdepth: 2
 
     tools.rst
+    lamp/index
     git/index
     sphinxrst.rst

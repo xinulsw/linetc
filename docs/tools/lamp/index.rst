@@ -26,7 +26,7 @@ Linux
 ===================
 
 W systemie Debian i pochodnych (Ubuntu, Linux Mint itd.) lub na Arch Linuksie
-można zainstalować serwer Apache2 i interpreter PHP5 za pomocą dedykowanych
+można zainstalować serwer Apache2 i interpreter PHP za pomocą dedykowanych
 menedżerów pakietów, czyli odpowiednio:
 
 .. code-block:: bash
@@ -35,9 +35,8 @@ menedżerów pakietów, czyli odpowiednio:
     ~# pacman -S apache php php-gd php-sqlite php-curl libapache-mod-php7
 
 .. caution::
-  Nazwy pakietów dla Debiana i sytrybujcji pochodnych mogą różnić się od podanych
-  w zalezności od wersji interpretera PHP. Właściwe nazwy można sprawdzić wydając
-  w terminalu polecenie: ``apt-get search php | grep php``
+  Nazwy pakietów dla dystrybujcji opartych na Debianie (Ubuntu itd.) różnią się od podanych.
+  Właściwe nazwy można sprawdzić wydając w terminalu polecenie: ``apt-get search php | grep php``.
 
 Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
 
@@ -49,9 +48,9 @@ Podstawowa konfiguracja sprowadza się do uaktywnienia odpowiednich modułów:
     ~# a2enmod userdir rewrite
     ~# systemctl restart httpd
 
-– i odblokowania możliwości wykopnywania skryptów w katalogach domowych
+– i odblokowania możliwości wykonywania skryptów w katalogach domowych
 użytkowników poprzez zakomentowanie następujących linii z pliku
-``/etc/apache2/mods-available/php5.conf`` (Debian) lub ``/etc/httpd/mods-available/php5.conf``
+``/etc/apache2/mods-available/php7.0.conf`` (Debian) lub ``/etc/httpd/mods-available/php7.conf``
 (Arch):
 
 .. code-block:: bash
@@ -79,29 +78,40 @@ W systemie Microsoftu najłatwiej skorzystać z gotowego zestawu WAMP.
 Proponujemy `UwAmp <http://www.uwamp.com/en/>`_. Po wejściu na stronę klikamy *Download*,
 a następnie link o nazwie **Download Exe/Install**.
 
-.. caution::
-  Do poprawnego działania Apache'a wymagana jest biblioteka Microsoftu Visual
-  `C++ 2012 Redistributable (VC++ 11.0) <https://www.microsoft.com/en-us/download/details.aspx?id=30679>`,
-  do PHP 7 musimy zainstalować `Visual C++ 2015 Redistributable <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`.
-
-Po pobraniu pliku instalacyjnego UwAmpa, pobieramy więc wymienione wyżej biblioteki
-i instalujemy je na początku.
-
-
-Następnie uruchamiamy i wskazujemy miejsce instalacji, proponujemy główny katalog
-wybranego dysku, *C:*, *D:* itp.:
-
 .. figure:: img/uwamp01.jpg
 
-.. figure:: img/uwamp03.jpg
+
+.. caution::
+  Do poprawnego działania Apache'a wymagana jest biblioteka Microsoftu Visual
+  `C++ 2012 Redistributable (VC++ 11.0) <https://www.microsoft.com/en-us/download/details.aspx?id=30679>`_,
+  do PHP 7 musimy zainstalować `Visual C++ 2015 Redistributable <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`_.
+
+Pobieramy wymienione wyżej biblioteki i instalujemy je na początku.
+
+.. figure:: img/vcredist2012.jpg
+
+.. figure:: img/vcredist2015.jpg
+
+
+Następnie uruchamiamy instalację UwAmpa. Jako miejsce instalacji wybieramy główny katalog
+wybranego dysku, *C:*, *D:* itp.:
+
+.. figure:: img/uwamp02.jpg
 
 Po zainstalowaniu i uruchomieniu aplikacji *UwAmp* zapora systemowa może poprosić
 o odblokowanie portów serwera www i bazy danych. Godzimy się, wybierając opcję dla
 sieci prywatnych i domowych.
 
+.. figure:: img/uwamp04_mysqld.jpg
+
+.. figure:: img/uwamp05_apache.jpg
+
 Serwerami i narzędziami zarządzamy za pomocą wygodnego okna:
 
-.. figure:: img/uwamp05.jpg
+.. figure:: img/uwamp06.jpg
+
+.. note::
+  Korzystając z powyższego okna wybierz wersję PHP 7.
 
 Serwery www (Apache2) i bazy danych (MySQL) startowane są automatycznie. Jeżeli nie korzystamy
 z serwera MySQL możemy go zatrzymać, klikając niebieską strzałkę obok przycisku "Stop" i wybierając
@@ -110,3 +120,5 @@ go listy. Do obsługi baz SQLite dołączono bardzo wygodny interfejs graficzny 
 Strony czy projekty umieszczamy w katalogu ``www`` folderu, w którym zainstalowaliśmy UwAmpa,
 np. w ``C:\\UwAmp\www``. W przeglądarce wpisujemy adres ``localhost`` lub ``localhost/podkatalog``,
 jeżeli strony umieściliśmy w jakimś podkatalogu.
+
+.. figure:: img/uwamp07.jpg

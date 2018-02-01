@@ -11,9 +11,7 @@ Spis treści:
 
 .. toctree::
     :maxdepth: 2
-    :numbered:
 
     html_css_js/index.rst
-    lamp
     gs/index.rst
     glosary_www.rst
