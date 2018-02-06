@@ -28,6 +28,7 @@ Spis treści:
     :maxdepth: 2
 
     tools.rst
+    python/index
     lamp/index
     git/index
     sphinxrst.rst
