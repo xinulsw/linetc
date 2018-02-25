@@ -294,9 +294,10 @@ rst_prolog = u"""
     <!-- Domyślnie ładowane fonty nie zawierają Latin Ext -->
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <style>
-        div.code_no { text-align: right; background: #e3e3e3; padding: 6px 12px; }
+        div.code_no { background: #e3e3e3; padding: 6px 12px; }
         div.highlight, div.highlight-python { margin-top: 0px; }
         .rst-content code { color: #E74C3C; }
+        div[class^="highlight"] pre { line-height: normal; }
     </style>
 
 """
