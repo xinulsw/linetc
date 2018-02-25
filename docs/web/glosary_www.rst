@@ -67,3 +67,8 @@ Słownik
         (ang. framework – struktura) – oprogramowanie będące zestawem narzędzi ułatwiających
         i przyśpieszających tworzenie aplikacji.
 
+    responsywny
+        (ang. responsive) – przymitonik związany z techniką projektowania stron internetowych
+        określanej skrótem RWD (ang. responsive web design), oznacza dostosowywanie wyglądu
+        i układu strony do rozmiaru okna przeglądarki w urządzeniach o różnej rozdzielczości.
+

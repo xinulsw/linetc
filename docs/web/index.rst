@@ -14,4 +14,5 @@ Spis treści:
 
     html_css_js/index.rst
     gs/index.rst
+    bootstrap/index.rst
     glosary_www.rst

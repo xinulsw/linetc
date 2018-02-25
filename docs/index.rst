@@ -14,6 +14,7 @@ Spis treści:
 
 .. toctree::
     :numbered:
+    :maxdepth: 2
 
     tools/index
     cppqt/index
