@@ -17,7 +17,7 @@ Wersja HTML dostępna jest pod adresami:
 Pobieranie tego repozytorium
 ================================
 
-Repozytorium można skolonować lokanie:
+Repozytorium można skolonować lokalnie:
 
     $ git clone https://github.com/xinulsw/linetc/
 
