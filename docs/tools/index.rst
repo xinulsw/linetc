@@ -3,11 +3,6 @@ Narzędzia
 
 .. _tools:
 
-Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
-
-.. contents:: Spis treści
-    :backlinks: none
-
 .. note::
 
     Przykłady poleceń wydawanych w terminalu będziemy podawali dla systemu Debian
@@ -23,10 +18,14 @@ Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
 Spis treści:
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
 
-    tools.rst
-    python/index
-    lamp/index
-    git/index
-    sphinxrst.rst
+   python/index
+   cpp/index
+   edytory/index
+   git/index
+   lamp/index
+   bazy/index
+   qt/index
+   sphinxrst.rst
+   glossary.rst
