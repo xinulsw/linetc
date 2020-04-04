@@ -16,11 +16,9 @@ Poniżej przedstawiamy zestaw przykładowych narzędzi informatycznych.
     (np. Manjaro) korzystających z menedżera ``pacman``, poprzedzamy je
     symbolami ``~#``.
 
-    Instalacja pakietów **wymaga uprawnień roota**. W wielu systemach używa się
-    polecenia ``sudo``, które pozwala zwykłemu użytkownikowi uruchamiać programy
-    z podwyższonymi uprawnieniami. Jeżeli Twój system nie ma skonfigurowanego
-    domyślnie polecenia *sudo* (np. Debian lub Arch Linux), musisz zalogować się
-    na konto *roota*, np. wpisując w terminalu ``su root``.
+    Instalacja pakietów może wymagć **uprawnień roota**. W systemach Ubuntu i pochodnych
+    używa się wtedy dodatkowego polecenia ``sudo``, które pozwala zwykłemu użytkownikowi
+    uruchamiać programy z podwyższonymi uprawnieniami.
 
 Spis treści:
 
