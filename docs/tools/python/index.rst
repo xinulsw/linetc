@@ -55,7 +55,7 @@ klikamy link *Last Python 3 Release - ...* i pobieramy instalator
 
    Jeżeli podczas pierwszego uruchomienia zobaczymy komunikat zapory systemowej, zezwalamy na dostęp wybierając sieci prywatne.
 
-Po instalacji uruchom wiersz poleceń (`cmd` lub `Power Shell`) i sprawdź poprawność instalacji uruchamiając interpreter:
+Po instalacji uruchom wiersz poleceń (``cmd`` lub PowerShell) i sprawdź poprawność instalacji uruchamiając interpreter:
 
 .. figure:: ../img/python05.jpg
 
@@ -172,7 +172,7 @@ Poniżej kilka wskazówek, które mogą pomóc je rozwiązać.
    a) spróbuj zrestartować system, aby zakończyć ewentualne zadania wykorzystujące Pythona, i ponów instalację
    b) podczas aktualizacji użyj opcji `--user`, np.: :code:`python -m pip install --upgrade --user pip`
    c) podczas instalacji użyj opcji `--user`, np.: :code:`python -m pip install --user pyqt5`
-   d) uruchom wiersz poleceń (*cmd* lub *Power Shell*) jako administrator i dopiero wtedy wydaj polecenie
+   d) uruchom wiersz poleceń (``cmd`` lub PowerShell) jako administrator i dopiero wtedy wydaj polecenie
 
 
 Materiały
