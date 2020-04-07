@@ -28,4 +28,4 @@ Spis treści:
    bazy/index
    qt/index
    sphinxrst.rst
-   glossary.rst
+   ../glossary.rst

@@ -13,7 +13,7 @@ System i środowisko IDE
 
 Bilioteka :term:`Qt` jest przenośna z założenia, więc programować z jej wykorzystaniem
 można w wielu systemach i środowiskach. Proponujemy system Linux,
-np. dystrybucję :term:`Debian` (v. Jessie) lub :term:`Xubuntu 14.04`.
+np. dystrybucję :term:`Ubuntu` lub :term:`Debian`.
 Instalacja wymaganych narzędzi sprowadza się do wydania prostych poleceń
 w terminalu:
 

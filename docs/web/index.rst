@@ -12,7 +12,6 @@ Spis treści:
 .. toctree::
     :maxdepth: 2
 
-    html_css_js/index.rst
-    gs/index.rst
-    bootstrap/index.rst
-    glosary_www.rst
+    html_css_js/index
+    gs/index
+    bootstrap/index

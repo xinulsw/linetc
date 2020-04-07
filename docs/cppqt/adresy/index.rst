@@ -424,7 +424,3 @@ Materiały
 .. _Dokumentacja Qt 5: http://doc.qt.io/qt-5/reference-overview.html
 .. _Qt Developer Wiki (pl): http://qt-project.org/wiki/Wiki_Home_Polish
 
-Pojęcia
-===============
-
-.. include:: ../glossary.rst
