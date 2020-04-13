@@ -3,6 +3,17 @@ Słownik
 
 .. glossary::
 
+    katalog domowy
+        katalog, w którym przechowywane są pliki konfiguracyjne i dokumenty zalogowanego
+        użytkownika. W systemie Linux jest to katalog :file:`/home/nazwa_użytkownika`,
+        w systemie Windows :file:`C:\Users\nazwa_użytkownika`.
+
+    katalog konfiguracyjny
+        podkatalog katalogu domowego, w którym programy zapisują ustawienia. W systemie Linux jest to ukryty katalog
+        o nazwie :file:`.config`, można go wyświetlić naciskając w menedżerze plików skrót :kbd:`CTRL+H`.
+        W systemie Windows najczęściej będzie to katalog :file:`AppData` (:file:`Dane aplikacji`), który domyślnie jest ukryty,
+        a żeby go zobczyć, trzeba włączyć pokazywanie ukrytych plików w Eksploratorze.
+
     Qt
         zestaw bibliotek programistycznych ułatwiających tworzenie aplikacji
         z interfejsem graficznym w językach C++, QML i Java.
