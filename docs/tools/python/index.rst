@@ -9,17 +9,30 @@ Linux
 =====
 
 W systemach **Linux** Python jest szeroko stosowany i dostępny w standardowej instalacji większości dystrybucji
-i to zarówno w wersji 2.x, jak i 3.x. Dla formalności polecenie instalacyjne w systemach opartych na Debianie (Ubuntu, Linux Mint) to:
+i to zarówno w wersji 2.x, jak i 3.x. Dla formalności polecenie instalacyjne w systemach opartych
+na Debianie (Ubuntu, Linux Mint) to:
 
 .. code-block:: bash
 
     ~$ sudo apt-get install python3
 
-.. note::
+W niektórych dystrybucjach polecenie ``python`` jest dowiązaniem do wersji 2.x, a pakiety nazywają się odpowiednio
+``python2-...`` lub ``python3-...``. Warto ustawić jako domyślną wersję 3:
 
-    Warto zauważyć, że w dystrybucjach opartych na Debianie polecenie ``python``
-    jest dowiązaniem do wersji 2.x, a paczki nazywają się odpowiednio ``python2-...``
-    lub ``python3-...``.
+.. code-block:: bash
+
+   ~$ sudo update-alternatives --list python
+   ~$ ls /usr/bin/python*
+   ~$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+   ~$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+   ~$ sudo update-alternatives --config python
+
+Pierwsze polecenie pokaże, czy w systemie ustawiono jakieś alternatywne wersje. Drugie pokaże wersje dostępne.
+Trzecie ustawia Pythona w wersji 2.7 i w wersji 3.8 jako dostępne, ale domyślną wersją zostaje
+ta, która ma wyższą cyfrę na końcu. W powyższym przykładzie 3.8. Ostatnie polecenie pozwala
+sprawdzić, która wersja jest domyślna. W przypadku pomyłki można wskazać wersję 3., wpisując liczbę
+wskazującą `/usr/bin/python3`. Na koniec w terminalu wpisujemy polecenie `python -V` i powinniśmy
+zobaczyć odpowiedź `3.x`.
 
 Windows
 =======
@@ -69,7 +82,7 @@ Najwygodniej zainstalować je za pomocą menedżera pakietów:
 
 .. code-block:: bash
 
-    ~$ pip install ipython3 qtconsole pyqt5
+    ~$ pip install ipython3 qtconsole
 
 W systemach Linux można też użyć prekompilowanych pakietów systemowych instalowanych za pomocą menedżerów, np.
 
@@ -149,12 +162,13 @@ do którego zwykły użytkownik ma pełen dostęp. Wykorzystaj tę możliwość 
 Frameworki
 ----------
 
-Poniżej lista często używanych pakietów dodatkowych.
+Poniżej lista często używanych pakietów dodatkowych. ALternatywne polecenia działają w systemach Linux
+opartych na Debianie (Ubuntu, Linux Mint).
 
 1. Aplikacje WWW Django: :code:`pip3 install django`
 2. Aplikacje Flask: :code:`pip3 install flask flask-wtf peewee`
-3. Aplikacje okienkowe PyQt5: :code:`pip3 install pyqt5`
-4. Wykresy z Matplotlib: :code:`pip3 install matplotlib`
+3. Aplikacje okienkowe PyQt5: :code:`pip3 install pyqt5` albo :code:`apt install python3-pyqt5`
+4. Wykresy z Matplotlib: :code:`pip3 install matplotlib` albo :code:`apt install python3-matplotlib`
 
 
 Problemy w systemie Windows

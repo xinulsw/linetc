@@ -93,11 +93,13 @@ Sublime Text 3 to szybki, lekki i elastyczny edytor dla programistów. Wybrane n
    * wygodne otwieranie plików: :kbd:`CTRL+P`,
    * wielokrotna selekcja i edycja: po zaznaczeniu zmiennej :kbd:`CTRL+D`,
    * zaznaczenie wszystkich wystąpień i jednoczesna edycja: :kbd:`ALT+F3`,
+   * szybkie otwieranie pliku: :kbd:`CTRL+P`
    * lista wszystkich poleceń: :kbd:`CTRL+SHIFT+P`
+   * lista wszystkich definicji: :kbd:`CTRL+R`
    * równoczesna edycja kilku plików: *View / Layout*
 
 Linux
------------------
+-------
 
 W Ubuntu i podobnych systemach (Linux Mint) wchodzimy na stronę
 `Linux Package Manager Repositories <http://www.sublimetext.com/docs/3/linux_repositories.html>`_
@@ -114,167 +116,163 @@ Po wejściu na stronę `Sublime Text 3 <http://www.sublimetext.com/3>`_
 pobieramy archiwum dla wersji 32- lub 64-bitowej. Instalujemy standardowo
 dwukrotnie klikając pobrany plik.
 
-Konfiguracja
-------------
+Wtyczki
+-------
 
 Wtyczki do ST3 przechowywane są w repozytorium `Package Control <https://packagecontrol.io/>`_,
-zarządzamy nimi z poziomu edytora. Na początku instalujemy *Package Control*: wywołujemy listę
-poleceń :kbd:`CTRL+SHIFT+P`, wpisujemy *Install Package Control* i zatwierdzamy :kbd:`Enter`.
+zarządzamy nimi z poziomu edytora. Instalacja każdej wtyczki polega na wywołaniu listy
+poleceń :kbd:`CTRL+SHIFT+P` i wpisaniu *Install Package*. Na początku trzeba zainstalować wtyczkę
+*Package Control*: wpisz *Install Package Control* i zatwierdź :kbd:`Enter`.
 
-Wtyczki instalujemy po wybraniu listy poleceń i wpisaniu *Install Package*. W wyświetlonym oknie
-wpisujemy nazwę wtyczki i po jej odnalezieniu i zaznaczeniu zatwierdzamy naciśnięciem :kbd:`Enter`.
-
-Polecane wtyczki:
+W podobny sposób instalujemy inne wtyczki. Na początek warto zainstalować
+następujące:
 
 * `Anaconda <https://packagecontrol.io/packages/Anaconda>`_ – podstawowy dodatek do programowania w Pythonie
-  dostępny w menu podręcznym podczas edycji plików ".py".
-* `Emmet <https://packagecontrol.io/packages/Emmet>`_ – rozszerzanie składni HTML, CSS itp.
+  dostępny w menu podręcznym podczas edycji plików ".py"
 * `SublimeREPL <https://packagecontrol.io/packages/SublimeREPL>`_ – pozwala uruchamiać kod Pythona
-  w edytorze za pomocą skrótu :kbd:`CTRL+SHIFT+R` lub :kbd:`CTRL+B`
-* `Color Picker <https://packagecontrol.io/packages/ColorPicker>`_ –
-  dodaje próbnik kolorów wywoływany skrótem :kbd:`CTRL+SHIFT+C`
+  w terminalu osadzonym w edytorze za pomocą skrótu :kbd:`CTRL+SHIFT+R`
+* `Emmet <https://packagecontrol.io/packages/Emmet>`_ – rozszerzanie / uzupełnianie składni HTML, CSS itp.
+* `View in Browser <https://packagecontrol.io/packages/View%20In%20Browser>`_ – otwiera edytowane dokumenty HTML
+  w przeglądarce (domyślnie Firefox), ale można to zmienić w konfiguracji: *Preferences > Package Settings > View In Browser*
+* `Color Picker <https://packagecontrol.io/packages/ColorPicker>`_ – dodaje próbnik kolorów wywoływany skrótem :kbd:`CTRL+SHIFT+C`
 
-Niektóre wtyczki wymagają ustawień, które opisane są w dokumentacji.
-Globalne ustawienia edytora definiujemy w *Preferences >Settings – User*.
+Ustawienia wtyczek opisane są w dokumentacji. Globalne ustawienia edytora definiujemy w *Preferences > Settings – User*.
 Ustawienia dla wybranego języka programowania dostępne są po wybraniu
-*Preferences > Settings – More > Syntax Specific – User*,
-plik należy zapisać pod nazwą *LANGUAGE.sublime-settings*, np. *Python.sublime-settings*
-w podkatalogu :file:`Packages/User`.
-
-Obsługa Git-a
--------------
-
-Za pomocą wtyczki:
-
-* `GitSavvy <https://packagecontrol.io/packages/GitSavvy>`_ – po instalacji wciśnij
-  :kbd:`CTRL+SHIFT+P`, wpisz "git" i wybierz "git:status"
-
-Za pomocą dedykowanego programu `Sublime Merge <https://www.sublimemerge.com/>`_.
-W systemie Linux Ubuntu itp., jeżeli dodaliśmy wcześniej repozytoria dla SublimeText3,
-wystarczy wydać polecenie:
-
-.. code-block:: bash
-
-   sudo apt install sublime-merge
-
-– lub skorzystać z graficznego instalatora "Oprogramowanie".
-W Windows pobieramy instalator ze strony `Download <https://www.sublimemerge.com/download>`_
-i instalujemy.
-
-Poprawnie zainstalowany program można wywołać z poziomu SublimeText3,
-jeżeli otworzyliśmy katalog zawierający repozytorium. Wystarczy kliknąć charakterystyczną dla Gita
-rozgałęzioną ikonę na dolnym pasku statusu.
-
-
-Skrypty Pythona
----------------
-
-Zainstaluj dodatki Anaconda i SublimeREPL. Utwórz pusty plik i zapisz z rozszerzeniem ``.py``.
-Wybierz *Preferences / Settings – Syntax Specific*. W otwartym pliku :file:`Python.sublime-settings` wklej kod:
-
-.. code-block:: bash
-
-   {
-     // editor options
-     // tabs and whitespace
-     "auto_indent": true,
-     "ensure_newline_at_eof_on_save": true,
-     "folder_exclude_patterns":
-     [
-       ".svn",
-       ".git",
-       ".hg",
-       "CVS",
-       "__pycache__"
-     ],
-     "indent_to_bracket": true,
-      "rulers": [79],
-      "shift_tab_unindent": true,
-      "smart_indent": true,
-      "tab_size": 4,
-      "translate_tabs_to_spaces": true,
-      "trim_automatic_white_space": true,
-      "use_tab_stops": true,
-      "word_wrap": true,
-      "wrap_width": 80
-   }
-
-Plik powinien zostać zapisany w podkatalogu :file:`sublime-text-3/Packages/User` znajdującym się
-w katalogu konfiguracyjnym (zob. :term:`katalog konfiguracyjny`) użytkownika.
+*Preferences > Settings – More > Syntax Specific – User*, ewentualne zmiany należy zapisać pod nazwą
+*LANGUAGE.sublime-settings*, np. *Python.sublime-settings* w podkatalogu :file:`Packages/User`.
 
 .. tip::
 
-   Zawartość katalogu, o którym mowa powyżej, możesz przywołać wybierając *Preferences / Browse Packages*
+   Położenie i zawartość katalogu, o którym mowa powyżej, możesz sprawdzić wybierając *Preferences / Browse Packages*
    i wchodząc do katalogu :file:`User`.
-
-Uruchomienie skryptu Pythona polega na naciśnięciu skrótu :kbd:`CTRL+SHIFT+R` lub :kbd:`CTRL+B`,
-skrypt zostanie uruchomiony w nowej karcie edytora. Po wykonaniu skryptu warto kartę zamknąć :kbd:`CTRL+W`.
 
 Systemy budowania
 -----------------
 
-Do kompilacji (budowania) i ewentualnie uruchamiania SublimeText3 wykorzystuje różne systemy budowania.
-Dostępne systemy sprawdzisz i wybierzesz w *Tools / Build System*. Skrót :kbd:`CTRL+B` powinien wywołać
-automatycznie dobrany system dla danego języka.
+Do kompilacji (budowania) i uruchamiania Sublime Text 3 wykorzystuje tzw. systemy budowania.
+Dostępne systemy sprawdzisz i wybierzesz w *Tools / Build System*. Domyślne ustawienia nie zadziałają,
+jeżeli chcemy uruchamiać skrypty interaktywne, tzn. takie, które wymagają podania jakiś danych wejściowych.
+Aby było to możliwe, trzeba użyć wtyczek lub utworzyć własne systemy budowania dla poszczególnych języków.
+Poniżej znjdziesz archiwa zawierające przykładowe konfiguracje. Jeżeli z nich skorzystasz:
 
-W przypadku języka Python skrypty można uruchamiać za pomocą wtyczki SublimeREPL lub zdefiniowanego systemu,
-co przydaje się wtedy, kiedy mamy kilka wersji Pythona.
+* szkielet skryptu Pythona wstawisz wpisując "py" i naciskając klawisz :kbd:`TAB`;
+* skrypty Pythona uruchomisz naciskając :kbd:`CTRL+SHIFT+R` (pod warunkiem, że polecenie `python` uruchamia Pythona w wersji 3)
+  lub :kbd:`CTRL+SHIFT+P`, wpisując "Python3" i wybierając "SublimeREPL: Python3 - RUN current file";
+* lokalne pliki HTML otworzysz w przeglądarce (domyślnie Mozilla Firefox) naciskając :kbd:`CTRL+B` i wybierając
+  "Browser"
+* pliki źródłowe C++ skompilujesz / uruchomisz naciskając :kbd:`CTRL+SHIFT+B` i wybierając "C++" / "C++ - Uruchom".
 
-Przykładowy nowy system dla Pythona 3 tworzymy wybierając *Tools / Build System / New Build System*,
-do pliku wklejamy kod:
+Repozytoria Git-a
+-----------------
+
+Repozytoria obsłużymy za pomocą:
+
+* wtyczki `GitSavvy <https://packagecontrol.io/packages/GitSavvy>`_ – po instalacji wciśnij
+  :kbd:`CTRL+SHIFT+P`, wpisz "git" i wybierz "git:status";
+
+* lub dedykowanego programu `Sublime Merge <https://www.sublimemerge.com/>`_.
+  W systemie Linux Ubuntu itp., jeżeli dodaliśmy wcześniej repozytoria dla SublimeText3,
+  wystarczy wydać polecenie:
+
+    .. code-block:: bash
+
+      sudo apt install sublime-merge
+
+  – lub skorzystać z graficznego instalatora "Oprogramowanie".
+  W Windows pobieramy instalator ze strony `Download <https://www.sublimemerge.com/download>`_
+  i instalujemy.
+
+  Poprawnie zainstalowany program można wywołać z poziomu SublimeText3,
+  jeżeli otworzyliśmy katalog zawierający repozytorium. Wystarczy kliknąć charakterystyczną dla Gita
+  rozgałęzioną ikonę na dolnym pasku statusu.
+
+Na skróty
+---------
+
+Konfiguracja wszystkich ustawień wymaga przeczytania dokumentacji programu oraz instalowanych wtyczek.
+Zamiast tego możesz spróbować zainstalować przygotowane archiwa, które znajdziesz w serwisie GitHub pod adresem
+`lo1cgsan/konfig <https://github.com/lo1cgsan/konfig/tree/master/st3>`_.
+
+Archiwum dla Linuksa (`st3-linux.tgz`) po pobraniu wypakuj poleceniem:
 
 .. code-block:: bash
 
-   {
-     "cmd": ["/usr/bin/python3", "$file"],
-     "selector": "source.python",
-     "file_regex": '^[ ]*File "(...*?)", line ([0-9]*)'
-   }
+    ~/Pobrane$ tar xzvf st3-linux.tgz -d ~/.config
 
-– zapisujemy pod nazwą :file:`Python3.sublime-build` w katalogu :file:`User`.
-Trzeba zwrócić uwagę na polecenie podawane w kluczu "cmd", musi ono być adekwatne dla używanego systemu operacyjnego.
+Archiwum dla Windowsa (`st3-windows.zip`) wypakuj przy użyciu wbudowanego lub zainstalowanego menedżera archiwum
+do katalogu: :file:`C:\\Użytkownicy\\nazwa_użytkownika\\Dane aplikacji`
+lub :file:`C:\\Users\\nazwa_użytkownika\\AppData\\Roaming`.
+
+VS Code
+=======
+
+.. figure:: ../img/vscodium.png
+
+`Visual Studio Code <https://code.visualstudio.com/>`_ to otwartoźródłowy edytor programistyczny firmy Microsoft.
+Wykorzystuje framework Electron napisany w języku Java Script, dlatego zajmuje relatywnie dużo miejsca i jest wolniejszy
+od aplikacji tworzonych w innych językach. Oferuje jednak wiele przydatnych narzędzi (m. in. wbudowana obsługa Gita)
+i ułatwień, działa na różnych systemach.
+
+Linux
+-----
+
+Wersje binarne przygotowywane przez Microsoft nie są zgodne z zasadami `licencji FLOSS <https://dwheeler.com/essays/floss-license-slide.html>`_,
+zawierają również telemetrię. Dlatego lepiej użyć wersji przygotowanych w ramach projektu `VSCodium <https://vscodium.com/>`_.
+W systemach opartych na Debianie (Ubuntu, Linux Mint) najlepiej użyć repozytoriów. W terminalu wydajemy polecenia:
+
+.. code-block:: bash
+
+   ~$ wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
+   ~$ echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list.d/vscodium.list
+   ~$ sudo apt update && sudo apt install codium
+
+Tak zainstalowany edytor będzie automatycznie aktualizowany wraz z całym systemem.
+
+Windows
+-------
+
+Ze strony `Download Visual Studio Code <https://code.visualstudio.com/Download>`_ pobieramy wersję "User" (instalacja
+dla jednego użytkownika) lub "System installer" (instalacja ogólnosystemowa) dostosowaną do architektury
+naszego systemu (64- lub 32-bitową) i instalujemy.
+
+Po wyjściu nowej wersji programu procedurę należy powtarzać.
+
+Konfiguracja
+------------
+
+Jak każdy profesjonalny edytor programistyczny, program wymaga poznania odpowiednich skrótów klawiaturowych
+i doinstalowania dodatków zależnych od używanego języka programowania. Pomaga w tym bardzo dobrze przygotowana
+dokumentacja dla większości języków, np.:
+
+* `Python <https://code.visualstudio.com/docs/languages/python>`_
+* `C++ <https://code.visualstudio.com/docs/languages/cpp>`_
+* `HTML <https://code.visualstudio.com/docs/languages/html>`_
+* `CSS itd. <https://code.visualstudio.com/docs/languages/css>`_
+* `PHP <https://code.visualstudio.com/docs/languages/php>`_
+
+Dostępne są również przewodniki omawiające programnowanie w wybranych językach, np.:
+
+* `Getting Started with Python in VS Code <https://code.visualstudio.com/docs/python/python-tutorial>`_
+* `Using GCC with MinGW <https://code.visualstudio.com/docs/cpp/config-mingw>`_
+* `Using C++ on Linux in VS Code <https://code.visualstudio.com/docs/cpp/config-linux>`_
+
+Wspomnieć można, że wersja dla Windowsa pozwala zainstalować dodatek umożliwiający pracę na projektach
+zapisanych w środowisku `WSL (Windows Subsystem for Linux) <https://pl.wikipedia.org/wiki/Windows_Subsystem_for_Linux>`_.
+Nie jest to co prawda rozwiązanie dorównujące wygodzie programowania w Linuksie, ale jako proteza wystarczy.
+
+Python
+------
+
+* Po zainstalowaniu rozszerzenia Microsoft "Python" i otwarciu skryptu Pythona, możesz zobaczyć komunikat
+  typu "Linter pylint is not installed", wybierz wtedy "Install".
+* Błędy składniowe w skryptach zobaczysz po naciśnięciu :kbd:`CTRL+SHIFT+M`
+* Skrypty Pythona uruchomisz używając ikony w prawym górnym rogu okna edytora lub z menu podręcznego "Run Python File in Terminal".
+* Interaktywny interpreter Pythona wywołasz po naciśnięciu :kbd:`CTRL+SHIFT+P` i wpisaniu "Python: Start REPL".
 
 C++
----
+-----
 
-Programy w C++ powinny być budowane automatycznie po naciśnięciu :kbd:`CTRL+B`, ale po zainstalowaniu kompilatora
-MinGW w systemie Windows warto stworzyć nowy system budowania i umieścić w nim kod:
-
-.. code-block:: bash
-
-   {
-     "cmd": ["g++", "-o", "${file_path}/${file_base_name}.exe", "-static-libgcc", "-static-libstdc++", "*.cpp"],
-     "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
-     "working_dir": "${file_path}",
-     "selector": "source.c, source.cpp, source.c++",
-     "path": "c:/Program Files/mingw-w64/mingw64/bin",
-     "shell": true,
-     "variants": [
-        {
-          "name": "Run",
-          "cmd": ["g++", "-o", "${file_path}/${file_base_name}.exe", "-static-libgcc", "-static-libstdc++", "*.cpp", "&", "${file_path}/${file_base_name}.exe"]
-        }
-      ]
-   }
-
-Plik zapisujemy pod nazwą :file:`C++.sublime-build` w katalogu :file:`User`.
-
-
-Następnie pobieramy :download:`archiwum zip <ide/st3.zip>`
-i wypakowujemy do katalogu :file:`~/.config` za pomocą menedżera archiwów
-albo polecenia w terminalu:
-
-.. code-block:: bash
-
-    ~$ unzip st3.zip -d ~/.config
-
-
-Następnie pobieramy :download:`archiwum zip <ide/st3.zip>`, wypakowujemy do katalogu
-:file:`C:\\Użytkownicy\\nazwa_użytkownika\\Dane aplikacji` i zmieniamy nazwę folderu
-:file:`sublime-text-3` na :file:`Sublime Text 3`.
-
-Materiały
-=========
-
-1. `Edytor Geany <http://www.geany.org/>`_
+* Po zainstalowaniu rozszerzenia Microsoft "C/C++" trzeba utworzyć nowe zadanie budowania plików C++, należy postąpić
+  zgodnie z instrukcjami na stronie dokumentacji C++ Edytora (zobacz wyżej). Po utworzeniu zadania kompilację wywołujemy
+  naciśnięciem :kbd:`CTRL+SHIFT+B`, natomiast pliki wynikowe uruchamiamy ręcznie w terminalu.
 
