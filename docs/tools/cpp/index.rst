@@ -45,7 +45,7 @@ W wyświetlonym oknie klikamy zakładkę "Toolchain executables". Wskazujemy odp
 .. figure:: ../img/cb05.png
 
 1. "Compiler's installation directory" – klikamy trzy kropki i wskazujemy katalog z plikami kompilatora,
-   najczęściej: :file:`C:\Program Files (x86)\CodeBlocks\MinGW\bin`.
+   najczęściej: :file:`C:\\Program Files (x86)\\CodeBlocks\\MinGW\\bin`.
 2. "C compiler", "C++ compiler", "Linker..." – w razie potrzeby zamieniamy nazwy wersji 32-bitowe na 64-bitowe
    dopisując ``x86_64-w64-``, np.: ``x86_64-w64-mingw32-gcc.exe``.
 3. Zatwierdzamy zmiany klikając "OK".
