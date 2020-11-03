@@ -29,3 +29,4 @@ Pozostałe litery rozwija się najczęściej jako:
    php
    linlamp
    uwamp
+   codeigniter

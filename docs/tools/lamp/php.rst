@@ -21,7 +21,7 @@ Windows
 -------
 
 Ze strony `PHP for Windows – Downloads <https://windows.php.net/download/>`_
-pobieramy archiwum zip z ostatnia 64-bitową wersją, np. `php-7.4.12-nts-Win32-vc15-x64.zip`.
+pobieramy archiwum zip z ostatnią 64-bitową wersją, np. `php-7.4.12-nts-Win32-vc15-x64.zip`.
 Pobrany plik rozpakowujemy do głównego katalogu wybranego dysku, np.: :file:`C:\\php`.
 
 .. figure:: img/c_php.png
