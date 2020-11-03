@@ -19,12 +19,13 @@ Pozostałe litery rozwija się najczęściej jako:
    Wymienione oprogramowanie to najpopularniejsze, ale nie jedyne rozwiązania.
    Dostępnych jest wiele innych, równie dobrych serwerów czy baz danych.
 
-   Do tworzenia i testowania serwisów z bazą SQLite wystarczą serwery deweloperskie
-   wbudowane w instalacje interpreterów PHP lub Python.
+   Do tworzenia i testowania serwisów z bazą SQLite czy MariaDB wystarczą
+   serwery deweloperskie wbudowane w instalacje interpreterów PHP lub Python.
 
 .. toctree::
    :maxdepth: 1
 
    xampp
+   php
    linlamp
    uwamp
