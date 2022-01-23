@@ -23,7 +23,7 @@ Spis treści:
     python/index
     inne/linki
     galerie/index
-    Serwis eCG <http://ecg.vot.pl/>
+    Serwis eCG <http://srv40578.seohost.com.pl/>
 
 Indeks
 ==================
