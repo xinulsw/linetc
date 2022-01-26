@@ -72,9 +72,9 @@ Pakiety można instalować ogólnosystemowo za pomocą polecenia:
 rozszerzony interpreter `IPython <https://ipython.readthedocs.io/en/stable/>`_ i/lub
 aplikację `Jupyter QtConsole <https://github.com/jupyter/qtconsole>`_:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-    ~$ sudo pip3 install ipython3 qtconsole
+       ~$ sudo pip3 install ipython3 qtconsole
 
 Pakiety wykorzystywane na potrzeby konkretnej aplikacji lepiej instalować w katalogu użytkownika
 – wystarczy, że do polecenia dodamy opcję `--user`:
