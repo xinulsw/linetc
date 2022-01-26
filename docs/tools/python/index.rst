@@ -51,21 +51,6 @@ Po instalacji uruchom wiersz poleceń (``cmd`` lub PowerShell) i sprawdź popraw
 
 .. figure:: ../img/python05.jpg
 
-Testowanie kodu
-===============
-
-Do testowania kodu poza standardowym interpreterm można użyć
-
-Najwygodniej zainstalować je za pomocą menedżera pakietów:
-
-
-
-W systemach Linux można też użyć prekompilowanych pakietów systemowych instalowanych za pomocą menedżerów, np.
-
-.. code-block:: bash
-
-   ~$ sudo apt install python3-ipython python3-qtconsole
-
 Dodatkowe narzędzia i pakiety
 =============================
 
