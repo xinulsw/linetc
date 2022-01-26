@@ -8,59 +8,38 @@ Aktualnie zalecaną i wspieraną wersją interpretera Pythona jest 3.x.
 Linux
 =====
 
-W systemach **Linux** Python jest szeroko stosowany i dostępny w standardowej instalacji większości dystrybucji
-i to zarówno w wersji 2.x, jak i 3.x. Dla formalności polecenie instalacyjne w systemach opartych
-na Debianie (Ubuntu, Linux Mint) to:
+W systemach **Linux** Python 3 jest szeroko stosowany i dostępny w standardowej instalacji.
+W termnalu uruchomimy interpreter po wydaniu polecenia:
 
 .. code-block:: bash
 
-    ~$ sudo apt-get install python3
-
-W niektórych dystrybucjach polecenie ``python`` jest dowiązaniem do wersji 2.x, a pakiety nazywają się odpowiednio
-``python2-...`` lub ``python3-...``. Warto ustawić jako domyślną wersję 3:
-
-.. code-block:: bash
-
-   ~$ sudo update-alternatives --list python
-   ~$ ls /usr/bin/python*
-   ~$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-   ~$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
-   ~$ sudo update-alternatives --config python
-
-Pierwsze polecenie pokaże, czy w systemie ustawiono jakieś alternatywne wersje. Drugie pokaże wersje dostępne.
-Trzecie ustawia Pythona w wersji 2.7 i w wersji 3.8 jako dostępne, ale domyślną wersją zostaje
-ta, która ma wyższą cyfrę na końcu. W powyższym przykładzie 3.8. Ostatnie polecenie pozwala
-sprawdzić, która wersja jest domyślna. W przypadku pomyłki można wskazać wersję 3., wpisując liczbę
-wskazującą `/usr/bin/python3`. Na koniec w terminalu wpisujemy polecenie `python -V` i powinniśmy
-zobaczyć odpowiedź `3.x`.
+    ~$ python3
 
 Windows
 =======
 
 .. note::
 
-   Przed rozpoczęciem instalacji Pythona zaktualizuj system. Jeżeli będziesz instalował nowszą wersję
+   Przed rozpoczęciem instalacji Pythona zaktualizuj system. Przed instalacją nowszej wersji
    interpretera, odinstaluj starą.
 
 Na stronie `Python Releases for Windows <https://www.python.org/downloads/windows/>`_
-klikamy link *Last Python 3 Release - ...* i pobieramy instalator
-:file:`Windows executable installer` w odpowiedniej wersji, tj.
-*x86-64* (64-bitowe, wersja zalecana) lub *x86* (32-bitowej.
+klikamy link *Last Python 3 Release - ...*, pobieramy instalator
+:file:`Windows installer (64-bit) Recommended` i uruchamiamy instalację.
 
-.. figure:: ../img/python01.jpg
+.. figure:: ../img/python01.png
 
 .. warning::
 
-   Podczas instalacji zaznaczamy opcję "Add Python.exe to Path" i wybieramy "Customize installation".
+   Podczas instalacji zaznaczamy opcję "Add Python 3.x to Path" i wybieramy "Customize installation".
 
-.. figure:: ../img/python02.jpg
+.. figure:: ../img/python02.png
 
-.. figure:: ../img/python03a.jpg
+.. figure:: ../img/python03.png
 
-   Można zaznaczyć "Install for all users" (instalacja dla wszystkich użytkowników) i "Precompile standard library"
-   (prekompilacja biblioteki standardowej).
+   Można zaznaczyć opcje "Install for all users" i "Precompile standard library" (prekompilacja biblioteki standardowej).
 
-.. figure:: ../img/python04.jpg
+.. figure:: ../img/python04.png
 
    W ostatnim oknie klikamy "Close".
 
@@ -72,46 +51,54 @@ Po instalacji uruchom wiersz poleceń (``cmd`` lub PowerShell) i sprawdź popraw
 
 .. figure:: ../img/python05.jpg
 
-Narzędzia dodatkowe
-===================
+Testowanie kodu
+===============
 
-Do pracy z Pythonem można wykorzystać dodatkowe narzędzia, przede wszystkim rozszerzone konsole
-`IPython <https://ipython.readthedocs.io/en/stable/>`_ oraz `Jupyter QtConsole <https://github.com/jupyter/qtconsole>`_.
+Do testowania kodu poza standardowym interpreterm można użyć
+
 Najwygodniej zainstalować je za pomocą menedżera pakietów:
 
 
-.. code-block:: bash
-
-    ~$ pip install ipython3 qtconsole
 
 W systemach Linux można też użyć prekompilowanych pakietów systemowych instalowanych za pomocą menedżerów, np.
 
 .. code-block:: bash
 
-   ~$ sudo apt install python3-ipython ipython3-qtconsole
+   ~$ sudo apt install python3-ipython python3-qtconsole
 
-Dodatkowe pakiety
-=================
+Dodatkowe narzędzia i pakiety
+=============================
 
-Podczas programowania w Pythonie używamy wielu dodatkowych pakietów zawierających mniejsze lub większe frameworki.
-Pakiety te można instalować ogólnosystemowo. Wymaga to zazwyczaj uprawnień administratora i nie zawsze jest
-dobrym rozwiązaniem, ponieważ "zaśmieca" system. Instalacja ogólnosystemowa polega na wydaniu polecenia:
-
-   .. code-block:: bash
-
-      sudo pip3 install nazwa_pakietu
-
-– przy czym `sudo` używamy tylko w systemie Linux, ale nie w Windows.
-
-Inną możliwością, często polecaną, jest instalacja w katalogu użytkownika. Wystarczy, że do polecenia dodamy opcję
-`--user`:
+Podczas tworzenia większych aplikacji i projektów bardzo przydatne są dodatkowe narzędzia.
+Do instalowania i zarządzania dodatkowymi pakietami używa się menedżera `pip3` oraz środowisk wirtualnych.
+W terminalu wydajemy polecenie, które zainstaluje odpowiednie pakiety:
 
    .. code-block:: bash
 
-      pip3 install nazwa_pakietu --user
+      ~$ sudo apt-get install python3-pip python3-venv
 
-Ostatnia możliwość to instalacja w tzw. środowisku wirtualnym, czyli osobnym katalogu,
-do którego zwykły użytkownik ma pełen dostęp. Wykorzystaj tę możliwość przy dużych frameworkach (np. Django).
+Pakiety można instalować ogólnosystemowo za pomocą polecenia:
+
+   .. code-block:: bash
+
+      ~$ sudo pip3 install nazwa_pakietu
+
+– przy czym `sudo` używamy tylko w systemie Linux, ale nie w Windows. W taki sposób można zainstalować
+rozszerzony interpreter `IPython <https://ipython.readthedocs.io/en/stable/>`_ i/lub
+aplikację `Jupyter QtConsole <https://github.com/jupyter/qtconsole>`_:
+
+.. code-block:: bash
+
+    ~$ sudo pip3 install ipython3 qtconsole
+
+Pakiety wykorzystywane na potrzeby konkretnej aplikacji lepiej instalować w katalogu użytkownika
+– wystarczy, że do polecenia dodamy opcję `--user`:
+
+   .. code-block:: bash
+
+      ~$ pip3 install nazwa_pakietu --user
+
+– lub w wirtualnym środowisku, czyli osobnym katalogu.
 
 Środowisko wirtualne
 --------------------
@@ -123,7 +110,6 @@ do którego zwykły użytkownik ma pełen dostęp. Wykorzystaj tę możliwość 
 
       python3 -m venv pve
 
-
    .. note::
 
       Przełącznik `-m` wskazuje moduł, którego chcemy użyć, `pve` to umowna nazwa katalogu, który zostanie utworzony
@@ -133,7 +119,7 @@ do którego zwykły użytkownik ma pełen dostęp. Wykorzystaj tę możliwość 
 
    .. code-block:: bash
 
-      source pve/bin/activate
+      ~$ source pve/bin/activate
 
    .. note::
 
@@ -178,16 +164,14 @@ Jeżeli możesz, zainstaluj system Linux, unikniesz wielu poniższych problemów
 Jeżeli musisz używać systemu Windows, wcześniej czy później zetkniesz się z problemami.
 Poniżej kilka wskazówek, które mogą pomóc je rozwiązać.
 
-1) Przed instalacją interpretera Pythona upewnij się, że ewentualne starsze wersje zostały usunięte.
-2) Jeżeli odinstalowałeś starszą wersję Pythona, zrestartuj system.
-3) W przypadku błędów *odmowa dostępu* (ang. *access denied*) podczas aktualizowania menedżera `pip` lub
+1) Przed instalacją interpretera Pythona odinstaluj ewentualne starsze wersje i zrestartuj system.
+2) W przypadku błędów *odmowa dostępu* (ang. *access denied*) podczas aktualizowania menedżera `pip` lub
    instalowania wypróbuj następujące sposoby:
 
    a) spróbuj zrestartować system, aby zakończyć ewentualne zadania wykorzystujące Pythona, i ponów instalację
    b) podczas aktualizacji użyj opcji `--user`, np.: :code:`python -m pip install --upgrade --user pip`
    c) podczas instalacji użyj opcji `--user`, np.: :code:`python -m pip install --user pyqt5`
    d) uruchom wiersz poleceń (``cmd`` lub PowerShell) jako administrator i dopiero wtedy wydaj polecenie
-
 
 Materiały
 =========

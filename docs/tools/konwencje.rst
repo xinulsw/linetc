@@ -4,14 +4,13 @@ Konwencje
 Linux
 =====
 
-Dystrybucji systemu Linux jest bardzo dużo, nasze instrukcje dotyczą systemu Ubuntu
-i pokrewnych, tzn. opartych na Debianie i używających menedżera pakietów ``apt``,
-np. Linux Mint.
+Dystrybucji systemu Linux jest bardzo dużo, nasze instrukcje dotyczą systemów opartych na Debianie,
+np. Linux Mint, MX Linux, Ubuntu, i używających menedżera pakietów ``apt``.
 
 Katalog główny w systemie Linux oznaczany jest znakiem ``/`` (ukośnik, ang. *slash* ).
 Znak ten jest również separatorem katalogów w ścieżkach, np. :file:`/home/user/.config`.
 
-Większość działań polega na wpisywani poleceń w terminalu. Terminali w Linuksie jest wiele,
+Większość działań polega na wpisywaniu poleceń w terminalu. Terminali w Linuksie jest wiele,
 domyślny dla danego systemu znajdziesz pod nazwą "Terminal".
 
 Prefiks ``~S`` nie jest częścią polecenia, ale znakiem zachęty.
@@ -26,7 +25,7 @@ Windows
 =======
 
 W systemie Windows podstawowym terminalem jest wiersz poleceń uruchamiany komendą ``cmd``.
-Lepszym wyborem jest PowerShell, a w przypadku repozytoriów Git Bash – terminal instalowany razem z kientem
+Lepszym wyborem jest PowerShell, a w przypadku repozytoriów Git Bash – terminal instalowany razem z klientem
 Git.
 
 W systemie Windows partycja systemowa (w pewnym stopniu odpowiednik katalogu głównego) oznaczana jest jako
