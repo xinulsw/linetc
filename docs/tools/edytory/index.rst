@@ -29,7 +29,7 @@ W systemach linuksowych korzystamy z dedykowanych menedżerów, np. w systemach 
 
    ~$ sudo apt-get install geany geany-plugins
 
-Można też skorzystać z graficznego instalatora "Oprogramowanie".
+W Ubuntu można też skorzystać z graficznego instalatora "Oprogramowanie".
 
 .. figure:: ../img/geany02.png
 
@@ -177,8 +177,7 @@ zarządzamy nimi z poziomu edytora. Instalacja każdej wtyczki polega na wywoła
 poleceń :kbd:`CTRL+SHIFT+P` i wpisaniu *Install Package*. Na początku trzeba zainstalować wtyczkę
 *Package Control*: wpisz *Install Package Control* i zatwierdź :kbd:`Enter`.
 
-W podobny sposób instalujemy inne wtyczki. Na początek warto zainstalować
-następujące:
+W podobny sposób instalujemy inne wtyczki. Na początek warto zainstalować następujące:
 
 * `Anaconda <https://packagecontrol.io/packages/Anaconda>`_ – podstawowy dodatek do programowania w Pythonie
   dostępny w menu podręcznym podczas edycji plików ".py"
@@ -261,3 +260,36 @@ C++
 * Po zainstalowaniu rozszerzenia Microsoft "C/C++" trzeba utworzyć nowe zadanie budowania plików C++, należy postąpić
   zgodnie z instrukcjami na stronie dokumentacji C++ Edytora (zobacz wyżej). Po utworzeniu zadania kompilację wywołujemy
   naciśnięciem :kbd:`CTRL+SHIFT+B`, natomiast pliki wynikowe uruchamiamy ręcznie w terminalu.
+
+PyCharm
+=======
+
+.. figure:: ../img/pycharm2022.png
+
+
+PyCharm to profesjonalne, komercyjne środowisko programistyczne dostępne
+za darmo do celów szkoleniowych. Interfejs nie został na razie spolszczony.
+
+To IDE doskonale wspiera proces uczenia się. Udostępnia nawigację po kodzie,
+podpowiedzi, wykrywa błędy i ma wbudowanych wiele innych udogodnień.
+
+Najprościej zainstalować
+
+Zarówno w systemach Linux, jak i MS Windows, na początku pobieramy i instalujemy
+aplikację `Toolbox App <https://www.jetbrains.com/toolbox-app/>`_.
+Po jej uruchomieniu wybieramy instalację PyCharma w wersji Professional
+(po okresie próbnym wymaga rejestracji) lub Community (darmowa).
+
+Bezpłatna licencja
+------------------
+
+Każdy nauczyciel może wystąpić o klucz licencyjny przy pomocy
+`formularza <https://www.jetbrains.com/buy/classroom/?product=pycharm>`_
+dostępnego na stronie producenta.
+
+Polski słownik
+--------------
+
+W programie możemy włączyć sprawdzanie polskiej pisowni. Naciskamy
+:kbd:`Ctrl+Alt+S` i wyszukujemy "languages" i na zakładce "Natural Languages"
+dodajemy język polski.
