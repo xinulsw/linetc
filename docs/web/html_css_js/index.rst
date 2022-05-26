@@ -12,15 +12,17 @@ Twoim zadaniem jest przygotowanie strony HTML, która wygląda podobnie do poni�
 	Pobierz archiwum :download:`html_css_cw1.zip<html_css1/html_css_cw1.zip>` i rozpakuj w dowolnym katalogu.
 	W katalogu :file:`html_css_cw1` znajdziesz 3 pliki:
 
-	- :file:`index.html` – szkielet strony HTML, tu wprowadzaj wszystkie zmiany;
-	- :file:`style.css` – podstawowy arkusz stylów CSS, tu dodawaj definicje stylów;
-	- :file:`norwid.jpg` – obrazek potrzebny w części rozszerzonej.
-
-	Treść i obrazki, które należy umieścić w dokumencie ``index.html``,
-	skopiuj ze strony `Romantyzm <https://pl.wikipedia.org/wiki/Romantyzm>`_ Wikipedii.
+	- :file:`index.html` – szkielet strony HTML, tu wprowadzaj wszystkie zmiany,
+	- :file:`style.css` – podstawowy arkusz stylów CSS, tu dodawaj definicje stylów,
+	- :file:`norwid.jpg` – obrazek potrzebny w części rozszerzonej,
+	- :file:`index_done.png` – zrzut gotowej strony ``index.html``,
+	- :file:`norwid_done.png` – zrzut gotowej strony ``norwid.html``.
 
 Część pierwsza
 ****************
+
+Treści (tekst i obrazki) zawarte w dokumencie ``index.html`` kopiuj (pobieraj)
+ze strony `Romantyzm <https://pl.wikipedia.org/wiki/Romantyzm>`_ umieszczonej na Wikipedii.
 
 W pliku ``index.html`` dokonaj następujących zmian:
 
@@ -28,7 +30,7 @@ W pliku ``index.html`` dokonaj następujących zmian:
 #. W menu wstaw dwa odnośniki:
 
 	a) jeden o treści "Romantyzm" do strony zapisanej w pliku ``index.html``,
-	b) drugi o treści "Norwid" do strony  zapisanej w pliku ``norwid.html``.
+	b) drugi o treści "Norwid" do strony zapisanej w pliku ``norwid.html``.
 
 #. Wstaw dwa akapity, a w każdym wstaw obrazek.
 #. Wstaw akapit z tekstem "Źródło" i odnośnikiem do Wikipedii.
@@ -54,37 +56,34 @@ W pliku ``index.html`` dokonaj następujących zmian:
 Część druga
 *****************
 
-W pliku :file:`norwid.html` należy przygotować stronę HTML, która wygląda podobnie do poniższej.
+Twoim zadaniem jest przygotowanie strony HTML, która wygląda podobnie do poniższej.
 
 .. image:: html_css1/norwid_done.png
 
 :download:`Kliknij, aby zobaczyć większy obrazek <html_css1/norwid.png>`
 
-.. attention::
+Treści (tekst i obrazki) zawarte w dokumencie ``norwid.html`` kopiuj (pobieraj) z Wikipedii.
 
-	**Uwaga**: Treści zawarte w pliku ``norwid.html`` pobierz z odpowiedniej strony Wikipedii.
-
-1. Zapisz plik :file:`index.html` pod nazwą ``norwid.html``.
+#. Zapisz plik :file:`index.html` pod nazwą ``norwid.html``.
 #. Upewnij się, że działają odnośniki w menu.
 
 W pliki :file:`norwid.html` dokonaj następujących zmian:
 
 #. Zmień tytuł dokumentu i zawartość nagłówka strony.
 #. Z elementu ``<section>`` usuń wszystko poza nagłówkiem.
-#. Wstaw 2-komórkową tabelę, szerokość lewej komórki ustaw 10%.
+#. Wstaw 2-komórkową tabelę, szerokość lewej komórki ustaw na 10%.
 #. W lewej komórce umieść obrazek, w prawej akapity z tekstem oraz akapit "Źródło".
 #. Zmień treść i url odnośnika na dole strony.
 #. Za pomocą stylów CSS ustaw prawy zewnętrzny margines tabeli na 100px.
-#. Utwórz klasę CSS ``.tdright``, która definiuje 5% wewnętrzne marginesy oraz prawe obramowanie (2px solid grey).
-#. Zastosuj utworzoną klasę.
-
-Po wykonaniu ćwiczenia lub upłynięciu przeznaczonego na nie czasu utwórz archiwum w formacie *zip* zawierające katalog :file:`html_css_cw1`, zmień jego nazwę wg schematu: ``kl1ag1_nazwisko_imie_html1_roz.zip`` i wgraj na wskazany serwer.
+#. Utwórz klasę CSS ``.tdright``, która definiuje 5% wewnętrzne marginesy (wypełnienie) oraz prawe obramowanie (2px solid grey).
+#. Zastosuj utworzoną klasę do prawej komórki tabeli.
 
 Materiały
 **************
 
-1. `Elementy HTML <http://webkod.pl/dodatki/html/mapa-html-elementy-atrybuty-wartosci>`_
-2. `HTML Element Reference <http://www.w3schools.com/tags/default.asp>`_
-3. `Właściwości CSS <http://webkod.pl/kurs-css/wlasciwosci/tekst/text-align>`_
-4. `CSS Reference <http://www.w3schools.com/cssref/default.asp>`_
-
+#. `HTML Tutorial <https://www.w3schools.com/html/default.asp>`
+#. `HTML Element Reference <http://www.w3schools.com/tags/default.asp>`_
+#. `HTML Tables <https://www.w3schools.com/html/html_tables.asp>`
+#. `Właściwości CSS <http://webkod.pl/kurs-css/wlasciwosci/tekst/text-align>`_
+#. `CSS Layout - float and clear <https://www.w3schools.com/css/css_float.asp>`
+#. `CSS Reference <http://www.w3schools.com/cssref/default.asp>`_
