@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Materiały LinEtc'
-copyright = u'2016, Robert Bednarz (ecg@ecg.vot.pl)'
+copyright = u'2022, Robert Bednarz (xinulsw@gmail.com)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -192,7 +192,7 @@ html_static_path = ['_static']
 # Sphinx supports the following languages:
 #   'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja'
 #   'nl', 'no', 'pt', 'ro', 'ru', 'sv', 'tr'
-#html_search_language = 'en'
+html_search_language = 'pl'
 
 # A dictionary with options for the search language support, empty by default.
 # Now only 'ja' uses this config value
@@ -325,5 +325,7 @@ except:
 
 
 def setup(app):
-    app.add_javascript('custom.js')
-    app.add_javascript('jquery.prettyPhoto.js')
+    #app.add_javascript('custom.js')
+    #app.add_javascript('jquery.prettyPhoto.js')
+    app.add_js_file('custom.js')
+    app.add_js_file('jquery.prettyPhoto.js')

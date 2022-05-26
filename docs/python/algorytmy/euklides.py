@@ -24,11 +24,11 @@ def nwd_optymalny(a, b):
 
 
 def main(args):
-    a = int(raw_input("Podaj liczbę a: "))
-    b = int(raw_input("Podaj liczbę b: "))
+    a = int(input("Podaj liczbę a: "))
+    b = int(input("Podaj liczbę b: "))
 
-    print "Nwd(%, %) klasyczny =", nwd_klasyczny(a, b)
-    print "Nwd(%, %) optymalny =", nwd_optymalny(a, b)
+    print("Nwd(%, %) klasyczny =", nwd_klasyczny(a, b))
+    print("Nwd(%, %) optymalny =", nwd_optymalny(a, b))
 
     return 0
 

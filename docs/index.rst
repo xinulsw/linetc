@@ -19,7 +19,7 @@ Spis treści:
     tools/index
     cppqt/index
     web/index
-    porteus/index
+    linux/index
     python/index
     inne/linki
     galerie/index
