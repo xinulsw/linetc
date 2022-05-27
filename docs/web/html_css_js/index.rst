@@ -1,25 +1,23 @@
 HTML&CSS – ćwiczenie 1
 ######################
 
-Twoim zadaniem jest przygotowanie strony HTML, która wygląda podobnie do poniższej.
+Pobierz archiwum :download:`html_css_cw1.zip<html_css1/html_css_cw1.zip>` i rozpakuj w dowolnym katalogu.
+W katalogu :file:`html_css_cw1` znajdziesz pliki:
 
-.. image:: html_css1/index_done.png
-
-:download:`Kliknij, aby zobaczyć większy obrazek <html_css1/index.png>`
-
-.. attention::
-
-	Pobierz archiwum :download:`html_css_cw1.zip<html_css1/html_css_cw1.zip>` i rozpakuj w dowolnym katalogu.
-	W katalogu :file:`html_css_cw1` znajdziesz 3 pliki:
-
-	- :file:`index.html` – szkielet strony HTML, tu wprowadzaj wszystkie zmiany,
-	- :file:`style.css` – podstawowy arkusz stylów CSS, tu dodawaj definicje stylów,
-	- :file:`norwid.jpg` – obrazek potrzebny w części rozszerzonej,
-	- :file:`index_done.png` – zrzut gotowej strony ``index.html``,
-	- :file:`norwid_done.png` – zrzut gotowej strony ``norwid.html``.
+- :file:`index.html` – szkielet strony HTML, tu wprowadzaj wszystkie zmiany,
+- :file:`style.css` – podstawowy arkusz stylów CSS, tu dodawaj definicje stylów,
+- :file:`norwid.jpg` – obrazek potrzebny w części drugiej,
+- :file:`index_done.png` – zrzut gotowej strony ``index.html``,
+- :file:`norwid_done.png` – zrzut gotowej strony ``norwid.html``.
 
 Część pierwsza
 ****************
+
+Twoim zadaniem jest przygotowanie strony HTML, która wygląda jak poniżej.
+
+.. image:: html_css1/index_done.png
+
+:download:`Kliknij, aby zobaczyć większy obrazek <html_css1/index_done.png>`
 
 Treści (tekst i obrazki) zawarte w dokumencie ``index.html`` kopiuj (pobieraj)
 ze strony `Romantyzm <https://pl.wikipedia.org/wiki/Romantyzm>`_ umieszczonej na Wikipedii.
@@ -60,14 +58,14 @@ Twoim zadaniem jest przygotowanie strony HTML, która wygląda podobnie do poni�
 
 .. image:: html_css1/norwid_done.png
 
-:download:`Kliknij, aby zobaczyć większy obrazek <html_css1/norwid.png>`
+:download:`Kliknij, aby zobaczyć większy obrazek <html_css1/norwid_done.png>`
 
 Treści (tekst i obrazki) zawarte w dokumencie ``norwid.html`` kopiuj (pobieraj) z Wikipedii.
 
 #. Zapisz plik :file:`index.html` pod nazwą ``norwid.html``.
 #. Upewnij się, że działają odnośniki w menu.
 
-W pliki :file:`norwid.html` dokonaj następujących zmian:
+W pliku :file:`norwid.html` dokonaj następujących zmian:
 
 #. Zmień tytuł dokumentu i zawartość nagłówka strony.
 #. Z elementu ``<section>`` usuń wszystko poza nagłówkiem.
@@ -87,3 +85,4 @@ Materiały
 #. `Właściwości CSS <http://webkod.pl/kurs-css/wlasciwosci/tekst/text-align>`_
 #. `CSS Layout - float and clear <https://www.w3schools.com/css/css_float.asp>`
 #. `CSS Reference <http://www.w3schools.com/cssref/default.asp>`_
+#. `CSS: Kaskadowe arkusze stylów <https://developer.mozilla.org/pl/docs/Web/CSS>`
