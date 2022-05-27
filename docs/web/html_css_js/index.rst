@@ -79,10 +79,10 @@ W pliku :file:`norwid.html` dokonaj następujących zmian:
 Materiały
 **************
 
-#. `HTML Tutorial <https://www.w3schools.com/html/default.asp>`
+#. `HTML Tutorial <https://www.w3schools.com/html/default.asp>`_
 #. `HTML Element Reference <http://www.w3schools.com/tags/default.asp>`_
-#. `HTML Tables <https://www.w3schools.com/html/html_tables.asp>`
+#. `HTML Tables <https://www.w3schools.com/html/html_tables.asp>`_
 #. `Właściwości CSS <http://webkod.pl/kurs-css/wlasciwosci/tekst/text-align>`_
-#. `CSS Layout - float and clear <https://www.w3schools.com/css/css_float.asp>`
+#. `CSS Layout - float and clear <https://www.w3schools.com/css/css_float.asp>`_
 #. `CSS Reference <http://www.w3schools.com/cssref/default.asp>`_
-#. `CSS: Kaskadowe arkusze stylów <https://developer.mozilla.org/pl/docs/Web/CSS>`
+#. `CSS: Kaskadowe arkusze stylów <https://developer.mozilla.org/pl/docs/Web/CSS>`_
