@@ -325,7 +325,7 @@ except:
 
 
 def setup(app):
-    app.add_javascript('custom.js')
-    app.add_javascript('jquery.prettyPhoto.js')
-    #app.add_js_file('custom.js')
-    #app.add_js_file('jquery.prettyPhoto.js')
+    #app.add_javascript('custom.js')
+    #app.add_javascript('jquery.prettyPhoto.js')
+    app.add_js_file('custom.js')
+    app.add_js_file('jquery.prettyPhoto.js')
