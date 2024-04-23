@@ -13,14 +13,14 @@ W katalogu :file:`html_css_cw1` znajdziesz pliki:
 Część pierwsza
 ****************
 
-Twoim zadaniem jest przygotowanie strony HTML, która wygląda jak poniżej.
+Twoim zadaniem jest przygotowanie strony WWW, której zrzut znajduje się poniżej.
 
 .. image:: html_css1/index_done.png
 
 :download:`Kliknij, aby zobaczyć większy obrazek <html_css1/index_done.png>`
 
-Treści (tekst i obrazki) zawarte w dokumencie ``index.html`` kopiuj (pobieraj)
-ze strony `Romantyzm <https://pl.wikipedia.org/wiki/Romantyzm>`_ umieszczonej na Wikipedii.
+Tekst i obrazki, które mają znaleźć się w dokumencie ``index.html`` skopiuj ze strony
+`Romantyzm <https://pl.wikipedia.org/wiki/Romantyzm>`_ (Wikipedia).
 
 W pliku ``index.html`` dokonaj następujących zmian:
 
@@ -30,7 +30,7 @@ W pliku ``index.html`` dokonaj następujących zmian:
 	a) jeden o treści "Romantyzm" do strony zapisanej w pliku ``index.html``,
 	b) drugi o treści "Norwid" do strony zapisanej w pliku ``norwid.html``.
 
-#. Wstaw dwa akapity, a w każdym wstaw obrazek.
+#. Wstaw dwa akapity i w każdym wstaw obrazek.
 #. Wstaw akapit z tekstem "Źródło" i odnośnikiem do Wikipedii.
 #. Wstaw poziomą linię.
 #. Wstaw nagłówek stopnia drugiego.
@@ -54,13 +54,13 @@ W pliku ``index.html`` dokonaj następujących zmian:
 Część druga
 *****************
 
-Twoim zadaniem jest przygotowanie strony HTML, która wygląda podobnie do poniższej.
+Twoim zadaniem jest przygotowanie strony WWW, której zrzut znajduje się poniższej.
 
 .. image:: html_css1/norwid_done.png
 
 :download:`Kliknij, aby zobaczyć większy obrazek <html_css1/norwid_done.png>`
 
-Treści (tekst i obrazki) zawarte w dokumencie ``norwid.html`` kopiuj (pobieraj) z Wikipedii.
+Tekst i obrazki, które powinny znaleźć się w dokumencie ``norwid.html`` skopiuj z Wikipedii.
 
 #. Zapisz plik :file:`index.html` pod nazwą ``norwid.html``.
 #. Upewnij się, że działają odnośniki w menu.
