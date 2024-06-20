@@ -83,6 +83,99 @@ lub :kbd:`CTRL+I`, zmniejszenie wcięcia uzyskamy naciskając :kbd:`CTRL+U`.
 
 .. _st3-opis:
 
+VS Code / Codium
+=================
+
+.. figure:: ../img/vscodium.png
+
+`Visual Studio Code <https://code.visualstudio.com/>`_ to otwartoźródłowy edytor programistyczny firmy Microsoft
+rozwijany w oparciu o framework Electron napisany w języku Java Script. Oferuje wiele przydatnych narzędzi
+(m. in. wbudowana obsługa Gita) i ułatwień, działa na różnych systemach. Niestety wersje binarne
+przygotowywane przez Microsoft nie są zgodne z zasadami `licencji FLOSS <https://dwheeler.com/essays/floss-license-slide.html>`_,
+zawierają również telemetrię. W ramach projektu `VSCodium <https://vscodium.com/>`_ dostępne są jednak polecane
+przez nas wersje na `licencji MIT <https://pl.wikipedia.org/wiki/Licencja_MIT>`_ pozbawione telemetrii.
+
+Linux
+-----
+
+W systemach opartych na Debianie (MX Linux, Ubuntu, Linux Mint) w menu strony `VSCodium <https://vscodium.com>`_ klikamy "INSTALL"
+i postępujemy zgodnie z instrukcjami z sekcji "Install on Debian / Ubuntu (deb package)". Można również ze strony
+`Github releases <https://github.com/VSCodium/vscodium/releases>`_ pobrać pakiet o nazwie  "codium_wersja_amd64.deb"
+i zainstalować ręcznie.
+
+Windows
+-------
+
+W systemie MS Windows w menu strony `VSCodium <https://vscodium.com>`_ klikamy "INSTALL"
+i postępujemy zgodnie z instrukcjami z sekcji "Install with Windows Package Manager (WinGet)". Można również ze strony
+`Github releases <https://github.com/VSCodium/vscodium/releases>`_ pobrać pakiet o nazwie  "VSCodium-x64-wersja.msi"
+lub "VSCodium-x64-wersja.exe" i zainstalować ręcznie.
+
+Konfiguracja
+------------
+
+Jak każdy profesjonalny edytor programistyczny, program wymaga poznania odpowiednich skrótów klawiaturowych
+i doinstalowania dodatków zależnych od używanego języka programowania. Pomaga w tym bardzo dobrze przygotowana
+dokumentacja dla większości języków, np.:
+
+* `Python <https://code.visualstudio.com/docs/languages/python>`_
+* `C++ <https://code.visualstudio.com/docs/languages/cpp>`_
+* `HTML <https://code.visualstudio.com/docs/languages/html>`_
+* `CSS itd. <https://code.visualstudio.com/docs/languages/css>`_
+* `PHP <https://code.visualstudio.com/docs/languages/php>`_
+
+Dostępne są również przewodniki omawiające programowanie w wybranych językach, np.:
+
+* `Getting Started with Python in VS Code <https://code.visualstudio.com/docs/python/python-tutorial>`_
+* `Using GCC with MinGW <https://code.visualstudio.com/docs/cpp/config-mingw>`_
+* `Using C++ on Linux in VS Code <https://code.visualstudio.com/docs/cpp/config-linux>`_
+
+Wspomnieć można, że wersja dla Windowsa pozwala zainstalować dodatek umożliwiający pracę na projektach
+zapisanych w środowisku `WSL (Windows Subsystem for Linux) <https://pl.wikipedia.org/wiki/Windows_Subsystem_for_Linux>`_.
+Nie jest to co prawda rozwiązanie dorównujące wygodzie programowania w Linuksie, ale jako proteza wystarczy.
+
+Python
+------
+
+* Po zainstalowaniu rozszerzenia Microsoft "Python" i otwarciu skryptu Pythona, możesz zobaczyć komunikat
+  typu "Linter pylint is not installed", wybierz wtedy "Install".
+* Błędy składniowe w skryptach zobaczysz po naciśnięciu :kbd:`CTRL+SHIFT+M`
+* Skrypty Pythona uruchomisz używając ikony w prawym górnym rogu okna edytora lub z menu podręcznego "Run Python File in Terminal".
+* Interaktywny interpreter Pythona wywołasz po naciśnięciu :kbd:`CTRL+SHIFT+P` i wpisaniu "Python: Start REPL".
+
+C++
+-----
+
+* Po zainstalowaniu rozszerzenia Microsoft "C/C++" trzeba utworzyć nowe zadanie budowania plików C++, należy postąpić
+  zgodnie z instrukcjami na stronie dokumentacji C++ Edytora (zobacz wyżej). Po utworzeniu zadania kompilację wywołujemy
+  naciśnięciem :kbd:`CTRL+SHIFT+B`, natomiast pliki wynikowe uruchamiamy ręcznie w terminalu.
+
+PyCharm
+=======
+
+.. figure:: ../img/pycharm2022.png
+
+
+PyCharm to profesjonalne, komercyjne środowisko programistyczne dostępne za darmo do celów szkoleniowych.
+Interfejs nie został na razie spolszczony, ale to IDE doskonale wspiera proces uczenia się. Udostępnia nawigację
+po kodzie, podpowiedzi, wykrywa błędy i ma wbudowanych wiele innych udogodnień.
+
+Najprościej je zainstalować przy użyciu aplikacji `Toolbox App <https://www.jetbrains.com/toolbox-app/>`_, którą pobieramy
+i instalujemy. Po jej uruchomieniu wybieramy instalację PyCharma w wersji Community.
+
+Bezpłatna licencja
+------------------
+
+Każdy nauczyciel może wystąpić o klucz licencyjny do wersji PyCharm Professional przy pomocy
+`formularza <https://www.jetbrains.com/buy/classroom/?product=pycharm>`_ dostępnego na stronie producenta.
+
+Polski słownik
+--------------
+
+W programie możemy włączyć sprawdzanie polskiej pisowni. Naciskamy
+:kbd:`Ctrl+Alt+S` i wyszukujemy "languages" i na zakładce "Natural Languages"
+dodajemy język polski.
+
 Sublime Text
 ==============
 
@@ -197,99 +290,3 @@ Ustawienia dla wybranego języka programowania dostępne są po wybraniu
 
    Położenie i zawartość katalogu, o którym mowa powyżej, możesz sprawdzić wybierając *Preferences / Browse Packages*
    i wchodząc do katalogu :file:`User`.
-
-VS Code
-=======
-
-.. figure:: ../img/vscodium.png
-
-`Visual Studio Code <https://code.visualstudio.com/>`_ to otwartoźródłowy edytor programistyczny firmy Microsoft.
-Wykorzystuje framework Electron napisany w języku Java Script, dlatego zajmuje relatywnie dużo miejsca i jest wolniejszy
-od aplikacji tworzonych w innych językach. Oferuje jednak wiele przydatnych narzędzi (m. in. wbudowana obsługa Gita)
-i ułatwień, działa na różnych systemach.
-
-Linux
------
-
-Wersje binarne przygotowywane przez Microsoft nie są zgodne z zasadami `licencji FLOSS <https://dwheeler.com/essays/floss-license-slide.html>`_,
-zawierają również telemetrię. Dlatego lepiej użyć wersji przygotowanych w ramach projektu `VSCodium <https://vscodium.com/>`_.
-W systemach opartych na Debianie (MX Linux, Ubuntu, Linux Mint) na stronie projektu klikamy "INSTALL"
-i postępujemy zgodnie z instrukcjami z sekcji "Install with Package Manager (Linux) -> Debian / Ubuntu (deb package)".
-
-Windows
--------
-
-Ze strony `Download Visual Studio Code <https://code.visualstudio.com/Download>`_ pobieramy wersję "User" (instalacja
-dla jednego użytkownika) lub "System installer" (instalacja ogólnosystemowa) i instalujemy.
-
-Konfiguracja
-------------
-
-Jak każdy profesjonalny edytor programistyczny, program wymaga poznania odpowiednich skrótów klawiaturowych
-i doinstalowania dodatków zależnych od używanego języka programowania. Pomaga w tym bardzo dobrze przygotowana
-dokumentacja dla większości języków, np.:
-
-* `Python <https://code.visualstudio.com/docs/languages/python>`_
-* `C++ <https://code.visualstudio.com/docs/languages/cpp>`_
-* `HTML <https://code.visualstudio.com/docs/languages/html>`_
-* `CSS itd. <https://code.visualstudio.com/docs/languages/css>`_
-* `PHP <https://code.visualstudio.com/docs/languages/php>`_
-
-Dostępne są również przewodniki omawiające programnowanie w wybranych językach, np.:
-
-* `Getting Started with Python in VS Code <https://code.visualstudio.com/docs/python/python-tutorial>`_
-* `Using GCC with MinGW <https://code.visualstudio.com/docs/cpp/config-mingw>`_
-* `Using C++ on Linux in VS Code <https://code.visualstudio.com/docs/cpp/config-linux>`_
-
-Wspomnieć można, że wersja dla Windowsa pozwala zainstalować dodatek umożliwiający pracę na projektach
-zapisanych w środowisku `WSL (Windows Subsystem for Linux) <https://pl.wikipedia.org/wiki/Windows_Subsystem_for_Linux>`_.
-Nie jest to co prawda rozwiązanie dorównujące wygodzie programowania w Linuksie, ale jako proteza wystarczy.
-
-Python
-------
-
-* Po zainstalowaniu rozszerzenia Microsoft "Python" i otwarciu skryptu Pythona, możesz zobaczyć komunikat
-  typu "Linter pylint is not installed", wybierz wtedy "Install".
-* Błędy składniowe w skryptach zobaczysz po naciśnięciu :kbd:`CTRL+SHIFT+M`
-* Skrypty Pythona uruchomisz używając ikony w prawym górnym rogu okna edytora lub z menu podręcznego "Run Python File in Terminal".
-* Interaktywny interpreter Pythona wywołasz po naciśnięciu :kbd:`CTRL+SHIFT+P` i wpisaniu "Python: Start REPL".
-
-C++
------
-
-* Po zainstalowaniu rozszerzenia Microsoft "C/C++" trzeba utworzyć nowe zadanie budowania plików C++, należy postąpić
-  zgodnie z instrukcjami na stronie dokumentacji C++ Edytora (zobacz wyżej). Po utworzeniu zadania kompilację wywołujemy
-  naciśnięciem :kbd:`CTRL+SHIFT+B`, natomiast pliki wynikowe uruchamiamy ręcznie w terminalu.
-
-PyCharm
-=======
-
-.. figure:: ../img/pycharm2022.png
-
-
-PyCharm to profesjonalne, komercyjne środowisko programistyczne dostępne
-za darmo do celów szkoleniowych. Interfejs nie został na razie spolszczony.
-
-To IDE doskonale wspiera proces uczenia się. Udostępnia nawigację po kodzie,
-podpowiedzi, wykrywa błędy i ma wbudowanych wiele innych udogodnień.
-
-Najprościej zainstalować
-
-Zarówno w systemach Linux, jak i MS Windows, na początku pobieramy i instalujemy
-aplikację `Toolbox App <https://www.jetbrains.com/toolbox-app/>`_.
-Po jej uruchomieniu wybieramy instalację PyCharma w wersji Professional
-(po okresie próbnym wymaga rejestracji) lub Community (darmowa).
-
-Bezpłatna licencja
-------------------
-
-Każdy nauczyciel może wystąpić o klucz licencyjny przy pomocy
-`formularza <https://www.jetbrains.com/buy/classroom/?product=pycharm>`_
-dostępnego na stronie producenta.
-
-Polski słownik
---------------
-
-W programie możemy włączyć sprawdzanie polskiej pisowni. Naciskamy
-:kbd:`Ctrl+Alt+S` i wyszukujemy "languages" i na zakładce "Natural Languages"
-dodajemy język polski.

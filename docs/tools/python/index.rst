@@ -108,7 +108,7 @@ Pakiety wykorzystywane na potrzeby konkretnej aplikacji lepiej instalować w kat
 
    .. note::
 
-      W systemie Windows: :code:`pve\Scripts\activate.bat`
+      W systemie Windows: :code:`pve\\Scripts\\activate.bat`
 
    Po udanej aktywacji przed ścieżką zobaczymy nazwę katalogu z wirtualnym środowiskiem w okrągłych nawiasach,
    np. `(pve)`.
