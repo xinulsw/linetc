@@ -3,20 +3,17 @@
 Interpreter Pythona
 ###################
 
-Aktualnie zalecaną i wspieraną wersją interpretera Pythona jest 3.x.
+Aktualnie zalecaną i wspieraną wersją interpretera Pythona jest `3.x`, gdzie `x` oznacza podwersję.
 
 Linux
 =====
 
 W systemach **Linux** Python 3 jest szeroko stosowany i dostępny w standardowej instalacji.
-W termnalu uruchomimy interpreter po wydaniu polecenia:
-
-.. code-block:: bash
-
-    ~$ python3
 
 Windows
 =======
+
+W systemie Windows interpreter trzeba doinstalować. 
 
 .. note::
 
@@ -51,116 +48,92 @@ Po instalacji uruchom wiersz poleceń (``cmd`` lub PowerShell) i sprawdź popraw
 
 .. figure:: ../img/python05.jpg
 
+Tryb interaktywny
+=================
+
+Poprawność instalacji, dostępność lub wersję Pythona sprawdzamy uruchamiając tryb interaktywny interpretera za pomocą polecenia
+w terminalu (wierszu poleceń):
+
+.. figure:: ../img/python_shell.png
+
+Środowisko programistyczne
+===========================
+
+Domyślnym narzędziem programistycznym dla języka Python jest środowisko IDLE (ang. *Integrated Development and Learning Environment*).
+W systemach Linux może być konieczne doinstalowanie go np. za pomocą polecenia w terminalu:
+
+   .. code-block:: bash
+
+      ~$ sudo apt-get install idle3
+      lub
+      ~$ sudo apt-get install idle-python3.x
+
+- gdzie `x` oznacza podwersję Pythona.
+
+W systemie Windows środowisko jest instalowane domyślnie razem z interpreterem Pythona.
+
+.. figure:: ../img/python_idle.png
+
 Dodatkowe narzędzia i pakiety
 =============================
 
 Podczas tworzenia większych aplikacji i projektów bardzo przydatne są dodatkowe narzędzia.
 Do instalowania i zarządzania dodatkowymi pakietami używa się menedżera `pip3` oraz środowisk wirtualnych.
-W terminalu wydajemy polecenie, które zainstaluje odpowiednie pakiety:
+W systemach Linux może być konieczne doinstalowanie tych narzędzi:
 
    .. code-block:: bash
 
       ~$ sudo apt-get install python3-pip python3-venv
 
-Pakiety można instalować ogólnosystemowo za pomocą polecenia:
-
-   .. code-block:: bash
-
-      ~$ sudo pip3 install nazwa_pakietu
-
-– przy czym `sudo` używamy tylko w systemie Linux, ale nie w Windows. W taki sposób można zainstalować
-rozszerzony interpreter `IPython <https://ipython.readthedocs.io/en/stable/>`_ i/lub
-aplikację `Jupyter QtConsole <https://github.com/jupyter/qtconsole>`_:
-
-   .. code-block:: bash
-
-       ~$ sudo pip3 install ipython3 qtconsole
-
-Pakiety wykorzystywane na potrzeby konkretnej aplikacji lepiej instalować w katalogu użytkownika
-– wystarczy, że do polecenia dodamy opcję `--user`:
-
-   .. code-block:: bash
-
-      ~$ pip3 install nazwa_pakietu --user
-
-– lub w wirtualnym środowisku, czyli osobnym katalogu.
 
 Środowisko wirtualne
---------------------
+====================
 
-1. Uruchom terminal (wiersz poleceń). Jeżeli chcesz, przejdź do katalogu, w którym chcesz utworzyć środowisko wirtualne.
-2. Wydaj polecenie:
+Wirtualne środowisko Pythona (ang. *Python virtual environment*) pozwala instalować dodatkowe pakiety
+w wybranych wersjach bez uprawnień administratora. W praktyce to katalog zawierający niezbędne pliki
+potrzebne do działania interpretera oraz menedżer instalacji pakietów **pip**.
 
-   .. code-block:: bash
+Linux
+-----
 
-      python3 -m venv pve
+Środowisko tworzymy, a następnie aktywujemy i korzystamy z niego przy użyciu dowolnego terminala.
 
-   .. note::
+.. code-block:: bash
 
-      Przełącznik `-m` wskazuje moduł, którego chcemy użyć, `pve` to umowna nazwa katalogu, który zostanie utworzony
-      i do którego zostaną skopiowane podstawowe pliki Pythona.
+    ~$ python3 -m venv .venv        # utworzenie środowiska w katalogu .venv
+    ~$ source .venv/bin/activate    # aktywacja
+    (.venv) ~$ python3              # uruchamianie interpretera w trybie interaktywnym
+    (.venv) ~$ python3 skrypt.py    # uruchamianie skryptu w wirtualnym środowisku
+    (.venv) ~$ deactivate           # deaktywacja środowiska
 
-3. Jeżeli chcesz skorzystać z wirtualnego środowiska, musisz go aktywować:
+Windows
+-------
 
-   .. code-block:: bash
+W systemie **Windows** korzystamy z wiersza poleceń (CMD), `Windows PowerShell` lub `Windows Terminal`.
 
-      ~$ source pve/bin/activate
+.. code-block:: bash
 
-   .. note::
+    py -m venv .venv                # utworzenie środowiska w katalogu .venv
+    .venv\\Scripts\\activate.bat    # aktywacja w wierszu poleceń (cmd)
+    .venv\\Scripts\\Activate.ps1    # aktywacja w Windows PowerSchell
+    (.venv) py                      # uruchamianie interpretera w trybie interaktywnym
+    (.venv) py     skrypt.py        # uruchamianie skryptu w wirtualnym środowisku
+    (.venv) .venv\\Scripts\\deactivate.bat  # deaktywacja w wierszu poleceń (cmd)
+    (.venv) deactivate                      # deaktywacja w Windows PowerSchell
 
-      W systemie Windows: :code:`pve\\Scripts\\activate.bat`
+Zarządzanie pakietami
+---------------------
 
-   Po udanej aktywacji przed ścieżką zobaczymy nazwę katalogu z wirtualnym środowiskiem w okrągłych nawiasach,
-   np. `(pve)`.
+Do zarządzania pakietami w aktywnym środowisku używamy narzędzia `pip`, np.:
 
-4. Po aktywacji środowiska warto zaktualizować menedżer pakietów:
+.. code-block:: bash
 
-   .. code-block:: bash
-
-      pip install pip --upgrade
-
-5. W środowisku wirtualnym można instalować dowolne pakiety bez uprawnień administracyjnych:
-
-   .. code-block:: bash
-
-      pip install nazwa_pakietu
-
-.. figure:: ../img/pve_linux.png
-
-6. Listę zainstalowanych pakietów wyświetlisz poleceniem: :code:`pip list`
-
-
-Frameworki
-----------
-
-Poniżej lista często używanych pakietów dodatkowych. ALternatywne polecenia działają w systemach Linux
-opartych na Debianie (Ubuntu, Linux Mint).
-
-1. Aplikacje WWW Django: :code:`pip3 install django`
-2. Aplikacje Flask: :code:`pip3 install flask flask-wtf peewee`
-3. Aplikacje okienkowe PyQt5: :code:`pip3 install pyqt5` albo :code:`apt install python3-pyqt5`
-4. Wykresy z Matplotlib: :code:`pip3 install matplotlib` albo :code:`apt install python3-matplotlib`
-
-
-Problemy w systemie Windows
-===========================
-
-Jeżeli możesz, zainstaluj system Linux, unikniesz wielu poniższych problemów.
-Jeżeli musisz używać systemu Windows, wcześniej czy później zetkniesz się z problemami.
-Poniżej kilka wskazówek, które mogą pomóc je rozwiązać.
-
-1) Przed instalacją interpretera Pythona odinstaluj ewentualne starsze wersje i zrestartuj system.
-2) W przypadku błędów *odmowa dostępu* (ang. *access denied*) podczas aktualizowania menedżera `pip` lub
-   instalowania wypróbuj następujące sposoby:
-
-   a) spróbuj zrestartować system, aby zakończyć ewentualne zadania wykorzystujące Pythona, i ponów instalację
-   b) podczas aktualizacji użyj opcji `--user`, np.: :code:`python -m pip install --upgrade --user pip`
-   c) podczas instalacji użyj opcji `--user`, np.: :code:`python -m pip install --user pyqt5`
-   d) uruchom wiersz poleceń (``cmd`` lub PowerShell) jako administrator i dopiero wtedy wydaj polecenie
+    (.venv) pip install matplotlib  # instalacja pakietu
+    (.venv) pip list  # lista zainstalowanych pakietów
 
 Materiały
 =========
 
-1. `Język Python`_
+1. `Strona języka Python`_
 
-.. _Język Python: https://www.python.org/
+.. _Strona języka Python: https://www.python.org/
