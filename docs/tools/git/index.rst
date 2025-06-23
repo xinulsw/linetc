@@ -7,13 +7,22 @@ przez `Linusa Torvaldsa <http://pl.wikipedia.org/wiki/Linus_Torvalds>`_,
 twórcę `jądra Linux <http://pl.wikipedia.org/wiki/Linux_%28j%C4%85dro%29>`_.
 Skrót SCM bywa również rozwijany jako *software configuration management*,
 co oznacza "zarządzanie konfiguracją oprogramowania". Gita można używać
-do rozwijania zarówno małych, jak i dużych projektów (np. Arch Linux, GIMP, jQuery).
+do rozwijania zarówno małych, jak i dużych projektów.
 
-Repozytorium zdalne
-====================
+Założenie konta
+=================
 
-Przede wszystkim wchodzimy na stronę  `<https://github.com/>`_ i zakładamy konto podając:
-nazwę użytkownika, email i hasło. Następnie tworzymy nowe repozytorium.
+Wchodzimy na stronę  `<https://github.com/>`_, klikamy przycisk *Sign Up* i wypełniamy pola
+formularza. Podajemy adres email, min. 8-znakowe hasło zawierające liczby i małe litery.
+Jako nazwę użytkownika wybieramy pojedynczy krótki wyraz.
+
+Po wysłaniu formularza na podany email dostaniemy wiadomość pozwalającą na jego weryfikację.
+Kod zawarty w wiadomości kopiujemy i wklejamy do wyświetlonego w dalszym kroku formularza.
+
+Tworzenie repozytorium
+======================
+
+Następnie tworzymy nowe repozytorium.
 Możemy postępować wg poniższych instrukcji:
 
 *   Krok 1 – `założenie konta <https://help.github.com/articles/signing-up-for-a-new-github-account/>`_;
@@ -649,11 +658,14 @@ Materiały
       - ``rd /s /q mojprojekt`` – usunie katalog projektu (odpowiednik ``rm -rf``);
       - ``type doc\katalog.rst`` – pokaże zawartość pliku (odpowiednik ``cat``).
 
-Odwiedź
--------
+Materiały
+----------
 
-1. `Strona projektu Git <http://git-scm.com/>`_.
+1. `Creating an account on GitHub <https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github>`
+2. `Quickstart for repositories <https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories>`
+3. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
 3. `Python 101 – Git <http://python101.readthedocs.io/pl/latest/git/index.html>`_ (materiał w j. polskim)
 4. `Git Cheat Sheet <https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf>`_
 5. `Pro Git v. 2 <https://git-scm.com/book/en/v2>`_ – wersja angielska.
+6. `GitHub flow <https://docs.github.com/en/get-started/using-github/github-flow>`
