@@ -9,33 +9,33 @@ Skrót SCM bywa również rozwijany jako *software configuration management*,
 co oznacza "zarządzanie konfiguracją oprogramowania". Gita można używać
 do rozwijania zarówno małych, jak i dużych projektów.
 
-Założenie konta
+Utworzenie konta
 =================
 
 Wchodzimy na stronę  `<https://github.com/>`_, klikamy przycisk *Sign Up* i wypełniamy pola
 formularza. Podajemy adres email, min. 8-znakowe hasło zawierające liczby i małe litery.
-Jako nazwę użytkownika wybieramy pojedynczy krótki wyraz.
+Jako nazwę użytkownika wybieramy jeden krótki wyraz (ciąg znaków).
 
-Po wysłaniu formularza na podany email dostaniemy wiadomość pozwalającą na jego weryfikację.
+Po wysłaniu formularza rejestracyjnego na podany email dostaniemy wiadomość pozwalającą na jego weryfikację.
 Kod zawarty w wiadomości kopiujemy i wklejamy do wyświetlonego w dalszym kroku formularza.
 
 Tworzenie repozytorium
 ======================
 
-Następnie tworzymy nowe repozytorium.
-Możemy postępować wg poniższych instrukcji:
+Następnie tworzymy `nowe repozytorium <https://help.github.com/articles/create-a-repo/>`_.
+Po kliknięciu zielonego przycisku *Create repository* lub *New* zobaczymy formularz, w którym wpisujemy:
 
-*   Krok 1 – `założenie konta <https://help.github.com/articles/signing-up-for-a-new-github-account/>`_;
-    podajemy nazwę użytkownika, adres email i hasło, jako typ konta wybieramy *free*.
-*   Krok 2 – `weryfikacja adresu e-mail <https://help.github.com/articles/verifying-your-email-address/>`_
-*   Krok 3 – `zakładamy repozytorium <https://help.github.com/articles/create-a-repo/>`_ dla projektu,
-    wybieramy typ *Public* (publiczne) i zaznaczamy "Initialize this repository with a README"
+* nazwę repoz,
+* opis (*description*) – krótka informacja nt. zawartości / przeznaczenia repozytorium.
+
+Zazwyczaj zaznaczamy też opcje:
+
+* *Public* – repozytorium publiczne, dostępne dla każdego,
+* *Add a README file* – dodanie pliku ``README.md``, w którym będziemy mogli opisać nasz projekt,
+* *Add .gitignore* – z listy wybieramy dominujący w naszym projekcie język programowania, np. Python,
+* *Choose a licence* – wybieramy licencję np Apache 2.0 lub GNU General Public License v3.0.
 
 .. figure:: img/git_repo01.jpg
-
-.. figure:: img/git_repo02.jpg
-
-W ten sposób założyliśmy repozytorium zdalne.
 
 Klient Gita
 ===========
@@ -661,8 +661,9 @@ Materiały
 Materiały
 ----------
 
-1. `Creating an account on GitHub <https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github>`
-2. `Quickstart for repositories <https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories>`
+1. `Creating an account on GitHub <https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github>`_
+2. `Quickstart for repositories <https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories>`_
+3. `Verifying your email address <https://help.github.com/articles/verifying-your-email-address/>`_
 3. `Strona projektu Git <http://git-scm.com/>`_.
 2. `Pro Git v. 1 <https://git-scm.com/book/pl/v1>`_ – wersja polska.
 3. `Python 101 – Git <http://python101.readthedocs.io/pl/latest/git/index.html>`_ (materiał w j. polskim)
